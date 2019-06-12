@@ -73,4 +73,12 @@ public class PostServiceImpl implements PostService {
         post.setId(postId);
         return postMapper.updateawesome(post);
     }
+
+    @Override
+    public int updatereplynumber(long postId, Integer replynumber) {
+        Post post = new Post();
+        post.setId(postId);
+        post.setReplynumber(replynumber);
+        return 0;
+    }
 }

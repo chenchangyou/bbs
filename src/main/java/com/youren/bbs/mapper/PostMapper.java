@@ -16,4 +16,5 @@ public interface PostMapper {
     int updatebrowse(Post post);
     int updatedifference(Post post);
     int updateawesome(Post post);
+    int updatereplynumber(Post post);
 }

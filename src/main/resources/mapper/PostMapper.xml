@@ -39,6 +39,10 @@
 		update t_post set awesome=#{awesome} where id=#{id}
 	</update>
 
+	<update id="updatereplynumber" parameterType="Post">
+		update t_post set replynumber=#{replynumber} where id=#{id}
+	</update>
+
 	<update id="update" parameterType="Post">
 		update t_post set title=#{title},content=#{content} where id=#{id}
 	</update>

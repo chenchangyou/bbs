@@ -1,7 +1,9 @@
 package com.youren.bbs.controller;
 
+import com.youren.bbs.entity.Post;
 import com.youren.bbs.entity.Reply;
 import com.youren.bbs.entity.User;
+import com.youren.bbs.service.PostService;
 import com.youren.bbs.service.ReplyService;
 import com.youren.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,21 @@ public class PeplyController {
     private UserService userService;
     @Autowired
     private ReplyService replyService;
-    public void post(){
 
-    }
+    @Autowired
+    private PostService postService;
 
     @PostMapping("addReply")
     public String add(long postId, String content, HttpSession httpSession){
-
+        Post post =null;
         User user = (User)httpSession.getAttribute("loginUser");
+
+        post = postService.findById(postId);
+        Integer replynumber = post.getReplynumber();
 
         int id = replyService.add(content, postId,user.getId());
         if(id > 0){
+            postService.updatereplynumber(postId,replynumber+1);
             return "";
         }else {
             return "";

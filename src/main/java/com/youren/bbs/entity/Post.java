@@ -15,6 +15,7 @@ public class Post {
     private Date createTime;//发贴时间
     private User user;//发帖人
     private Integer awesome; //点赞量
+    private Integer replynumber;//回复数量
     private Integer browse; //浏览数
     private Integer difference;//差评数
     private Integer state;//帖子状态（1.正常，2.正在审核，3.提示不合规范下架，并回退到草稿区，4，属于草稿

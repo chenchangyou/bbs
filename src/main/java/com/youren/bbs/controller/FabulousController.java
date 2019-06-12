@@ -27,11 +27,11 @@ public class FabulousController {
         Fabulous fabulous = fabulousService.findByPidUid(pid, uid);
 
         if(fabulous!=null && !fabulous.equals("")){
-            int row = fabulousService.create(pid, uid);
-            return 1;
-        }else {
             int row = fabulousService.delete(fabulous.getId());
             return 0;
+        }else {
+            int row = fabulousService.create(pid, uid);
+            return 1;
         }
     }
 
