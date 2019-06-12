@@ -23,7 +23,7 @@ public class AjaxTest {
     @ResponseBody
     @GetMapping("/getpostlist")
     public Map home(@RequestParam(name = "page",defaultValue = "1") int pageNum,
-                    @RequestParam(name = "limit",defaultValue = "10") int pageSize){
+                    @RequestParam(name = "limit",defaultValue = "5") int pageSize){
 
         Map<String,Object> map = new HashMap<String, Object>();
 

@@ -66,7 +66,7 @@
                         <img class="layui-circle" border="1px red" width="22px" height="22xp" src="static/images/user.png">
                         zhutengfei
                     </span>
-                    <sapn>娱乐</sapn>
+                    <sapn style="margin-left: 15px">娱乐</sapn>
                     <span><i class="fa fa-eye"></i>  999+</span>
                     <span><i class="fa fa-thumbs-o-up"></i>  999+</span>
                     <span><i class="fa fa-commenting"></i>  999+</span>
@@ -74,7 +74,7 @@
             </ul>
         </div>
         <div style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">
-            <div class="">
+            <div>
                     <a href="#" class="thumbnail" style="width: 93%;height: 100%">
                         <img src="" alt="...">
                     </a>
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div style="width: 780px;height: 116px;margin:0 auto;border-bottom: 1px paleturquoise solid;padding: 8px 0px;background-color: #FFFFFF">
+    <div style="width: 780px;height: 116px;margin: 0 auto;border-bottom: 1px paleturquoise solid;padding: 8px 0px;background-color: #FFFFFF">
         <div style="width: 75%;height: 100%;float: left">
             <ul class="list-group" style="border: none">
                 <li class="list-group-item"><h3>嘿嘿嘿嘿嘿嘿嘿！！！！！！！！</h3></li>
@@ -92,7 +92,7 @@
                         <img class="layui-circle" border="1px red" width="22px" height="22xp" src="static/images/user.png">
                         zhutengfei
                     </span>
-                    <sapn>娱乐</sapn>
+                    <sapn style="margin-left: 15px">娱乐</sapn>
                     <span><i class="fa fa-eye"></i>  999+</span>
                     <span><i class="fa fa-thumbs-o-up"></i>  999+</span>
                     <span><i class="fa fa-commenting"></i>  999+</span>
@@ -100,7 +100,7 @@
             </ul>
         </div>
         <div style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">
-            <div class="">
+            <div>
                 <a href="#" class="thumbnail" style="width: 93%;height: 100%">
                     <img src="" alt="...">
                 </a>

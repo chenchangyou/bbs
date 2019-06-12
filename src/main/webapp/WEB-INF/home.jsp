@@ -12,6 +12,27 @@
             height: 150px;
             background: #6495ED;
         }
+        .list-group{
+            display: block;
+        }
+         .list-group li{
+             border: none;
+             padding: 6px 16px;
+             display: block;
+         }
+        .span1 span{
+            margin-left: 60px;
+            color:#A9A9A9;
+        }
+        .contentbox{
+            display: block;
+        }
+        .contentbox:hover .titlebox{
+                color: #3461ff;
+        }
+        .contentbox:hover{
+            cursor:pointer
+        }
     </style>
 </head>
 <body  onload="load()">
@@ -104,7 +125,6 @@
     </div>
 <div id="footer"></div>
 <script>
-
     function getNewPost() {
         layui.use('flow', function(){
             var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
@@ -117,7 +137,36 @@
                     $.get('/getpostlist?page='+page, function(res){
                         //假设你的列表返回在data集合中
                         layui.each(res.date, function(index, item){
-                            lis.push('<a target="_blank" href="postdetails?postlistId='+item.id+'" class="list-group-item">'+ item.title +'</a>');
+                            lis.push('' +
+                                '<div class="contentbox" style="width: 760px;height: 116px;margin:0 auto;border-bottom: 1px solid #f4f5f7;padding: 8px 0px;background-color: #FFFFFF">' +
+                                ' <a href="postdetails?postlistId='+item.id+'"  target="_blank" style="display: block">' +
+                                '        <div style="width: 75%;height: 100%;float: left">' +
+                                '            <ul class="list-group" style="border: none">' +
+                                '                <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden"><span class="titlebox" style="font-size: 20px;white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;">'+item.title+'</span></li>' +
+                                '                <li class="list-group-item" style="padding-left: 15px;text-overflow:ellipsis;overflow: hidden">' +
+                                '               <span style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 12px">内容</span></li>' +
+                                '                <li class="list-group-item span1">' +
+                                '                    <span style="margin: 0;vertical-align: middle;">' +
+                                '                        <img class="layui-circle" border="1px red" width="22px" height="22xp" src="${ctx}/'+item.user.headshot+'">' +
+                                '                        '+item.user.username+' '+
+                                '                    </span>' +
+                                '                    <span>娱乐</span>' +
+                                '                    <span><i class="fa fa-eye"></i>  '+item.browse+'</span>' +
+                                '                    <span><i class="fa fa-thumbs-o-up"></i>  999+</span>' +
+                                '                    <span><i class="fa fa-commenting"></i>  999+</span>' +
+                                '                </li>' +
+                                '            </ul>' +
+                                '        </div>' +
+                                '        <div style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
+                                '            <div>' +
+                                '                <a href="#" class="thumbnail" style="width: 93%;height: 100%">' +
+                                '                    <img src="" alt="...">' +
+                                '                </a>' +
+                                '            </div>' +
+                                '        </div>' +
+                                '       </a>' +
+                                '    </div>' +
+                                '');
                         });
                         //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
                         //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
