@@ -23,7 +23,7 @@
 	</select>
 
 	<select id="findByUsername" parameterType="string" resultType="User">
-		select id,username,password,sex,age,email,headshot,state,type,create_time createTime from t_user where username=#{username}
+		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime from t_user where username=#{username}
 	</select>
 
 	<select id="findAll" resultType="User">
