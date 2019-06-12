@@ -20,7 +20,7 @@ import java.util.List;
 public class ReplyServiceImpl implements ReplyService {
 
     @Autowired
-    private ReplyMapper replyDao;
+    private ReplyMapper replyMapper;
 
     @Autowired
     private ReplyCommentMapper replyCommentDao;
@@ -44,7 +44,7 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public List<Reply> findByPostId(long postId) {
         List<Reply> Replylist = new ArrayList<Reply>();
-        List<Reply> replylists = replyDao.findByPostId(postId);
+        List<Reply> replylists = replyMapper.findByPostId(postId);
 
         long replyid = 0;
         Reply reply = null;
@@ -83,7 +83,7 @@ public class ReplyServiceImpl implements ReplyService {
         reply.setContent(content);
         reply.setPost(post);
         reply.setCreateTime(new Date());
-        int id = replyDao.create(reply);
+        int id = replyMapper.create(reply);
 
         return id;
     }
