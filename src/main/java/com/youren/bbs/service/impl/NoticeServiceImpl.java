@@ -15,7 +15,7 @@ import java.util.List;
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
-    private NoticeMapper noticeDao;
+    private NoticeMapper noticeMapper;
 
     @Override
     public int create(String title, String content) {
@@ -25,7 +25,7 @@ public class NoticeServiceImpl implements NoticeService {
             notice.setContent(content);
             notice.setCreateTime(new Date());
             notice.setState(1);
-        int row = noticeDao.create(notice);
+        int row = noticeMapper.create(notice);
         return row;
     }
 
@@ -41,12 +41,12 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Notice findById(long id) {
-        return noticeDao.findById(id);
+        return noticeMapper.findById(id);
     }
 
     @Override
     public List<Notice> findAll() {
 
-        return noticeDao.findAll();
+        return noticeMapper.findAll();
     }
 }

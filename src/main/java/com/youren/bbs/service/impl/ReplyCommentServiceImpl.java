@@ -17,7 +17,7 @@ import java.util.Date;
 public class ReplyCommentServiceImpl implements ReplyCommentService {
 
     @Autowired
-    private ReplyCommentMapper replyCommentDao;
+    private ReplyCommentMapper replyCommentMapper;
 
 
     @Override
@@ -33,13 +33,13 @@ public class ReplyCommentServiceImpl implements ReplyCommentService {
             replyComment.setContent(content);
             replyComment.setCreateTime(new Date());
 
-        int row = replyCommentDao.create(replyComment);
+        int row = replyCommentMapper.create(replyComment);
 
         return row;
     }
 
     @Override
     public int delete(Integer id) {
-        return replyCommentDao.delete(id);
+        return replyCommentMapper.delete(id);
     }
 }

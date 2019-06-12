@@ -1,7 +1,7 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.mapper.UserMapper;
 import com.youren.bbs.entity.User;
+import com.youren.bbs.mapper.UserMapper;
 import com.youren.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +17,14 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userDao;
+    private UserMapper userMapper;
 
     @Override
     public Map<String, Object> register(String username, String password, String sex, String email, int age, String tel) {
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("ok",false);
         String headshot = "static/images/user.png";//默认头像路径
-        User user = userDao.findByUsername(username);
+        User user = userMapper.findByUsername(username);
         if(user==null){
             user = new User();
             user.setUsername(username);
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
             user.setState(1);
             user.setType(1);
             user.setCreateTime(new Date());
-            int row = userDao.create(user);
+            int row = userMapper.create(user);
             if(row>0){
                 map.put("ok",true);
             }else{
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("ok",false);
         if(username!=null&&password!=null&&!username.equals("")&&!password.equals("")){
-            User user = userDao.findByUsername(username);
+            User user = userMapper.findByUsername(username);
             if(user!=null){
                 if(user.getPassword().equals(password)){
                     map.put("ok",true);
@@ -73,11 +73,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userDao.findById(id);
+        return userMapper.findById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return userDao.findAll();
+        return userMapper.findAll();
     }
 }

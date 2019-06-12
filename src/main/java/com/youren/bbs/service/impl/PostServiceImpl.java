@@ -13,11 +13,11 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     @Autowired
-    private PostMapper postDao;
+    private PostMapper postMapper;
 
     @Override
     public int create(Post post) {
-        int row = postDao.create(post);
+        int row = postMapper.create(post);
         return row;
     }
 
@@ -33,16 +33,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findById(long id) {
-        return postDao.findById(id);
+        return postMapper.findById(id);
     }
     @Override
     public List<Post> findByUserId(int userId) {
-        return postDao.findByUserId(userId);
+        return postMapper.findByUserId(userId);
     }
 
     @Override
     public List<Post> findAll() {
-        return postDao.findAll();
+        return postMapper.findAll();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setId(postId);
         post.setBrowse(browse);
-        return postDao.updatebrowse(post);
+        return postMapper.updatebrowse(post);
     }
 
     @Override

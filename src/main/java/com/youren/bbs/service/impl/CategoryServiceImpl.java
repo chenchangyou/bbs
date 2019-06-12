@@ -14,7 +14,7 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CategoryMapper categoryDao;
+    private CategoryMapper categoryMapper;
 
     @Override
     public int create(String name) {
@@ -22,12 +22,12 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         category.setName(name);
 
-        return categoryDao.create(category);
+        return categoryMapper.create(category);
     }
 
     @Override
     public int delete(long id) {
-        return categoryDao.delete(id);
+        return categoryMapper.delete(id);
     }
 
     @Override
@@ -37,6 +37,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAll() {
-        return categoryDao.findAll();
+        return categoryMapper.findAll();
     }
 }
