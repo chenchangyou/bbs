@@ -47,7 +47,6 @@ public class UserController {
         Map<String, Object> resultMap = userService.login(username, password);
         if((Boolean) resultMap.get("ok")){
             //把登录成功后的用户对象保存到session中
-            System.out.println(resultMap.get("user"));
             session.setAttribute("loginUser", resultMap.get("user"));
             return resultMap;
         }else{

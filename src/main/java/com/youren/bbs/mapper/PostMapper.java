@@ -9,7 +9,7 @@ import java.util.List;
 public interface PostMapper {
     int create(Post post);
     int update(Post post);
-    int delete(long id);
+    int updateState(Post post);
     Post findById(long id);
     List<Post> findByUserId(long userId);
     List<Post> findAll();

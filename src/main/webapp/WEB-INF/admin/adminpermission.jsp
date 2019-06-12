@@ -20,13 +20,18 @@
         </div>
         <div style="width:900px;height: 630px;padding: 15px;float: right">
             <div>
-                <table class="layui-hide" id="test"></table>
+                <table class="layui-hide" id="test" lay-filter="test"></table>
             </div>
         </div>
 
     </div>
 
 </div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 
 <script>
     layui.use('table', function(){
@@ -35,6 +40,13 @@
         table.render({
             elem: '#test'
             ,url:'/admin/postlist'
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                , groups: 5 //只显示 1 个连续页码
+                , first: false //不显示首页
+                , last: false //不显示尾页
+            }
             ,cols: [[
                 {field:'id', width:80, title: 'ID',}
                 ,{field:'title', width:150, title: '标题'}

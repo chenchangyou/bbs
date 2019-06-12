@@ -26,9 +26,14 @@ public class PostServiceImpl implements PostService {
         return 0;
     }
 
+
+    //更新状态（包括假删除)
     @Override
-    public int delete(long id) {
-        return 0;
+    public int updateState(int state, long id) {
+        Post post = new Post();
+        post.setState(state);
+        post.setId(id);
+        return postMapper.updateState(post);
     }
 
     @Override

@@ -11,7 +11,7 @@
 	</insert>
 
 	<update id="update" parameterType="User">
-		update t_user set password=#{password},sex=#{sex}
+		update t_user set password=#{password},sex=#{sex} where id=#{id}
 	</update>
 
 	<delete id="delete" parameterType="long">

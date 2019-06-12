@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -75,6 +76,17 @@ public class PostController {
         }else {
             model.addAttribute("error","发表失败");
             return "user/addpost";
+        }
+    }
+    @ResponseBody
+    @PostMapping("/admin/deletePost")
+    public String daletepost(Long postId){
+
+        int row = postService.updateState(0, postId);
+        if(row > 0){
+            return "ok";
+        }else {
+            return "删除失败！";
         }
     }
 }

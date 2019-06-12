@@ -73,7 +73,7 @@
                     <div class="layui-tab" style="margin-top: 0">
                         <ul class="layui-tab-title" style="background-color: #FFFFFF">
                             <li class="layui-this">最新回复</li>
-                            <li>新帖</li>
+                            <li onclick="getNewPost()">新帖</li>
                             <li>热门</li>
                         </ul>
                         <div class="layui-tab-content">
@@ -93,10 +93,8 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            <div class="layui-tab-item">内容2</div>
+                            <div class="layui-tab-item" id="NewPost"></div>
                             <div class="layui-tab-item">内容3</div>
-                            <div class="layui-tab-item">内容4</div>
-                            <div class="layui-tab-item">内容5</div>
                         </div>
                     </div>
 
@@ -105,5 +103,31 @@
         </div>
     </div>
 <div id="footer"></div>
+<script>
+
+    function getNewPost() {
+        layui.use('flow', function(){
+            var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+            var flow = layui.flow;
+            flow.load({
+                elem: '#NewPost' //指定列表容器
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+                    var lis = [];
+                    //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                    $.get('/getpostlist?page='+page, function(res){
+                        //假设你的列表返回在data集合中
+                        layui.each(res.date, function(index, item){
+                            lis.push('<a target="_blank" href="postdetails?postlistId='+item.id+'" class="list-group-item">'+ item.title +'</a>');
+                        });
+                        //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                        //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                        next(lis.join(''), page < res.pages);
+                    });
+                }
+            });
+        });
+    }
+
+</script>
 </body>
 </html>

@@ -27,8 +27,9 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>信息流 - 滚动加载</legend>
 </fieldset>
-<ul id="demo">
-</ul>
+        <ul id="demo">
+
+        </ul>
 </body >
 
 <script>
@@ -41,9 +42,9 @@
             ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                $.get('http://119.23.52.230/MovieSystem/movie?act=list&pageNum=1'+page, function(res){
+                $.get('/getpostlist?page='+page, function(res){
                     //假设你的列表返回在data集合中
-                    layui.each(res.data, function(index, item){
+                    layui.each(res.date, function(index, item){
                         lis.push('<li>'+ item.title +'</li>');
                     });
                     //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页

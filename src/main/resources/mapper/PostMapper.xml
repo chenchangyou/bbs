@@ -43,9 +43,9 @@
 	</update>
 
 
-	<delete id="delete" parameterType="long">
-		delete from t_post where id=#{id}
-	</delete>
+	<update id="updateState" parameterType="Post">
+		update t_post set state=#{state} where id=#{id}
+	</update>
 
 	<select id="findById" parameterType="long" resultMap="postResultMap">
 		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
@@ -62,9 +62,10 @@
 	</select>
 
 	<select id="findAll" resultMap="postResultMap">
-		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
+		select p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
 			   u.id uid, u.username
 		from t_post p left join t_user u on p.user_id=u.id
+		where p.state >0
 		GROUP BY p.create_time desc
 	</select>
 </mapper>
