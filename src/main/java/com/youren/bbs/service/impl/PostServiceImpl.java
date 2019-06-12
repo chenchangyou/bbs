@@ -59,13 +59,13 @@ public class PostServiceImpl implements PostService {
         post.setId(postId);
         post.setDifference(difference);
 
-        return postDao.updatedifference(post);
+        return postMapper.updatedifference(post);
     }
 
     @Override
     public int updateawesome(long postId, Integer awesome) {
         Post post = new Post();
         post.setId(postId);
-        return postDao.updateawesome(post);
+        return postMapper.updateawesome(post);
     }
 }
