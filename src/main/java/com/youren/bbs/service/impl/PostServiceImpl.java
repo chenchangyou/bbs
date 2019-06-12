@@ -1,6 +1,6 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.dao.PostDao;
+import com.youren.bbs.mapper.PostMapper;
 import com.youren.bbs.entity.Post;
 import com.youren.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     @Autowired
-    private PostDao postDao;
+    private PostMapper postDao;
 
     @Override
     public int create(Post post) {

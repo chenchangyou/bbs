@@ -1,25 +1,13 @@
 package com.youren.bbs.entity;
 
+import lombok.Data;
+
 /**
  * 贴子类别
  */
+
+@Data
 public class Category {
     private long id;
     private  String name;//类别名字
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

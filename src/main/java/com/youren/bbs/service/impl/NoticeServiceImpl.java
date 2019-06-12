@@ -1,6 +1,6 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.dao.NoticeDao;
+import com.youren.bbs.mapper.NoticeMapper;
 import com.youren.bbs.entity.Notice;
 import com.youren.bbs.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
-    private NoticeDao noticeDao;
+    private NoticeMapper noticeDao;
 
     @Override
     public int create(String title, String content) {

@@ -1,6 +1,6 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.dao.CategoryDao;
+import com.youren.bbs.mapper.CategoryMapper;
 import com.youren.bbs.entity.Category;
 import com.youren.bbs.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryMapper categoryDao;
 
     @Override
     public int create(String name) {

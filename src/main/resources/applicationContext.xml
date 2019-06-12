@@ -43,10 +43,27 @@
         <property name="dataSource" ref="dataSource"/><!--数据源-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/><!-- 配置Mapper.xml的目录 -->
         <property name="typeAliasesPackage" value="com.youren.bbs.entity"/><!-- 配置实体类包做为别名 -->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<!--使用下面的方式配置参数，一行配置一个 -->
+						<value>
+							helperDialect=mysql
+							offsetAsPageNum=true
+							rowBoundsWithCount=true
+							pageSizeZero=true
+							reasonable=true
+							supportMethodsArguments=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
     </bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.youren.bbs.dao" /><!--配置dao的包-->
+		<property name="basePackage" value="com.youren.bbs.mapper" /><!--配置Mapper的包-->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
 

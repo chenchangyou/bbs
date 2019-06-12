@@ -1,13 +1,12 @@
-package com.youren.bbs.dao;
+package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Post;
-import com.youren.bbs.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PostDao {
+public interface PostMapper {
     int create(Post post);
     int update(Post post);
     int delete(long id);

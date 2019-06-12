@@ -1,7 +1,7 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.dao.ReplyCommentDao;
-import com.youren.bbs.dao.ReplyDao;
+import com.youren.bbs.mapper.ReplyCommentMapper;
+import com.youren.bbs.mapper.ReplyMapper;
 import com.youren.bbs.entity.Post;
 import com.youren.bbs.entity.Reply;
 import com.youren.bbs.entity.ReplyComment;
@@ -20,10 +20,10 @@ import java.util.List;
 public class ReplyServiceImpl implements ReplyService {
 
     @Autowired
-    private ReplyDao replyDao;
+    private ReplyMapper replyDao;
 
     @Autowired
-    private ReplyCommentDao replyCommentDao;
+    private ReplyCommentMapper replyCommentDao;
 
     @Override
     public int create(Reply reply) {

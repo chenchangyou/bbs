@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.youren.bbs.dao.PostDao">
+<mapper namespace="com.youren.bbs.mapper.PostMapper">
 
 	<resultMap id="postResultMap" type="Post">
 		<id property="id" column="id" />

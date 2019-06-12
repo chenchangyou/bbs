@@ -1,6 +1,6 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.dao.ReplyCommentDao;
+import com.youren.bbs.mapper.ReplyCommentMapper;
 import com.youren.bbs.entity.Reply;
 import com.youren.bbs.entity.ReplyComment;
 import com.youren.bbs.entity.User;
@@ -17,7 +17,7 @@ import java.util.Date;
 public class ReplyCommentServiceImpl implements ReplyCommentService {
 
     @Autowired
-    private ReplyCommentDao replyCommentDao;
+    private ReplyCommentMapper replyCommentDao;
 
 
     @Override

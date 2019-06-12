@@ -1,10 +1,10 @@
-package com.youren.bbs.dao;
+package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Notice;
 
 import java.util.List;
 
-public interface NoticeDao {
+public interface NoticeMapper {
 
     int create(Notice notice);
     int update(Notice notice);

@@ -1,10 +1,10 @@
-package com.youren.bbs.dao;
+package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Category;
 
 import java.util.List;
 
-public interface CategoryDao {
+public interface CategoryMapper {
     int create(Category category);
     int delete(long id);
     Category findById(long id);

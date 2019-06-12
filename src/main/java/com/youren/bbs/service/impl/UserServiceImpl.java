@@ -1,6 +1,6 @@
 package com.youren.bbs.service.impl;
 
-import com.youren.bbs.dao.UserDao;
+import com.youren.bbs.mapper.UserMapper;
 import com.youren.bbs.entity.User;
 import com.youren.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userDao;
 
     @Override
     public Map<String, Object> register(String username, String password, String sex, String email, int age, String tel) {

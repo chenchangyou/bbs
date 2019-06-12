@@ -1,4 +1,4 @@
-package com.youren.bbs.dao;
+package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Reply;
 import org.springframework.stereotype.Repository;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReplyDao {
+public interface ReplyMapper {
     int create(Reply reply);
     int delete(long id);
     Reply findById(long id);
