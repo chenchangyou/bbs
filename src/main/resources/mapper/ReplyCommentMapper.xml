@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.youren.bbs.dao.ReplyCommentDao">
+
+	<resultMap id="ReplyCommentDaoResultMap" type="ReplyComment">
+		<id property="id" column="id" />
+		<result property="content" column="content" />
+		<result property="createTime" column="create_time" />
+		<!-- 多对一的映射 -->
+		<association property="user" javaType="User">
+			<id property="id" column="uid"/>
+			<result property="username" column="username"/>
+			<result property="headshot" column="headshot"/>
+		</association>
+		<association property="reply" javaType="Reply">
+			<id property="id" column="reply_id"/>
+		</association>
+	</resultMap>
+
+    <insert id="create" parameterType="ReplyComment" useGeneratedKeys="true" keyProperty="id">
+		insert into t_replycomment(uid,reply_id,content,create_time) values(#{user.id},#{reply.id},#{content},#{createTime})
+	</insert>
+
+	<delete id="delete" parameterType="long">
+		delete from t_reply where id=#{id}
+	</delete>
+
+	<select id="findByReplyId" parameterType="long" resultMap="ReplyCommentDaoResultMap">
+		select rc.id,rc.uid,rc.reply_id,rc.create_time,
+				rc.content,u.username,u.headshot,r.user_id
+		FROM t_replycomment rc
+		LEFT JOIN t_user u on u.id = rc.uid
+		LEFT JOIN t_reply r on r.id = rc.reply_id
+		WHERE r.id = #{reply.id}
+	</select>
+
+</mapper>

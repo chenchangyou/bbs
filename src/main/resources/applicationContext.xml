@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 启用注解方式配置 -->
+	<context:annotation-config />
+	<!-- 指定扫描bean的包 -->
+	<context:component-scan base-package="com.youren.bbs"/>
+
+	<!-- 引入属性文件 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:database.properties</value>
+				<value>classpath:email.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置数据源（druid的连接池）-->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+		<property name="maxActive" value="${maxActive}" /><!-- 最大连接数 -->
+		<property name="initialSize" value="${initialSize}"/><!-- 初始化连接数 -->
+	</bean>
+
+    <!--配置MyBatis的sqlSessionFactory-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/><!--数据源-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/><!-- 配置Mapper.xml的目录 -->
+        <property name="typeAliasesPackage" value="com.youren.bbs.entity"/><!-- 配置实体类包做为别名 -->
+    </bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.youren.bbs.dao" /><!--配置dao的包-->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+
+	<!-- Druid -->
+	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor"/>
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.oaec.ssm.service.*</value>
+				<value>com.oaec.ssm.dao.*</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 切入点配置 -->
+	<aop:config proxy-target-class="true">
+		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+
+	<!-- 导入email配置文件 -->
+	<import resource="applicationContext-email.xml"/>
+
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.youren.bbs.dao.NoticeDao">
+
+	<resultMap id="NoticeResultMap" type="Notice">
+		<id property="nid" column="nid" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="createTime" column="create_time" />
+		<result property="state" column="state"/>
+	</resultMap>
+
+    <insert id="create" parameterType="Notice" useGeneratedKeys="true" keyProperty="nid">
+		insert into t_notice(nid,title,content,create_time,state)
+		values(#{nid},#{title},#{content},#{createTime},#{state})
+	</insert>
+
+	<delete id="delete" parameterType="long">
+		delete from t_notice where nid=#{nid}
+	</delete>
+
+	<select id="findAll"  resultType="Notice">
+		select nid,title,content,create_time createTime, state from t_notice
+	</select>
+
+</mapper>

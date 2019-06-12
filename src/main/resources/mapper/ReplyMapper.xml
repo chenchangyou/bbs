@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.youren.bbs.dao.ReplyDao">
+
+	<resultMap id="replyResultMap" type="Reply">
+		<id property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="createTime" column="create_time" />
+		<!-- 多对一的映射 -->
+		<association property="user" javaType="User">
+			<id property="id" column="uid"/>
+			<result property="username" column="username"/>
+			<result property="headshot" column="headshot"/>
+		</association>
+	</resultMap>
+
+    <insert id="create" parameterType="Reply" useGeneratedKeys="true" keyProperty="id">
+		insert into t_reply(user_id,post_id,content,create_time) values(#{user.id},#{post.id},#{content},#{createTime})
+	</insert>
+
+	<delete id="delete" parameterType="long">
+		delete from t_reply where id=#{id}
+	</delete>
+
+	<select id="findById" parameterType="long" resultMap="replyResultMap">
+		select r.id,r.content,r.create_time,
+			   u.id uid, u.username
+		from t_reply r
+		left join t_user u on r.user_id=u.id
+		where p.id=#{id}
+	</select>
+
+	<select id="findByPostId" parameterType="long" resultMap="replyResultMap">
+		select r.id,r.content,r.create_time,u.headshot,
+			   u.id uid, u.username
+		from t_reply r
+		left join t_user u on r.user_id=u.id
+		where r.post_id=#{postId}
+		order by create_time desc
+	</select>
+
+</mapper>

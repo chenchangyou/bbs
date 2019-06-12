@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.youren.bbs.dao.PostDao">
+
+	<resultMap id="postResultMap" type="Post">
+		<id property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="createTime" column="create_time" />
+		<result property="browse" column="browse" />
+		<result property="difference" column="difference" />
+		<result property="awesome" column="awesome" />
+		<result property="state" column="state" />
+		<!-- 多对一的映射 -->
+		<association property="user" javaType="User">
+			<id property="id" column="uid"/>
+			<result property="username" column="username"/>
+		</association>
+	</resultMap>
+
+    <insert id="create" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
+		insert into t_post(user_id,title,content,create_time,state,category) values
+		(#{user.id},#{title},#{content},#{createTime},#{state},#{category.id})
+	</insert>
+
+	<update id="updatebrowse" parameterType="Post">
+		update t_post set browse=#{browse} where id=#{id}
+	</update>
+
+	<update id="updatedifference" parameterType="Post">
+		update t_post set difference=#{difference} where id=#{id}
+	</update>
+
+	<update id="updateawesome" parameterType="Post">
+		update t_post set awesome=#{awesome} where id=#{id}
+	</update>
+
+	<update id="update" parameterType="Post">
+		update t_post set title=#{title},content=#{content} where id=#{id}
+	</update>
+
+
+	<delete id="delete" parameterType="long">
+		delete from t_post where id=#{id}
+	</delete>
+
+	<select id="findById" parameterType="long" resultMap="postResultMap">
+		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
+			   u.id uid, u.username
+		from t_post p left join t_user u on p.user_id=u.id
+		where p.id=#{id}
+	</select>
+
+	<select id="findByUserId" parameterType="long" resultMap="postResultMap">
+		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
+			   u.id uid, u.username
+		from t_post p left join t_user u on p.user_id=u.id
+		where p.user_id=#{userId}
+	</select>
+
+	<select id="findAll" resultMap="postResultMap">
+		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
+			   u.id uid, u.username
+		from t_post p left join t_user u on p.user_id=u.id
+		GROUP BY p.create_time desc
+	</select>
+</mapper>

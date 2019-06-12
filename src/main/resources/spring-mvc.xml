@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.2.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!-- 全注解方式 -->
+	<!-- 配置扫描Controller的包 -->
+	<context:component-scan base-package="com.youren.bbs.controller" />
+
+    <!-- 启用MVC注解 -->
+    <mvc:annotation-driven/>
+    
+    <!-- 静态资源不拦截 -->
+    <mvc:resources mapping="/static/**" location="/static/" />
+	
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+         <!-- jsp页面放到WEB-INF目录下 -->
+         <property name="prefix" value="/WEB-INF/" />
+         <!-- 页面的后缀为jsp -->
+         <property name="suffix" value=".jsp" />
+    </bean>
+
+	<!-- 配置SessionLocaleResolver用于将Locale对象存储于Session中供后续使用 -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+
+	<!-- 配置LocaleChangeInterceptor 主要用于获取请求中的locale信息，将其转为Locale对像，获取LocaleResolver对象-->
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang"/>
+		</bean>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/upload"/>
+			<bean class="com.youren.bbs.intercetor.FileUploadInterceptor">
+				<property name="maxSize" value="41943040" /><!-- 最大40M -->
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 文件上传配置 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 最大上传100M的文件 -->
+		<property name="maxUploadSize" value="104857600"></property>
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="resolveLazily" value="true" /><!-- 延迟解析（把上传异常交给Controller处理） -->
+	</bean>
+
+
+</beans>
