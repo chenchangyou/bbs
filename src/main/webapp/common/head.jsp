@@ -12,7 +12,7 @@
                     async:  true , // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
                     // 请求成功后的回调函数。
                     success :function(data){
-                        if(data.ok == true){
+                        if(data.ok){
                             $("#error").html("登录成功");
                             window.location.reload();
                         }else {
