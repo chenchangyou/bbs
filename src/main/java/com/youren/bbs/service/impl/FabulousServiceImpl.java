@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class FabulousServiceImpl implements FabulousService {
@@ -40,5 +42,16 @@ public class FabulousServiceImpl implements FabulousService {
         fabulous.setUid(uid);
 
         return fabulousMapper.findByPidUid(fabulous);
+    }
+
+    @Override
+    public List<Fabulous> findBypid(Long pid) {
+
+        return fabulousMapper.findBypid(pid);
+    }
+
+    @Override
+    public Fabulous findnumber(Long pid) {
+        return fabulousMapper.findnumber(pid);
     }
 }

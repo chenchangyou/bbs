@@ -2,7 +2,7 @@
 <script>
     $(function(){
         var data = $('#form1').serialize()
-            <$("#login").click(function(){
+            $("#login").click(function(){
                 $.ajax({
                     url:"${ctx}/user/login",// 发送请求的URL字符串。
                     // 发送到服务器的数据。
@@ -51,7 +51,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty loginUser}">
-                    <li><a href="javascript:;" data-toggle="modal" data-target="#myModal">登陆</a></li>
+                    <li><a class="btn" data-toggle="modal" data-target="#myModal">登陆</a></li>
                     <li><a href="${ctx}/user/register">注册</a></li>
                     <li><a href="#">关于</a></li>
                 </c:if>

@@ -42,4 +42,10 @@ public class ReplyCommentServiceImpl implements ReplyCommentService {
     public int delete(Integer id) {
         return replyCommentMapper.delete(id);
     }
+
+    @Override
+    public ReplyComment findById(Long id) {
+
+        return replyCommentMapper.findById(id);
+    }
 }

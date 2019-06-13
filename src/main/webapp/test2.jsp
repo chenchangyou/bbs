@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp"%>
+<%@include file="common/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,36 +15,43 @@
         height: 200px;
         background: #FFA500;
     }
+
     #container .article {
         width: 1200px;
         margin: 0 auto;
         overflow: hidden;
     }
+
     #container .article .articlebox {
         overflow: hidden;
         position: relative;
     }
+
     #container .article .articlebox .articlelist {
         width: 330px;
         height: 560px;
         background: #8A2BE2;
         float: left;
     }
+
     #container .article .articlebox .articledetail {
         width: 770px;
         height: 1560px;
         background: #FFB6C1;
         float: right;
     }
+
     #footer {
         width: 100%;
         height: 500px;
         background: #6495ED;
-    }#footer {
-         width: 100%;
-         height: 500px;
-         background: #6495ED;
-     }
+    }
+
+    #footer {
+        width: 100%;
+        height: 500px;
+        background: #6495ED;
+    }
 </style>
 
 <body>

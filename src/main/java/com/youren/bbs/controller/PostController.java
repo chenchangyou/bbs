@@ -19,6 +19,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * 贴子
+ */
 @Controller
 public class PostController {
 

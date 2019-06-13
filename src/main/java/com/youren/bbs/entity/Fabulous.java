@@ -3,7 +3,7 @@ package com.youren.bbs.entity;
 import lombok.Data;
 
 /**
- * 点赞表
+ *贴子点赞表
  */
 @Data
 public class Fabulous {

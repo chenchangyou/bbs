@@ -12,25 +12,25 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: url('https://img-blog.csdn.net/20161205162919763') 50% 50% no-repeat rgb(249,249,249);
+            background: url('https://img-blog.csdn.net/20161205162919763') 50% 50% no-repeat rgb(249, 249, 249);
         }
-     </style>
+    </style>
 </head>
-<body  onload="load()">
+<body onload="load()">
 
 
-<div id="loading" class="loader" >
+<div id="loading" class="loader">
 </div>
 <!--你的内容-->
 
-</body >
+</body>
 <script type="text/javascript">
-    function load(){
+    function load() {
         $("#loading").fadeOut("slow");
     }
 </script>
 
 <script>
-   location.href="home";
+    location.href = "home";
 </script>
 </html>

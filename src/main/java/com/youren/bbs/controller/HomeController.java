@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+
+/**
+ * 首页
+ */
 @Controller
 public class HomeController {
 

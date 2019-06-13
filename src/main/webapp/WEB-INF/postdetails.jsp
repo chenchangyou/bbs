@@ -9,7 +9,7 @@
             //页面加载完毕后开始执行的事件
             $(".reply_btn").click(function(){
                 $(".reply_textarea").remove();
-                $(this).parent().parent().parent().parent().append("<div class='reply_textarea'><textarea id='user_reply' class='form-control' name='content' rows='3'></textarea><br/><button type='submit' class='btn btn-info btn-right' id='publish' style='position: relative;left: 94%'>回复</button></div></form>");
+                $(this).parent().parent().parent().parent().append("<div class='reply_textarea'><textarea id='user_reply' class='form-control' name='content' rows='3'></textarea><br/><button type='button' class='btn btn-info btn-right' id='publish' style='position: relative;left: 94%'>回复</button></div></form>");
             });
         });
       function respond(){
@@ -50,6 +50,8 @@
                     <div style="width: 100%;height: 30px;padding: 0 5px;">
                         <div style="height: 30px;text-align: center;line-height: 30px;float: left">作者：${user.username}</div>
                         <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;"><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd hh:mm"/></div>
+                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;"><i class="fa fa-eye"></i>  ${post.browse}</div>
+                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">${post.browse}</div>
                     </div>
                     <hr style="color: #93D1FF;height: 3px">
                     <div style=" background-color: #F2F2F2;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
@@ -64,7 +66,7 @@
             <c:forEach items="${replyList}" var="reply" varStatus="number">
                 <div class="panel panel-default" style="background-color: rgba(0,255,255,0.02);border: 1px red solid">
                     <!-- 评论区 -->
-                    <form action="/replyComment/add" method="post" class="reply1">
+                    <form method="post" class="reply1">
                     <div class="panel-body" style="padding: 5px;">
                         <div style="height: 35px;width: 100%">
                             <div style="width: 50px;float: left"><img src="${ctx}/${reply.user.headshot}" alt="..." class="img-circle" width="35px" height="35px" style="text-align: center"></div>
@@ -109,10 +111,8 @@
                                <div style="width: 100%;">
                                    <c:if test="${reply.user.id == comment.user.id}"><span style="color:#1E9FFF;font-weight: bolder;float: left">楼主：</span></c:if>
                                    <span style="float: left">${comment.user.username}：&nbsp;</span>
-                                   <%--<span style="color: #1E9FFF">回复&nbsp;${reply.user.username}：</span>--%>
                                    <span style="width: 500px;float: left">${comment.content}</span>
                                    <span style="width: 50px;float: right"><a href="javascript:;">回复</a></span>
-                                   <%--<div style="width: 100%"><span style="float: right;padding: 2px 5px"><fmt:formatDate value=">" pattern="yyyy-MM-dd hh:mm"/></span></div>--%>
                                </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
             <h3>发表一下看法吧</h3>
             <c:if test="${not empty loginUser}">
                 <div id="replys" style="width: 100%;height: 200px;margin-top: 50px">
-                    <form action="addReply" method="post">
+                    <form action="addReply" method="post" id="publish">
                         <div id="editor"></div>
                         <input type="hidden" name="postId" value="${post.id}">
                         <textarea id="content" name="content" style="display: none;"></textarea></br>
@@ -161,8 +161,46 @@
     $content.val(editor.txt.html());
 </script>
 <script>
+    $(function(){
+        $(".reply1").on('click','#publish',function(){
+            var data = $(this).parent().parent().serialize();
+            var plq = $(this).parent().parent().parent();
+            $.ajax({
+                url:"${ctx}/replyComment/add",// 发送请求的URL字符串。
+                // 发送到服务器的数据。
+                data:data,
+                type : "post", //  请求方式 POST或GET
+                dataType : "json", // 预期服务器返回的数据类型。
+                async:  true , // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
+                // 请求成功后的回调函数。
+                success :function(data){
+                    if(data > 0){
+                        /*plq.append("" +
+                            "<div class='panel panel-default' style='margin-right: 6px;background:none;border:none'> " +
+                            "                            <div class='panel-body'style='padding: 5px;margin-left: 60px'>" +
+                            "                               <span style='float: left'><img src='${ctx}/${comment.user.headshot}' style='width: 35px;height: 35px; border-radius:50%'></span>" +
+                            "                               <div style='width: 100%;'> " +
+                            "                                   <c:if test='${reply.user.id == comment.user.id}'><span style='color:#1E9FFF;font-weight: bolder;float: left'>楼主：</span></c:if>" +
+                            "                                   <span style='float: left'>${comment.user.username}：&nbsp;</span>" +
+                            "                                   <span style='width: 500px;float: left'>${comment.content}</span>" +
+                            "                                   <span style='width: 50px;float: right'><a href='javascript:;'>回复</a></span>" +
+                            "                               </div>" +
+                            "                            </div>" +
+                            "                        </div>");*/
+                        layer.msg('发表成功！');
+                        window.location.reload();
+                    }else {
+                        alert(data);
+                        layer.msg('发表失败！');
+                    }
+                },
+                // 请求出错时调用的函数
+                error:function(){
 
-
+                }
+            });
+        });
+    })
 
 </script>
 
