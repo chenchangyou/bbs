@@ -26,10 +26,10 @@ public class FabulousController {
 
         Fabulous fabulous = fabulousService.findByPidUid(pid, uid);
 
-        if(fabulous!=null && !fabulous.equals("")){
-            int row = fabulousService.delete(fabulous.getId());
+        if(fabulous!=null){//不为空，则点过赞了就删除记录
+            int row = fabulousService.delete(fabulous.getPid(),fabulous.getUid());
             return 0;
-        }else {
+        }else {//没点过赞则添加记录
             int row = fabulousService.create(pid, uid);
             return 1;
         }

@@ -7,7 +7,6 @@ import lombok.Data;
  */
 @Data
 public class Fabulous {
-    private Long id;
     private Long pid;
     private Long uid;
 }

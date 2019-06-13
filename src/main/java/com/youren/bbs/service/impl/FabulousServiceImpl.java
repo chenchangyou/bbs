@@ -25,8 +25,11 @@ public class FabulousServiceImpl implements FabulousService {
     }
 
     @Override
-    public int delete(Long id) {
-        return fabulousMapper.delete(id);
+    public int delete(Long pid, Long uid) {
+        Fabulous fabulous = new Fabulous();
+        fabulous.setPid(pid);
+        fabulous.setUid(uid);
+        return fabulousMapper.delete(fabulous);
     }
 
     @Override

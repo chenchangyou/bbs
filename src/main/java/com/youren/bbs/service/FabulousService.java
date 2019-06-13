@@ -5,6 +5,6 @@ import com.youren.bbs.entity.Fabulous;
 
 public interface FabulousService {
     int create(Long pid,Long uid);
-    int delete(Long id);
+    int delete(Long pid,Long uid);
     Fabulous findByPidUid(Long pid,Long uid);
 }

@@ -5,17 +5,17 @@
   
 <mapper namespace="com.youren.bbs.mapper.FabulousMapper">
 
-    <insert id="create" parameterType="Fabulous" useGeneratedKeys="true" keyProperty="id">
+    <insert id="create" parameterType="Fabulous">
 		insert into t_fabulous(pid,uid)
 		values(#{pid},#{uid})
 	</insert>
 
-	<delete id="delete" parameterType="Long">
-		delete from t_fabulous where id=#{id}
+	<delete id="delete" parameterType="Fabulous">
+		delete from t_fabulous where pid=#{pid} and uid=#{uid}
 	</delete>
 
 	<select id="findByPidUid"  resultType="Fabulous">
-		select id,pid,uid from t_category where pid=#{pid} and uid=#{uid}
+		select pid,uid from t_fabulous where pid=#{pid} and uid=#{uid}
 	</select>
 
 </mapper>

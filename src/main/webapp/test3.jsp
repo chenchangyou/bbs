@@ -8,7 +8,7 @@
     <%@include file="common/style.jsp"%>
     <style>
         .loader {
-            position: fixed;
+            position: relative;
             left: 0px;
             top: 0px;
             width: 100%;
@@ -30,10 +30,9 @@
         }
     </style>
 </head>
-<body  onload="load()">
+<body>
 
-<div id="loading" class="loader" >
-</div>
+
 
 <!--你的内容-->
 <%@include file="common/head.jsp"%>
@@ -50,7 +49,9 @@
     <div></div>
 </div>
 
-<div class="panel panel-default" style="background-color: #00FFFF;border: 1px red solid">
+<div class="panel panel-default" style="background-color: #00FFFF;border: 1px red solid" onload="load()">
+    <div id="loading" class="loader" >
+    </div>
     <!-- 评论区 -->
     <div class="panel-body" style="padding: 5px;">
         <div style="height: 35px;width: 100%">
