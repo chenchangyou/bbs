@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    height: 1000px;
+    /*height: 1000px;*/
     background-color: #F2F2F2;
 }
 
@@ -21,7 +21,7 @@ body{
     width: 784px;
     min-height: 600px;
     float: right;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
 }
 .box-right{
     background-color: #FFFFFF;

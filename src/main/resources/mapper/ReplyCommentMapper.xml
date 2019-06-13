@@ -35,6 +35,7 @@
 		LEFT JOIN t_user u on u.id = rc.uid
 		LEFT JOIN t_reply r on r.id = rc.reply_id
 		WHERE r.id = #{reply.id}
+		GROUP BY rc.create_time desc
 	</select>
 
 </mapper>

@@ -49,7 +49,7 @@ public class PeplyController {
     }
 
     @ResponseBody
-    @GetMapping("deletereply")
+    @PostMapping("deletereply")
     public int deletereply(Long replyId){
         int row = replyService.delete(replyId);
         return row;

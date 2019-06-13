@@ -33,7 +33,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public int delete(long id) {
-        return 0;
+        return replyMapper.delete(id);
     }
 
     @Override

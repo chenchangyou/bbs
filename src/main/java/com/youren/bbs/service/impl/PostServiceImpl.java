@@ -79,6 +79,6 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setId(postId);
         post.setReplynumber(replynumber);
-        return 0;
+        return postMapper.updatereplynumber(post);
     }
 }
