@@ -49,7 +49,7 @@
                     </div>
                     <div style="width: 100%;height: 30px;padding: 0 5px;">
                         <div style="height: 30px;text-align: center;line-height: 30px;float: left">作者：${user.username}</div>
-                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;"><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd hh:mm"/></div>
+                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;"><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></div>
                         <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;"><i class="fa fa-eye"></i>  ${post.browse}</div>
                         <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">${post.browse}</div>
                     </div>
@@ -78,10 +78,10 @@
                         </div>
                         <div style="padding: 5px 10px 10px 60px;overflow: hidden;min-height:35px">${reply.content}</div>
                         <div style="width: 100%;height: 25px;" class="comment">
-                            <div style="width: 150px;float: left;font-size: 12px;color: #A9A9A9;"><fmt:formatDate value="${reply.createTime}" pattern="yyyy-MM-dd hh:mm"/>
+                            <div style="width: 150px;float: left;font-size: 12px;color: #A9A9A9;"><fmt:formatDate value="${reply.createTime}" pattern="yyyy-MM-dd HH:mm"/>
                             </div>
                             <div style="width: 40px;float: right;margin-left: 3px;">
-                                <c:if test="${reply.user.id == loginUser.id}"><a href="javascript:;" style="color:#1E9FFF;font-weight: bolder">删除</a></c:if>
+                                <c:if test="${reply.user.id == loginUser.id}"><a id="${reply.id}" class="delectreply layui-btn" data-method="confirmTrans" style="color:#1E9FFF;font-weight: bolder">删除</a></c:if>
                             </div>
                             <div style="width: 130px;float:right;margin-left: 5px">
                                 <a href="javascript:;"><i class="fa fa-thumbs-o-up"></i>
@@ -109,7 +109,7 @@
                             <div class="panel-body"style="padding: 5px;margin-left: 60px">
                                <sapn style="float: left"><img src="${ctx}/${comment.user.headshot}" style="width: 35px;height: 35px; border-radius:50%"></sapn>
                                <div style="width: 100%;">
-                                   <c:if test="${reply.user.id == comment.user.id}"><span style="color:#1E9FFF;font-weight: bolder;float: left">楼主：</span></c:if>
+                                   <c:if test="${reply.user.id == comment.user.id}"><span style="color:#1E9FFF;font-weight: bolder;float: left">层主：</span></c:if>
                                    <span style="float: left">${comment.user.username}：&nbsp;</span>
                                    <span style="width: 500px;float: left">${comment.content}</span>
                                    <span style="width: 50px;float: right"><a href="javascript:;">回复</a></span>
@@ -129,11 +129,11 @@
             <h3>发表一下看法吧</h3>
             <c:if test="${not empty loginUser}">
                 <div id="replys" style="width: 100%;height: 200px;margin-top: 50px">
-                    <form action="addReply" method="post" id="publish">
+                    <form id="publish">
                         <div id="editor"></div>
                         <input type="hidden" name="postId" value="${post.id}">
-                        <textarea id="content" name="content" style="display: none;"></textarea></br>
-                        <button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>
+                        <textarea id="content" name="content" style="display: none;">111111111111</textarea></br>
+                        <button class="btn btn-danger" style="width:100px;float: right" type="button" id="publishbtn"> 发表</button>
                     </form>
                 </div>
             </c:if>
@@ -159,8 +159,7 @@
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());
-</script>
-<script>
+
     $(function(){
         $(".reply1").on('click','#publish',function(){
             var data = $(this).parent().parent().serialize();
@@ -190,20 +189,54 @@
                         layer.msg('发表成功！');
                         window.location.reload();
                     }else {
-                        alert(data);
                         layer.msg('发表失败！');
                     }
                 },
                 // 请求出错时调用的函数
                 error:function(){
-
+                    layer.msg('系统错误，发表失败！');
                 }
             });
         });
+        var content = $("#content").val();
+        var contenttext = $("#publish").serialize();
+        $("#publishbtn").click(function () {
+           alert($content.length);
+            if(content.length > 11){
+                setcontent();
+            }else {
+                layer.msg('请输入内容！')
+            }
+            
+        });
+        
+        function setcontent() {
+            $.post('/addReply',contenttext,function (data) {
+                if(data > 0){
+                    layer.msg('发表成功！');
+                }else {
+                    layer.msg('发表失败！');
+                }
+            });
+        }
+
+        $(".delectreply").click(function () {
+
+            layer.confirm('您是如何看待前端开发？', {
+                btn: ['重要','奇葩'] //按钮
+            }, function(){
+                layer.msg('的确很重要', {icon: 1});
+            }, function(){
+                layer.msg('也可以这样', {
+                    time: 20000, //20s后自动关闭
+                    btn: ['明白了', '知道了']
+                });
+            });
+
+        })
     })
 
 </script>
-
 
 </body>
 </html>

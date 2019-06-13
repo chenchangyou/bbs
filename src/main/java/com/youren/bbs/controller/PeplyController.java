@@ -8,8 +8,10 @@ import com.youren.bbs.service.ReplyService;
 import com.youren.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
@@ -28,8 +30,9 @@ public class PeplyController {
     @Autowired
     private PostService postService;
 
+    @ResponseBody
     @PostMapping("addReply")
-    public String add(long postId, String content, HttpSession httpSession){
+    public int add(long postId, String content, HttpSession httpSession){
         Post post =null;
         User user = (User)httpSession.getAttribute("loginUser");
 
@@ -39,10 +42,17 @@ public class PeplyController {
         int id = replyService.add(content, postId,user.getId());
         if(id > 0){
             postService.updatereplynumber(postId,replynumber+1);
-            return "";
+            return 1;
         }else {
-            return "";
+            return 0;
         }
+    }
+
+    @ResponseBody
+    @GetMapping("deletereply")
+    public int deletereply(Long replyId){
+        int row = replyService.delete(replyId);
+        return row;
     }
 
 }
