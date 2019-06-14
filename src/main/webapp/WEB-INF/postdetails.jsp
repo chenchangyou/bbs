@@ -16,6 +16,23 @@
         });
 
     </script>
+    <style>
+        .dianzan-ok {
+            color: #2aabd2;
+        }
+
+        .dianzan-no {
+            color: #A9A9A9;
+        }
+
+        .dianzan {
+        }
+
+        .dianzan:hover {
+            text-decoration: none;
+            color: red;
+        }
+    </style>
 </head>
 <body onload="load()">
 
@@ -66,8 +83,8 @@
             <div style="width: 100%;height: 120px;padding: 10px 50px;">
                 <div style="width: 500px;margin: 0 auto;text-align: center">
                     <div style="width: 33.3%;float: left;">
-                       <a style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
-                        <p>点赞</p>
+                       <a class="dianzan dianzan-no" style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
+                        <p>${post.replynumber}</p>
                        </a>
                     </div>
                     <div style="float: left;width: 33.3%;">
@@ -169,11 +186,11 @@
             <hr>
             <h3>发表一下看法吧</h3>
             <c:if test="${not empty loginUser}">
-                <div id="replys" style="width: 100%;height: 200px;margin-top: 50px">
+                <div id="replys" style="width: 100%;height: 310px;margin-top: 50px">
                     <form id="publish">
-                        <div id="editor"></div>
+                        <div id="editor" style="width:100%;"></div>
                         <input type="hidden" name="postId" value="${post.id}">
-                        <textarea id="content" name="content" style="display: none;">111111111111</textarea></br>
+                        <textarea id="content" name="content" style="display: none;" ></textarea></br>
                         <button class="btn btn-danger" style="width:100px;float: right" type="button" id="publishbtn">
                             发表
                         </button>
@@ -201,7 +218,13 @@
     editor.customConfig.onchange = function (html) {
         // 监控变化，同步更新到 textarea
         $content.val(html)
-    }
+    };
+    // 配置服务器端图片上传地址
+    editor.customConfig.uploadImgServer = '${ctx}/admin/book/upload';
+    // 将图片大小限制为 3M
+    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024
+    // 限制一次最多上传 5 张图片
+    editor.customConfig.uploadImgMaxLength = 5
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());
@@ -342,6 +365,37 @@
 
             });
 
+        });
+        /*点赞功能Ajax写法*/
+        var pid = ${post.id};//帖子Id,由于是测试就是先写死，怎么拿到自己想办法
+        var uid = ${loginUser.id};//当前用户的Id，后台可以通过Session获取
+        $('.dianzan').click(function () {//给每个点赞按钮绑定点击事件
+            var dz = $(this);//定义当前元素
+            var number = dz.find(".number").html();//获取当前的点赞数
+            $.ajax({
+                url: "/user/fabulous",  // 发送请求的URL字符串。
+                data: {pid: pid,uid:uid}, // 发送到服务器的数据。
+                type: "post",   //请求方式 POST或GET
+                dataType: "json",   // 预期服务器返回的数据类型。
+                async: false,   // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
+                success: function (data) {  // 请求成功后的回调函数。
+                    if (data > 0) {     //判断返回来的值,这个根据自己写的后台返回的json数据进行判断
+                        dz.removeClass('dianzan-no').addClass('dianzan-ok');    //替换点击赞后的样式
+                        number++; //数量加1
+                        dz.find(".number").html(number);    //替换原有的点赞数
+                        layer.msg("点赞成功");  //layui弹出层提示
+                    } else {
+                        dz.removeClass('dianzan-ok').addClass('dianzan-no');    //替换回没点赞的样式
+                        number--;   //数量减1
+                        dz.find(".number").html(number);    //替换原有的点赞数
+                        layer.msg("取消点赞");   //layui弹出层提示
+                    }
+                },
+                // 请求出错时调用的函数
+                error: function () {
+                    layer.msg("点赞失败！系统出错");
+                }
+            });
         })
     })
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 回复评论
+ * 回复某条评论
  */
 @Data
 public class ReplyComment {

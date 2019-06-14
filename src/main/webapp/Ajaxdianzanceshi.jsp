@@ -146,7 +146,7 @@
 <script>
     /*点赞功能Ajax写法*/
     var pid = 4;//帖子Id,由于是测试就是先写死，怎么拿到自己想办法
-    var uid = 5;//当前用户的Id，由于是测试就是先写死
+    var uid = 5;//当前用户的Id，后台可以通过Session获取
     $('.dianzan').click(function () {//给每个点赞按钮绑定点击事件
         var dz = $(this);//定义当前元素
         var number = dz.find(".number").html();//获取当前的点赞数
