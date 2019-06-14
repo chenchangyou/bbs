@@ -83,7 +83,8 @@
             <ul class="list-group" style="border: none">
                 <li class="list-group-item"><h3>嘿嘿嘿嘿嘿嘿嘿！！！！！！！！</h3></li>
                 <li class="list-group-item" style="padding-left: 15px;text-overflow:ellipsis;overflow: hidden"><span
-                        style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 12px">显示部分内容11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</span>
+                        style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 12px">显示部分内容111111111111111111111111111111111111111111
+                    11111111111111111111111111111111111111111111111111111111111</span>
                 </li>
                 <li class="list-group-item span1">
                     <span style="margin: 0">
@@ -115,7 +116,8 @@
             <ul class="list-group" style="border: none">
                 <li class="list-group-item"><h3>嘿嘿嘿嘿嘿嘿嘿！！！！！！！！</h3></li>
                 <li class="list-group-item" style="padding-left: 15px;text-overflow:ellipsis;overflow: hidden"><span
-                        style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 12px">显示部分内容11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</span>
+                        style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 12px">显示部分内容11111111111111111111111111111111111111111111111111111111
+                    111111111111111111111111111111111111111111111</span>
                 </li>
                 <li class="list-group-item span1">
                     <span style="margin: 0">
@@ -139,13 +141,12 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 <script>
-    var pid = 4;//帖子Id
-    var uid = 5;//当前用户的Id
+    /*点赞功能Ajax写法*/
+    var pid = 4;//帖子Id,由于是测试就是先写死，怎么拿到自己想办法
+    var uid = 5;//当前用户的Id，由于是测试就是先写死
     $('.dianzan').click(function () {//给每个点赞按钮绑定点击事件
         var dz = $(this);//定义当前元素
         var number = dz.find(".number").html();//获取当前的点赞数
@@ -156,7 +157,7 @@
             dataType: "json",   // 预期服务器返回的数据类型。
             async: false,   // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
             success: function (data) {  // 请求成功后的回调函数。
-                if (data > 0) {     //判断返回来的值
+                if (data > 0) {     //判断返回来的值,这个根据自己写的后台返回的json数据进行判断
                     dz.removeClass('dianzan-no').addClass('dianzan-ok');    //替换点击赞后的样式
                     number++; //数量加1
                     dz.find(".number").html(number);    //替换原有的点赞数
@@ -173,19 +174,6 @@
                 layer.msg("点赞失败！系统出错");
             }
         });
-
-        // // var num = $(this).text();
-        // $.post('/user/fabulous',{pid: pid, uid: uid}, function (data) {
-        //     if (data > 0) {
-        //         // num++;
-        //         $(this).removeClass('dianzan-no').addClass('dianzan-ok');
-        //         // $(this).text(num);
-        //     } else {
-        //         // num--;
-        //         $(this).removeClass('dianzan-ok').addClass('dianzan-no');
-        //         // $(this).text(num);
-        //     }
-        // })
     })
 </script>
 

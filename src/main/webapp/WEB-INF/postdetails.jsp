@@ -49,9 +49,12 @@
                             作者：${user.username}</div>
                         <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
                             <fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></div>
-                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;"><i
-                                class="fa fa-eye"></i> ${post.browse}</div>
-                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">${post.browse}</div>
+                        <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                            <i class="fa fa-eye"></i> ${post.browse}</div>
+                        <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                            <i  class="fa fa-commenting"></i> ${post.replynumber}</div>
+                        <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                            <i  class="fa fa-thumbs-o-up"></i> ${post.replynumber}</div>
                     </div>
                     <hr style="color: #93D1FF;height: 3px">
                     <div style=" background-color: #F2F2F2;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
@@ -59,15 +62,41 @@
                     </div>
                 </div>
             </div>
-            <div style="width: 100%;height: 40px;padding: 2px;">
-                <div style="width: 100px;height: 100%;font-size: 25px;font-weight: bolder;float: left">评论区</div>
-                <div style="width: 58px;float: right;height: 100%"><a class="btn btn-default" href="#replys"
-                                                                      role="button">回复</a></div>
+            <%--文章末端--%>
+            <div style="width: 100%;height: 120px;padding: 10px 50px;">
+                <div style="width: 500px;margin: 0 auto;text-align: center">
+                    <div style="width: 33.3%;float: left;">
+                       <a style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
+                        <p>点赞</p>
+                       </a>
+                    </div>
+                    <div style="float: left;width: 33.3%;">
+                       <a href="javascript:;"><i  class="fa fa-star-o fa-3x"></i>
+                        <p>收藏</p>
+                       </a>
+                    </div>
+                    <div style="float: left;width: 33.3%;">
+                        <a href="javascript:;"><i style="color: red" class="fa fa-warning fa-3x"></i>
+                            <p>举报</p>
+                        </a>
+                    </div>
+                </div>
             </div>
+
+            <%--评论区--%>
+            <div style="width: 100%;height: 68px;padding: 2px;">
+                <blockquote style="height: 53px;border-bottom:1px  #92bdc1 solid " class="layui-elem-quote">
+                    <div style="width: 100px;height: 100%;font-size: 25px;font-weight: bolder;float: left">评论区</div>
+                    <div style="width: 58px;float: right;height: 100%"><a class="btn btn-default" href="#replys"
+                                                                          role="button">回复</a></div>
+                </blockquote>
+            </div>
+            
             <c:forEach items="${replyList}" var="reply" varStatus="number">
-                <div class="panel panel-default" style="background-color: rgba(0,255,255,0.02);border: 1px red solid">
-                    <!-- 评论区 -->
+                <div class="panel panel-default" style="padding: 2px; background-color: rgba(0,255,255,0.02);border: none">
+                    <!-- 回复区 -->
                     <form method="post" class="reply1">
+                        <input type="hidden" name="postId" value="${post.id}">
                         <div class="panel-body" style="padding: 5px;">
                             <div style="height: 35px;width: 100%">
                                 <div style="width: 50px;float: left"><img src="${ctx}/${reply.user.headshot}" alt="..."
@@ -110,7 +139,7 @@
                         </div>
                     </form>
 
-                        <%--回复区--%>
+                        <%--评论回复区--%>
 
                     <c:forEach items="${reply.replyCommentList}" var="comment">
                         <div class="panel panel-default" style="margin-right: 6px;background:none;border:none">
@@ -181,7 +210,7 @@
         $(".reply1").on('click', '#tjpublish', function () {
             var data = $(this).parent().parent().serialize();
             var plq = $(this).parent().parent().parent();
-            if($("#user_reply").val().length > 0){
+            if ($("#user_reply").val().length > 0) {
 
                 $.ajax({
                     url: "${ctx}/replyComment/add",// 发送请求的URL字符串。
@@ -199,40 +228,46 @@
                                 "                               <span style='float: left'><img src='
 
 
-${ctx}/
+
+                            ${ctx}/
 
 
-                        ${comment.user.headshot}' style='width: 35px;height: 35px; border-radius:50%'></span>" +
+
+                            ${comment.user.headshot}' style='width: 35px;height: 35px; border-radius:50%'></span>" +
                             "                               <div style='width: 100%;'> " +
                             "
 
 
-                        <c:if test='${reply.user.id == comment.user.id}'><span style='color:#1E9FFF;font-weight: bolder;float: left'>楼主：</span>
+
+                            <c:if test='${reply.user.id == comment.user.id}'><span style='color:#1E9FFF;font-weight: bolder;float: left'>楼主：</span>
 
 
-                        </c:if>" +
+
+                            </c:if>" +
                             "                                   <span style='float: left'>
 
 
-                        ${comment.user.username}：&nbsp;</span>" +
+
+                            ${comment.user.username}：&nbsp;</span>" +
                             "                                   <span style='width: 500px;float: left'>
 
 
-                        ${comment.content}</span>" +
+
+                            ${comment.content}</span>" +
                             "                                   <span style='width: 50px;float: right'><a href='javascript:;'>回复</a></span>" +
                             "                               </div>" +
                             "                            </div>" +
                             "                        </div>");*/
-                            layer.msg('发表成功！',{
+                            layer.msg('发表成功！', {
                                 offset: '150',
-                                time:800,
-                            },function () {
+                                time: 800,
+                            }, function () {
                                 window.location.reload();
                             });
                         } else {
-                            layer.msg('发表失败！',{
+                            layer.msg('发表失败！', {
                                 offset: '150',
-                                time:1000,
+                                time: 1000,
                             });
                         }
                     },
@@ -242,8 +277,8 @@ ${ctx}/
                     }
                 });
 
-            }else {
-                layer.msg('发表失败！内容为空',{
+            } else {
+                layer.msg('发表失败！内容为空', {
                     offset: '150',
                 });
             }
@@ -257,22 +292,23 @@ ${ctx}/
             if (textlength.length > 0) {    /*判断长度*/
                 setcontent();/*调用方法*/
             } else {
-                layer.msg('请输入内容！',{
+                layer.msg('请输入内容！', {
                     offset: '150',
                 });
             }
         });
+
         function setcontent() {
             $.post('/addReply', contenttext.serialize(), function (data) {
                 if (data > 0) {
-                    layer.msg('发表成功！',{
+                    layer.msg('发表成功！', {
                         offset: '150',
-                        time:1000,
-                    },function () {
+                        time: 1000,
+                    }, function () {
                         window.location.reload();
                     });
                 } else {
-                    layer.msg('发表失败！',{
+                    layer.msg('发表失败！', {
                         offset: '150',
                     });
                 }
