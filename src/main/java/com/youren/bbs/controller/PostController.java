@@ -1,14 +1,11 @@
 package com.youren.bbs.controller;
 
-import com.youren.bbs.entity.Category;
-import com.youren.bbs.entity.Post;
-import com.youren.bbs.entity.Reply;
-import com.youren.bbs.entity.User;
+import com.youren.bbs.entity.*;
+import com.youren.bbs.service.FabulousService;
 import com.youren.bbs.service.PostService;
 import com.youren.bbs.service.ReplyService;
 import com.youren.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +27,8 @@ public class PostController {
     private PostService postService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private FabulousService fabulousService;
     @Autowired
     private ReplyService replyService;
 
@@ -40,7 +38,16 @@ public class PostController {
     }
 
     @GetMapping("postdetails")
-    public String postdetails(long postlistId,Model model){
+    public String postdetails(long postlistId,Model model,HttpSession session){
+        User loginUser = (User)session.getAttribute("loginUser");
+        int state =0;
+        if(loginUser!=null) {
+            Fabulous fabulous = fabulousService.findByPidUid(postlistId, loginUser.getId());
+            if(fabulous!=null){
+                state = 1;
+            }
+        }
+
         Post post = postService.findById(postlistId);
 
         Integer browse = post.getBrowse();
@@ -52,6 +59,8 @@ public class PostController {
 
         List<Reply> replyLists = replyService.findByPostId(postlistId);
 
+        model.addAttribute("state",state);
+        model.addAttribute("count",fabulousService.findnumber(postlistId));
         model.addAttribute("replyList",replyLists);
         model.addAttribute("user",user);
         model.addAttribute("post",post);

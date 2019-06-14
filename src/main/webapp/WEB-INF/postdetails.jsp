@@ -71,7 +71,14 @@
                         <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
                             <i  class="fa fa-commenting"></i> ${post.replynumber}</div>
                         <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
-                            <i  class="fa fa-thumbs-o-up"></i> ${post.replynumber}</div>
+                            <i  class="fa fa-thumbs-o-up"></i>
+                            <c:if test="${not empty count}">
+                               ${count}
+                            </c:if>
+                            <c:if test="${empty count}">
+                                0
+                            </c:if>
+                        </div>
                     </div>
                     <hr style="color: #93D1FF;height: 3px">
                     <div style=" background-color: #F2F2F2;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
@@ -83,8 +90,15 @@
             <div style="width: 100%;height: 120px;padding: 10px 50px;">
                 <div style="width: 500px;margin: 0 auto;text-align: center">
                     <div style="width: 33.3%;float: left;">
-                       <a class="dianzan dianzan-no" style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
-                        <p>${post.replynumber}</p>
+                       <a class="dianzan <c:if test="${state le 0}">dianzan-no</c:if>
+                                        <c:if test="${state gt 0}">dianzan-ok</c:if>"
+                            style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
+                            <c:if test="${not empty count}">
+                               <p class="number">${count}</p>
+                            </c:if>
+                           <c:if test="${empty count}">
+                               <p class="number">0</p>
+                           </c:if>
                        </a>
                     </div>
                     <div style="float: left;width: 33.3%;">
@@ -201,7 +215,7 @@
             <c:if test="${empty loginUser}">
                 <div id="replys"
                      style="width: 100%;height: 200px;margin-top: 50px;border: 1px silver solid;margin-bottom: 10px;text-align: center;">
-                    <button href="javascript:;" data-toggle="modal" data-target="#myModal"
+                    <button data-toggle="modal" data-target="#myModal"
                             style="width: 150px;text-align: center;height: 30px;margin:85px auto">登陆后才可发表
                     </button>
                 </div>
@@ -326,7 +340,7 @@
                 if (data > 0) {
                     layer.msg('发表成功！', {
                         offset: '150',
-                        time: 1000,
+                        time: 1000
                     }, function () {
                         window.location.reload();
                     });
@@ -368,7 +382,7 @@
         });
         /*点赞功能Ajax写法*/
         var pid = ${post.id};//帖子Id,由于是测试就是先写死，怎么拿到自己想办法
-        var uid = ${loginUser.id};//当前用户的Id，后台可以通过Session获取
+        var uid = <c:if test="${empty loginUser}">null</c:if><c:if test="${not empty loginUser}">${loginUser.id}</c:if>;//当前用户的Id，后台可以通过Session获取
         $('.dianzan').click(function () {//给每个点赞按钮绑定点击事件
             var dz = $(this);//定义当前元素
             var number = dz.find(".number").html();//获取当前的点赞数
@@ -379,21 +393,34 @@
                 dataType: "json",   // 预期服务器返回的数据类型。
                 async: false,   // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
                 success: function (data) {  // 请求成功后的回调函数。
-                    if (data > 0) {     //判断返回来的值,这个根据自己写的后台返回的json数据进行判断
+                    if (data === 1) {     //判断返回来的值,这个根据自己写的后台返回的json数据进行判断
                         dz.removeClass('dianzan-no').addClass('dianzan-ok');    //替换点击赞后的样式
                         number++; //数量加1
                         dz.find(".number").html(number);    //替换原有的点赞数
-                        layer.msg("点赞成功");  //layui弹出层提示
-                    } else {
+                        layer.msg("点赞成功",{
+                            offset: '150'
+                        });  //layui弹出层提示
+                    } else if(data === 0){
                         dz.removeClass('dianzan-ok').addClass('dianzan-no');    //替换回没点赞的样式
                         number--;   //数量减1
                         dz.find(".number").html(number);    //替换原有的点赞数
-                        layer.msg("取消点赞");   //layui弹出层提示
+                        layer.msg("已取消点赞",{
+                            offset: '150'
+                        });   //layui弹出层提示
+                    }else if(data === 2){
+                        layer.msg("请先登录",{
+                            offset: '150',
+                            time:800
+                        },function () {
+                            $('#denglu').trigger("click");
+                        });
                     }
                 },
                 // 请求出错时调用的函数
                 error: function () {
-                    layer.msg("点赞失败！系统出错");
+                    layer.msg("点赞失败！系统出错",{
+                        offset: '150'
+                    });
                 }
             });
         })

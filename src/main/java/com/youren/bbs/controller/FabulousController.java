@@ -27,16 +27,17 @@ public class FabulousController {
     @PostMapping("fabulous")
     public int click(Long pid, Long uid) {
 
-        Fabulous fabulous = fabulousService.findByPidUid(pid, uid);
-
-        if (fabulous != null) {//不为空，则点过赞了就删除记录
-            int row = fabulousService.delete(fabulous.getPid(), fabulous.getUid());
-            
-            return 0;
-        } else {//没点过赞则添加记录
-            int row = fabulousService.create(pid, uid);
-            return 1;
+        if(pid!=null&&uid!=null&&uid!=0&&pid!=0&&uid!=0){
+            Fabulous fabulous = fabulousService.findByPidUid(pid, uid);
+            if (fabulous != null) {//不为空，则点过赞了就删除记录
+                int row = fabulousService.delete(fabulous.getPid(), fabulous.getUid());
+                return 0;
+            } else {//没点过赞则添加记录
+                int row = fabulousService.create(pid, uid);
+                return 1;
+            }
+        }else {//如果为空
+            return 2;
         }
     }
-
 }

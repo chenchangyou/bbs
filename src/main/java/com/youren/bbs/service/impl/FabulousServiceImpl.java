@@ -46,12 +46,12 @@ public class FabulousServiceImpl implements FabulousService {
 
     @Override
     public List<Fabulous> findBypid(Long pid) {
-
-        return fabulousMapper.findBypid(pid);
+        List<Fabulous> list = fabulousMapper.findBypid(pid);
+        return list;
     }
 
     @Override
-    public Fabulous findnumber(Long pid) {
+    public Integer findnumber(Long pid) {
         return fabulousMapper.findnumber(pid);
     }
 }

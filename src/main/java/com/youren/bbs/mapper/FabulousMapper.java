@@ -9,5 +9,5 @@ public interface FabulousMapper {
     int delete(Fabulous fabulous);
     Fabulous findByPidUid(Fabulous fabulous);
     List<Fabulous> findBypid(Long pid);
-    Fabulous findnumber(Long pid);
+    Integer findnumber(Long pid);
 }

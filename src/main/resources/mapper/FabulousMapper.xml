@@ -14,16 +14,16 @@
 		delete from t_fabulous where pid=#{pid} and uid=#{uid}
 	</delete>
 
-	<select id="findByPidUid"  resultType="Fabulous">
+	<select id="findByPidUid"  resultType="Fabulous" parameterType="Long">
 		select pid,uid from t_fabulous where pid=#{pid} and uid=#{uid}
 	</select>
 
-	<select id="findBypid"  resultType="Fabulous">
+	<select id="findBypid"  resultType="Fabulous" parameterType="Long">
 		select * from t_fabulous where pid=#{pid};
 	</select>
 
-	<select id="findbunber"  resultType="Fabulous">
-		select count(*) pid from t_fabulous where pid=#{pid};
+	<select id="findnumber"  resultType="Integer"  parameterType="Long">
+		select count(*) counts from t_fabulous where pid=#{pid};
 	</select>
 
 </mapper>

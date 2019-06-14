@@ -9,4 +9,5 @@ import lombok.Data;
 public class Fabulous {
     private Long pid;
     private Long uid;
+    private Integer counts;//用于统计数量
 }

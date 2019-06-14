@@ -27,6 +27,7 @@ public class AjaxTest {
     @Autowired
     private  PostService postService;
 
+    @Autowired
     private FabulousService fabulousService;
 
     @ResponseBody
@@ -48,17 +49,17 @@ public class AjaxTest {
     }
     @ResponseBody
     @GetMapping("getnumber")
-    public String getnumber(Long pid){
+    public List getnumber(Long pid){
         List<Fabulous> bypid = fabulousService.findBypid(pid);
         System.out.println(bypid);
-        return "list";
+        return bypid;
     }
     @ResponseBody
     @GetMapping("getnumbers")
-    public String getnumbers(Long pid){
-        Fabulous findnumber = fabulousService.findnumber(pid);
-        System.out.println(findnumber);
-        return "list";
+    public Integer getnumbers(Long pid){
+        Integer count = fabulousService.findnumber(pid);
+        System.out.println(count);
+        return count;
     }
 
     @PostMapping("")

@@ -51,7 +51,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty loginUser}">
-                    <li><a class="btn" data-toggle="modal" data-target="#myModal">登陆</a></li>
+                    <li><a class="btn" id="denglu" data-toggle="modal" data-target="#myModal">登陆</a></li>
                     <li><a href="${ctx}/user/register">注册</a></li>
                     <li><a href="#">关于</a></li>
                 </c:if>

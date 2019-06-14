@@ -10,5 +10,6 @@ public interface FabulousService {
     int delete(Long pid,Long uid);
     Fabulous findByPidUid(Long pid,Long uid);
     List<Fabulous> findBypid(Long pid);
-    Fabulous findnumber(Long pid);
+    Integer findnumber(Long pid);
+
 }
