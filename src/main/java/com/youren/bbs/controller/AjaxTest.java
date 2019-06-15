@@ -10,11 +10,12 @@ import com.youren.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,8 +63,31 @@ public class AjaxTest {
         return count;
     }
 
-    @PostMapping("")
-    public String upload(){
-    return""; 
+    @ResponseBody
+    @RequestMapping("/upload")
+    public Map<String,Object> upload(MultipartFile file)  throws IOException {
+
+        Map<String,Object> map = new HashMap<String, Object>();
+        Map<String,String> imgmap = new HashMap<String, String>();
+            String paht = "D:\\uploads\\file\\";
+            String newpaht = null;
+            String originalFilename = file.getOriginalFilename();
+            //获取上传文件的后缀名
+            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+            //新文件名
+            String newName = System.currentTimeMillis() + suffix;
+            //本地的文件
+            File saveFile = new File(paht + newName);
+            //把上传的文件保存到本地磁盘文件
+            file.transferTo(saveFile);
+            newpaht = paht+newName;
+            imgmap.put("src",newpaht);
+
+            map.put("code",0);
+            map.put("msg","");
+            map.put("data",imgmap);
+
+        return map;
+
     }
 }

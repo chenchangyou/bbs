@@ -63,4 +63,10 @@ public class UserController {
     public String index(){
         return "/user/index";
     }
+    @ResponseBody
+    @PostMapping("update")
+    public String update(){
+
+        return "";
+    }
 }

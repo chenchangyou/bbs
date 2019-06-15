@@ -171,7 +171,8 @@
                                 '        <div style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
                                 '            <div>' +
                                 '                <a href="#" class="thumbnail" style="width: 93%;height: 100%">' +
-                                '                    <img src="${ctx}/static/images/heiheihei.jpg" alt="...">' +
+                                '                    <img style="max-height: 100%;' +
+                                '}" src="${ctx}/static/images/heiheihei.jpg" alt="...">' +
                                 '                </a>' +
                                 '            </div>' +
                                 '        </div>' +
