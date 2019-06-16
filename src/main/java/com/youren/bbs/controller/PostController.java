@@ -37,10 +37,18 @@ public class PostController {
         return "user/addpost";
     }
 
+
+    /**
+     * 获取帖子详情页的数据
+     * @param postlistId 帖子Id
+     * @param model 传值到浏览器
+     * @param session 获取HttpSession对象
+     * @return 帖子详情页
+     */
     @GetMapping("postdetails")
     public String postdetails(long postlistId,Model model,HttpSession session){
         User loginUser = (User)session.getAttribute("loginUser");
-        int state =0;
+        int state =0;//用于判断当前用户是否点赞过该帖子（0 无，1有）
         if(loginUser!=null) {
             Fabulous fabulous = fabulousService.findByPidUid(postlistId, loginUser.getId());
             if(fabulous!=null){
@@ -49,17 +57,20 @@ public class PostController {
         }
 
         Post post = postService.findById(postlistId);
-
+        //获取访问量
         Integer browse = post.getBrowse();
-
+        //更新访问量加1
         int i = postService.updatebrowse(postlistId,  browse+1);
 
         Long userId = post.getUser().getId();
+
+        //获取发帖者的信息
         User user = userService.findById(userId);
 
+        //获取当前帖子的所有评论
         List<Reply> replyLists = replyService.findByPostId(postlistId);
 
-        model.addAttribute("state",state);
+        model.addAttribute("state",state);//
         model.addAttribute("count",fabulousService.findnumber(postlistId));
         model.addAttribute("replyList",replyLists);
         model.addAttribute("user",user);
@@ -67,6 +78,14 @@ public class PostController {
         return "postdetails";
     }
 
+    /**
+     * 发表帖子（添加帖子）
+     * @param title 标题
+     * @param content 内容
+     * @param session 获取HttpSession对象
+     * @param model 传值到浏览器
+     * @return 成功或者失败
+     */
     @PostMapping("addpost")
     public String addpost(String title,String content, HttpSession session, Model model){
 
@@ -91,6 +110,11 @@ public class PostController {
             return "user/addpost";
         }
     }
+
+    /**
+     * 删除帖子
+     * @param postId id
+     */
     @ResponseBody
     @PostMapping("/admin/deletePost")
     public String daletepost(Long postId){

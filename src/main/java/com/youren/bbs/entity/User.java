@@ -3,6 +3,7 @@ package com.youren.bbs.entity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户类
@@ -20,4 +21,6 @@ public class User {
     private Integer state;
     private Integer type;
     private Date createTime;
+//    private List<Post> post; //用户的帖子
+//    private List<Collect> collect; //用户的收藏
 }

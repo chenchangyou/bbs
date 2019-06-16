@@ -30,7 +30,7 @@ public class FabulousController {
         if(pid!=null&&uid!=null&&uid!=0&&pid!=0&&uid!=0){
             Fabulous fabulous = fabulousService.findByPidUid(pid, uid);
             if (fabulous != null) {//不为空，则点过赞了就删除记录
-                int row = fabulousService.delete(fabulous.getPid(), fabulous.getUid());
+                int row = fabulousService.delete(fabulous.getPost().getId(), fabulous.getUser().getId());
                 return 0;
             } else {//没点过赞则添加记录
                 int row = fabulousService.create(pid, uid);

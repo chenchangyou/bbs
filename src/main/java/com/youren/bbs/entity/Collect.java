@@ -1,14 +1,16 @@
 package com.youren.bbs.entity;
 
+
 import lombok.Data;
 
 import java.util.Date;
 
 /**
- *贴子点赞表
+ * 帖子收藏（t_collection）
  */
 @Data
-public class Fabulous {
+public class Collect {
+    private Long id;
     private Post post;
     private User user;
     private Date createTime;

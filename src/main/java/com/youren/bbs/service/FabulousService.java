@@ -11,5 +11,4 @@ public interface FabulousService {
     Fabulous findByPidUid(Long pid,Long uid);
     List<Fabulous> findBypid(Long pid);
     Integer findnumber(Long pid);
-
 }
