@@ -9,5 +9,5 @@ public interface CollectMapper {
     int delete(Collect collect);
     Collect findByPidUid(Collect collect); //用于判断用户是否收藏了该贴（判断结果集是否为空）
     List<Collect> findByuid(Long uid); //用户的收藏列表
-    Integer findnumber(Long pid); //统计帖子的收藏数量
+    Integer findNumber(Long pid); //统计帖子的收藏数量
 }
