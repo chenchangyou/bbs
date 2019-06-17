@@ -10,7 +10,6 @@ import java.util.Date;
  */
 @Data
 public class Collect {
-    private Long id;
     private Post post;
     private User user;
     private Date createTime;

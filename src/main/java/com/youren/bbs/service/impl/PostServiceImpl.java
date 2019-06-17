@@ -81,4 +81,12 @@ public class PostServiceImpl implements PostService {
         post.setReplynumber(replynumber);
         return postMapper.updatereplynumber(post);
     }
+
+    @Override
+    public int updatecollectCount(long postId, Integer collectCount) {
+        Post post = new Post();
+        post.setId(postId);
+        post.setCollectCount(collectCount);
+        return postMapper.updateCollectCount(post);
+    }
 }

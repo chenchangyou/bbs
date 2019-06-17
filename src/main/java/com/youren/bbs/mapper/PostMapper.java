@@ -17,4 +17,5 @@ public interface PostMapper {
     int updatedifference(Post post);
     int updateawesome(Post post);
     int updatereplynumber(Post post);
+    int updateCollectCount(Post post);
 }

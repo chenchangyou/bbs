@@ -163,7 +163,7 @@
                                 '                    </span>' +
                                 '                    <span>娱乐</span>' +
                                 '                    <span><i class="fa fa-eye"></i>  ' + item.browse + '</span>' +
-                                '                    <span><i class="fa fa-thumbs-o-up"></i>  999+</span>' +
+                                '                    <span><i class="fa fa-thumbs-o-up"></i>  ' + item.collectCount + '</span>' +
                                 '                    <span><i class="fa fa-commenting"></i>  ' + item.replynumber + '</span>' +
                                 '                </li>' +
                                 '            </ul>' +

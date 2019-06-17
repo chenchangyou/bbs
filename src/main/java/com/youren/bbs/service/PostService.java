@@ -15,5 +15,5 @@ public interface PostService {
     int updatedifference(long postId,Integer difference);
     int updateawesome(long postId,Integer awesome);
     int updatereplynumber(long postId,Integer replynumber);
-
+    int updatecollectCount(long postId,Integer collectCount);
 }

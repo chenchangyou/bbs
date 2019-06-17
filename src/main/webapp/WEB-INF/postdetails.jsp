@@ -89,6 +89,8 @@
             <%--文章末端--%>
             <div style="width: 100%;height: 120px;padding: 10px 50px;">
                 <div style="width: 500px;margin: 0 auto;text-align: center">
+
+                    <%--点赞按钮--%>
                     <div style="width: 33.3%;float: left;">
                        <a class="dianzan <c:if test="${state le 0}">dianzan-no</c:if>
                                         <c:if test="${state gt 0}">dianzan-ok</c:if>"
@@ -96,22 +98,36 @@
                             <c:if test="${not empty count}">
                                <p class="number">${count}</p>
                             </c:if>
-                           <c:if test="${empty count}">
+                            <c:if test="${empty count}">
                                <p class="number">0</p>
+                            </c:if>
+                       </a>
+                    </div>
+
+                    <%--收藏按钮--%>
+                    <div style="float: left;width: 33.3%;">
+                       <a href="javascript:;" id="collect"><i id="collectsty" style="
+                               <c:if test="${collectMap.state gt 0}">color:orange</c:if>
+                       " class="fa fa-star fa-3x"></i>
+
+                           <c:if test="${not empty collectMap.collectNumber}">
+                           <p id="collectNumber">${collectMap.collectNumber}</p>
+                           </c:if>
+                           <c:if test="${empty collectMap.collectNumber}">
+                               <p id="collectNumber">0</p>
                            </c:if>
                        </a>
                     </div>
-                    <div style="float: left;width: 33.3%;">
-                       <a href="javascript:;"><i  class="fa fa-star-o fa-3x"></i>
-                        <p>收藏</p>
-                       </a>
-                    </div>
+
+                    <%--举报按钮--%>
                     <div style="float: left;width: 33.3%;">
                         <a href="javascript:;"><i style="color: red" class="fa fa-warning fa-3x"></i>
                             <p>举报</p>
                         </a>
                     </div>
+
                 </div>
+
             </div>
 
             <%--评论区--%>
@@ -263,32 +279,15 @@
                                 "<div class='panel panel-default' style='margin-right: 6px;background:none;border:none'> " +
                                 "                            <div class='panel-body'style='padding: 5px;margin-left: 60px'>" +
                                 "                               <span style='float: left'><img src='
-
-
-
-                            ${ctx}/
-
-
-
                             ${comment.user.headshot}' style='width: 35px;height: 35px; border-radius:50%'></span>" +
                             "                               <div style='width: 100%;'> " +
-                            "
-
-
-
                             <c:if test='${reply.user.id == comment.user.id}'><span style='color:#1E9FFF;font-weight: bolder;float: left'>楼主：</span>
-
-
 
                             </c:if>" +
                             "                                   <span style='float: left'>
 
-
-
                             ${comment.user.username}：&nbsp;</span>" +
                             "                                   <span style='width: 500px;float: left'>
-
-
 
                             ${comment.content}</span>" +
                             "                                   <span style='width: 50px;float: right'><a href='javascript:;'>回复</a></span>" +
@@ -297,14 +296,14 @@
                             "                        </div>");*/
                             layer.msg('发表成功！', {
                                 offset: '150',
-                                time: 800,
+                                time: 800
                             }, function () {
                                 window.location.reload();
                             });
                         } else {
                             layer.msg('发表失败！', {
                                 offset: '150',
-                                time: 1000,
+                                time: 1000
                             });
                         }
                     },
@@ -316,7 +315,7 @@
 
             } else {
                 layer.msg('发表失败！内容为空', {
-                    offset: '150',
+                    offset: '150'
                 });
             }
 
@@ -330,7 +329,7 @@
                 setcontent();/*调用方法*/
             } else {
                 layer.msg('请输入内容！', {
-                    offset: '150',
+                    offset: '150'
                 });
             }
         });
@@ -346,7 +345,7 @@
                     });
                 } else {
                     layer.msg('发表失败！', {
-                        offset: '150',
+                        offset: '150'
                     });
                 }
             });
@@ -380,6 +379,7 @@
             });
 
         });
+
         /*点赞功能Ajax写法*/
         var pid = ${post.id};//帖子Id,由于是测试就是先写死，怎么拿到自己想办法
         var uid = <c:if test="${empty loginUser}">null</c:if><c:if test="${not empty loginUser}">${loginUser.id}</c:if>;//当前用户的Id，后台可以通过Session获取
@@ -408,7 +408,7 @@
                             offset: '150'
                         });   //layui弹出层提示
                     }else if(data === 2){
-                        layer.msg("请先登录",{
+                        layer.msg("请您先登录",{
                             offset: '150',
                             time:800
                         },function () {
@@ -423,7 +423,59 @@
                     });
                 }
             });
-        })
+        });
+
+        /*收藏Ajax*/
+        $("#collect").click(function () {
+
+            var collectNumber = $("#collectNumber").text();
+
+            $.ajax({
+                url: "/user/collect",  // 发送请求的URL字符串。
+                data: {pid: pid}, // 发送到服务器的数据。
+                type: "post",   //请求方式 POST或GET
+                dataType: "json",   // 预期服务器返回的数据类型。
+                async: false,
+                success:function (data) {
+                if(data === 0){
+
+                    collectNumber--;
+                    $("#collectsty").css("color","");
+                    $("#collectNumber").html(collectNumber);
+                    layer.msg("已取消收藏",{ //layui弹出层提示
+                        offset: '150'
+                    });
+
+                }else if (data === 1){
+
+                    collectNumber++;
+                    $("#collectsty").css("color","orange");
+                    $("#collectNumber").html(collectNumber);
+                    layer.msg("收藏成功",{ //layui弹出层提示
+                        offset: '150'
+                        ,icon: 1
+                    });
+
+                } else if(data === 2){
+
+                    layer.msg("请您先登录",{
+                        offset: '150',
+                        time:800
+                    },function () {
+                        $('#denglu').trigger("click");
+                    });
+
+                    }
+                },
+                // 请求出错时调用的函数
+                error: function () {
+                    layer.msg("收藏失败！系统出错",{
+                        offset: '150'
+                        ,icon: 2
+                    });
+                }
+            })
+        });
     })
 
 </script>

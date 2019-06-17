@@ -15,6 +15,7 @@
 		<result property="awesome" column="awesome" />
 		<result property="state" column="state" />
 		<result property="replynumber" column="replynumber" />
+		<result property="collectCount" column="collectcount" />
 		<!-- 多对一的映射 -->
 		<association property="user" javaType="User">
 			<id property="id" column="uid"/>
@@ -44,6 +45,10 @@
 		update t_post set replynumber=#{replynumber} where id=#{id}
 	</update>
 
+	<update id="updateCollectCount" parameterType="Post">
+		update t_post set collectcount=#{collectCount} where id=#{id}
+	</update>
+
 	<update id="update" parameterType="Post">
 		update t_post set title=#{title},content=#{content} where id=#{id}
 	</update>
@@ -55,21 +60,21 @@
 
 	<select id="findById" parameterType="long" resultMap="postResultMap">
 		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,p.replynumber
+			   u.id uid, u.username,p.replynumber,p.collectcount
 		from t_post p left join t_user u on p.user_id=u.id
 		where p.id=#{id}
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="postResultMap">
 		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,p.replynumber
+			   u.id uid, u.username,p.replynumber,p.collectcount
 		from t_post p left join t_user u on p.user_id=u.id
 		where p.user_id=#{userId}
 	</select>
 
 	<select id="findAll" resultMap="postResultMap">
 		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,u.headshot,p.replynumber
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount
 		from t_post p left join t_user u on p.user_id=u.id
 		where p.state >0
 		GROUP BY p.create_time desc

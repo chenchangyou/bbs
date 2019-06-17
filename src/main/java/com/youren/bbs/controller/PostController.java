@@ -1,10 +1,7 @@
 package com.youren.bbs.controller;
 
 import com.youren.bbs.entity.*;
-import com.youren.bbs.service.FabulousService;
-import com.youren.bbs.service.PostService;
-import com.youren.bbs.service.ReplyService;
-import com.youren.bbs.service.UserService;
+import com.youren.bbs.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -31,6 +29,8 @@ public class PostController {
     private FabulousService fabulousService;
     @Autowired
     private ReplyService replyService;
+    @Autowired
+    private CollectService collectService;
 
     @GetMapping("addpost")
     public String addpost(){
@@ -47,14 +47,20 @@ public class PostController {
      */
     @GetMapping("postdetails")
     public String postdetails(long postlistId,Model model,HttpSession session){
-        User loginUser = (User)session.getAttribute("loginUser");
+
+        User user = (User)session.getAttribute("loginUser");
+
+        Map<String, Object> collectMap = null;
+
         int state =0;//用于判断当前用户是否点赞过该帖子（0 无，1有）
-        if(loginUser!=null) {
-            Fabulous fabulous = fabulousService.findByPidUid(postlistId, loginUser.getId());
+        if(user!=null) {
+            //返回判断当前用户是否有收藏过该帖子的数值
+            Fabulous fabulous = fabulousService.findByPidUid(postlistId, user.getId());
             if(fabulous!=null){
                 state = 1;
             }
         }
+        collectMap = collectService.collectmap(postlistId,user);
 
         Post post = postService.findById(postlistId);
         //获取访问量
@@ -65,15 +71,16 @@ public class PostController {
         Long userId = post.getUser().getId();
 
         //获取发帖者的信息
-        User user = userService.findById(userId);
+        User postuser = userService.findById(userId);
 
         //获取当前帖子的所有评论
         List<Reply> replyLists = replyService.findByPostId(postlistId);
 
+        model.addAttribute("collectMap",collectMap);
         model.addAttribute("state",state);//
         model.addAttribute("count",fabulousService.findnumber(postlistId));
         model.addAttribute("replyList",replyLists);
-        model.addAttribute("user",user);
+        model.addAttribute("user",postuser);
         model.addAttribute("post",post);
         return "postdetails";
     }
