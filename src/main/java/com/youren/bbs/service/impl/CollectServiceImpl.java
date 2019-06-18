@@ -30,7 +30,7 @@ public class CollectServiceImpl implements CollectService {
     @Autowired
     private PostService postService;
 
-    //封装
+    //
     private Collect coll(Long pid, Long uid){
 
         Collect collect = new Collect();
@@ -103,6 +103,7 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public int judgeCollect(Long pid, Long uid) {
+
         Collect collect = coll(pid, uid);
 
         Post post;
@@ -135,6 +136,7 @@ public class CollectServiceImpl implements CollectService {
 
     @Override
     public Map<String, Object> collectmap(Long pid,User user) {
+
         Map<String, Object> map = new HashMap<String, Object>();
 
         if(user!=null){

@@ -25,13 +25,25 @@
             color: #A9A9A9;
         }
 
-        .dianzan {
+        .dianzan:visited {
         }
 
         .dianzan:hover {
             text-decoration: none;
             color: red;
         }
+        a:hover{
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+        a:link{
+              text-decoration: none;
+            /*color: #000000;*/
+          }
+        a:visited{
+            /*color: #000000;*/
+        }
+
     </style>
 </head>
 <body onload="load()">
@@ -51,7 +63,12 @@
                 style="text-align: center"></p>
         <p>${user.username}</p>
         <p>个人信息</p>
-        <button type="button" class="btn btn-info btn-right"><i class="fa fa-plus"></i> 关注</button>
+        <div style="width: 100%; padding: 12px 10px">
+            <p><a href="#">帖子：999+</a> | <a href="#">关注：999+</a></p>
+            <p><a href="#">粉丝：999+</a> | <a href="#">收藏：999+</a></p>
+        </div>
+        <button type="button" style="width: 120px;text-align: center;margin: 0 32px" class="btn btn-info btn-right">
+            <i class="fa fa-plus"></i> 关注</button>
     </div>
     <div>
 

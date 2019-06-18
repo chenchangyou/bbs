@@ -39,3 +39,16 @@ body{
 .layui-col-md12:hover{
     border: #00F7DE 1px solid;
 }
+.admin-global{
+    height: 650px;
+    width: 100%;
+    margin:80px auto;
+    padding:10px 10px;
+    background-color:#FFFFFF;
+    box-shadow: 2px 2px 2px #888888;
+}
+.admin-rightbox{
+    width:86%;
+    height: 630px;
+    float: right
+}

@@ -31,6 +31,8 @@ public class PostController {
     private ReplyService replyService;
     @Autowired
     private CollectService collectService;
+    @Autowired
+    private FollowedService followedService;
 
     @GetMapping("addpost")
     public String addpost(){
@@ -63,6 +65,8 @@ public class PostController {
         collectMap = collectService.collectmap(postlistId,user);
 
         Post post = postService.findById(postlistId);
+
+        Map<String, Object> followedmap = followedService.followedmap(post.getId(), user);
         //获取访问量
         Integer browse = post.getBrowse();
         //更新访问量加1
@@ -76,6 +80,7 @@ public class PostController {
         //获取当前帖子的所有评论
         List<Reply> replyLists = replyService.findByPostId(postlistId);
 
+        model.addAttribute("followedmap",followedmap);
         model.addAttribute("collectMap",collectMap);
         model.addAttribute("state",state);//
         model.addAttribute("count",fabulousService.findnumber(postlistId));

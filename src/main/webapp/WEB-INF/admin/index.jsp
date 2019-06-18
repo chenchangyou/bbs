@@ -8,7 +8,7 @@
 <body>
 <%@include file="../../common/head.jsp"%>
 
-<div style="height: 650px; width: 1160px;margin:80px auto;padding:10px 10px;background-color:#FFFFFF;box-shadow: 2px 2px 2px #888888;">
+<div class="admin-global">
     <ol class="breadcrumb">
         <li>后台首页</li>
         <li class="active">管理中心</li>
@@ -19,7 +19,7 @@
     <div style="width:200px;height: 630px;float: left">
         <%@include file="adminmenu.jsp"%>
     </div>
-    <div style="width:900px;height: 630px;padding: 15px;float: right">
+    <div class="admin-rightbox">
         <div>
             <table class="layui-hide" id="test"></table>
         </div>

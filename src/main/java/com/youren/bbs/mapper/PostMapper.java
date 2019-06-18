@@ -10,8 +10,8 @@ public interface PostMapper {
     int create(Post post);
     int update(Post post);
     int updateState(Post post);
-    Post findById(long id);
-    List<Post> findByUserId(long userId);
+    Post findById(Long id);
+    List<Post> findByUserId(Long userId);
     List<Post> findAll();
     int updatebrowse(Post post);
     int updatedifference(Post post);
