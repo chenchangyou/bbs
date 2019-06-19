@@ -85,7 +85,7 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public List<Collect> findByUid(Long uid) {
-        return null;
+        return collectMapper.findByuid(uid);
     }
 
 

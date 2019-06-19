@@ -72,6 +72,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int update(User user) {
+        return 0;
+    }
+
+    @Override
+    public int updateThumbnail(String thumbnail,Long uid) {
+        User user = new User();
+            user.setId(uid);
+            user.setHeadshot(thumbnail);
+        return userMapper.updateThumbnail(user);
+    }
+
+    @Override
+    public int delete(Long id) {
+        return 0;
+    }
+
+    @Override
     public User findById(Long id) {
         return userMapper.findById(id);
     }

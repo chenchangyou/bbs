@@ -63,12 +63,12 @@ public class AjaxTest {
         return count;
     }
 
-    @ResponseBody
+   /* @ResponseBody
     @RequestMapping("/upload")
-    public Map<String,Object> upload(MultipartFile file)  throws IOException {
+           public Map<String,Object> upload(MultipartFile file)  throws IOException {
 
-        Map<String,Object> map = new HashMap<String, Object>();
-        Map<String,String> imgmap = new HashMap<String, String>();
+            Map<String,Object> map = new HashMap<String, Object>();
+            Map<String,String> imgmap = new HashMap<String, String>();
             String paht = "D:\\uploads\\file\\";
             String newpaht = null;
             String originalFilename = file.getOriginalFilename();
@@ -87,7 +87,7 @@ public class AjaxTest {
             map.put("msg","");
             map.put("data",imgmap);
 
-        return map;
+            return map;
 
-    }
+    }*/
 }

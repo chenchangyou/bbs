@@ -64,11 +64,34 @@
         <p>${user.username}</p>
         <p>个人信息</p>
         <div style="width: 100%; padding: 12px 10px">
-            <p><a href="#">帖子：999+</a> | <a href="#">关注：999+</a></p>
-            <p><a href="#">粉丝：999+</a> | <a href="#">收藏：999+</a></p>
+            <p><a href="#">帖子：${followedmap.postcount}</a> | <a href="#">关注：${followedmap.followedcount}</a></p>
+            <p><a href="#">粉丝：<span id="fans">${followedmap.collectNumber}</span></a> | <a href="#">收藏：${followedmap.collectcount}</a></p>
         </div>
-        <button type="button" style="width: 120px;text-align: center;margin: 0 32px" class="btn btn-info btn-right">
-            <i class="fa fa-plus"></i> 关注</button>
+
+       <c:if test="${followedmap.state gt 0}">
+
+           <c:if test="${user.id ne loginUser.id}">
+               <button type="button" id="attention" style="width: 120px;border:none;text-align: center;margin: 0 32px;background-color: gray" class="btn btn-info btn-right">
+                   <i class="fa fa-check attentionfont"></i> <span>已关注</span></button>
+           </c:if>
+           <c:if test="${user.id eq loginUser.id}">
+               <a type="button" style="width: 120px;border:none;text-align: center;margin: 0 32px;" class="btn btn-info btn-right">
+                    <span>个人中心</span></a>
+           </c:if>
+
+       </c:if>
+
+        <c:if test="${followedmap.state le 0}">
+            <c:if test="${user.id ne loginUser.id}">
+                <button type="button" id="attention" style="width: 120px;border:none;text-align: center;margin: 0 32px;"class="btn btn-info btn-right">
+                    <i class="fa fa-plus attentionfont"></i> <span>关注</span></button>
+            </c:if>
+            <c:if test="${user.id eq loginUser.id}">
+                <a type="button" style="width: 120px;border:none;text-align: center;margin: 0 32px;" class="btn btn-info btn-right">
+                    <span>个人中心</span></a>
+            </c:if>
+        </c:if>
+
     </div>
     <div>
 
@@ -269,9 +292,9 @@
     // 配置服务器端图片上传地址
     editor.customConfig.uploadImgServer = '${ctx}/admin/book/upload';
     // 将图片大小限制为 3M
-    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024
+    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024;
     // 限制一次最多上传 5 张图片
-    editor.customConfig.uploadImgMaxLength = 5
+    editor.customConfig.uploadImgMaxLength = 5;
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());
@@ -493,8 +516,67 @@
                 }
             })
         });
-    })
 
+        /*关注Ajax*/
+        $("#attention").click(function () {
+
+            var fansNumber = $("#fans").text();
+
+            var postUserId = ${user.id};
+
+            $.ajax({
+                url: "/user/followed",  // 发送请求的URL字符串。
+                data: {fid: postUserId}, // 发送到服务器的数据。
+                type: "post",   //请求方式 POST或GET
+                dataType: "json",   // 预期服务器返回的数据类型。
+                async: false,
+                success:function (data) {
+                    if(data === 0){
+
+                        fansNumber--;
+
+                        $(".attentionfont").removeClass('fa-check').addClass('fa-plus');
+
+                         $("#attention").css("background-color","");
+                         $("#attention span").text("关注");
+                        $("#fans").html(fansNumber);
+                        layer.msg("已取消关注",{ //layui弹出层提示
+                            offset: '150'
+                        });
+
+                    }else if (data === 1){
+
+                        fansNumber++;
+                        $(".attentionfont").removeClass('fa-plus').addClass('fa-check');
+
+                        $("#attention").css("background-color","gray");
+                        $("#attention span").text("已关注");
+                        $("#fans").html(fansNumber);
+                        layer.msg("关注成功",{ //layui弹出层提示
+                            offset: '150'
+                            ,icon: 1
+                        });
+
+                    } else if(data === 2){
+
+                        layer.msg("请您先登录",{
+                            offset: '150',
+                            time:800
+                        },function () {
+                            $('#denglu').trigger("click");
+                        });
+                    }
+                },
+                // 请求出错时调用的函数
+                error: function () {
+                    layer.msg("关注失败！系统出错",{
+                        offset: '150'
+                        ,icon: 2
+                    });
+                }
+            })
+        });
+    })
 </script>
 
 </body>

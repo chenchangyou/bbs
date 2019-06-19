@@ -1,9 +1,11 @@
 package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Collect;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CollectMapper {
     int create(Collect collect);
     int delete(Collect collect);

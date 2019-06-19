@@ -40,7 +40,7 @@
 		select * from t_collect where pid=#{post.id} and uid=#{user.id}
 	</select>
 
-	<select id="findByUid"  resultMap="collectResultMap" parameterType="Collect">
+	<select id="findByuid"  resultMap="collectResultMap" parameterType="Collect">
 		select * from t_collect where uid=#{user.id};
 	</select>
 

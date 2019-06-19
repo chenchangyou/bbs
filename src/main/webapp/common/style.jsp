@@ -55,6 +55,6 @@
         width: 100%;
         height: 100%;
         z-index: 9999;
-        background: url('https://img-blog.csdn.net/20161205162919763') 50% 50% no-repeat rgb(249,249,249);
+        background: url('../static/images/load.gif') 50% 50% no-repeat rgb(249,249,249);
     }
 </style>

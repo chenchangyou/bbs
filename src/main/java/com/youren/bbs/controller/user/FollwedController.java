@@ -5,9 +5,7 @@ import com.youren.bbs.service.FabulousService;
 import com.youren.bbs.service.FollowedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +17,7 @@ public class FollwedController {
     private FollowedService followedService;
 
     @ResponseBody
-    @GetMapping("followed")
+    @PostMapping("followed")
     public int judgeFollowed(Long fid, HttpSession session){
 
         User user = (User)session.getAttribute("loginUser");

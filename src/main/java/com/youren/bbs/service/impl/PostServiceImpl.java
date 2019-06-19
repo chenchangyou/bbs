@@ -29,7 +29,7 @@ public class PostServiceImpl implements PostService {
 
     //更新状态（包括假删除)
     @Override
-    public int updateState(int state, long id) {
+    public int updateState(int state, Long id) {
         Post post = new Post();
         post.setState(state);
         post.setId(id);
@@ -37,11 +37,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(long id) {
+    public Post findById(Long id) {
         return postMapper.findById(id);
     }
     @Override
-    public List<Post> findByUserId(int userId) {
+    public List<Post> findByUserId(Long userId) {
         return postMapper.findByUserId(userId);
     }
 
@@ -51,7 +51,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int updatebrowse(long postId, Integer browse) {
+    public int updatebrowse(Long postId, Integer browse) {
         Post post = new Post();
         post.setId(postId);
         post.setBrowse(browse);
@@ -59,7 +59,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int updatedifference(long postId, Integer difference) {
+    public int updatedifference(Long postId, Integer difference) {
         Post post = new Post();
         post.setId(postId);
         post.setDifference(difference);
@@ -68,14 +68,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int updateawesome(long postId, Integer awesome) {
+    public int updateawesome(Long postId, Integer awesome) {
         Post post = new Post();
         post.setId(postId);
         return postMapper.updateawesome(post);
     }
 
     @Override
-    public int updatereplynumber(long postId, Integer replynumber) {
+    public int updatereplynumber(Long postId, Integer replynumber) {
         Post post = new Post();
         post.setId(postId);
         post.setReplynumber(replynumber);
@@ -83,7 +83,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int updatecollectCount(long postId, Integer collectCount) {
+    public int updatecollectCount(Long postId, Integer collectCount) {
         Post post = new Post();
         post.setId(postId);
         post.setCollectCount(collectCount);

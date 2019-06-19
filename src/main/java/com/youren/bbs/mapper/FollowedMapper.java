@@ -1,9 +1,11 @@
 package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Followed;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface FollowedMapper {
     int create(Followed followed);//添加
     int delete(Followed followed);//删除

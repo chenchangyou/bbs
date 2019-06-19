@@ -127,17 +127,17 @@ public class FolloewdServiceImpl implements FollowedService {
                 map.put("state",0);
             }
         }else {
-            map.put("state",2);
+            map.put("state",0);
         }
         List<Post> postList = postService.findByUserId(fid);
         List<Collect> collectList = collectService.findByUid(fid);
         List<Followed> followedList = followedMapper.findByUid(fid);
         Integer number = findNumber(fid);
 
-        map.put("followedcount",followedList.size());
-        map.put("collectcount",collectList.size());
-        map.put("postcount",postList.size());
-        map.put("collectNumber",number);
+        map.put("followedcount",followedList.size());//粉丝数
+        map.put("collectcount",collectList.size());//收藏数
+        map.put("postcount",postList.size());//贴子数
+        map.put("collectNumber",number);//关注数
 
         return map;
     }

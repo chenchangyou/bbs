@@ -79,6 +79,22 @@
 </div>
 <script src="static/layui/layui.js"></script>
 <script>
+    layui.use('layer', function(){ //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer;
+
+        layer.prompt({title: '输入口令，并确认', formType: 1}, function(pass, index){
+            layer.close(index);
+
+            if(pass === 123456){
+
+            }else {
+                layer.msg("口令错误！请重新输入")
+            }
+        });
+
+    });
+
+
     //JavaScript代码区域
     layui.use('element', function(){
         var element = layui.element;

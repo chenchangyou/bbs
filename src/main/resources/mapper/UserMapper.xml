@@ -14,6 +14,10 @@
 		update t_user set password=#{password},sex=#{sex} where id=#{id}
 	</update>
 
+	<update id="updateThumbnail" parameterType="User">
+		update t_user set headshot=#{headshot} where id=#{id}
+	</update>
+
 	<delete id="delete" parameterType="long">
 		delete from t_user where id=#{id}
 	</delete>

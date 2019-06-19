@@ -6,15 +6,19 @@ import com.youren.bbs.entity.User;
 import com.youren.bbs.service.PostService;
 import com.youren.bbs.service.ReplyService;
 import com.youren.bbs.service.UserService;
+import com.youren.bbs.util.Constant;
+import com.youren.bbs.util.UploadFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 评论

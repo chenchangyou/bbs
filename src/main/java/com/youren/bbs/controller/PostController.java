@@ -2,15 +2,22 @@ package com.youren.bbs.controller;
 
 import com.youren.bbs.entity.*;
 import com.youren.bbs.service.*;
+import com.youren.bbs.util.Constant;
+import com.youren.bbs.util.UploadFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +40,8 @@ public class PostController {
     private CollectService collectService;
     @Autowired
     private FollowedService followedService;
+    @Autowired
+    private PostImageService postImageService;
 
     @GetMapping("addpost")
     public String addpost(){
@@ -66,7 +75,7 @@ public class PostController {
 
         Post post = postService.findById(postlistId);
 
-        Map<String, Object> followedmap = followedService.followedmap(post.getId(), user);
+        Map<String, Object> followedmap = followedService.followedmap(post.getUser().getId(), user);
         //获取访问量
         Integer browse = post.getBrowse();
         //更新访问量加1
@@ -137,5 +146,25 @@ public class PostController {
         }else {
             return "删除失败！";
         }
+    }
+    @ResponseBody
+    @PostMapping("/global/postimage")
+    public Map<String,Object> uploadimg(@RequestParam("file") MultipartFile[] files) throws IOException {
+
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        for(MultipartFile file:files){
+
+            String newName = UploadFileUtil.files(file);
+
+            File saveFile = new File(Constant.POST_POSTCOVER_PATH + newName);
+
+//            postImageService.save()
+
+            //把上传的文件保存到本地磁盘文件
+            file.transferTo(saveFile);
+        }
+
+        return map;
     }
 }

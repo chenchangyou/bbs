@@ -1,9 +1,11 @@
 package com.youren.bbs.mapper;
 
 import com.youren.bbs.entity.Fabulous;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface FabulousMapper {
     int create(Fabulous fabulous);
     int delete(Fabulous fabulous);
