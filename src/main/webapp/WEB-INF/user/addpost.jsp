@@ -26,10 +26,27 @@
     var E = window.wangEditor
     var editor = new E('#editor');
     var $content = $('#content');
+
     editor.customConfig.onchange = function (html) {
         // 监控变化，同步更新到 textarea
         $content.val(html)
-    }
+    };
+    /*editor.customConfig.uploadImgShowBase64 = true*/
+    /*editor.customConfig.customUploadImg = function (files, insert) {
+        // files 是 input 中选中的文件列表
+        // insert 是获取图片 url 后，插入到编辑器的方法
+
+        // 上传代码返回结果之后，将图片插入到编辑器中
+        insert(imgUrl)
+    };*/
+    // 配置服务器端图片上传地址
+    editor.customConfig.uploadImgServer = '${ctx}/global/postimage';
+
+    editor.customConfig.uploadFileName = 'file';
+    // 将图片大小限制为 10M
+    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+    // 限制一次最多上传 5 张图片
+    editor.customConfig.uploadImgMaxLength = 1000;//不限制
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());

@@ -1,6 +1,6 @@
 package com.youren.bbs.mapper;
 
-import com.youren.bbs.entity.PostImge;
+import com.youren.bbs.entity.PostImage;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,8 +8,8 @@ import java.util.List;
 @Repository
 public interface PostImageMapper {
 
-    int save(PostImge postImge);
+    int save(PostImage postImge);
     int delete(String id);
-    List<PostImge> findAllByPid (Long pid);
+    List<PostImage> findAllByPid (Long pid);
 
 }

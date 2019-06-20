@@ -1,7 +1,7 @@
 package com.youren.bbs.service.impl;
 
 import com.youren.bbs.entity.Post;
-import com.youren.bbs.entity.PostImge;
+import com.youren.bbs.entity.PostImage;
 import com.youren.bbs.mapper.PostImageMapper;
 import com.youren.bbs.service.PostImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PostImageServiceImpl implements PostImageService {
     @Override
     public int save(Long pid, String url) {
 
-        PostImge postImge = new PostImge();
+        PostImage postImge = new PostImage();
             postImge.setId(UUID.randomUUID().toString());
             postImge.setUrl(url);
                 Post post = new Post();
@@ -36,7 +36,7 @@ public class PostImageServiceImpl implements PostImageService {
     }
 
     @Override
-    public List<PostImge> findAllByPid(Long pid) {
+    public List<PostImage> findAllByPid(Long pid) {
         return postImageMapper.findAllByPid(pid);
     }
 }

@@ -91,6 +91,8 @@ public class UserController {
         Map<String, Object> map = new HashMap<String, Object>();
         Map<String, String> imgmap = new HashMap<String, String>();
 
+        String message = null;
+
         //代替下面注释的代码
         String newName = UploadFileUtil.files(file);
 
@@ -99,19 +101,32 @@ public class UserController {
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
         //新文件名
         String newName =  UUID.randomUUID() + suffix;*/
-        //本地的文件
+
+       //本地的文件
         File saveFile = new File(Constant.HEADSHOT_SAVE_PATH + newName);
+        //获取原来的头像
+        File deleteimg = new File(Constant.CONSTANT_DELETE_PATH+suser.getHeadshot());
+//        System.err.println(Constant.CONSTANT_DELETE_PATH+suser.getHeadshot());
         int i = userService.updateThumbnail( Constant.HEADSHOT_PATH+newName,suser.getId());
         if(i > 0){
             //把上传的文件保存到本地磁盘文件
             file.transferTo(saveFile);
-            map.put("msg", "保存成功！");
+            map.put("code", 0);
+            message = "保存成功！,";
+            //删除原来存在本地的头像
+            boolean delete = deleteimg.delete();
+            if(delete){
+                message += "删除文件成功";
+            }else {
+                message += "删除文件失败";
+            }
         }else {
-            map.put("msg", "保存失败！");
+          message= "保存失败！";
+            map.put("code", 1);
         }
 
         imgmap.put("src", Constant.HEADSHOT_PATH+newName);
-        map.put("code", 0);
+        map.put("msg",message);
         map.put("data", imgmap);
 
         return map;

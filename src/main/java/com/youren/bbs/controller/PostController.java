@@ -149,21 +149,23 @@ public class PostController {
     }
     @ResponseBody
     @PostMapping("/global/postimage")
-    public Map<String,Object> uploadimg(@RequestParam("file") MultipartFile[] files) throws IOException {
+    public Map<String,Object> uploadimg(MultipartFile[] file) throws IOException {
 
+//        System.out.println(file.length);
         Map<String,Object> map = new HashMap<String, Object>();
+        String[] paths = new String [file.length];//保存上传图片成功后的地址
+        int count=0;
+        for(MultipartFile files:file){
 
-        for(MultipartFile file:files){
-
-            String newName = UploadFileUtil.files(file);
-
-            File saveFile = new File(Constant.POST_POSTCOVER_PATH + newName);
-
-//            postImageService.save()
-
+//            System.out.println(files.getName());
+            String newName = UploadFileUtil.files(files);
+            File saveFile = new File(Constant.POST_POSTIMG_SAVE_PATH + newName);
             //把上传的文件保存到本地磁盘文件
-            file.transferTo(saveFile);
+            files.transferTo(saveFile);
+            paths[count++] = Constant.POST_POSTIMG_PATH+newName;
         }
+        map.put("errno", 0);
+        map.put("data", paths);
 
         return map;
     }

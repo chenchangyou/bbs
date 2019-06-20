@@ -22,4 +22,6 @@ public class Constant {
 	public static final String POST_USERBACKGROUND_SAVE_PATH = "E:\\uploads\\userbackground\\";
 	//个人中心图片的相对路径
 	public static final String POST_USERBACKGROUND_PATH = "uploads/userbackground/";
+
+    public static final String CONSTANT_DELETE_PATH = "E:/";
 }

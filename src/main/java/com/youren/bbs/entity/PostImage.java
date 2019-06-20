@@ -8,7 +8,7 @@ import lombok.Data;
  */
 
 @Data
-public class PostImge {
+public class PostImage {
 
     private String id;
     private Post post;//所属帖子
