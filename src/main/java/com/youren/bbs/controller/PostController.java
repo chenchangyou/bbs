@@ -133,7 +133,7 @@ public class PostController {
     }
 
     /**
-     * 删除帖子
+     * 删除帖子(更新状态)
      * @param postId id
      */
     @ResponseBody

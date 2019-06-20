@@ -24,20 +24,24 @@
         }
 
         .span1 span {
-            margin-left: 60px;
+            margin-left: 25px;
             color: #A9A9A9;
+            font-size: 10px;
         }
 
         .contentbox {
             display: block;
+            background-color: #FFFFFF;
         }
 
         .contentbox:hover .titlebox {
-            color: #3461ff;
-        }
+              color: #3461ff;
+          }
 
         .contentbox:hover {
-            cursor: pointer
+            cursor: pointer;
+            /*z-index: 999999;*/
+            /*background-color: #c4e5ff;*/
         }
     </style>
 </head>
@@ -100,7 +104,7 @@
         </div>
         <div class="box-middle articledetail">
             <div style=" background-color: #F2F2F2;">
-                <div class="layui-tab" style="margin-top: 0">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top: 0">
                     <ul class="layui-tab-title" style="background-color: #FFFFFF">
                         <li class="layui-this">最新回复</li>
                         <li onclick="getNewPost()">新帖</li>
@@ -135,11 +139,17 @@
     </div>
 </div>
 <div id="footer"></div>
+<style>
+    c{
+
+    }
+</style>
 <script>
     function getNewPost() {
         layui.use('flow', function () {
             var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
             var flow = layui.flow;
+            var util = layui.util;
             flow.load({
                 elem: '#NewPost' //指定列表容器
                 , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
@@ -149,18 +159,19 @@
                         //假设你的列表返回在data集合中
                         layui.each(res.date, function (index, item) {
                             lis.push('' +
-                                '<div class="contentbox" style="width: 760px;height: 116px;margin:0 auto;border-bottom: 1px solid #f4f5f7;padding: 8px 0px;background-color: #FFFFFF">' +
+                                '<div class="contentbox" style="width: 760px;height: 116px;margin:0 auto;border-bottom: 1px solid #f4f5f7;padding: 8px 0px;">' +
                                 ' <a href="postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
                                 '        <div style="width: 75%;height: 100%;float: left">' +
                                 '            <ul class="list-group" style="border: none">' +
-                                '                <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden"><span class="titlebox" style="font-size: 20px;white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;">' + item.title + '</span></li>' +
+                                '                <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden"><span class="titlebox" style="font-size: 20px;white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;font-weight: bolder;">' + item.title + '</span></li>' +
                                 '                <li class="list-group-item" style="padding-left: 15px;text-overflow:ellipsis;overflow: hidden">' +
-                                '               <span style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 12px">内容</span></li>' +
+                                '               <span style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 10px">内容</span></li>' +
                                 '                <li class="list-group-item span1">' +
                                 '                    <span style="margin: 0;vertical-align: middle;">' +
                                 '                        <img class="layui-circle" border="1px red" width="22px" height="22xp" src="${ctx}/' + item.user.headshot + '">' +
                                 '                        ' + item.user.username + ' ' +
                                 '                    </span>' +
+                                '                    <span>发表于：'+ util.toDateString(item.createTime,'yyyy-MM-dd HH:mm') +'</span>' +
                                 '                    <span>娱乐</span>' +
                                 '                    <span><i class="fa fa-eye"></i>  ' + item.browse + '</span>' +
                                 '                    <span><i class="fa fa-thumbs-o-up"></i>  ' + item.collectCount + '</span>' +

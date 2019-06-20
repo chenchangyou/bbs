@@ -17,6 +17,15 @@
                     <input type="hidden" name="act" value="add" />
                     用户名：${loginUser.username}</br>
                     标题：<input type="text" class="form-control" autocomplete="off"  style="width: 200px" name="title" /><span id="title1" style="color: red"></span><br/>
+                    <div>
+                        <div>
+                            <p>简介</p>
+
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                     内容<div id="editor"></div>
                     <textarea id="content" name="content" style="display: none;"></textarea></br>
                     <button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>
