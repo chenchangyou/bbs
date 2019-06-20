@@ -31,15 +31,14 @@
             text-decoration: none;
         }
         .bg-setting{
-            background-color: rgba(0,0,1,0.3);
+            background-color: rgba(0,0,1,0.2);
             text-align: center;
             width: 110px;
             line-height: 28px;
-            border: 1px solid hsla(0,0%,100%,.4);
+            border: 1px solid hsla(0,0%,100%,.3);
             border-radius: 25px;
-            display: block;
             color: #f4fcff;
-            /*display: ;*/
+            display:none ;
         }
         .bg-setting:hover{
             background-color: rgba(0,0,1,0.4);
@@ -56,6 +55,9 @@
         a:visited{
             /*color: snow;*/
         }
+        .bg-top:hover .bg-setting{
+            display:block;
+        }
     </style>
 </head>
 <body>
@@ -64,22 +66,22 @@
 
 <div style="width: 1160px;padding:0px 10px;margin: 0 auto">
 
-    <div style="width: 100%;height: 280px;padding-top: 185px;background-image: url('static/images/userback.png')">
-        <div style="width: 100%;height: 100px;">
-            <div style="width: 100%;margin-left: 20px;padding-top: 10px;background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAABdCAMAAADNEjtLAAABEVBMV…CAAAIEECCAAAEECCBAAAECCBBAgAACBAQIIEAAAQIse') ">
+    <div class="bg-top" style="width: 100%;height: 280px;padding-top: 185px;background-image: url('static/images/userback.png')">
+        <div style="width: 100%;height: 100px;background-image: url('static/images/bg_transparent.png') ">
+            <div style="width: 100%;margin-left: 20px;padding-top: 10px;">
                 <div style="width: 70px;height: 70px;float: left;border: 2px solid hsla(0,0%,100%,.4);border-radius: 52px;">
                     <img width="65" height="65" src="static/images/userback.png">
                 </div>
                 <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
                     <div>
-                        <span style="font-size: 18px;vertical-align: middle">zhutengfei</span>
+                        <span style="font-weight: 700;font-size: 24px;color: #FFFFFF; vertical-align: middle">zhutengfei</span>
                     </div>
                     <div style="margin-top: 5px">
                         个性签名：
                     </div>
                 </div>
             </div>
-            <div style="float: right;height: 80px;width: 120px">
+            <div style="float: right;height: 80px;width: 130px;margin-top: 37px">
                 <a class="bg-setting" href="javascript:;"style="">
                         <i class="fa fa-cog"></i>
                         <span>更换背景</span>
