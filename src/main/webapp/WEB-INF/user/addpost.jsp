@@ -15,7 +15,7 @@
                 <h2>发布帖子</h2>
                 <form action="addpost" method="post">
                     <input type="hidden" name="act" value="add" />
-                    用户名：${loginUser.username}</br>
+                    用户名：${loginUser.username} <br>
                     标题：<input type="text" class="form-control" autocomplete="off"  style="width: 200px" name="title" /><span id="title1" style="color: red"></span><br/>
                     <div>
                         <div style="width: 100%">
