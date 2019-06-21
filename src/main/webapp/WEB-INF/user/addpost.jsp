@@ -18,11 +18,19 @@
                     用户名：${loginUser.username}</br>
                     标题：<input type="text" class="form-control" autocomplete="off"  style="width: 200px" name="title" /><span id="title1" style="color: red"></span><br/>
                     <div>
-                        <div>
+                        <div style="width: 100%">
+                           <div style="width: 600px;float: left">
                             <p>简介</p>
-
+                            <textarea class="form-control" rows="4"></textarea>
+                           </div>
+                            <div style="float: left">
+                                <div class="layui-upload-drag" id="test10">
+                                    <i class="layui-icon"></i>
+                                    <p>点击上传，或将文件拖拽到此处</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
+                        <div style="clear:both">
 
                         </div>
                     </div>
@@ -40,22 +48,14 @@
         // 监控变化，同步更新到 textarea
         $content.val(html)
     };
-    /*editor.customConfig.uploadImgShowBase64 = true*/
-    /*editor.customConfig.customUploadImg = function (files, insert) {
-        // files 是 input 中选中的文件列表
-        // insert 是获取图片 url 后，插入到编辑器的方法
-
-        // 上传代码返回结果之后，将图片插入到编辑器中
-        insert(imgUrl)
-    };*/
     // 配置服务器端图片上传地址
     editor.customConfig.uploadImgServer = '${ctx}/global/postimage';
 
     editor.customConfig.uploadFileName = 'file';
     // 将图片大小限制为 10M
     editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
-    // 限制一次最多上传 5 张图片
-    editor.customConfig.uploadImgMaxLength = 1000;//不限制
+    // 限制一次最多上传 （5） 张图片
+    editor.customConfig.uploadImgMaxLength = 10000;//不限制
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());

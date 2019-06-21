@@ -1,6 +1,8 @@
 package com.youren.bbs.controller.user;
 
 import com.youren.bbs.entity.User;
+import com.youren.bbs.entity.UserBackground;
+import com.youren.bbs.service.UserBackgroundService;
 import com.youren.bbs.service.UserService;
 import com.youren.bbs.util.Constant;
 import com.youren.bbs.util.UploadFileUtil;
@@ -19,13 +21,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserBackgroundService userBackgroundService;
 
     @GetMapping("register")
     public String register() {
@@ -76,30 +79,33 @@ public class UserController {
 
         if(user!=null){
             User byId = userService.findById(user.getId());
+
+            UserBackground userBgByuid = userBackgroundService.findByUid(user.getId());
+
+            model.addAttribute("userbg",userBgByuid);
             model.addAttribute("user",byId);
         }
-        return "/user/index";
+        return "/user/HomePage";
 
     }
 
     @ResponseBody
     @PostMapping("/uploadThumbnail")
     public Map<String, Object> upload(MultipartFile file,HttpSession session) throws IOException {
-
+        //获取当前登录的用户
         User suser = (User)session.getAttribute("loginUser");
 
         Map<String, Object> map = new HashMap<String, Object>();
         Map<String, String> imgmap = new HashMap<String, String>();
 
+        //返回的提示信息
         String message = null;
 
         //代替下面注释的代码
         String newName = UploadFileUtil.files(file);
 
        /* String originalFilename = file.getOriginalFilename();
-        //获取上传文件的后缀名
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-        //新文件名
         String newName =  UUID.randomUUID() + suffix;*/
 
        //本地的文件
@@ -116,9 +122,9 @@ public class UserController {
             //删除原来存在本地的头像
             boolean delete = deleteimg.delete();
             if(delete){
-                message += "删除文件成功";
+                message += "删除原文件成功";
             }else {
-                message += "删除文件失败";
+                message += "删除原件失败";
             }
         }else {
           message= "保存失败！";
@@ -130,6 +136,5 @@ public class UserController {
         map.put("data", imgmap);
 
         return map;
-
     }
 }

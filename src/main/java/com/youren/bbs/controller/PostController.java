@@ -158,6 +158,7 @@ public class PostController {
         for(MultipartFile files:file){
 
 //            System.out.println(files.getName());
+            //调用处理文件的方法
             String newName = UploadFileUtil.files(files);
             File saveFile = new File(Constant.POST_POSTIMG_SAVE_PATH + newName);
             //把上传的文件保存到本地磁盘文件

@@ -21,6 +21,7 @@ public class User {
     private Integer state;
     private Integer type;
     private Date createTime;
+//    private UserBackground userBackground;
 //    private List<Post> post; //用户的帖子
 //    private List<Collect> collect; //用户的收藏
 }
