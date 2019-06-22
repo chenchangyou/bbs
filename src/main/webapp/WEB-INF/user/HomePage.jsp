@@ -76,6 +76,26 @@
             </c:if>
 
         }
+        #replacehead{
+            border-radius: 52px;
+            width: 65px;
+            height: 65px;
+            display: block;
+        }
+        .replace_bg{
+            text-align: center;
+            line-height: 65px;
+            border-radius: 52px;
+            font-size: 12px;
+            width:100%;
+            height:100%;
+            color: #dadada;
+            background-color: rgba(0,0,1,0.4);
+            display: none;
+        }
+        #replacehead:hover .replace_bg{
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -144,7 +164,8 @@
                 , done: function (data) {
 
                    if(data.state === 1){
-                       $(".bg-top").css("background","url(/"+data.data.src+") no-repeat 0 0")
+                       $(".bg-top").css("background","url(/"+data.data.src+") no-repeat 0 0");
+                       layer.closeAll('page');
                    }else if (data.state === 0){
                        layer.msg("系通出错！更换失败",{ //layui弹出层提示
                            offset: '150'
@@ -161,6 +182,44 @@
                 }
             });
         });
+        $("#replacehead").click(function () {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                content: '<div class="layui-upload">' +
+                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
+                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
+                    '</div>'
+            });
+            upload.render({
+                elem: '#test8'
+                , url: '/user/uploadThumbnail/'
+                , auto: false
+                //,multiple: true
+                , bindAction: '#test9'
+                , done: function (data) {
+
+                    if(data.state === 1){
+                        $("#replacehead").css({"background":"url(/"+data.data.src+")","background-size":"100% 100%"});
+                        layer.closeAll('page');
+                    }else if (data.state === 0){
+                        layer.msg("系通出错！更换失败",{ //layui弹出层提示
+                            offset: '150'
+                        });
+                    } else if(data.state === 2){
+                        layer.msg("请您先登录",{
+                            offset: '150',
+                            time:800
+                        },function () {
+                            $('#denglu').trigger("click");
+                        });
+                    }
+
+                }
+            });
+
+        })
     });
 </script>
 </body>

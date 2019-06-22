@@ -4,6 +4,13 @@
 <head>
     <title>发表新帖</title>
     <%@include file="../../common/style.jsp"%>
+
+    <style>
+        #demo1{
+            width: 400px;
+            height: 180px;
+        }
+    </style>
 </head>
 <body>
 <%@include file="../../common/head.jsp"%>
@@ -13,28 +20,43 @@
                    <li class="active">发表新帖</li>
                </ol>
                 <h2>发布帖子</h2>
-                <form action="addpost" method="post">
+                <form action="addpost" method="post" class="layui-form">
                     <input type="hidden" name="act" value="add" />
                     用户名：${loginUser.username} <br>
                     标题：<input type="text" class="form-control" autocomplete="off"  style="width: 200px" name="title" /><span id="title1" style="color: red"></span><br/>
                     <div>
                         <div style="width: 100%">
-                           <div style="width: 600px;float: left">
-                            <p>简介</p>
+                           <div style="width: 600px;">
+                            <h3>简介 (建议50个字左右)</h3>
+                               <hr>
                             <textarea class="form-control" rows="4"></textarea>
+                               <div>
+                                   <p>选择帖子类型</p>
+                                   <select name="city" lay-verify="">
+                                       <option value="">请选择类型</option>
+                                       <option value="010">北京</option>
+                                       <option value="021">上海</option>
+                                       <option value="0571">杭州</option>
+                                   </select>
+                               </div>
                            </div>
-                            <div style="float: left">
+                            <div style="margin-top:  26px;">
+                                <h3>上传封面图（可选）</h3>
+                                <hr>
                                 <div class="layui-upload-drag" id="test10">
                                     <i class="layui-icon"></i>
-                                    <p>点击上传，或将文件拖拽到此处</p>
+                                    <p>点击封面图，或将文件拖拽到此处</p>
                                 </div>
+                                <img class="layui-upload-img" id="demo1">
                             </div>
                         </div>
                         <div style="clear:both">
 
                         </div>
                     </div>
-                    内容<div id="editor"></div>
+                    <hr>
+                    <h2>正文内容</h2>
+                    <div id="editor"></div>
                     <textarea id="content" name="content" style="display: none;"></textarea></br>
                     <button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>
                 </form>
@@ -59,6 +81,29 @@
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());
+</script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+    });
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+        upload.render({
+            elem: '#test10'
+            ,url: '/global/postimage'
+            ,auto:false
+            ,bindAction:'btn-danger'
+            ,choose: function(obj){
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）直接将图片地址赋值给img的src属性
+                });
+            }
+        });
+    });
+
 </script>
 <script>
     var $tips = "<div class=\"divs\">";

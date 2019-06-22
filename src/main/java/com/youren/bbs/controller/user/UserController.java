@@ -95,11 +95,16 @@ public class UserController {
         //获取当前登录的用户
         User suser = (User)session.getAttribute("loginUser");
 
+        User byId = userService.findById(suser.getId());
+
+
         Map<String, Object> map = new HashMap<String, Object>();
         Map<String, String> imgmap = new HashMap<String, String>();
 
         //返回的提示信息
         String message = null;
+
+        int state = 0;
 
         //代替下面注释的代码
         String newName = UploadFileUtil.files(file);
@@ -111,13 +116,14 @@ public class UserController {
        //本地的文件
         File saveFile = new File(Constant.HEADSHOT_SAVE_PATH + newName);
         //获取原来的头像
-        File deleteimg = new File(Constant.CONSTANT_DELETE_PATH+suser.getHeadshot());
+        File deleteimg = new File(Constant.CONSTANT_DELETE_PATH+byId.getHeadshot());
 //        System.err.println(Constant.CONSTANT_DELETE_PATH+suser.getHeadshot());
-        int i = userService.updateThumbnail( Constant.HEADSHOT_PATH+newName,suser.getId());
+        int i = userService.updateThumbnail( Constant.HEADSHOT_PATH+newName,byId.getId());
         if(i > 0){
             //把上传的文件保存到本地磁盘文件
             file.transferTo(saveFile);
             map.put("code", 0);
+            state = 1;
             message = "保存成功！,";
             //删除原来存在本地的头像
             boolean delete = deleteimg.delete();
@@ -128,12 +134,14 @@ public class UserController {
             }
         }else {
           message= "保存失败！";
+            state = 0;
             map.put("code", 1);
         }
 
         imgmap.put("src", Constant.HEADSHOT_PATH+newName);
         map.put("msg",message);
         map.put("data", imgmap);
+        map.put("state",state);
 
         return map;
     }

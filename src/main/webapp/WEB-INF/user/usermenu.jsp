@@ -4,7 +4,10 @@
         <div id="user_bg" style="width: 100%;height: 100px;background-image: url('../../static/images/bg_transparent.png') ">
             <div style="width: 100%;margin-left: 20px;padding-top: 10px;">
                 <div style="width: 70px;height: 70px;float: left;border: 2px solid hsla(0,0%,100%,.4);border-radius: 52px;">
-                    <img style="border-radius: 52px;" width="65" height="65" src="${ctx}/${user.headshot}">
+                    <a id="replacehead"  style=" background: url('${ctx}/${user.headshot}'); background-size:100% 100%;" href="javascript:;">
+                        <%--<img>--%>
+                        <span class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
+                    </a>
                 </div>
                 <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
                     <div>
