@@ -48,6 +48,8 @@ public class UserBackgroundController {
                     int update = userBackgroundService.update(user.getId(), Constant.POST_USERBACKGROUND_PATH + newName);
                     if(update>0){
                         File deletefile = new File(Constant.CONSTANT_DELETE_PATH + byUid.getUrl());
+
+
                         deletefile.delete();
                         map.put("msg","OK");
                         state = 1;
@@ -63,6 +65,9 @@ public class UserBackgroundController {
                         state = 0;
                     }
                 }
+            if(!saveFile.exists()&&!saveFile.isDirectory()) {
+                saveFile.mkdirs();
+            }
             file.transferTo(saveFile);
         }else {
             map.put("msg","未登录");

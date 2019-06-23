@@ -120,6 +120,11 @@ public class UserController {
 //        System.err.println(Constant.CONSTANT_DELETE_PATH+suser.getHeadshot());
         int i = userService.updateThumbnail( Constant.HEADSHOT_PATH+newName,byId.getId());
         if(i > 0){
+
+            if(!saveFile.exists()&&!saveFile.isDirectory()) {
+                saveFile.mkdirs();
+            }
+
             //把上传的文件保存到本地磁盘文件
             file.transferTo(saveFile);
             map.put("code", 0);
