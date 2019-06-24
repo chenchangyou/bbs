@@ -5,13 +5,13 @@
   
 <mapper namespace="com.youren.bbs.mapper.CategoryMapper">
 
-    <insert id="create" parameterType="Category" useGeneratedKeys="true" keyProperty="nid">
+    <insert id="create" parameterType="Category" useGeneratedKeys="true" keyProperty="id">
 		insert into t_category(id,name)
 		values(#{id},#{name})
 	</insert>
 
 	<delete id="delete" parameterType="long">
-		delete from t_category where id=#{nid}
+		delete from t_category where id=#{id}
 	</delete>
 
 	<select id="findAll"  resultType="Category">

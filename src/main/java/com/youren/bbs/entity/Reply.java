@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Data
 public class Reply {
-    private long id;
+    private Long id;
     private String content;//回复内容
     private Date createTime;//回复时间
     private User user;//回复人的信息

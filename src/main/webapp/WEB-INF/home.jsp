@@ -3,20 +3,18 @@
 <html>
 <!DOCTYPE html>
 <head>
-    <title>欢迎来到友人博客</title>
+    <title>欢迎来到友人论坛</title>
     <%@include file="../common/style.jsp" %>
     <style>
         #footer {
             clear: both;
             width: 100%;
             height: 150px;
-            background: #6495ED;
+            background: #494949;
         }
-
         .list-group {
             display: block;
         }
-
         .list-group li {
             border: none;
             padding: 6px 16px;
@@ -150,6 +148,7 @@
             var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
             var flow = layui.flow;
             var util = layui.util;
+            var postImg;
             flow.load({
                 elem: '#NewPost' //指定列表容器
                 , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
@@ -158,6 +157,16 @@
                     $.get('/getpostlist?page=' + page, function (res) {
                         //假设你的列表返回在data集合中
                         layui.each(res.date, function (index, item) {
+                            if(item.coverImage!=null){
+                                postImg = '<div>' +
+                                    '<a href="#" class="thumbnail" style="width: 93%;height: 100%">' +
+                                    '<img style="max-height: 100%;width:100%;height:100%' +
+                                    '" src="${ctx}/'+item.coverImage+'" alt="...">'+
+                                    '</a> ' +
+                                    '</div>'
+                            }else {
+                                postImg = '';
+                            }
                             lis.push('' +
                                 '<div class="contentbox" style="width: 760px;height: 116px;margin:0 auto;border-bottom: 1px solid #f4f5f7;padding: 8px 0px;">' +
                                 ' <a href="postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
@@ -165,14 +174,14 @@
                                 '            <ul class="list-group" style="border: none">' +
                                 '                <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden"><span class="titlebox" style="font-size: 20px;white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;font-weight: bolder;">' + item.title + '</span></li>' +
                                 '                <li class="list-group-item" style="padding-left: 15px;text-overflow:ellipsis;overflow: hidden">' +
-                                '               <span style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 10px">内容</span></li>' +
+                                '               <span style="white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;color:#A9A9A9;font-size: 10px">'+item.synopsis+'</span></li>' +
                                 '                <li class="list-group-item span1">' +
                                 '                    <span style="margin: 0;vertical-align: middle;">' +
                                 '                        <img class="layui-circle" border="1px red" width="22px" height="22xp" src="${ctx}/' + item.user.headshot + '">' +
                                 '                        ' + item.user.username + ' ' +
                                 '                    </span>' +
                                 '                    <span>发表于：'+ util.toDateString(item.createTime,'yyyy-MM-dd HH:mm') +'</span>' +
-                                '                    <span>娱乐</span>' +
+                                '                    <span>'+item.category.name+'</span>' +
                                 '                    <span><i class="fa fa-eye"></i>  ' + item.browse + '</span>' +
                                 '                    <span><i class="fa fa-thumbs-o-up"></i>  ' + item.collectCount + '</span>' +
                                 '                    <span><i class="fa fa-commenting"></i>  ' + item.replynumber + '</span>' +
@@ -180,12 +189,7 @@
                                 '            </ul>' +
                                 '        </div>' +
                                 '        <div style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
-                                '            <div>' +
-                                '                <a href="#" class="thumbnail" style="width: 93%;height: 100%">' +
-                                '                    <img style="max-height: 100%;' +
-                                '}" src="${ctx}/static/images/heiheihei.jpg" alt="...">' +
-                                '                </a>' +
-                                '            </div>' +
+                                ''+postImg+'' +
                                 '        </div>' +
                                 '       </a>' +
                                 '    </div>' +

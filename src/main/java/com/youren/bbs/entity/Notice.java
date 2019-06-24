@@ -9,7 +9,7 @@ import java.util.Date;
  */
 @Data
 public class Notice {
-    private long nid;
+    private Long nid;
     private String title;
     private String content;
     private Date createTime;

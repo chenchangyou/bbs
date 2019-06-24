@@ -14,6 +14,7 @@
         !function(){
             var layer = layui.layer
                 ,form = layui.form
+                ,table = layui.table
                 ,element = layui.element
                 ,carousel = layui.carousel
                 ,$ = layui.jquery;
@@ -57,5 +58,8 @@
         height: 100%;
         z-index: 9999;
         background: url('../static/images/load.gif') 50% 50% no-repeat rgb(249,249,249);
+    }
+    body{
+        /*background-image: url("../static/images/background_index.jpg");*/
     }
 </style>

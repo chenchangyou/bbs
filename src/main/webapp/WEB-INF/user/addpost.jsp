@@ -20,34 +20,44 @@
                    <li class="active">发表新帖</li>
                </ol>
                 <h2>发布帖子</h2>
-                <form action="addpost" method="post" class="layui-form">
+                <form action="addpost" method="post" class="layui-form" enctype="multipart/form-data">
                     <input type="hidden" name="act" value="add" />
                     用户名：${loginUser.username} <br>
-                    标题：<input type="text" class="form-control" autocomplete="off"  style="width: 200px" name="title" /><span id="title1" style="color: red"></span><br/>
+                    <%--<input type="text" class="form-control" autocomplete="off"  name="title" /><span id="title1" style="color: red"></span><br/>--%>
+                    标题：<input style="width: 200px"  type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                     <div>
                         <div style="width: 100%">
                            <div style="width: 600px;">
-                            <h3>简介 (建议50个字左右)</h3>
+
                                <hr>
-                            <textarea class="form-control" rows="4"></textarea>
+                            <%--<textarea name="synopsis" class="form-control" rows="4" id="accepted_answer"></textarea>--%>
+                               <div class="layui-form-item layui-form-text">
+                                   <label class="layui-form-label">简介</label>
+                                   <div class="layui-input-block">
+                                       <textarea name="synopsis" placeholder="请输入内容" class="layui-textarea" id="accepted_answer" lay-verify="required"></textarea>
+                                   </div>
+                               </div>
+                               <span style="margin-left: 100%;color: #0000FF" id="word">100</span><span>/100</span>
                                <div>
                                    <p>选择帖子类型</p>
-                                   <select name="city" lay-verify="">
+                                   <select name="category" lay-verify="required">
                                        <option value="">请选择类型</option>
-                                       <option value="010">北京</option>
-                                       <option value="021">上海</option>
-                                       <option value="0571">杭州</option>
+                                       <c:forEach items="${categoryList}" var="category">
+                                        <option value="${category.id}">${category.name}</option>
+                                       </c:forEach>
                                    </select>
                                </div>
                            </div>
                             <div style="margin-top:  26px;">
                                 <h3>上传封面图（可选）</h3>
                                 <hr>
-                                <div class="layui-upload-drag" id="test10">
+                                <input type="file" name="file">
+                                <p>请选择文件</p>
+                                <%--<div class="layui-upload-drag" id="test10">
                                     <i class="layui-icon"></i>
                                     <p>点击封面图，或将文件拖拽到此处</p>
                                 </div>
-                                <img class="layui-upload-img" id="demo1">
+                                <img class="layui-upload-img" id="demo1">--%>
                             </div>
                         </div>
                         <div style="clear:both">
@@ -57,8 +67,14 @@
                     <hr>
                     <h2>正文内容</h2>
                     <div id="editor"></div>
-                    <textarea id="content" name="content" style="display: none;"></textarea></br>
-                    <button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>
+                    <textarea id="content" name="content" style="display: none;" lay-verify="required"></textarea></br>
+
+                    <div class="layui-form-item" style="float: right">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        </div>
+                    </div>
+                    <%--<button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>--%>
                 </form>
            </div>
 <script>
@@ -74,8 +90,8 @@
     editor.customConfig.uploadImgServer = '${ctx}/global/postimage';
 
     editor.customConfig.uploadFileName = 'file';
-    // 将图片大小限制为 10M
-    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+    // 将图片大小限制为 5M
+    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024;
     // 限制一次最多上传 （5） 张图片
     editor.customConfig.uploadImgMaxLength = 10000;//不限制
     editor.create();
@@ -106,7 +122,24 @@
 
 </script>
 <script>
-    var $tips = "<div class=\"divs\">";
+    $(function(){
+        $("#accepted_answer").keyup(function(){
+            var len = $(this).val().length;
+            if(len > 99){
+                $(this).val($(this).val().substring(0,100));
+                $("#word").text(0);
+            }
+            var num = 100 - len;
+            if(num<0){
+                layer.msg('不能再写了哦');
+                return false;
+                $("#word").text(0);
+            }else{
+                $("#word").text(num);
+            }
+        });
+    });
+  /*  var $tips = "<div class=\"divs\">";
     function tj(){
         if($(".form-control").val().length <= 0){
             $(".form-control").css("border","1px red solid")
@@ -123,7 +156,7 @@
         setTimeout(function () {
             $(".divs").fadeOut(400);
         }, 1200);
-    }
+    }*/
 </script>
 </body>
 </html>

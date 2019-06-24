@@ -16,17 +16,23 @@
 		<result property="state" column="state" />
 		<result property="replynumber" column="replynumber" />
 		<result property="collectCount" column="collectcount" />
+		<result property="coverImage" column="cover_image"/>
+		<result property="synopsis" column="synopsis"/>
 		<!-- 多对一的映射 -->
 		<association property="user" javaType="User">
 			<id property="id" column="uid"/>
 			<result property="username" column="username"/>
 			<result property="headshot" column="headshot"/>
 		</association>
+		<association property="category" javaType="Category">
+			<id property="id" column="category"/>
+			<result property="name" column="caname" />
+		</association>
 	</resultMap>
 
     <insert id="create" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
-		insert into t_post(user_id,title,content,create_time,state,category) values
-		(#{user.id},#{title},#{content},#{createTime},#{state},#{category.id})
+		insert into t_post(user_id,title,content,create_time,state,category,cover_image,synopsis) values
+		(#{user.id},#{title},#{content},#{createTime},#{state},#{category.id},#{coverImage},#{synopsis})
 	</insert>
 
 	<update id="updatebrowse" parameterType="Post">
@@ -60,22 +66,24 @@
 
 	<select id="findById" parameterType="long" resultMap="postResultMap">
 		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,p.replynumber,p.collectcount
+			   u.id uid, u.username,p.replynumber,p.collectcount,p.collectcount,p.cover_image,p.synopsis
 		from t_post p left join t_user u on p.user_id=u.id
 		where p.id=#{id}
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="postResultMap">
 		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,p.replynumber,p.collectcount
+			   u.id uid, u.username,p.replynumber,p.collectcount,p.collectcount,p.cover_image,p.synopsis
 		from t_post p left join t_user u on p.user_id=u.id
 		where p.user_id=#{userId}
 	</select>
 
 	<select id="findAll" resultMap="postResultMap">
-		select p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount
-		from t_post p left join t_user u on p.user_id=u.id
+		select p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,ca.name caname,p.category,
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
+		from t_post p
+		left join t_user u on p.user_id=u.id
+		left join t_category ca on ca.id=p.category
 		where p.state >0
 		GROUP BY p.create_time desc
 	</select>

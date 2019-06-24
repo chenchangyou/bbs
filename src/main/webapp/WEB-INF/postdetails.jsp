@@ -290,11 +290,13 @@
         $content.val(html)
     };
     // 配置服务器端图片上传地址
-    editor.customConfig.uploadImgServer = '${ctx}/admin/book/upload';
+    editor.customConfig.uploadImgServer = '${ctx}/global/postimage';
+    //后台接受的name
+    editor.customConfig.uploadFileName = 'file';
     // 将图片大小限制为 3M
-    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024;
+    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
     // 限制一次最多上传 5 张图片
-    editor.customConfig.uploadImgMaxLength = 5;
+    editor.customConfig.uploadImgMaxLength = 3;
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());
@@ -379,7 +381,7 @@
                 if (data > 0) {
                     layer.msg('发表成功！', {
                         offset: '150',
-                        time: 1000
+                        time: 800
                     }, function () {
                         window.location.reload();
                     });

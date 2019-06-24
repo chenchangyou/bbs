@@ -40,12 +40,17 @@ public class UserController {
         return "login";
     }
 
+    //注册
     @PostMapping("register")
     public String register(String username, String password, String sex, String email, Integer age, String tel,
-                           Map<String, Object> map, RedirectAttributes redirectAttributes) {
+                           Map<String, Object> map, RedirectAttributes redirectAttributes,HttpSession session) {
         Map<String, Object> resultMap = userService.register(username, password, sex, email, age, tel);
         if ((Boolean) resultMap.get("ok")) {
+
+            Map<String, Object> loginMap = userService.login(username, password);
+            session.setAttribute("loginUser", loginMap.get("user"));
             redirectAttributes.addFlashAttribute("message", "注册成功！请登录！");
+
             return "chenggong";
         } else {
             map.put("error", resultMap.get("error"));

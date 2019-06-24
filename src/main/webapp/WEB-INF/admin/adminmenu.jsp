@@ -6,7 +6,7 @@
         </a>
         <a href="${ctx}/admin/post" class="list-group-item">帖子管理</a>
         <a href="${ctx}/admin/user" class="list-group-item">用户管理</a>
-        <a href="${ctx}/admin/category" class="list-group-item">分类管理</a>
+        <a href="${ctx}/admin/category/" class="list-group-item">分类管理</a>
         <a href="${ctx}/admin/permission" class="list-group-item">分配权限</a>
     </div>
 </div>

@@ -3,7 +3,10 @@
 <html>
 <head>
     <title>${loginUser.username}的个人中心</title>
-    <%@include file="../../common/style.jsp"%>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%@include file="../../common/javascript.jsp"%>
 </head>
 <body>
 <%@include file="../../common/head.jsp"%>
@@ -20,39 +23,66 @@
         </div>
 
         <div class="admin-rightbox">
+            <button type="button" class="layui-btn layui-btn-sm" id="addcaregory" data-type="addRow">
+                <i class="layui-icon layui-icon-add-1"></i> 添加类型
+            </button>
             <div>
-                <table class="layui-hide" id="test"></table>
+                <table class="layui-table" lay-data="{width: 892, height:330, url:'/admin/category/list/', page:true, id:'idTest'}" lay-filter="test3">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+                        <th lay-data="{field:'name', width:120, sort: true, edit: 'text'}">类型名</th>
+                    </tr>
+                    </thead>
+                </table>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
             </div>
         </div>
 
     </div>
 
 </div>
-
+<script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script>
     layui.use('table', function(){
         var table = layui.table;
-        var util = layui.util;
-        table.render({
-            elem: '#test'
-            ,url:'/admin/postlist'
-            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                //,curr: 5 //设定初始在第 5 页
-                , groups: 5 //只显示 1 个连续页码
-                , first: false //不显示首页
-                , last: false //不显示尾页
-            }
-            ,cols: [[
-                {field:'id', width:80, title: 'ID',}
-                ,{field:'title', title: '标题'}
-                ,{field:'content',  title: '内容'}
-                ,{field:'browse', width:120,title: '访问量' }
-                ,{field:'createTime',width:160, title: '发布时间',templet:'<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }}</div>'}
-                ,{field:'state',width:80, title: '状态' }
-            ]]
+
+        //监听单元格编辑
+        table.on('edit(test3)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+            layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
         });
     });
+
+    $(function () {
+      $("#addcaregory").click(function () {
+          layer.prompt({
+              title: '请输入类别名称'},
+              function(val, index){
+              $.post("/admin/category/add",{cname:val},function (date) {
+                    if(date > 0 ){
+                        layer.msg("添加成功！",{
+                            time:800
+                        },function () {
+                            window.location.reload();
+                        })
+                    }else {
+                        layer.msg('添加失败', {
+                            offset: '150',
+                            icon: 2
+                        });
+                    }
+              });
+              /*layer.msg('得到了'+val);*/
+                  layer.close(index);
+          });
+      })
+    })
+
 </script>
 </body>
 </html>

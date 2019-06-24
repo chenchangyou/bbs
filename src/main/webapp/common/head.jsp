@@ -28,7 +28,8 @@
     })
 </script>
 
-<nav class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(247, 247, 247, 0.8);z-index: 100;border: none;box-shadow: 2px 2px 2px #888888;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(255,255,255,0.75);
+z-index: 100;border: none;box-shadow: 2px 2px 2px #d8d6d6;">
     <div class="container-fluid" style="width: 1180px;">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -38,7 +39,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${ctx}/home">友人BLOG</a>
+            <a class="navbar-brand" href="${ctx}/home">友人论坛</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

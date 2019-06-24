@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +19,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.youren.bbs.util.Constant.POST_POSTCOVER_SAVE_PATH;
 
 
 /**
@@ -42,9 +43,16 @@ public class PostController {
     private FollowedService followedService;
     @Autowired
     private PostImageService postImageService;
+    @Autowired
+    private CategoryService categoryService;
+
 
     @GetMapping("addpost")
-    public String addpost(){
+    public String addpost(Model model){
+
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categoryList",categoryList);
+
         return "user/addpost";
     }
 
@@ -108,19 +116,35 @@ public class PostController {
      * @return 成功或者失败
      */
     @PostMapping("addpost")
-    public String addpost(String title,String content, HttpSession session, Model model){
+    public String addpost(MultipartFile file,String title,String content, HttpSession session,
+                          Model model,Long category,String synopsis) throws IOException {
+
+        String postImg = null;
+        if (file.getSize()>0){
+            String newName = UploadFileUtil.files(file);
+            File file1 = new  File(Constant.POST_POSTCOVER_SAVE_PATH + newName);
+            if(!file1.exists()&&!file1.isDirectory()) {
+                file1.mkdir();
+            }
+            file.transferTo(file1);
+            postImg = Constant.POST_POSTCOVER_PATH + newName;
+        }
 
         User user = (User)session.getAttribute("loginUser");
         Date datetime = new Date();
-        Category category = new Category();
-        category.setId(1);
+        Category categorys = new Category();
+        categorys.setId(category);
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
         post.setCreateTime(datetime);
-        post.setCategory(category);
+        post.setCategory(categorys);
         post.setUser(user);
         post.setState(1);
+        post.setSynopsis(synopsis);
+        post.setCoverImage(postImg);
+
+//        post
 
         int row = postService.create(post);
         if( row > 0){
