@@ -72,10 +72,13 @@
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="postResultMap">
-		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,
-			   u.id uid, u.username,p.replynumber,p.collectcount,p.collectcount,p.cover_image,p.synopsis
-		from t_post p left join t_user u on p.user_id=u.id
+		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.collectcount,p.cover_image,p.synopsis
+		from t_post p
+		left join t_user u on p.user_id=u.id
+		left join t_category ca on ca.id=p.category
 		where p.user_id=#{userId}
+		GROUP BY p.create_time desc
 	</select>
 
 	<select id="findAll" resultMap="postResultMap">

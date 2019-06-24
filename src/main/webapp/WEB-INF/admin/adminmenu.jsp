@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div style="width:200px;height: 630px;float: left">
-    <div class="list-group">
+<div style="width:100%;height: 630px;float: left">
+    <div class="list-group" style="text-align: center">
         <a href="${ctx}/admin/index" class="list-group-item">
             公告编辑
         </a>

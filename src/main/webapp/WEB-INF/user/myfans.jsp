@@ -1,59 +1,253 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="../../common/taglib.jsp"%>
+<%@include file="../../common/taglib.jsp" %>
 <html>
 <head>
     <title>${loginUser.username}的个人中心</title>
-    <%@include file="../../common/style.jsp"%>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet">
+    <link href="${ctx}/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${ctx}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="${ctx}/static/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="${ctx}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <%--引入样式--%>
+    <%--<%@include file="common/style.jsp" %>--%>
+    <style>
+        body {
+            background-color: #F4F5F7;
+        }
+
+        .layui-nav .layui-nav-item a {
+            color: #3b3b3b;
+            font-size: 14px;
+        }
+
+        .layui-nav .layui-nav-item a i {
+            line-height: 20px;
+        }
+
+        .layui-nav .layui-nav-item a:hover {
+            color: rgba(29, 131, 255, 0.88);
+            /*font-weight: bolder;*/
+            text-decoration: none;
+        }
+        .bg-setting{
+            background-color: rgba(0,0,1,0.2);
+            text-align: center;
+            width: 110px;
+            line-height: 28px;
+            border: 1px solid hsla(0,0%,100%,.3);
+            border-radius: 25px;
+            color: #f4fcff;
+            display:none ;
+        }
+        .bg-setting:hover{
+            background-color: rgba(0,0,1,0.4);
+            color: #f4fcff;
+        }
+        a:hover{
+            text-decoration: none;
+            /*color: cornflowerblue;*/
+        }
+        a:link{
+            text-decoration: none;
+            /*color: #000000;*/
+        }
+        a:visited{
+            /*color: snow;*/
+        }
+        .bg-top:hover .bg-setting{
+            display:block;
+        }
+        .layui-upload{
+            margin: 10px auto;
+        }
+        #user_bg{
+
+        }
+        .bg-top{
+            width: 100%;
+            height: 280px;
+            padding-top: 180px;
+        <c:if test="${not empty userbg}">
+            background-image: url('/${userbg.url}');
+        </c:if>
+        <c:if test="${empty userbg}">
+            background-image: url('../../static/images/userback.png');
+        </c:if>
+
+        }
+        #replacehead{
+            border-radius: 52px;
+            width: 65px;
+            height: 65px;
+            display: block;
+        }
+        .replace_bg{
+            text-align: center;
+            line-height: 65px;
+            border-radius: 52px;
+            font-size: 12px;
+            width:100%;
+            height:100%;
+            color: #dadada;
+            background-color: rgba(0,0,1,0.4);
+            display: none;
+        }
+        #replacehead:hover .replace_bg{
+            display: block;
+        }
+        .list-group-item a{
+            display: block;
+        }
+    </style>
 </head>
 <body>
-<%@include file="../../common/head.jsp"%>
-<div style="height: 650px; width: 1160px;margin:80px auto;padding:10px 10px;background-color:#FFFFFF;box-shadow: 2px 2px 2px #888888;">
-
-    <div style="width:200px;height: 630px;float: left">
-       <%@include file="../menu.jsp"%>
-    </div>
-    <div style=" border: 1px red solid;width:900px;height: 630px;padding: 15px;float: right">
-
-        <div style="width: 100%;padding: 15px 10px"><h3 style="font-weight: bolder">个人资料</h3></div>
-        <hr style="color:#888888;height: 1px ">
-        <div style="width: 100%;height: 560px">
-            <div style="width: 150px;height: 560px;float: left;text-align: center">
-                <img src="${ctx}/${loginUser.headshot}" alt="..." class="img-circle" width="100" height="100">
-                <p style="text-align: center;width: 100%"><a href="#" style="color: #1E9FFF;"> 修改头像 </a></p>
+<%--引入导航栏--%>
+<%@include file="../../common/head.jsp" %>
+<div style="width: 1160px;padding:0px 10px;margin: 0 auto">
+    <%--引入菜单栏跟头部--%>
+    <div class="bg-top">
+        <div id="user_bg" style="width: 100%;height: 100px;background-image: url('../../static/images/bg_transparent.png') ">
+            <div style="width: 100%;margin-left: 20px;padding-top: 10px;">
+                <div style="width: 70px;height: 70px;float: left;border: 2px solid hsla(0,0%,100%,.4);border-radius: 52px;">
+                    <a id="replacehead"  style=" background: url('${ctx}/${user.headshot}'); background-size:100% 100%;" href="javascript:;">
+                        <%--<img>--%>
+                        <span class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
+                    </a>
+                </div>
+                <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
+                    <div>
+                        <span style="font-weight: 700;font-size: 24px;color: #FFFFFF; vertical-align: middle">${user.username}</span>
+                    </div>
+                    <div style="margin-top: 5px">
+                        个性签名：
+                    </div>
+                </div>
             </div>
-            <div style="width: 700px;height: 560px;float: right">
-                <div style="width: 100%;height: 80px;padding: 2px 10px">
-                    <div style="width: 100%;height: 30px">
-                        <span style="line-height: 30px ;width: 100px;float: left">ID ：${loginUser.id}</span>
-                        <a style="line-height: 30px ;width: 80px;padding: 0 3px;float: right;color: #1E9FFF" href="">个人主页 》</a>
-                    </div>
-                    <div style="width: 100%;height: 30px;margin-top: 10px">
-                        <span style="margin-left: 10px;text-align: center;line-height: 30px;">关注 99</span>
-                        <span style="margin-left: 10px;text-align: center;line-height: 30px;">粉丝 888万</span>
-                        <span style="margin-left: 10px;text-align: center;line-height: 30px;">等级 99+</span>
-                    </div>
-                </div>
-                <hr style="color:#888888;height: 1px ">
-                <div style="width: 100%;height: 470px">
-                    <div style="width: 100%;height: 30px">
-                        <span style="line-height: 30px ;width: 100px;float: left">昵称：${loginUser.username}</span>
-                        <a style="line-height: 30px ;width: 80px;padding: 0 3px;float: right;color: #1E9FFF" href="">修改资料 》</a>
-                    </div>
-                    <div>性别：${loginUser.sex}</div>
-                    <div>年龄：${loginUser.age}</div>
-                    <div>联系电话：${loginUser.tel}</div>
-                    <div>邮箱：${loginUser.email}</div>
-                    <div>注册时间：<fmt:formatDate value="${loginUser.createTime}" pattern="yyyy-MM-dd"/></div>
-                </div>
-
+            <div style="float: right;height: 80px;width: 130px;margin-top: 37px">
+                <a class="bg-setting" href="javascript:;"style="">
+                    <i class="fa fa-cog"></i>
+                    <span>更换背景</span>
+                </a>
             </div>
         </div>
+    </div>
+    <div style=" width: 100%;margin:10px auto;">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
+                <li class="layui-nav-item <%--layui-this--%>"><a href="/user/index"><i class="fa fa-home fa-1x" style="color: purple"></i>
+                    主页 </a></li>
+                <li class="layui-nav-item "><a href="/user/post/list?uid=${loginUser.id}"><i class="fa fa-pencil-square-o fa-1x"
+                                                                                             style="color: #04bdff"></i> 帖子（999+）</a>
+                </li>
+                <li class="layui-nav-item "><a href="/user/followed"><i class="fa fa-user-plus fa-1x"></i> 关注（20）</a></li>
+                <li class="layui-nav-item layui-this"><a href=""><i class="fa fa-star fa-1x" style="color: orange"></i> 收藏（99+）</a>
+                </li>
+                <li class="layui-nav-item"><a href=""><i class="fa fa-heart fa-1x" style="color: #eeb4c3"></i>
+                    粉丝（7800万+）</a></li>
+                <li class="layui-nav-item"><a href=""><i class="fa fa fa-cog fa-spin fa-1x" style="color: #041527"></i>
+                    设置</a></li>
 
+            </ul>
+        </div>
+    </div>
+
+    <div style="width: 100%;">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="javascript:;">
+                    <img src="..." alt="..." class="img-circle">
+                </a>
+            </div>
+        </div>
     </div>
 
 </div>
-<script>
 
+
+
+
+<script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        var upload = layui.upload;
+        $(".bg-setting").click(function () {
+
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                content: '<div class="layui-upload">' +
+                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
+                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
+                    '</div>'
+            });
+            upload.render({
+                elem: '#test8'
+                , url: '/upload/updatebg/'
+                , auto: false
+                //,multiple: true
+                , bindAction: '#test9'
+                , done: function (data) {
+
+                    if(data.state === 1){
+                        $(".bg-top").css("background","url(/"+data.data.src+") no-repeat 0 0");
+                        layer.closeAll('page');
+                    }else if (data.state === 0){
+                        layer.msg("系通出错！更换失败",{ //layui弹出层提示
+                            offset: '150'
+                        });
+                    } else if(data.state === 2){
+                        layer.msg("请您先登录",{
+                            offset: '150',
+                            time:800
+                        },function () {
+                            $('#denglu').trigger("click");
+                        });
+                    }
+
+                }
+            });
+        });
+        $("#replacehead").click(function () {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                content: '<div class="layui-upload">' +
+                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
+                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
+                    '</div>'
+            });
+            upload.render({
+                elem: '#test8'
+                , url: '/user/uploadThumbnail/'
+                , auto: false
+                //,multiple: true
+                , bindAction: '#test9'
+                , done: function (data) {
+
+                    if(data.state === 1){
+                        $("#replacehead").css({"background":"url(/"+data.data.src+")","background-size":"100% 100%"});
+                        layer.closeAll('page');
+                    }else if (data.state === 0){
+                        layer.msg("系通出错！更换失败",{ //layui弹出层提示
+                            offset: '150'
+                        });
+                    } else if(data.state === 2){
+                        layer.msg("请您先登录",{
+                            offset: '150',
+                            time:800
+                        },function () {
+                            $('#denglu').trigger("click");
+                        });
+                    }
+
+                }
+            });
+
+        })
+    });
 </script>
 </body>
 </html>

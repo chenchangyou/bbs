@@ -10,6 +10,9 @@
             width: 400px;
             height: 180px;
         }
+        .layui-form-select dl{
+            z-index: 999999;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +43,7 @@
                                <span style="margin-left: 100%;color: #0000FF" id="word">100</span><span>/100</span>
                                <div>
                                    <p>选择帖子类型</p>
-                                   <select name="category" lay-verify="required">
+                                   <select name="category" lay-verify="required" class="select_cat">
                                        <option value="">请选择类型</option>
                                        <c:forEach items="${categoryList}" var="category">
                                         <option value="${category.id}">${category.name}</option>
@@ -66,12 +69,13 @@
                     </div>
                     <hr>
                     <h2>正文内容</h2>
+                    <hr>
                     <div id="editor"></div>
                     <textarea id="content" name="content" style="display: none;" lay-verify="required"></textarea></br>
 
                     <div class="layui-form-item" style="float: right">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button class="layui-btn" lay-submit lay-filter="formDemo" style="background-color: #0cc1f7">立即发表</button>
                         </div>
                     </div>
                     <%--<button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>--%>

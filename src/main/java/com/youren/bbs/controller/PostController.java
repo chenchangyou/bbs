@@ -124,7 +124,7 @@ public class PostController {
             String newName = UploadFileUtil.files(file);
             File file1 = new  File(Constant.POST_POSTCOVER_SAVE_PATH + newName);
             if(!file1.exists()&&!file1.isDirectory()) {
-                file1.mkdir();
+                file1.mkdirs();
             }
             file.transferTo(file1);
             postImg = Constant.POST_POSTCOVER_PATH + newName;

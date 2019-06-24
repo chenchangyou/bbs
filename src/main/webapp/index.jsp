@@ -3,7 +3,7 @@
 <html>
 <!DOCTYPE html>
 <head>
-    <title>欢迎来到友人博客</title>
+    <title>欢迎来到友人论坛</title>
     <style>
         .loader {
             position: fixed;

@@ -29,7 +29,8 @@
 </script>
 
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(255,255,255,0.75);
-z-index: 100;border: none;box-shadow: 2px 2px 2px #d8d6d6;">
+z-index: 100;border: none;box-shadow: 2px 2px 2px #d8d6d6;
+background-image: url('../static/images/bg1.png')">
     <div class="container-fluid" style="width: 1180px;">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">

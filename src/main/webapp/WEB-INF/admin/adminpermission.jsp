@@ -15,7 +15,7 @@
     </ol>
 
     <div style="width: 100%">
-        <div style="width:200px;height: 630px;float: left">
+        <div style="width:150px;height: 630px;float: left">
             <%@include file="adminmenu.jsp"%>
         </div>
         <div class="admin-rightbox">
