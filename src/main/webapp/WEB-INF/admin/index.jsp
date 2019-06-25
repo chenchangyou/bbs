@@ -15,9 +15,26 @@
     </ol>
 
 <div style="width: 100%">
-
+    <div class="layui-tab" lay-allowClose="true">
+        <ul class="layui-tab-title">
+            <li class="layui-this">网站设置</li>
+            <li>用户基本管理</li>
+            <li>权限分配</li>
+            <li>全部历史商品管理文字长一点试试</li>
+            <li>订单管理</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">1</div>
+            <div class="layui-tab-item">2</div>
+            <div class="layui-tab-item">3</div>
+            <div class="layui-tab-item">4</div>
+            <div class="layui-tab-item">5</div>
+            <div class="layui-tab-item">6</div>
+        </div>
+    </div>
     <div style="width:150px;height: 630px;float: left">
-        <%@include file="adminmenu.jsp"%>
+        <%--<%@include file="adminmenu.jsp"%>--%>
+
     </div>
     <div class="admin-rightbox">
         <div>
@@ -28,6 +45,14 @@
 </div>
 </div>
 <script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(demo)', function(data){
+            console.log(data);
+        });
+    });
     layui.use('table', function(){
         var table = layui.table;
         table.render({
