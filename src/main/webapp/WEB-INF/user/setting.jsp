@@ -137,26 +137,46 @@
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
                 <li class="layui-nav-item <%--layui-this--%>"><a href="/user/index"><i class="fa fa-home fa-1x" style="color: purple"></i>
                     主页 </a></li>
-                <li class="layui-nav-item "><a href="/user/post/list?uid=${user.id}"><i class="fa fa-pencil-square-o fa-1x"
+                <li class="layui-nav-item "><a href="/user/post/list?uid=${loginUser.id}"><i class="fa fa-pencil-square-o fa-1x"
                                                                                              style="color: #04bdff"></i> 帖子（999+）</a>
                 </li>
-                <li class="layui-nav-item "><a href="/user/followed?uid=${user.id}"><i class="fa fa-user-plus fa-1x"></i> 关注（20）</a></li>
-                <li class="layui-nav-item layui-this"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x" style="color: orange"></i> 收藏（99+）</a>
+                <li class="layui-nav-item "><a href="/user/followed?uid=${loginUser.id}"><i class="fa fa-user-plus fa-1x"></i> 关注（20）</a></li>
+                <li class="layui-nav-item"><a href="/user/collection?uid=${loginUser.id}"><i class="fa fa-star fa-1x" style="color: orange"></i> 收藏（99+）</a>
                 </li>
-                <li class="layui-nav-item "><a href="/user/fans?uid=${user.id}"><i class="fa fa-heart fa-1x" style="color: #eeb4c3"></i>
+                <li class="layui-nav-item"><a href="/user/fans?uid=${loginUser.id}"><i class="fa fa-heart fa-1x" style="color: #eeb4c3"></i>
                     粉丝（7800万+）</a></li>
-                <li class="layui-nav-item"><a href="/user/setting?uid=${user.id}"><i class="fa fa fa-cog fa-spin fa-1x" style="color: #041527"></i>
+                <li class="layui-nav-item  layui-this"><a href="/user/setting?uid=${user.id}"><i class="fa fa fa-cog fa-spin fa-1x" style="color: #041527"></i>
                     设置</a></li>
 
             </ul>
         </div>
     </div>
 
-    <div style="width: 100%;">
-        <c:forEach items="${collectList}" var="collect">
-            <span>${collect.post.title}</span>
-        </c:forEach>
-    </div>
+        <div style="width: 100%;"  class="layui-form">
+            <%--<div></div>--%>
+            <table style="width: 300px"  class="layui-table" lay-skin="row" lay-size="lg">
+                <colgroup>
+                    <col width="150">
+                    <col width="120">
+                    <col>
+                </colgroup>
+                <thead>隐私设置</thead>
+                <tbody>
+                    <tr><td>我的收藏</td><td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏" checked></td></tr>
+                    <tr><td>我的关注</td><td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td></tr>
+                    <tr><td>我的粉丝</td><td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td></tr>
+                    <tr><td>性别</td><td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"</td></tr>
+                    <tr><td>个人资料</td><td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td></tr>
+                </tbody>
+            </table>
+            <%--<ul class="list-group">
+                <li class="list-group-item">我的收藏 <input type="checkbox" name="xxx" lay-skin="switch"></li>
+                <li class="list-group-item">我的关注 <input type="checkbox" name="aaa" lay-skin="switch" ></li>
+                <li class="list-group-item">我的粉丝 <input type="checkbox" name="aaa" lay-skin="switch" ></li>
+                <li class="list-group-item">性别 <input type="checkbox" name="aaa" lay-skin="switch" ></li>
+                <li class="list-group-item">个人资料 <input type="checkbox" name="aaa" lay-skin="switch" ></li>
+            </ul>--%>
+        </div>
 
 </div>
 
@@ -201,7 +221,6 @@
                             $('#denglu').trigger("click");
                         });
                     }
-
                 }
             });
         });

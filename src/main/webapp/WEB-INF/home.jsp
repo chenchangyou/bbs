@@ -137,11 +137,8 @@
     </div>
 </div>
 <div id="footer"></div>
-<style>
-    c{
 
-    }
-</style>
+
 <script>
     function getNewPost() {
         layui.use('flow', function () {

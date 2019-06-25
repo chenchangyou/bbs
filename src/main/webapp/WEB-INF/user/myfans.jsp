@@ -137,30 +137,38 @@
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
                 <li class="layui-nav-item <%--layui-this--%>"><a href="/user/index"><i class="fa fa-home fa-1x" style="color: purple"></i>
                     主页 </a></li>
-                <li class="layui-nav-item "><a href="/user/post/list?uid=${loginUser.id}"><i class="fa fa-pencil-square-o fa-1x"
+                <li class="layui-nav-item "><a href="/user/post/list?uid=${user.id}"><i class="fa fa-pencil-square-o fa-1x"
                                                                                              style="color: #04bdff"></i> 帖子（999+）</a>
                 </li>
-                <li class="layui-nav-item "><a href="/user/followed"><i class="fa fa-user-plus fa-1x"></i> 关注（20）</a></li>
-                <li class="layui-nav-item layui-this"><a href=""><i class="fa fa-star fa-1x" style="color: orange"></i> 收藏（99+）</a>
+                <li class="layui-nav-item "><a href="/user/followed?uid=${user.id}"><i class="fa fa-user-plus fa-1x"></i> 关注（20）</a></li>
+                <li class="layui-nav-item"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x" style="color: orange"></i> 收藏（99+）</a>
                 </li>
-                <li class="layui-nav-item"><a href=""><i class="fa fa-heart fa-1x" style="color: #eeb4c3"></i>
+                <li class="layui-nav-item layui-this"><a href="/user/fans?uid=${user.id}"><i class="fa fa-heart fa-1x" style="color: #eeb4c3"></i>
                     粉丝（7800万+）</a></li>
-                <li class="layui-nav-item"><a href=""><i class="fa fa fa-cog fa-spin fa-1x" style="color: #041527"></i>
+                <li class="layui-nav-item"><a href="/user/setting?uid=${user.id}"><i class="fa fa fa-cog fa-spin fa-1x" style="color: #041527"></i>
                     设置</a></li>
 
             </ul>
         </div>
     </div>
 
-    <div style="width: 100%;">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <a href="javascript:;">
-                    <img src="..." alt="..." class="img-circle">
-                </a>
-            </div>
+        <div style="width: 100%;">
+            <c:forEach items="${followedList}" var="followed">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="javascript:;">
+                            <img style="width: 60px;height: 60px" src="${ctx}/${followed.userId.headshot}" alt="..." class="img-circle">
+                        </a>
+                        <span>
+                                ${followed.userId.username}
+                        </span>
+                        <span class="layui-form">
+                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest" lay-text="关注|已取消">
+                    </span>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
-    </div>
 
 </div>
 

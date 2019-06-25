@@ -7,7 +7,7 @@
 <script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script src="${ctx}/static/wangEditor-3.1.1/wangEditor.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/js/myjs.js" type="text/javascript"></script>
+<%--<script src="${ctx}/static/js/myjs.js" type="text/javascript"></script>--%>
 <script>
     $(function () {
         //由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
@@ -61,5 +61,11 @@
     }
     body{
         /*background-image: url("../static/images/background_index.jpg");*/
+    }
+    #footer {
+        clear: both;
+        width: 100%;
+        height: 150px;
+        background: #494949;
     }
 </style>

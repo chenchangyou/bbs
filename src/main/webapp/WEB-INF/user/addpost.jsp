@@ -70,8 +70,13 @@
                     <hr>
                     <h2>正文内容</h2>
                     <hr>
-                    <div id="editor"></div>
-                    <textarea id="content" name="content" style="display: none;" lay-verify="required"></textarea></br>
+                    <%--<div id="editor">7899999999999999999</div>
+                    <textarea id="content" name="content" style="display: none;" lay-verify="required"></textarea></br>--%>
+
+                    <div class="form-group">
+                        <div id="editor"></div>
+                        <textarea id="detail" name="detail" style="width:100%; height:200px;display:none;"></textarea>
+                    </div>
 
                     <div class="layui-form-item" style="float: right">
                         <div class="layui-input-block">
@@ -81,14 +86,15 @@
                     <%--<button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>--%>
                 </form>
            </div>
+<div id="footer"></div>
 <script>
-    var E = window.wangEditor
-    var editor = new E('#editor');
-    var $content = $('#content');
+    var E = window.wangEditor;
+    var editor = new E("#editor");
+    var $detail = $('#detail');
 
     editor.customConfig.onchange = function (html) {
         // 监控变化，同步更新到 textarea
-        $content.val(html)
+        $detail.val(html)
     };
     // 配置服务器端图片上传地址
     editor.customConfig.uploadImgServer = '${ctx}/global/postimage';
@@ -100,7 +106,7 @@
     editor.customConfig.uploadImgMaxLength = 10000;//不限制
     editor.create();
     // 初始化 textarea 的值
-    $content.val(editor.txt.html());
+    $detail.val(editor.txt.html());
 </script>
 <script>
     //Demo

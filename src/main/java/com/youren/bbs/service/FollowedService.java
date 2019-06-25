@@ -11,6 +11,7 @@ public interface FollowedService {
     int delete(Long id);
     Followed findByPidUid(Long fid, Long uid);
     List<Followed> findByUid(Long uid);
+    List<Followed> findByFuid(Long fuid);
     Integer findNumber(Long fid); //统计该用户的关注量
     Integer findFuser(Long fid); //统计该用户的粉丝数量
     int judgeFollowed(Long fid, Long uid);//判断是否有关注

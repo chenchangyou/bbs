@@ -72,6 +72,12 @@ public class FolloewdServiceImpl implements FollowedService {
         return followedMapper.findByUid(uid);
     }
 
+    //粉丝list
+    @Override
+    public List<Followed> findByFuid(Long fuid) {
+        return followedMapper.findByFuid(fuid);
+    }
+
     @Override
     public Integer findNumber(Long fid) {
 

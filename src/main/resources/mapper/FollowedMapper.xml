@@ -15,8 +15,8 @@
 
 		<association property="followeId" column="followed_user_id" javaType="User">
 			<id property="id" column="followed_user_id" />
-			<result property="username" column="username"/>
-			<result property="headshot" column="headshot"/>
+			<result property="username" column="fusername"/>
+			<result property="headshot" column="fheadshot"/>
 		</association>
 	</resultMap>
 
@@ -34,11 +34,23 @@
 	</select>
 
 	<select id="findByUid"  resultMap="followedResultMap" parameterType="Followed">
-		select * from t_followed where user_id=#{userId.id};
+		select u.id,u.username,u.headshot,
+		fu.id fid,fu.username fusername,fu.headshot fheadshot,
+		f.create_time
+		from t_followed f
+		left join t_user u on u.id = f.user_id
+		left join t_user fu on fu.id = f.followed_user_id
+		where user_id=#{userId.id};
 	</select>
 
 	<select id="findByFuid"  resultMap="followedResultMap" parameterType="Followed">
-		select * from t_followed where followed_user_id=#{followeId.id};
+		select u.id,u.username,u.headshot,
+		fu.id fid,fu.username fusername,fu.headshot fheadshot,
+		f.create_time
+		from t_followed f
+		left join t_user u on u.id = f.user_id
+		left join t_user fu on fu.id = f.followed_user_id
+		where followed_user_id=#{followeId.id};
 	</select>
 
 	<select id="findNumber"  resultType="Integer"  parameterType="Long">
