@@ -10,8 +10,9 @@
     <script src="${ctx}/static/js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${ctx}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
     <%--引入样式--%>
+    <%@include file="userstyle.jsp"%>
     <%--<%@include file="common/style.jsp" %>--%>
-    <style>
+    <%--<style>
         body {
             background-color: #F4F5F7;
         }
@@ -99,7 +100,7 @@
         .list-group-item a{
             display: block;
         }
-    </style>
+    </style>--%>
 </head>
 <body>
 <%--引入导航栏--%>

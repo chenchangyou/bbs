@@ -3,11 +3,9 @@
 <html>
 <head>
     <title>${loginUser.username}的个人中心</title>
-    <%@include file="../../common/style.jsp"%>
+    <%@include file="../../common/javascript.jsp"%>
 </head>
 <body>
-<%@include file="../../common/head.jsp"%>
-
 <div class="admin-global">
     <ol class="breadcrumb">
         <li>后台首页</li>
@@ -16,14 +14,9 @@
 
     <div style="width: 100%">
 
-        <div style="width:150px;height: 630px;float: left">
-            <%@include file="adminmenu.jsp"%>
-        </div>
-        <div class="admin-rightbox">
             <div>
                 <table class="layui-hide" id="test"  lay-filter="test"></table>
             </div>
-        </div>
 
     </div>
 

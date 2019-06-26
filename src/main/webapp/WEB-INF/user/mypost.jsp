@@ -12,8 +12,9 @@
     <script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
     <%--<script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>--%>
     <%--引入样式--%>
+    <%@include file="userstyle.jsp"%>
     <%--<%@include file="common/style.jsp" %>--%>
-    <style>
+   <%-- <style>
         body {
             background-color: #F4F5F7;
         }
@@ -118,7 +119,7 @@
         .list-group-item:hover .postmsg >.post_r{
             display: block;
         }
-    </style>
+    </style>--%>
 </head>
 <body>
 <script>

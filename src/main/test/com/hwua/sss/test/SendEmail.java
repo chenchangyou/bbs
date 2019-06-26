@@ -1,5 +1,6 @@
 package com.hwua.sss.test;
 
+import com.youren.bbs.util.RandomCode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,16 +17,13 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
 
 public class SendEmail {
 
     private JavaMailSender javaMailSender;
 
-    private String toEmail = "1554693372@qq.com";//接收端的邮箱（收件人邮箱）
+    private String toEmail = "18178051115@163.com";//接收端的邮箱（收件人邮箱）
 
     private Configuration configuration;
 
@@ -89,7 +87,7 @@ public class SendEmail {
             // 收件人邮箱
             mMessageHelper.setTo(toEmail);
             // 邮件的主题也就是邮件的标题
-            mMessageHelper.setSubject("这是freemarker模板邮件！");
+            mMessageHelper.setSubject("欢迎注册友人论坛");
             // 解析模板文件
             mMessageHelper.setText(getText(configuration), true);
             javaMailSender.send(mMessage);// 发送邮件
@@ -109,8 +107,8 @@ public class SendEmail {
             Template template = freeMarkerConfiguration.getTemplate("email.ftl");
             // 通过map传递动态数据
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("username", "rainmean");
-            map.put("validCode", UUID.randomUUID());
+            map.put("username", "柳州斯普面");
+            map.put("validCode", RandomCode.RegisteredCode());
             // 解析模板文件
             txt = FreeMarkerTemplateUtils.processTemplateIntoString(template, map);
             System.out.println("getText()->>>>>>>>>");// 输出的是HTML格式的文档

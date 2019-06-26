@@ -27,7 +27,7 @@
                     <input type="hidden" name="act" value="add" />
                     用户名：${loginUser.username} <br>
                     <%--<input type="text" class="form-control" autocomplete="off"  name="title" /><span id="title1" style="color: red"></span><br/>--%>
-                    标题：<input style="width: 200px"  type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    标题：<input style="width: 600px"  type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                     <div>
                         <div style="width: 100%">
                            <div style="width: 600px;">
@@ -75,7 +75,7 @@
 
                     <div class="form-group">
                         <div id="editor"></div>
-                        <textarea id="detail" name="detail" style="width:100%; height:200px;display:none;"></textarea>
+                        <textarea id="detail" name="content" style="width:100%; height:200px;display:none;"></textarea>
                     </div>
 
                     <div class="layui-form-item" style="float: right">

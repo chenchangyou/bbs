@@ -104,12 +104,12 @@
             <div style=" background-color: #F2F2F2;">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top: 0">
                     <ul class="layui-tab-title" style="background-color: #FFFFFF">
-                        <li class="layui-this">最新回复</li>
+                        <%--<li class="layui-this">最新回复</li>--%>
                         <li onclick="getNewPost()">新帖</li>
                         <li>热门</li>
                     </ul>
                     <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show">
+                        <%--<div class="layui-tab-item layui-show">
                             <c:forEach items="${postlist}" var="postlist">
                                 <div class="layui-row layui-col-space15">
                                     <div class="layui-col-md12">
@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                        </div>
+                        </div>--%>
                         <div class="layui-tab-item" id="NewPost"></div>
                         <div class="layui-tab-item">内容3</div>
                     </div>

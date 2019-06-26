@@ -111,4 +111,14 @@ public class AdminController {
         return "/admin/adminuser";
     }
 
+    @GetMapping("/indexs")
+    public String indexs(){
+        return "adminSystem/index";
+    }
+
+    @GetMapping("main")
+     public String main(){
+
+        return "adminSystem/main";
+    }
 }
