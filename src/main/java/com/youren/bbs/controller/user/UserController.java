@@ -110,13 +110,8 @@ public class UserController {
         String message = null;
 
         int state = 0;
-
-        //代替下面注释的代码
+        //获取新的文件名
         String newName = UploadFileUtil.files(file);
-
-       /* String originalFilename = file.getOriginalFilename();
-        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String newName =  UUID.randomUUID() + suffix;*/
 
        //本地的文件
         File saveFile = new File(Constant.HEADSHOT_SAVE_PATH + newName);

@@ -38,12 +38,12 @@
             ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['count', 'prev', 'page', 'next', 'skip'] //自定义分页布局 //自定义分页布局
                 //,curr: 5 //设定初始在第 5 页
-                , groups: 5 //只显示 1 个连续页码
+                , groups: 5 //只显示 5 个连续页码
                 , first: false //不显示首页
                 , last: false //不显示尾页
             }
             ,cols: [[
-                {field:'id', width:80, title: 'ID',}
+                {field:'id', width:80, title: 'ID'}
                 ,{field:'title', width:150, title: '标题'}
                 ,{field:'browse',width:80, title: '访问量' }
                 ,{field:'createTime', title: '发布时间',templet:'<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }}</div>'}
@@ -69,7 +69,7 @@
                     });
 
                 });
-            } else if(obj.event === 'edit'){
+            } else if(obj.event === 'edit'){//编辑按钮的事件
                 layer.prompt({
                     formType: 2
                     ,value: data.email

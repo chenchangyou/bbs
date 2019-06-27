@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,7 @@ import static com.youren.bbs.util.Constant.POST_POSTCOVER_SAVE_PATH;
  * 贴子
  */
 @Controller
+//@RequestMapping("")
 public class PostController {
 
     @Autowired
@@ -120,12 +122,15 @@ public class PostController {
                           Model model,Long category,String synopsis) throws IOException {
 
         String postImg = null;
+
         if (file.getSize()>0){
             String newName = UploadFileUtil.files(file);
             File file1 = new  File(Constant.POST_POSTCOVER_SAVE_PATH + newName);
+            //没有文件夹则创建
             if(!file1.exists()&&!file1.isDirectory()) {
                 file1.mkdirs();
             }
+            //保存本地
             file.transferTo(file1);
             postImg = Constant.POST_POSTCOVER_PATH + newName;
         }
@@ -193,5 +198,55 @@ public class PostController {
         map.put("data", paths);
 
         return map;
+    }
+
+    @GetMapping("/user/post/edit")
+    public String editpage(Long pid,Model model){
+
+        List<Category> categoryList = categoryService.findAll();
+        Post post = postService.findById(pid);
+//        System.out.println(post);
+
+        model.addAttribute("post",post);
+        model.addAttribute("categoryList",categoryList);
+
+        return "/user/postedit";
+    }
+    @PostMapping("/post/edit")
+    public String edit(MultipartFile file,Long pid,  String title,String content, HttpSession session,
+                       Model model,Long category,String synopsis) throws IOException {
+
+
+        Post post = postService.findById(pid);
+
+        Category categorys = new Category();
+        categorys.setId(category);
+        post.setTitle(title);
+        post.setContent(content);
+        post.setCategory(categorys);
+        post.setSynopsis(synopsis);
+
+        if (file.getSize()>0){
+            String newName = UploadFileUtil.files(file);
+            File file1 = new  File(Constant.POST_POSTCOVER_SAVE_PATH + newName);
+            //保存本地
+            file.transferTo(file1);
+            post.setCoverImage(Constant.POST_POSTCOVER_PATH + newName);
+
+            File deleteImg = new File(Constant.POST_POSTCOVER_SAVE_PATH + post.getCoverImage());
+
+            deleteImg.delete();
+        }else {
+            post.setCoverImage(post.getCoverImage());
+        }
+        System.out.println(post);
+        int i = postService.update(post);
+        if(i>0){
+            System.out.println("OK");
+        }else {
+            System.out.println("NO");
+        }
+
+        return "redirect:/user/index";
     }
 }

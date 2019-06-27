@@ -105,7 +105,7 @@
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top: 0">
                     <ul class="layui-tab-title" style="background-color: #FFFFFF">
                         <%--<li class="layui-this">最新回复</li>--%>
-                        <li onclick="getNewPost()">新帖</li>
+                        <li id="newpost" onclick="getNewPost()">新帖</li>
                         <li>热门</li>
                     </ul>
                     <div class="layui-tab-content">
@@ -140,6 +140,7 @@
 
 
 <script>
+
     function getNewPost() {
         layui.use('flow', function () {
             var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
@@ -156,7 +157,7 @@
                         layui.each(res.date, function (index, item) {
                             if(item.coverImage!=null){
                                 postImg = '<div>' +
-                                    '<a href="#" class="thumbnail" style="width: 93%;height: 100%">' +
+                                    '<a href="postdetails?postlistId=' + item.id + '" target="_blank" class="thumbnail" style="width: 93%;height: 100%">' +
                                     '<img style="max-height: 100%;width:100%;height:100%' +
                                     '" src="${ctx}/'+item.coverImage+'" alt="...">'+
                                     '</a> ' +
@@ -200,7 +201,7 @@
             });
         });
     }
-
+    $("#newpost").click();
 </script>
 </body>
 </html>

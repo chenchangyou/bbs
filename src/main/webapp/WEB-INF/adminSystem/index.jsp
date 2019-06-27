@@ -25,7 +25,7 @@
 			<div class="layui-header header header-demo">
 				<div class="layui-main">
 					<div class="admin-login-box">
-						<a class="logo" style="left: 0;" href="http://beginner.zhengjinfan.cn/demo/beginner_admin/">
+						<a class="logo" style="left: 0;" href="/admin/indexs">
 							<span style="font-size: 22px;">友人论坛·后台</span>
 						</a>
 						<div class="admin-side-toggle">

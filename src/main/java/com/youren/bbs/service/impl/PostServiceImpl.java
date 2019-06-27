@@ -23,7 +23,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int update(Post post) {
-        return 0;
+        return postMapper.update(post);
     }
 
 

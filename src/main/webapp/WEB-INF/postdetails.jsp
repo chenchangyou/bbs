@@ -87,7 +87,7 @@
                     <i class="fa fa-plus attentionfont"></i> <span>关注</span></button>
             </c:if>
             <c:if test="${user.id eq loginUser.id}">
-                <a type="button" style="width: 120px;border:none;text-align: center;margin: 0 32px;" class="btn btn-info btn-right">
+                <a href="${ctx}/user/index" type="button" style="width: 120px;border:none;text-align: center;margin: 0 32px;" class="btn btn-info btn-right">
                     <span>个人中心</span></a>
             </c:if>
         </c:if>
@@ -365,9 +365,12 @@
 
         /*提交发表的评论*/
         var contenttext = $("#publish");
+
         $("#publishbtn").click(function () {
             var textlength = $.trim($("#editor").text());/*获取富文本框的内容*/
-            if (textlength.length > 0) {    /*判断长度*/
+            // var htmllength = $content.
+            // alert($("#content").val().indexOf("img"));
+            if (textlength.length > 0 || $("#content").val().indexOf("img") >= 0 ) {    /*判断长度*/
                 setcontent();/*调用方法*/
             } else {
                 layer.msg('请输入内容！', {

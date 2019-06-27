@@ -207,7 +207,7 @@ function load() {
                            <span><i class="fa fa-thumbs-o-up"></i> ${post.collectCount}</span>
                            <span><i class="fa fa-commenting"></i> ${post.replynumber}</span>
                            <span class="post_r">
-                               <a class="btn btn-info layui-anim layui-anim-fadein" href="/user/post/edit">编辑</a>
+                               <a class="btn btn-info layui-anim layui-anim-fadein" href="/user/post/edit?pid=${post.id}">编辑</a>
                                <a class="btn btn-danger layui-anim layui-anim-fadein" href="javascript:;">删除</a>
                            </span>
                        </div>

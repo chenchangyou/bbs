@@ -52,15 +52,4 @@ public class UserPostController {
     public String login() {
         return "login";
     }
-
-
-    @GetMapping("edit")
-    public String edit(HttpSession session){
-        User user = (User)session.getAttribute("loginUser");
-        Long uid = user.getId();
-        List<Post> posts = postService.findByUserId(uid);
-
-        return "/user/postedit";
-    }
-
 }

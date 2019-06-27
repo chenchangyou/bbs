@@ -22,10 +22,11 @@
         <li><a href="home">首页</a></li>
         <li class="active">发表新帖</li>
     </ol>
-    <h2>发布帖子</h2>
-    <form action="addpost" method="post" class="layui-form" enctype="multipart/form-data">
+    <h2>编辑帖子</h2>
+    <form action="/post/edit" method="post" class="layui-form" enctype="multipart/form-data">
+        <input type="hidden" name="pid" value="${post.id}">
         <input type="hidden" name="act" value="add" />
-        用户名：${loginUser.username} <br>
+        用户名：${post.user.username} <br>
         <%--<input type="text" class="form-control" autocomplete="off"  name="title" /><span id="title1" style="color: red"></span><br/>--%>
         标题：<input style="width: 200px" value="${post.title}"  type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
         <div>
@@ -46,7 +47,7 @@
                         <select name="category" lay-verify="required" class="select_cat">
                             <option value="">请选择类型</option>
                             <c:forEach items="${categoryList}" var="category">
-                                <option <c:if test="${post.category eq category.id}"> selected = "selected"</c:if> value="${category.id}">${category.name}</option>
+                                <option <c:if test="${post.category.id == category.id}"> selected = "selected"</c:if> value="${category.id}">${category.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -70,12 +71,12 @@
         <hr>
         <h2>正文内容</h2>
         <hr>
-        <div id="editor"></div>
+        <div id="editor">${post.content}</div>
         <textarea id="content" name="content" style="display: none;" lay-verify="required"></textarea></br>
 
         <div class="layui-form-item" style="float: right">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo" style="background-color: #0cc1f7">立即发表</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" style="background-color: #0cc1f7">保存修改</button>
             </div>
         </div>
         <%--<button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>--%>
