@@ -239,7 +239,6 @@ public class PostController {
         }else {
             post.setCoverImage(post.getCoverImage());
         }
-        System.out.println(post);
         int i = postService.update(post);
         if(i>0){
             System.out.println("OK");

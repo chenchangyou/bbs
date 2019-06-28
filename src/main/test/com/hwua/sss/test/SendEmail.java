@@ -1,3 +1,4 @@
+/*
 package com.hwua.sss.test;
 
 import com.youren.bbs.util.RandomCode;
@@ -98,9 +99,11 @@ public class SendEmail {
         }
     }
 
-    /**
+    */
+/**
      * 读取freemarker模板的方法
-     */
+     *//*
+
     private String getText(Configuration freeMarkerConfiguration) {
         String txt = "";
         try {
@@ -121,3 +124,4 @@ public class SendEmail {
         return txt;
     }
 }
+*/

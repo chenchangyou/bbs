@@ -17,5 +17,4 @@
 	<select id="findAll"  resultType="Category">
 		select id,name from t_category
 	</select>
-
 </mapper>

@@ -9,6 +9,7 @@ import com.youren.bbs.entity.User;
 import com.youren.bbs.service.NoticeService;
 import com.youren.bbs.service.PostService;
 import com.youren.bbs.service.UserService;
+import lombok.extern.flogger.Flogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +39,14 @@ public class AdminController {
         return "/admin/index";
     }
 
+    @GetMapping("/noticeList")
+    public String NOticelist(){
+        return "/admin/notice";
+    }
+
     @ResponseBody
-    @GetMapping("/findAll")
-    public Map findAll(){
+    @GetMapping("/Notice")
+    public Map findAllNotice(){
         Map<String,Object> map = new HashMap<String, Object>();
 
         List<Notice> noticeList = noticeService.findAll();
@@ -50,7 +56,6 @@ public class AdminController {
         map.put("count",count);
         map.put("data",noticeList);
         return map;
-
     }
 
     //添加公告

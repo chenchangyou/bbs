@@ -2,7 +2,7 @@
 <%@include file="../../common/taglib.jsp"%>
 <html>
 <head>
-    <title>发表新帖</title>
+    <title>编辑帖子</title>
     <%@include file="../../common/style.jsp"%>
 
     <style>

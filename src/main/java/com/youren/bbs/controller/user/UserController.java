@@ -6,7 +6,9 @@ import com.youren.bbs.service.UserBackgroundService;
 import com.youren.bbs.service.UserService;
 import com.youren.bbs.util.Constant;
 import com.youren.bbs.util.UploadFileUtil;
+import freemarker.template.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,11 @@ public class UserController {
     @Autowired
     private UserBackgroundService userBackgroundService;
 
+    @Autowired
+    private JavaMailSender javaMailSender;
+    @Autowired
+    private Configuration configuration;
+
     @GetMapping("register")
     public String register() {
         return "register";
@@ -39,6 +46,8 @@ public class UserController {
     public String login() {
         return "login";
     }
+
+
 
     //注册
     @PostMapping("register")
