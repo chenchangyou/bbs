@@ -12,128 +12,13 @@
     <script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
     <%--引入样式--%>
     <%@include file="userstyle.jsp"%>
-    <%--<%@include file="common/style.jsp" %>--%>
-   <%-- <style>
-        body {
-            background-color: #F4F5F7;
-        }
-
-        .layui-nav .layui-nav-item a {
-            color: #3b3b3b;
-            font-size: 14px;
-        }
-
-        .layui-nav .layui-nav-item a i {
-            line-height: 20px;
-        }
-
-        .layui-nav .layui-nav-item a:hover {
-            color: rgba(29, 131, 255, 0.88);
-            /*font-weight: bolder;*/
-            text-decoration: none;
-        }
-        .bg-setting{
-            background-color: rgba(0,0,1,0.2);
-            text-align: center;
-            width: 110px;
-            line-height: 28px;
-            border: 1px solid hsla(0,0%,100%,.3);
-            border-radius: 25px;
-            color: #f4fcff;
-            display:none ;
-        }
-        .bg-setting:hover{
-            background-color: rgba(0,0,1,0.4);
-            color: #f4fcff;
-        }
-        a:hover{
-            text-decoration: none;
-            /*color: cornflowerblue;*/
-        }
-        a:link{
-            text-decoration: none;
-            /*color: #000000;*/
-        }
-        a:visited{
-            /*color: snow;*/
-        }
-        .bg-top:hover .bg-setting{
-            display:block;
-        }
-        .layui-upload{
-            margin: 10px auto;
-        }
-        #user_bg{
-
-        }
-        .bg-top{
-            width: 100%;
-            height: 280px;
-            padding-top: 180px;
-        <c:if test="${not empty userbg}">
-            background-image: url('/${userbg.url}');
-        </c:if>
-        <c:if test="${empty userbg}">
-            background-image: url('../../static/images/userback.png');
-        </c:if>
-
-        }
-        #replacehead{
-            border-radius: 52px;
-            width: 65px;
-            height: 65px;
-            display: block;
-        }
-        .replace_bg{
-            text-align: center;
-            line-height: 65px;
-            border-radius: 52px;
-            font-size: 12px;
-            width:100%;
-            height:100%;
-            color: #dadada;
-            background-color: rgba(0,0,1,0.4);
-            display: none;
-        }
-        #replacehead:hover .replace_bg{
-            display: block;
-        }
-        .list-group-item a{
-            display: block;
-        }
-    </style>--%>
 </head>
 <body>
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
 <div style="width: 1160px;padding:0px 10px;margin: 0 auto">
-    <%--引入菜单栏跟头部--%>
-    <div class="bg-top">
-        <div id="user_bg" style="width: 100%;height: 100px;background-image: url('../../static/images/bg_transparent.png') ">
-            <div style="width: 100%;margin-left: 20px;padding-top: 10px;">
-                <div style="width: 70px;height: 70px;float: left;border: 2px solid hsla(0,0%,100%,.4);border-radius: 52px;">
-                    <a id="replacehead"  style=" background: url('${ctx}/${user.headshot}'); background-size:100% 100%;" href="javascript:;">
-                        <%--<img>--%>
-                        <span class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
-                    </a>
-                </div>
-                <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
-                    <div>
-                        <span style="font-weight: 700;font-size: 24px;color: #FFFFFF; vertical-align: middle">${user.username}</span>
-                    </div>
-                    <div style="margin-top: 5px">
-                        个性签名：
-                    </div>
-                </div>
-            </div>
-            <div style="float: right;height: 80px;width: 130px;margin-top: 37px">
-                <a class="bg-setting" href="javascript:;"style="">
-                    <i class="fa fa-cog"></i>
-                    <span>更换背景</span>
-                </a>
-            </div>
-        </div>
-    </div>
+    <%--引入头部--%>
+    <%@include file="user_bg.jsp"%>
     <div style=" width: 100%;margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">

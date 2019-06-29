@@ -19,32 +19,8 @@
 <%@include file="../../common/head.jsp" %>
     <div style="width: 1160px;padding:0px 10px;margin: 0 auto">
         <%--引入菜单栏跟头部--%>
-            <div class="bg-top">
-                <div id="user_bg" style="width: 100%;height: 100px;background-image: url('../../static/images/bg_transparent.png') ">
-                    <div style="width: 100%;margin-left: 20px;padding-top: 10px;">
-                        <div style="width: 70px;height: 70px;float: left;border: 2px solid hsla(0,0%,100%,.4);border-radius: 52px;">
-                            <a id="replacehead"  style=" background: url('${ctx}/${user.headshot}'); background-size:100% 100%;" href="javascript:;">
-                                <%--<img>--%>
-                                <span class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
-                            </a>
-                        </div>
-                        <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
-                            <div>
-                                <span style="font-weight: 700;font-size: 24px;color: #FFFFFF; vertical-align: middle">${user.username}</span>
-                            </div>
-                            <div style="margin-top: 5px">
-                                个性签名：
-                            </div>
-                        </div>
-                    </div>
-                    <div style="float: right;height: 80px;width: 130px;margin-top: 37px">
-                        <a class="bg-setting" href="javascript:;"style="">
-                            <i class="fa fa-cog"></i>
-                            <span>更换背景</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <%--引入头部--%>
+            <%@include file="user_bg.jsp"%>
             <div style=" width: 100%;margin:10px auto;">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                     <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
@@ -72,7 +48,7 @@
                 <div style="width: 100%;font-size: 16px">
                     <div style="width: 100%;height: 30px">
                         <span style="line-height: 30px ;width: 100px;float: left">昵称：${user.username}</span>
-                        <a style="line-height: 30px ;width: 100px;padding: 0 3px;float: right;color: #1E9FFF" href="">修改资料>></a>
+                        <a style="line-height: 30px ;width: 100px;padding: 0 3px;float: right;color: #1E9FFF" href="javascript:;" onclick="updateuser(${user.id});">修改资料>></a>
                     </div>
                     <div>性别：${user.sex}</div>
                     <div>年龄：${user.age}</div>
@@ -176,6 +152,19 @@
 
         })
     });
+    function updateuser(uid) {
+        layer.open({
+            type: 2,
+            shade: false,
+            area: ['500', '600px'],
+            maxmin: false,
+            content: '/user/update?uid='+uid,
+            zIndex: layer.zIndex, //重点1
+            success: function(layero){
+                layer.setTop(layero); //重点2
+            }
+        });
+    }
 </script>
 </body>
 </html>

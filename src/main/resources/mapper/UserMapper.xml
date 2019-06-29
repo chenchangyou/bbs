@@ -23,14 +23,19 @@
 	</delete>
 
 	<select id="findById" parameterType="long" resultType="User">
-		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime from t_user where id=#{id}
+		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime
+		from t_user
+		where id=#{id}
 	</select>
 
 	<select id="findByUsername" parameterType="string" resultType="User">
-		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime from t_user where username=#{username}
+		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime
+		from t_user
+		 where username=#{username}
 	</select>
 
 	<select id="findAll" resultType="User">
-		select id,username,password,tel,sex,age,tel,email,headshot,state,type,create_time createTime from t_user
+		select id,username,password,tel,sex,age,tel,email,headshot,state,type,create_time createTime
+		 from t_user
 	</select>
 </mapper>

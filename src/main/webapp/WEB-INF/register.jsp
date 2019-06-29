@@ -38,7 +38,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">年龄</label>
         <div class="layui-input-inline">
-            <input type="text" name="age"  autocapitalize="off" required lay-verify="required" placeholder="请输入您的年龄" autocomplete="off" class="layui-input">
+            <input type="text" name="age"  autocapitalize="off" required  lay-verify="number" placeholder="请输入您的年龄" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">

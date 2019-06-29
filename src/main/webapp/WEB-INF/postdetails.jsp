@@ -189,7 +189,7 @@
                                 <div style="width: 50px;float: left"><img src="${ctx}/${reply.user.headshot}" alt="..."
                                                                           class="img-circle" width="35px" height="35px"
                                                                           style="text-align: center"></div>
-                                <div style="float: left;margin-left: 2px;width: 100px;text-align: center">
+                                <div style="float: left;margin-left: 2px;text-align: center">
                                     <c:if test="${reply.user.id == post.user.id}"><span
                                             style="color:#1E9FFF;font-weight: bolder">楼主 </span></c:if>
                                         ${reply.user.username}

@@ -79,11 +79,11 @@
 
         <div class="box-right">
             <c:if test="${not empty loginUser}">
-                <a href="addpost" class="btn btn-danger" style="width: 100%;"><span class="glyphicon glyphicon-pencil"
+                <a href="addpost" class="btn btn-info" style="width: 100%;"><span class="glyphicon glyphicon-pencil"
                                                                                     aria-hidden="true"></span> 发表新帖</a>
             </c:if>
             <c:if test="${empty loginUser}">
-                <a class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="width: 100%;"><span
+                <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="width: 100%;"><span
                         class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 发表新帖</a>
             </c:if>
             <div class="panel panel-default" style="margin-top: 5px">
@@ -106,7 +106,7 @@
                     <ul class="layui-tab-title" style="background-color: #FFFFFF">
                         <%--<li class="layui-this">最新回复</li>--%>
                         <li id="newpost" onclick="getNewPost()">新帖</li>
-                        <li>热门</li>
+                        <li><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
                     </ul>
                     <div class="layui-tab-content">
                         <%--<div class="layui-tab-item layui-show">

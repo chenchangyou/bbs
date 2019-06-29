@@ -159,4 +159,17 @@ public class UserController {
 
         return map;
     }
+
+    @GetMapping("/update")
+    public String update(Long uid,Model model){
+        User user = userService.findById(uid);
+
+        model.addAttribute("user",user);
+
+        return "/user/updateuser";
+    }
+    @PostMapping("/update")
+    public int update(Long uid){
+        return 0;
+    }
 }

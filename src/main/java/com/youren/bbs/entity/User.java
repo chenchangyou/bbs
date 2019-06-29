@@ -13,6 +13,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    private String nickname; //昵称
     private String sex;
     private Integer age;
     private String email;
@@ -21,6 +22,8 @@ public class User {
     private Integer state;
     private Integer type;
     private Date createTime;
+    private String signature; //个人签名
+    private String synopsis;  //简介
 //    private UserBackground userBackground;
 //    private List<Post> post; //用户的帖子
 //    private List<Collect> collect; //用户的收藏
