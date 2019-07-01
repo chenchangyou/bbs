@@ -137,10 +137,20 @@
     </div>
 </div>
 <div id="footer"></div>
-
-
 <script>
-
+    layui.use('util', function(){
+        var util = layui.util;
+        //执行
+        util.fixbar({
+            bar1: false
+            /*,click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+                    alert('点击了bar1')
+                }
+            }*/
+        });
+    });
     function getNewPost() {
         layui.use('flow', function () {
             var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
@@ -202,6 +212,7 @@
         });
     }
     $("#newpost").click();
+
 </script>
 </body>
 </html>

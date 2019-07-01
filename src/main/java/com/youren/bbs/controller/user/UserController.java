@@ -111,7 +111,6 @@ public class UserController {
 
         User byId = userService.findById(suser.getId());
 
-
         Map<String, Object> map = new HashMap<String, Object>();
         Map<String, String> imgmap = new HashMap<String, String>();
 
@@ -168,8 +167,19 @@ public class UserController {
 
         return "/user/updateuser";
     }
+
+    @ResponseBody
     @PostMapping("/update")
-    public int update(Long uid){
-        return 0;
+    public int update(Long uid,String nickname,String username, String sex, String email, Integer age, String tel,
+                      String synopsis){
+        int row = userService.update(uid, nickname, username, sex, email, age, tel, synopsis);
+
+        return row;
+    }
+    @ResponseBody
+    @PostMapping("/updatepassword")
+    public int updatepassword(Long uid,String password,String newPassword){
+
+        return  userService.updatepassword(uid, password, newPassword);
     }
 }

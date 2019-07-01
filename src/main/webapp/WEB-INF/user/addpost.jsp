@@ -26,14 +26,12 @@
                 <form action="addpost" method="post" class="layui-form" enctype="multipart/form-data">
                     <input type="hidden" name="act" value="add" />
                     用户名：${loginUser.username} <br>
-                    <%--<input type="text" class="form-control" autocomplete="off"  name="title" /><span id="title1" style="color: red"></span><br/>--%>
                     标题：<input style="width: 600px"  type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                     <div>
                         <div style="width: 100%">
                            <div style="width: 600px;">
 
                                <hr>
-                            <%--<textarea name="synopsis" class="form-control" rows="4" id="accepted_answer"></textarea>--%>
                                <div class="layui-form-item layui-form-text">
                                    <label class="layui-form-label">简介</label>
                                    <div class="layui-input-block">
@@ -56,23 +54,13 @@
                                 <hr>
                                 <input type="file" name="file">
                                 <p>请选择文件</p>
-                                <%--<div class="layui-upload-drag" id="test10">
-                                    <i class="layui-icon"></i>
-                                    <p>点击封面图，或将文件拖拽到此处</p>
-                                </div>
-                                <img class="layui-upload-img" id="demo1">--%>
                             </div>
                         </div>
-                        <div style="clear:both">
-
-                        </div>
+                        <div style="clear:both"></div>
                     </div>
                     <hr>
                     <h2>正文内容</h2>
                     <hr>
-                    <%--<div id="editor">7899999999999999999</div>
-                    <textarea id="content" name="content" style="display: none;" lay-verify="required"></textarea></br>--%>
-
                     <div class="form-group">
                         <div id="editor"></div>
                         <textarea id="detail" name="content" style="width:100%; height:200px;display:none;"></textarea>

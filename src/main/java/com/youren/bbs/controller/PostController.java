@@ -176,6 +176,7 @@ public class PostController {
             return "删除失败！";
         }
     }
+    //上传帖子的图片
     @ResponseBody
     @PostMapping("/global/postimage")
     public Map<String,Object> uploadimg(MultipartFile[] file) throws IOException {
@@ -192,14 +193,14 @@ public class PostController {
             File saveFile = new File(Constant.POST_POSTIMG_SAVE_PATH + newName);
             //把上传的文件保存到本地磁盘文件
             files.transferTo(saveFile);
-            paths[count++] = Constant.POST_POSTIMG_PATH+newName;
+            paths[count++] = "/"+Constant.POST_POSTIMG_PATH+newName;
         }
         map.put("errno", 0);
         map.put("data", paths);
 
         return map;
     }
-
+    //跳转编辑帖子页
     @GetMapping("/user/post/edit")
     public String editpage(Long pid,Model model){
 
@@ -212,6 +213,7 @@ public class PostController {
 
         return "/user/postedit";
     }
+    //提交编辑的帖子
     @PostMapping("/post/edit")
     public String edit(MultipartFile file,Long pid,  String title,String content, HttpSession session,
                        Model model,Long category,String synopsis) throws IOException {

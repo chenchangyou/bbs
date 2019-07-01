@@ -11,7 +11,13 @@
 	</insert>
 
 	<update id="update" parameterType="User">
-		update t_user set password=#{password},sex=#{sex} where id=#{id}
+		update t_user set username=#{username},nickname=#{nickname},sex=#{sex},age=#{age},tel=#{tel},email=#{email},
+		      synopsis=#{synopsis}
+		 where id=#{id}
+	</update>
+
+	<update id="updatepassword" parameterType="User">
+		update t_user set password=#{password} where id=#{id}
 	</update>
 
 	<update id="updateThumbnail" parameterType="User">
@@ -23,19 +29,22 @@
 	</delete>
 
 	<select id="findById" parameterType="long" resultType="User">
-		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime
+		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime,
+		nickname,synopsis
 		from t_user
 		where id=#{id}
 	</select>
 
 	<select id="findByUsername" parameterType="string" resultType="User">
-		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime
+		select id,username,password,tel,sex,age,email,headshot,state,type,create_time createTime,
+		nickname,synopsis
 		from t_user
-		 where username=#{username}
+		where username=#{username}
 	</select>
 
 	<select id="findAll" resultType="User">
-		select id,username,password,tel,sex,age,tel,email,headshot,state,type,create_time createTime
+		select id,username,password,tel,sex,age,tel,email,headshot,state,type,create_time createTime,
+		      nickname,synopsis
 		 from t_user
 	</select>
 </mapper>

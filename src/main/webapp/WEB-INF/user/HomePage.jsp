@@ -47,7 +47,7 @@
                 <blockquote class="layui-elem-quote">我的介绍</blockquote>
                 <div style="width: 100%;font-size: 16px">
                     <div style="width: 100%;height: 30px">
-                        <span style="line-height: 30px ;width: 100px;float: left">昵称：${user.username}</span>
+                        <span style="line-height: 30px ;min-width: 100px;float: left">昵称：${user.nickname}</span>
                         <a style="line-height: 30px ;width: 100px;padding: 0 3px;float: right;color: #1E9FFF" href="javascript:;" onclick="updateuser(${user.id});">修改资料>></a>
                     </div>
                     <div>性别：${user.sex}</div>
@@ -56,7 +56,8 @@
                     <div>邮箱：${user.email}</div>
                     <div>注册时间：<fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd"/></div>
                 </div>
-                <textarea class="form-control" rows="3">不写点什么嘛</textarea>
+                <h4>简介：</h4>
+                <div style="min-height: 120px" class="form-control">${user.synopsis}</div>
             </div>
             <div style="width: 316px;float: right">
                 <div class="panel panel-warning">
@@ -154,15 +155,12 @@
     });
     function updateuser(uid) {
         layer.open({
+            title:'修改个人资料',
             type: 2,
-            shade: false,
-            area: ['500', '600px'],
+            area: ['450px', '600px'],
+            fixed: true, //不固定
             maxmin: false,
-            content: '/user/update?uid='+uid,
-            zIndex: layer.zIndex, //重点1
-            success: function(layero){
-                layer.setTop(layero); //重点2
-            }
+            content: '/user/update?uid='+uid
         });
     }
 </script>

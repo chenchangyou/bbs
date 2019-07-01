@@ -16,36 +16,8 @@
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
 <div style="width: 1160px;padding:0px 10px;margin: 0 auto">
-    <%--引入头部--%>
+    <%--引入背景--%>
     <%@include file="user_bg.jsp"%>
-    <%--<div class="bg-top">
-        <div id="user_bg"
-             style="width: 100%;height: 100px;background-image: url('../../static/images/bg_transparent.png') ">
-            <div style="width: 100%;margin-left: 20px;padding-top: 10px;">
-                <div style="width: 70px;height: 70px;float: left;border: 2px solid hsla(0,0%,100%,.4);border-radius: 52px;">
-                    <a id="replacehead" style=" background: url('${ctx}/${user.headshot}'); background-size:100% 100%;"
-                       href="javascript:;">
-                        &lt;%&ndash;<img>&ndash;%&gt;
-                        <span class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
-                    </a>
-                </div>
-                <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
-                    <div>
-                        <span style="font-weight: 700;font-size: 24px;color: #FFFFFF; vertical-align: middle">${user.username}</span>
-                    </div>
-                    <div style="margin-top: 5px">
-                        个性签名：
-                    </div>
-                </div>
-            </div>
-            <div style="float: right;height: 80px;width: 130px;margin-top: 37px">
-                <a class="bg-setting" href="javascript:;" style="">
-                    <i class="fa fa-cog"></i>
-                    <span>更换背景</span>
-                </a>
-            </div>
-        </div>
-    </div>--%>
     <div style=" width: 100%;margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
@@ -107,28 +79,27 @@
         </table>
         <div style="float: left;margin-left: 20px;margin-top: 12px;width: 50%;">
             <blockquote style="padding: 6px;font-size: 16px" class="layui-elem-quote">更改密码</blockquote>
-            <div class="layui-form">
+            <form class="layui-form" method="post">
+                <input name="uid" value="${user.id}" type="hidden">
                 <div class="layui-form-item">
                     <label class="layui-form-label">原密码</label>
                     <div class="layui-input-inline">
                         <input type="password" name="password" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
                     </div>
-                    <%--<div class="layui-form-mid layui-word-aux">辅助文字</div>--%>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">新密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                        <input type="password" name="newPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
                     </div>
-                    <%--<div class="layui-form-mid layui-word-aux">辅助文字</div>--%>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">确认更改</button>
+                        <button class="layui-btn" lay-submit lay-filter="updatepassword">确认更改</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
-        </div>
+            </form>
     </div>
 
 </div>
@@ -211,11 +182,35 @@
                             $('#denglu').trigger("click");
                         });
                     }
-
                 }
             });
 
-        })
+        });
+    });
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(updatepassword)', function(data){
+            $.post("/user/updatepassword",data.field,function (data) {
+                if(data === 1){
+                    layer.msg("修改成功",{
+                        icon:1,
+                        time:800
+                    },function () {
+                        window.location.reload();
+                    })
+                }else if(data === 2){
+                    layer.msg("修改失败！系统出错",{
+                        icon:2
+                    })
+                }else  if(data === 0){
+                    layer.msg("您输入的原密码不正确，请重新输入",{
+                        icon:2
+                    })
+                }
+            });
+            return false;
+        });
     });
 </script>
 </body>

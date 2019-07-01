@@ -79,7 +79,6 @@
                 <button class="layui-btn" lay-submit lay-filter="formDemo" style="background-color: #0cc1f7">保存修改</button>
             </div>
         </div>
-        <%--<button class="btn btn-danger" style="width:100px;float: right" type="submit" > 发表</button>--%>
     </form>
 </div>
 <script>
@@ -144,24 +143,6 @@
             }
         });
     });
-    /*  var $tips = "<div class=\"divs\">";
-      function tj(){
-          if($(".form-control").val().length <= 0){
-              $(".form-control").css("border","1px red solid")
-              xs("请输入标题");
-          }else if ($("#editor").txt.html().length <= 0){
-              xs("请输入内容");
-          }else{
-              $("#tj").submit();
-          }
-      }
-      function xs(error){
-          $(".divs").remove();
-          $("body").append($tips+error+"</div>");
-          setTimeout(function () {
-              $(".divs").fadeOut(400);
-          }, 1200);
-      }*/
 </script>
 </body>
 </html>
