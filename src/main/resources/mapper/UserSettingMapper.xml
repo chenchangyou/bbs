@@ -26,7 +26,7 @@
 		values(#{id},#{uid.id},#{collect},#{followed},#{fans},#{sex})
 	</insert>
 
-	<update id="updatecollect" parameterType="UserSetting">
+	<!--<update id="updatecollect" parameterType="UserSetting">
 		update t_user set collect=#{collect} where uid=#{uid}
 	</update>
 
@@ -43,6 +43,6 @@
 	</update>
 	<select id="findByUid" resultMap="UserSettingResultMap"  parameterType="Long">
 		select * from t_user_setting where uid=#{uid.id};
-	</select>
+	</select>-->
 
 </mapper>

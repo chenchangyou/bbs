@@ -2,6 +2,7 @@ package com.youren.bbs.entity;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,12 @@ import java.util.List;
  * 用户类
  */
 @Data
+@Entity
+@Table(name = "t_user")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//主键生成策略
     private Long id;
     private String username;
     private String password;
