@@ -2,6 +2,7 @@ package com.youren.bbs.controller.user;
 
 import com.youren.bbs.entity.User;
 import com.youren.bbs.entity.UserBackground;
+import com.youren.bbs.mapper.UserSettingMapper;
 import com.youren.bbs.service.UserBackgroundService;
 import com.youren.bbs.service.UserService;
 import com.youren.bbs.util.Constant;
@@ -31,7 +32,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserBackgroundService userBackgroundService;
-
+    @Autowired
+    private UserSettingMapper userSettingMapper;
     @Autowired
     private JavaMailSender javaMailSender;
     @Autowired

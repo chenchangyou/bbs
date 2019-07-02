@@ -5,9 +5,12 @@
   
 <mapper namespace="com.youren.bbs.mapper.UserSettingMapper">
 
-	<resultMap id="fabulousResultMap" type="Fabulous">
+	<resultMap id="UserSettingResultMap" type="UserSetting">
 		<id property="id" column="id" />
-		<result property="createTime" column="create_time" />
+		<result property="collect" column="collect"/>
+		<result property="followed" column="followed"/>
+		<result property="fans" column="fans"/>
+		<result property="sex" column="sex"/>
 		<association property="user" column="uid" javaType="User">
 			<id property="id" column="uid" />
 			<!--<result property="username" column="username" />
@@ -16,35 +19,30 @@
 			<result property="createTime" column="uctime" />
 			<result property="balance" column="balance" />-->
 		</association>
-		<!--<association property="post" column="pid" javaType="Post">
-			<id property="id" column="pid" />
-			&lt;!&ndash;<result property="username" column="username" />
-			<result property="password" column="password" />
-			<result property="sex" column="sex" />
-			<result property="createTime" column="uctime" />
-			<result property="balance" column="balance" />&ndash;&gt;
-		</association>-->
 	</resultMap>
 
-    <insert id="create" parameterType="Fabulous">
-		insert into t_fabulous(pid,uid,create_time)
-		values(#{post.id},#{user.id},#{createTime})
+    <insert id="create" parameterType="UserSetting" useGeneratedKeys="true" keyProperty="id">
+		insert into t_user_setting(id,uid,collect,followed,fans,sex)
+		values(#{id},#{uid.id},#{collect},#{followed},#{fans},#{sex})
 	</insert>
 
-	<delete id="delete" parameterType="Fabulous">
-		delete from t_fabulous where pid=#{post.id} and uid=#{user.id}
-	</delete>
+	<update id="updatecollect" parameterType="UserSetting">
+		update t_user set collect=#{collect} where uid=#{uid}
+	</update>
 
-	<select id="findByPidUid"  resultMap="fabulousResultMap" parameterType="Fabulous">
-		select pid,uid from t_fabulous where pid=#{post.id} and uid=#{user.id}
-	</select>
+	<update id="updatefollowed"  parameterType="UserSetting">
+		update t_user set followed=#{followed} where uid=#{uid}
+	</update>
 
-	<select id="findBypid"  resultMap="fabulousResultMap" parameterType="Fabulous">
-		select * from t_fabulous where pid=#{post.id};
-	</select>
+	<update id="updatefans" parameterType="UserSetting">
+		update t_user set fans=#{fans} where uid=#{uid}
+	</update>
 
-	<select id="findnumber"  resultType="Integer"  parameterType="Long">
-		select count(*) counts from t_fabulous where pid=#{post.id};
+	<update id="updatesex"  parameterType="Long">
+		update t_user set sex=#{sex} where uid=#{uid}
+	</update>
+	<select id="findByUid" resultMap="UserSettingResultMap"  parameterType="Long">
+		select * from t_user_setting where uid=#{uid.id};
 	</select>
 
 </mapper>

@@ -10,7 +10,7 @@
 		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="createTime" column="create_time" />
-		<!-- 多对一的映射 -->
+		<!-- 一对多的映射 -->
 		<association property="user" javaType="User">
 			<id property="id" column="uid"/>
 			<result property="username" column="username"/>

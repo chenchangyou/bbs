@@ -5,9 +5,10 @@
 <head>
     <title>欢迎来到友人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <link rel="stylesheet" href="static/layui/css/layui.css">
 </head>
-<body class="layui-layout-body">
+<body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
     <legend>常规使用：普通图片上传</legend>
 </fieldset>
@@ -19,6 +20,18 @@
         <p id="demoText"></p>
     </div>
 </div>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>上传多张图片</legend>
+</fieldset>
+
+<div class="layui-upload">
+    <button type="button" class="layui-btn" id="test2">多图片上传</button>
+    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+        预览图：
+        <div class="layui-upload-list" id="demo2"></div>
+    </blockquote>
+</div>
 <script src="static/layui/layui.js"></script>
 <script>
     layui.use('upload', function(){
@@ -28,7 +41,7 @@
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#test1'
-            ,url: 'http://10.0.11.253:8080/upload/'
+            ,url: 'http://119.23.52.230/SSM/uploads/'
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
@@ -51,7 +64,33 @@
                 });
             }
         });
+        //多图片上传
+        upload.render({
+            elem: '#test2'
+            ,url: 'http://119.23.52.230/SSM/uploads/'
+            ,multiple: true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                });
+            }
+            ,done: function(res){
+                //上传完毕
+            }
+        });
     });
+
+
+    $.post("postSong",{content:'hhh',songId:2},function (data) {
+        
+    }),error: function () {
+        layer.msg("关注失败！系统出错",{
+            offset: '150'
+            ,icon: 2
+        });
+    }
+
 </script>
     </body>
 

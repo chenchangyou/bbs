@@ -10,10 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserSettingMapper {
     int create(UserSetting userSetting);
-//    List<UserSetting> findByuid(Long pid);
-    int updatecollect (String collect);
-    int updatefollowed (String followed);
-    int updatefans (String fans);
-    int updatesex (String sex);
-
+    int updatecollect (UserSetting userSetting);
+    int updatefollowed (UserSetting userSetting);
+    int updatefans (UserSetting userSetting);
+    int updatesex (UserSetting userSetting);
+    UserSetting findByUid(Long uid);
 }

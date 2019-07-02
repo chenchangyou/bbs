@@ -127,6 +127,7 @@
             upload.render({
                 elem: '#test8'
                 , url: '/user/uploadThumbnail/'
+                // , url: 'http://119.23.52.230/SSM/uploads/'
                 , auto: false
                 //,multiple: true
                 , bindAction: '#test9'

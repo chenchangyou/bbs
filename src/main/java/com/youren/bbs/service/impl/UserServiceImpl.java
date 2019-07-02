@@ -2,7 +2,9 @@ package com.youren.bbs.service.impl;
 
 import com.youren.bbs.entity.User;
 import com.youren.bbs.mapper.UserMapper;
+import com.youren.bbs.mapper.UserSettingMapper;
 import com.youren.bbs.service.UserService;
+import com.youren.bbs.service.UserSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserSettingService userSettingService;
 
     //注册
     @Override
@@ -41,8 +46,11 @@ public class UserServiceImpl implements UserService {
             int row = userMapper.create(user);
             if (row > 0) {
                 map.put("ok", true);
+               user = userMapper.findByUsername(username);
+                userSettingService.create(user.getId());
             } else {
                 map.put("error", "注册失败！");
+
             }
         } else {
             map.put("error", "用户名已被注册！");

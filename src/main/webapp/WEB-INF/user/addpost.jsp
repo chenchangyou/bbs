@@ -85,7 +85,7 @@
         $detail.val(html)
     };
     // 配置服务器端图片上传地址
-    editor.customConfig.uploadImgServer = '${ctx}/global/postimage';
+    editor.customConfig.uploadImgServer = 'http://119.23.52.230/SSM/uploads';
 
     editor.customConfig.uploadFileName = 'file';
     // 将图片大小限制为 5M
@@ -137,24 +137,7 @@
             }
         });
     });
-  /*  var $tips = "<div class=\"divs\">";
-    function tj(){
-        if($(".form-control").val().length <= 0){
-            $(".form-control").css("border","1px red solid")
-            xs("请输入标题");
-        }else if ($("#editor").txt.html().length <= 0){
-            xs("请输入内容");
-        }else{
-            $("#tj").submit();
-        }
-    }
-    function xs(error){
-        $(".divs").remove();
-        $("body").append($tips+error+"</div>");
-        setTimeout(function () {
-            $(".divs").fadeOut(400);
-        }, 1200);
-    }*/
+
 </script>
 </body>
 </html>
