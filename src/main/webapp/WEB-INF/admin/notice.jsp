@@ -20,16 +20,9 @@
                 <i class="layui-icon layui-icon-add-1"></i> 新增公告
             </button>
             <div>
-                <table class="layui-table" lay-data="{width: 892, height:330, url:'/admin/Notice/', page:true, id:'idTest'}" lay-filter="test3">
-                    <thead>
-                    <tr>
-                        <th lay-data="{field:'nid', width:80, sort: true}">ID</th>
-                        <th lay-data="{field:'title', width:120, sort: true, edit: 'text'}">标题</th>
-                        <th lay-data="{field:'createTime', width:120, sort: true, edit: 'Date',templet:'div>{{layui.util.toDateString(d.createTime, 'yyyy年MM月dd日 HH:mm:ss')}}</div>'}">时间</th>
-                        <th lay-data="{field:'state', width:120, sort: true, edit: 'text'}">状态</th>
-                    </tr>
-                    </thead>
-                </table>
+
+                <table id="demo" lay-filter="tes3"></table>
+
                 <script type="text/html" id="barDemo">
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                 </script>
@@ -40,10 +33,24 @@
 </div>
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script>
-    layui.use('table', function(){
+    layui.use(['table','util'], function(){
         var table = layui.table;
-
+        var util = layui.util;
         //监听单元格编辑
+        table.render({
+            elem: '#demo' //指定原始表格元素选择器（推荐id选择器）
+            ,url:'/admin/notice/list/'
+            ,title: '公告列表'
+            ,height: 450 //容器高度
+            ,cols: [[
+                {field:'nid', width:80, title: 'ID'}
+                , {field:'title', width:150, title: '标题'}
+                , {field:'content', width:200, title: '内容'}
+                , {field:''+ userName +'', width:120, title: '发布人'}
+                , {field:'createTime', width:80, title: '时间'}
+                , {field:'state', width:80, title: '状态'}
+            ]] //设置表头
+        });
         table.on('edit(test3)', function(obj){
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值

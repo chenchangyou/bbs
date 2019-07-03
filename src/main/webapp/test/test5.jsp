@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Monster</title>
-    <%@include file="common/style.jsp"%>
+    <%@include file="../common/style.jsp"%>
     <style>
         #bigbg{
-            background:url("static/images/user.png") no-repeat ;
+            background:url("../static/images/user.png") no-repeat ;
             height: 1000px;
         }
         ul{
@@ -80,10 +80,10 @@
         <!--轮播图-->
         <div class="layui-carousel" id="test1" style="padding-top: 1px">
             <div carousel-item style="color: #353C4C">
-                <div><img src="static/images/lbt.png"></div>
-                <div><img src="static/images/lbt.png"></div>
-                <div><img src="static/images/lbt.png"></div>
-                <div><img src="static/images/lbt.png"></div>
+                <div><img src="../static/images/lbt.png"></div>
+                <div><img src="../static/images/lbt.png"></div>
+                <div><img src="../static/images/lbt.png"></div>
+                <div><img src="../static/images/lbt.png"></div>
             </div>
         </div>
         <!--登录注册模态框-->

@@ -11,38 +11,19 @@
 		<result property="followed" column="followed"/>
 		<result property="fans" column="fans"/>
 		<result property="sex" column="sex"/>
-		<association property="user" column="uid" javaType="User">
+		<result property="usetting" column="usetting"/>
+		<association property="user" javaType="User">
 			<id property="id" column="uid" />
-			<!--<result property="username" column="username" />
-			<result property="password" column="password" />
-			<result property="sex" column="sex" />
-			<result property="createTime" column="uctime" />
-			<result property="balance" column="balance" />-->
 		</association>
 	</resultMap>
 
     <insert id="create" parameterType="UserSetting" useGeneratedKeys="true" keyProperty="id">
-		insert into t_user_setting(id,uid,collect,followed,fans,sex)
-		values(#{id},#{uid.id},#{collect},#{followed},#{fans},#{sex})
+		insert into t_user_setting(id,uid,collect,followed,fans,sex,usetting)
+		values(#{id},#{uid.id},#{collect},#{followed},#{fans},#{sex},#{usetting})
 	</insert>
 
-	<!--<update id="updatecollect" parameterType="UserSetting">
-		update t_user set collect=#{collect} where uid=#{uid}
-	</update>
-
-	<update id="updatefollowed"  parameterType="UserSetting">
-		update t_user set followed=#{followed} where uid=#{uid}
-	</update>
-
-	<update id="updatefans" parameterType="UserSetting">
-		update t_user set fans=#{fans} where uid=#{uid}
-	</update>
-
-	<update id="updatesex"  parameterType="Long">
-		update t_user set sex=#{sex} where uid=#{uid}
-	</update>
 	<select id="findByUid" resultMap="UserSettingResultMap"  parameterType="Long">
 		select * from t_user_setting where uid=#{uid.id};
-	</select>-->
+	</select>
 
 </mapper>

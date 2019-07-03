@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <html>
 <head>
     <title>欢迎来到友人博客</title>
-    <%@include file="common/style.jsp"%>
+    <%@include file="../common/style.jsp"%>
     <style>
         .loader {
             position: fixed;

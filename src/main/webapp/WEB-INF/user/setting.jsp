@@ -54,27 +54,27 @@
                 <col>
             </colgroup>
             <h5>隐私设置</h5>
-            <tbody>
-            <tr>
-                <td>我的收藏</td>
-                <td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏" checked></td>
-            </tr>
-            <tr>
-                <td>我的关注</td>
-                <td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td>
-            </tr>
-            <tr>
-                <td>我的粉丝</td>
-                <td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td>
-            </tr>
-            <tr>
-                <td>性别</td>
-                <td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td>
-            </tr>
-            <tr>
-                <td>个人资料</td>
-                <td><input type="checkbox" name="xxx" lay-skin="switch" lay-text="公开|隐藏"></td>
-            </tr>
+            <tbody class="layui-form">
+                <tr>
+                    <td>我的收藏</td>
+                    <td><input type="checkbox" name="collect" lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏" <c:if test="${userSetting.collect}">checked</c:if>></td>
+                </tr>
+                <tr>
+                    <td>我的关注</td>
+                    <td><input type="checkbox" name="followed" lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.followed}">checked</c:if>></td>
+                </tr>
+                <tr>
+                    <td>我的粉丝</td>
+                    <td><input type="checkbox" name="fans"lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.fans}">checked</c:if>></td>
+                </tr>
+                <tr>
+                    <td>性别</td>
+                    <td><input type="checkbox" name="sex" lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.sex}">checked</c:if>></td>
+                </tr>
+                <tr>
+                    <td>个人资料</td>
+                    <td><input type="checkbox" name="usetting" lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.usetting}">checked</c:if>></td>
+                </tr>
             </tbody>
         </table>
         <div style="float: left;margin-left: 20px;margin-top: 12px;width: 50%;">
@@ -187,6 +187,7 @@
 
         });
     });
+
     layui.use('form', function(){
         var form = layui.form;
         //监听提交
@@ -210,6 +211,12 @@
                 }
             });
             return false;
+        });
+        var uid= ${user.id}
+        form.on('switch(switchTest)', function(data){
+            $.post("/user/saveUserSetting",{uid:uid,sname:data.elem.name,state:data.elem.checked},function (data) {
+
+            })
         });
     });
 </script>

@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <html>
 <!DOCTYPE html>
 <head>
     <title>欢迎来到友人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-    <link rel="stylesheet" href="static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
 </head>
 <body>
 <div class="layui-form" style="margin: 50px auto" >
@@ -20,7 +20,7 @@
     </select>
 </div>
 
-<script src="static/layui/layui.js"></script>
+<script src="../static/layui/layui.js"></script>
 <script>
     //Demo
     layui.use('form', function(){

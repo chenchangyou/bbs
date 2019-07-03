@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <html>
 <!DOCTYPE html>
 <head>
     <title>欢迎来到友人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <%@include file="common/style.jsp"%>
+    <%@include file="../common/style.jsp"%>
     <style>
         .loader {
             position: relative;
@@ -35,7 +35,7 @@
 
 
 <!--你的内容-->
-<%@include file="common/head.jsp"%>
+<%@include file="../common/head.jsp"%>
 
 
 <div style="width: 98%; margin: 5px auto;height: 100%;border: 1px red solid">

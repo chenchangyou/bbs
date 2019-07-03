@@ -83,8 +83,8 @@
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.show_sql">true</prop><!--执行的时候是否显示SQL-->
-				<prop key="hibernate.format_sql">true</prop><!--执行的时候SQL是否格式化-->
-				<prop key="hibernate.hbm2ddl.auto">update</prop><!--如果没有是否创建-->
+				<prop key="hibernate.format_sql">false</prop><!--执行的时候SQL是否格式化-->
+				<!--<prop key="hibernate.hbm2ddl.auto">update</prop>&lt;!&ndash;如果没有是否创建&ndash;&gt;-->
 			</props>
 		</property>
 	</bean>

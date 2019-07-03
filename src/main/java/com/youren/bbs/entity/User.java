@@ -27,6 +27,8 @@ public class User {
     private String headshot; //用户头像路径
     private Integer state;
     private Integer type;
+    @Temporal(TemporalType.DATE)
+    @Column(name="create_time")
     private Date createTime;
     private String signature; //个人签名
     private String synopsis;  //简介

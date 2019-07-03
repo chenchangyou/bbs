@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp" %>
+<%@include file="../common/taglib.jsp" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Monster</title>
-    <%@include file="common/style.jsp" %>
+    <%@include file="../common/style.jsp" %>
     <style>
         #bigbg {
             background: url("static/images/水墨背景1.png") no-repeat;
@@ -89,7 +89,7 @@
                 <li class="list-group-item span1">
                     <span style="margin: 0">
                         <img class="layui-circle" border="1px red" width="22px" height="22xp"
-                             src="static/images/user.png">
+                             src="../static/images/user.png">
                         zhutengfei
                     </span>
                     <sapn style="margin-left: 15px">娱乐</sapn>
@@ -122,7 +122,7 @@
                 <li class="list-group-item span1">
                     <span style="margin: 0">
                         <img class="layui-circle" border="1px red" width="22px" height="22xp"
-                             src="static/images/user.png">
+                             src="../static/images/user.png">
                         zhutengfei
                     </span>
                     <sapn style="margin-left: 15px">娱乐</sapn>

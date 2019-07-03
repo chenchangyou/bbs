@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <html>
 <!DOCTYPE html>
 <head>
     <title>欢迎来到友人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
 
@@ -25,7 +25,7 @@
         © layui.com - 底部固定区域
     </div>
 </div>
-<script src="static/layui/layui.js"></script>
+<script src="../static/layui/layui.js"></script>
 <script>
     layui.use('layer', function(){ //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer;

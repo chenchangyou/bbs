@@ -39,36 +39,7 @@ public class AdminController {
         return "/admin/index";
     }
 
-    @GetMapping("/noticeList")
-    public String NOticelist(){
-        return "/admin/notice";
-    }
 
-    @ResponseBody
-    @GetMapping("/Notice")
-    public Map findAllNotice(){
-        Map<String,Object> map = new HashMap<String, Object>();
-
-        List<Notice> noticeList = noticeService.findAll();
-        int count = noticeList.size();
-        map.put("code",0);
-        map.put("msg","");
-        map.put("count",count);
-        map.put("data",noticeList);
-        return map;
-    }
-
-    //添加公告
-    @ResponseBody
-    @PostMapping("/add")
-    public String addNotice(String title,String content,Model model){
-        int row = noticeService.create(title, content);
-        if(row > 0) {
-            return "OK";
-        }else {
-            return "NO";
-        }
-    }
     @ResponseBody
     @GetMapping("/postlist")
     public Map postlist(@RequestParam(name = "page",defaultValue = "1") int pageNum,

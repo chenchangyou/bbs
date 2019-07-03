@@ -26,6 +26,8 @@ public class UserCenterController {
     private FollowedService followedService;
     @Autowired
     private CollectService collectService;
+    @Autowired
+    private UserSettingService userSettingService;
 
 
     private static User getuser(HttpSession session){
@@ -56,7 +58,7 @@ public class UserCenterController {
         model.addAttribute("followedList",fuidlist);
         model.addAttribute("user",user);
         model.addAttribute("userbg",userBackground);
-        return "user/myfans";
+        return "/user/myfans";
     }
     @GetMapping("/collection")
     public String usercollection(Long uid,Model model){
@@ -67,14 +69,16 @@ public class UserCenterController {
         model.addAttribute("collectList",collectList);
         model.addAttribute("user",user);
         model.addAttribute("userbg",userBackground);
-        return "user/mycollection";
+        return "/user/mycollection";
     }
     @GetMapping("/setting")
     public String setting(Long uid,Model model){
         User user = userService.findById(uid);
         UserBackground userBackground = userBackgroundService.findByUid(uid);
+
+        model.addAttribute("userSetting", userSettingService.findByUid(uid));
         model.addAttribute("user",user);
         model.addAttribute("userbg",userBackground);
-        return "user/setting";
+        return "/user/setting";
     }
 }
