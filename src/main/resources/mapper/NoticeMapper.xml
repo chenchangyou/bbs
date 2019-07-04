@@ -18,7 +18,7 @@
 		values(#{nid},#{title},#{content},#{createTime},#{state})
 	</insert>
 
-	<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="String">
 		delete from t_notice where nid=#{nid}
 	</delete>
 

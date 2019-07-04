@@ -40,7 +40,7 @@ background-image: url('../static/images/bg1.png')">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${ctx}/home">友人论坛</a>
+            <a style="padding:0" class="navbar-brand" href="${ctx}/home"><img style="width: 80px;height: 50px" src="/uploads/postimg/4bbbf82a-1da3-4b07-b64f-b2c8ac6bbd84.png"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -83,11 +83,11 @@ background-image: url('../static/images/bg1.png')">
                 <span class="modal-title" id="myModalLabel" style="font-size: 25px;font-weight: bolder">用户登录</span>
                 <span id="error" style="color: red;text-align: center;font-size: 15px;margin-left: 70px;"></span>
             </div>
-            <form id="form1" method="post" style="width: 380px;margin: 5px auto">
+            <form class="layui-form" id="form1" method="post" style="width: 380px;margin: 5px auto">
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名</label>
                     <div class="layui-input-inline">
-                        <input id="loginuser" type="text" name="username" required  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+                        <input id="loginuser" type="text" name="username" required lay-verType="title" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

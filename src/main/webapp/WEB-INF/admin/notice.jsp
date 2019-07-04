@@ -14,22 +14,19 @@
         <li>后台首页</li>
         <li class="active">公告</li>
     </ol>
-
     <div style="width: 100%">
-            <button type="button" class="layui-btn layui-btn-sm" id="addcaregory" data-type="addRow">
+            <button type="button" class="layui-btn layui-btn-sm" id="addcaregory" onclick="tc(null);" data-type="addRow">
                 <i class="layui-icon layui-icon-add-1"></i> 新增公告
             </button>
             <div>
-
-                <table id="demo" lay-filter="tes3"></table>
+                <table id="demo" lay-filter="text"></table>
 
                 <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="detail">查看/编辑</a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                 </script>
             </div>
         </div>
-
-
 </div>
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script>
@@ -38,51 +35,60 @@
         var util = layui.util;
         //监听单元格编辑
         table.render({
-            elem: '#demo' //指定原始表格元素选择器（推荐id选择器）
+            elem: '#demo'
             ,url:'/admin/notice/list/'
             ,title: '公告列表'
             ,height: 450 //容器高度
             ,cols: [[
                 {field:'nid', width:80, title: 'ID'}
-                , {field:'title', width:150, title: '标题'}
+                , {field:'title', width:150, title: '标题',edit:true}
                 , {field:'content', width:200, title: '内容'}
-                , {field:''+ userName +'', width:120, title: '发布人'}
-                , {field:'createTime', width:80, title: '时间'}
+                , {field:'createTime', width:180, title: '时间',templet:'<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }} </div>'}
                 , {field:'state', width:80, title: '状态'}
+                ,{field:'user', title: '发布人', width: 200
+                    ,templet: function(d){
+                        return''+ d.user.username +''
+                    }
+                }
+                , {field:'right', minwidth:80, title: '操作',toolbar: '#barDemo'}
             ]] //设置表头
         });
-        table.on('edit(test3)', function(obj){
-            var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
-            layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+
+        table.on('tool(text)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if(layEvent === 'detail'){ //查看
+
+                tc(data.nid);
+
+            } else if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除<span style="color: red">'+data.title+'</span>该公告吗', function(index){
+
+                    $.post("/admin/notice/delete",{nid:data.nid},function (state) {
+                        if(state > 0){
+                            obj.del();
+                            layer.close(index);
+                            layer.msg('删除成功');
+                        }else {
+                            layer.msg('删除失败');
+                        }
+                    })
+                });
+            }
         });
     });
-
-    $(function () {
-      $("#addcaregory").click(function () {
-          layer.prompt({
-              title: '请输入类别名称'},
-              function(val, index){
-              $.post("/admin/category/add",{cname:val},function (date) {
-                    if(date > 0 ){
-                        layer.msg("添加成功！",{
-                            time:800
-                        },function () {
-                            window.location.reload();
-                        })
-                    }else {
-                        layer.msg('添加失败', {
-                            offset: '150',
-                            icon: 2
-                        });
-                    }
-              });
-              /*layer.msg('得到了'+val);*/
-                  layer.close(index);
-          });
-      })
-    })
+    function tc(nid) {
+        layer.open({
+            title:'查看或者编辑公告',
+            type: 2,
+            area: ['800px', '650px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: '/admin/notice/edit?nid='+nid
+        });
+    }
 
 </script>
 </body>

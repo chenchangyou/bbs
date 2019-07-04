@@ -85,7 +85,7 @@
         $detail.val(html)
     };
     // 配置服务器端图片上传地址
-    editor.customConfig.uploadImgServer = 'http://119.23.52.230/SSM/uploads';
+    editor.customConfig.uploadImgServer = '/global/postimage';
 
     editor.customConfig.uploadFileName = 'file';
     // 将图片大小限制为 5M

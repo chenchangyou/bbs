@@ -10,19 +10,22 @@
     <ol class="breadcrumb">
         <li>后台首页</li>
         <li class="active">管理中心</li>
+        <a href="javascript:location.reload()" style="content:none; width: 150px;margin-left: 85%">刷新
+            <a href="javascript:location.reload();">
+            <i style="color: #0000FF" class="layui-anim layui-anim-rotate layui-icon layui-icon-refresh">
+            </i></a></a>
     </ol>
 
     <div style="width: 100%">
-
             <div>
                 <table class="layui-hide" id="test"  lay-filter="test"></table>
             </div>
-
     </div>
 
 </div>
 
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -64,21 +67,21 @@
                             layer.close(index);
                             layer.msg('删除成功');
                         }else {
-                            layer.msg(data);
+                            layer.msg('删除失败');
                         }
                     });
-
                 });
             } else if(obj.event === 'edit'){//编辑按钮的事件
-                layer.prompt({
-                    formType: 2
-                    ,value: data.email
-                }, function(value, index){
-                    obj.update({
-                        email: value
-                    });
-                    layer.close(index);
+                layer.open({
+                    title:'查看或者编辑公告',
+                    type: 2,
+                    area: ['800px', '650px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '/admin/post/edit?pid='+data.id
                 });
+            }else if(obj.event === 'detail'){
+                window.open("/postdetails?postlistId="+data.id);
             }
         });
     });

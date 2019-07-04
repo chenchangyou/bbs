@@ -35,12 +35,12 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public int delete(long id) {
-        return 0;
+    public int delete(String id) {
+        return noticeMapper.delete(id);
     }
 
     @Override
-    public Notice findById(long id) {
+    public Notice findById(String id) {
         return noticeMapper.findById(id);
     }
 

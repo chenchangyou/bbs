@@ -68,12 +68,12 @@ var navs = [{
 },{
 	"title": "板块管理",
 	"icon": "fa-stop-circle",
-	"href": "http://10.0.11.253:8080/",
+	"href": "/home",
 	"spread": false
 },{
 	"title": "首页轮播图",
 	"icon": "fa-stop-circle",
-	"href": "http://10.0.11.253:8080/",
+	"href": "/home",
 	"spread": false
 },{
 	"title": "设置",
@@ -83,7 +83,7 @@ var navs = [{
 	"children": [{
 		"title": "首页公告",
 		"icon": "fa-github",
-		"href": "https://www.github.com/"
+		"href": "/admin/notice/"
 	}, {
 		"title": "个人资料",
 		"icon": "fa-qq",
@@ -104,6 +104,6 @@ var navs = [{
 }, {
 	"title": "这是友人论坛",
 	"icon": "fa-stop-circle",
-	"href": "http://10.0.11.253:8080/",
+	"href": "/home",
 	"spread": false
 }];

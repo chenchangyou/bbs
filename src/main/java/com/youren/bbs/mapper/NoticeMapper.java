@@ -10,8 +10,8 @@ public interface NoticeMapper {
 
     int create(Notice notice);
     int update(Notice notice);
-    int delete(long id);
-    Notice findById(long id);
+    int delete(String id);
+    Notice findById(String id);
     List<Notice> findAll();
 
 }

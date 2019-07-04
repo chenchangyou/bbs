@@ -206,12 +206,23 @@ public class PostController {
 
         List<Category> categoryList = categoryService.findAll();
         Post post = postService.findById(pid);
-//        System.out.println(post);
 
         model.addAttribute("post",post);
         model.addAttribute("categoryList",categoryList);
 
         return "/user/postedit";
+    }
+
+    @GetMapping("/admin/post/edit")
+    public String admineditpage(Long pid,Model model){
+
+        List<Category> categoryList = categoryService.findAll();
+        Post post = postService.findById(pid);
+
+        model.addAttribute("post",post);
+        model.addAttribute("categoryList",categoryList);
+
+        return "/admin/postEdit";
     }
     //提交编辑的帖子
     @PostMapping("/post/edit")

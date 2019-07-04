@@ -1,6 +1,7 @@
 package com.youren.bbs.controller.admin;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.youren.bbs.entity.Notice;
 import com.youren.bbs.service.NoticeService;
 import com.youren.bbs.service.NoticeServiceJpa;
@@ -36,33 +37,38 @@ public class NoticeController {
     public Map findAllNotice(){
         Map<String,Object> map = new HashMap<String, Object>();
 
-//        List<Notice> noticeList = noticeService.findAll();
-
         List<Notice> noticeList = noticeServiceJpa.findAll();
         int count = noticeList.size();
         map.put("code",0);
-        map.put("msg","");
         map.put("count",count);
         map.put("data",noticeList);
         return map;
     }
-
-   /* //添加公告
+    //添加或保存
     @ResponseBody
     @PostMapping("/add")
-    public String addNotice(String title, String content, Model model){
-        int row = noticeService.create(title, content);
-        if(row > 0) {
-            return "OK";
-        }else {
-            return "NO";
+    public Notice add(String nid, Long uid,String title,String content){
+        Notice notice = null;
+        if(uid!=null&&!uid.equals("")){
+           notice = noticeServiceJpa.save(nid, uid, title, content);
         }
+        return notice;
     }
-*/
-    @ResponseBody
-    @PostMapping("/add")
-    public Notice add(Long uid,String title,String content){
 
-        return noticeServiceJpa.save(uid,title,content);
+    @GetMapping("/edit")
+    public String edit(String nid,Model model){
+
+        if(!nid.equals("null")){
+            model.addAttribute("notice",noticeServiceJpa.findById(nid));
+        }
+
+        return "/admin/noticeEdit";
     }
+    @ResponseBody
+    @PostMapping("/delete")
+    public int delete(String nid){
+
+        return noticeService.delete(nid);
+    }
+
 }

@@ -8,7 +8,7 @@ public interface NoticeService {
 
     int create(String title,String content);
     int update(String title,String content);
-    int delete(long id);
-    Notice findById(long id);
+    int delete(String id);
+    Notice findById(String id);
     List<Notice> findAll();
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "t_notice")
 public class Notice {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//主键生成策略
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)//主键生成策略
     private String nid;
     @OneToOne
     @JoinColumn(name = "uid",referencedColumnName = "id")
