@@ -88,13 +88,10 @@
             </c:if>
             <div class="panel panel-default" style="margin-top: 5px">
                 <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="#">公告1</a></li>
-                        <li class="list-group-item"><a href="#">公告1</a></li>
-                        <li class="list-group-item"><a href="#">公告1</a></li>
-                        <li class="list-group-item"><a href="#">公告1</a></li>
-                        <li class="list-group-item"><a href="#">公告1</a></li>
-                        <li class="list-group-item"><a href="#">公告1</a></li>
+                    <ul class="list-group" id="noticelist">
+                        <c:forEach items="${noticeList}" var="notice">
+                            <li class="list-group-item"><a class="notice" id="${notice.nid}" href="javascript:;">${notice.title}</a></li>
+                       </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -109,24 +106,7 @@
                         <li><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
                     </ul>
                     <div class="layui-tab-content">
-                        <%--<div class="layui-tab-item layui-show">
-                            <c:forEach items="${postlist}" var="postlist">
-                                <div class="layui-row layui-col-space15">
-                                    <div class="layui-col-md12">
-                                        <a href="postdetails?postlistId=${postlist.id}" target="_blank"
-                                           style="display: block">
-                                            <div class="layui-card">
-                                                <div class="layui-card-header">标题：${postlist.title}</div>
-                                                <div class="layui-card-body"
-                                                     style=" display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;white-space:nowrap;text-overflow:ellipsis;width:100%;height: 40px;font-size: 12px">
-                                                    内容：${postlist.content}
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>--%>
+
                         <div class="layui-tab-item" id="NewPost"></div>
                         <div class="layui-tab-item">内容3</div>
                     </div>
@@ -212,6 +192,11 @@
         });
     }
     $("#newpost").click();
+
+    $(".notice").click(function () {
+        var t = this;
+
+    })
 
 </script>
 </body>
