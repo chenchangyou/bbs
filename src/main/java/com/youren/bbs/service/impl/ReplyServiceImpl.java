@@ -38,7 +38,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public Reply findById(long id) {
-        return null;
+        return replyMapper.findById(id);
     }
 
     @Override
@@ -88,4 +88,19 @@ public class ReplyServiceImpl implements ReplyService {
         return id;
     }
 
+    @Override
+    public List<Reply> findAll() {
+
+        return replyMapper.findAll();
+    }
+
+    @Override
+    public int update(Long rid, String content) {
+
+        Reply reply = new Reply();
+        reply.setId(rid);
+        reply.setContent(content);
+
+        return replyMapper.update(reply);
+    }
 }

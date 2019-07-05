@@ -19,11 +19,11 @@
 
     <insert id="create" parameterType="UserSetting" useGeneratedKeys="true" keyProperty="id">
 		insert into t_user_setting(id,uid,collect,followed,fans,sex,usetting)
-		values(#{id},#{uid.id},#{collect},#{followed},#{fans},#{sex},#{usetting})
+		values(#{id},#{user.id},#{collect},#{followed},#{fans},#{sex},#{usetting})
 	</insert>
 
 	<select id="findByUid" resultMap="UserSettingResultMap"  parameterType="Long">
-		select * from t_user_setting where uid=#{uid.id};
+		select * from t_user_setting where uid=#{user.id};
 	</select>
 
 </mapper>

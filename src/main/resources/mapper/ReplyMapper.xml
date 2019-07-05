@@ -7,7 +7,6 @@
 
 	<resultMap id="replyResultMap" type="Reply">
 		<id property="id" column="id" />
-		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="createTime" column="create_time" />
 		<!-- 一对多的映射 -->
@@ -15,6 +14,10 @@
 			<id property="id" column="uid"/>
 			<result property="username" column="username"/>
 			<result property="headshot" column="headshot"/>
+		</association>
+		<association property="post" javaType="Post">
+			<id property="id" column="pid"/>
+			<result property="title" column="title"/>
 		</association>
 	</resultMap>
 
@@ -26,11 +29,16 @@
 		delete from t_reply where id=#{id}
 	</delete>
 
+	<update id="update" parameterType="Reply">
+		update t_reply set content=#{content} where id=#{id}
+	</update>
+
 	<select id="findById" parameterType="long" resultMap="replyResultMap">
-		select r.id,r.content,r.create_time,
-			   u.id uid, u.username
+		select r.id,r.content,r.create_time,u.headshot,
+			   u.id uid, u.username,p.title,p.id pid
 		from t_reply r
-		left join t_user u on r.user_id=u.id
+		left join t_post p on p.id = r.post_id
+		left join t_user u on u.id = r.user_id
 		where p.id=#{id}
 	</select>
 
@@ -42,5 +50,12 @@
 		where r.post_id=#{postId}
 		order by create_time desc
 	</select>
-
+	<select id="findAll" resultMap="replyResultMap">
+		select r.id,r.content,r.create_time,u.headshot,
+			   u.id uid, u.username,p.title,p.id pid
+		from t_reply r
+		left join t_post p on p.id = r.post_id
+		left join t_user u on u.id = r.user_id
+		order by create_time desc
+	</select>
 </mapper>

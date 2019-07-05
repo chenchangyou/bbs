@@ -11,4 +11,6 @@ public interface ReplyMapper {
     int delete(long id);
     Reply findById(long id);
     List<Reply> findByPostId(long postId);
+    List<Reply> findAll();
+    int update(Reply reply);
 }

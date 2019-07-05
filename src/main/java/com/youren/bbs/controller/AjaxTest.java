@@ -2,8 +2,10 @@ package com.youren.bbs.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.youren.bbs.dao.VacationTabDao;
 import com.youren.bbs.entity.Fabulous;
 import com.youren.bbs.entity.Post;
+import com.youren.bbs.entity.VacationTab;
 import com.youren.bbs.mapper.FabulousMapper;
 import com.youren.bbs.service.FabulousService;
 import com.youren.bbs.service.PostService;
@@ -31,6 +33,8 @@ public class AjaxTest {
     @Autowired
     private FabulousService fabulousService;
 
+    @Autowired
+    private VacationTabDao vacationTabDao;
     @ResponseBody
     @GetMapping("/getpostlist")
     public Map home(@RequestParam(name = "page",defaultValue = "1") int pageNum,
@@ -61,5 +65,22 @@ public class AjaxTest {
         Integer count = fabulousService.findnumber(pid);
         System.out.println(count);
         return count;
+    }
+    @ResponseBody
+    @GetMapping("/vacationTab")
+    public Map<String,Object> fanAll(){
+
+        Map<String,Object> usermap = new HashMap<String, Object>();
+
+        List<VacationTab> tabList = vacationTabDao.findAll();
+        usermap.put("code",0);
+        usermap.put("msg","");
+        usermap.put("data",tabList);
+        return usermap;
+    }
+    @GetMapping("/vacation")
+    public String vacationTab(){
+
+        return "/vacation";
     }
 }

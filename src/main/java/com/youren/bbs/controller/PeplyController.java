@@ -1,23 +1,21 @@
 package com.youren.bbs.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youren.bbs.entity.Post;
 import com.youren.bbs.entity.Reply;
 import com.youren.bbs.entity.User;
 import com.youren.bbs.service.PostService;
 import com.youren.bbs.service.ReplyService;
 import com.youren.bbs.service.UserService;
-import com.youren.bbs.util.Constant;
-import com.youren.bbs.util.UploadFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -58,5 +56,41 @@ public class PeplyController {
         int row = replyService.delete(replyId);
         return row;
     }
+    @ResponseBody
+    @GetMapping("/admin/reply/list")
+    public Map<String, Object> findAll(@RequestParam(name = "page",defaultValue = "1") int pageNum,
+                                       @RequestParam(name = "limit",defaultValue = "10") int pageSize){
+        Map<String,Object> replymap = new HashMap<String, Object>();
 
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Reply> replyList = replyService.findAll();
+
+        PageInfo<Reply> page = new PageInfo<Reply>(replyList);
+
+        replymap.put("code",0);
+        replymap.put("count",page.getTotal());
+        replymap.put("data",page.getList());
+
+        return replymap;
+    }
+    @GetMapping("/admin/reply")
+    public String reply(){
+      return "/admin/replyList";
+    }
+
+    @GetMapping("/admin/reply/edit")
+    public String replyEdit(Long rid, Model model){
+
+        model.addAttribute("reply",replyService.findById(rid));
+
+        return "/admin/replyEdit";
+    }
+
+    @ResponseBody
+    @PostMapping("/admin/reply/edit")
+    public int replyEditSave(Long rid,String content){
+
+        return replyService.update(rid,content);
+    }
 }

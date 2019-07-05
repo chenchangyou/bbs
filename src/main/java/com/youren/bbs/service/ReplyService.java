@@ -18,4 +18,6 @@ public interface ReplyService {
     Map<String,Object> postlist = new HashMap<String, Object>();
 
     int add(String content,long postId,long userId);
+    int update(Long rid,String content);
+    List<Reply> findAll();
 }
