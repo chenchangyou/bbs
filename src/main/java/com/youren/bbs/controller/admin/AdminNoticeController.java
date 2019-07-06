@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/notice")
-public class NoticeController {
+public class AdminNoticeController {
 
     @Autowired
     private NoticeServiceJpa noticeServiceJpa;

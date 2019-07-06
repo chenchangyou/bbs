@@ -193,7 +193,7 @@ public class PostController {
             File saveFile = new File(Constant.POST_POSTIMG_SAVE_PATH + newName);
             //把上传的文件保存到本地磁盘文件
             files.transferTo(saveFile);
-            paths[count++] = "/"+Constant.POST_POSTIMG_PATH+newName;
+            paths[count++] = Constant.POST_POSTIMG_PATH+newName;
         }
         map.put("errno", 0);
         map.put("data", paths);

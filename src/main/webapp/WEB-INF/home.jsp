@@ -38,8 +38,10 @@
 
         .contentbox:hover {
             cursor: pointer;
-            /*z-index: 999999;*/
-            /*background-color: #c4e5ff;*/
+        }
+        .notice{
+            text-align: center;
+            display: block;
         }
     </style>
 </head>
@@ -86,6 +88,8 @@
                 <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="width: 100%;"><span
                         class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 发表新帖</a>
             </c:if>
+
+            <%--公告--%>
             <div class="panel panel-default" style="margin-top: 5px">
                 <div class="panel-body">
                     <ul class="list-group" id="noticelist">
@@ -192,12 +196,19 @@
         });
     }
     $("#newpost").click();
-
+        /*公告点击事件*/
     $(".notice").click(function () {
-        var t = this;
-
+        var nid = $(this).attr("id");
+        var title = $(this).text();
+        var index = layer.open({
+            type: 2,
+            title :'友人公告-'+title,
+            content: '/notice/detail?nid='+nid,
+            area: ['700', '100%'],
+            maxmin: false
+        });
+        layer.full(index);
     })
-
 </script>
 </body>
 </html>

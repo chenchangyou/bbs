@@ -57,7 +57,7 @@
         padding-top: 180px;
         background-size: 100% 100%;
     <c:if test="${not empty userbg}">
-        background-image: url('/${userbg.url}');
+        background-image: url('${userbg.url}');
     </c:if>
     <c:if test="${empty userbg}">
         background-image: url('../../static/images/userback.png');

@@ -32,13 +32,6 @@ body{
     float:right;
     padding: 3px;
 }
-.layui-col-md12{
-    height: 100px;
-    margin-top: 2px;
-}
-.layui-col-md12:hover{
-    border: #00F7DE 1px solid;
-}
 .admin-global{
     height: 650px;
     width: 100%;
