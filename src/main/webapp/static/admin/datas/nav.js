@@ -1,7 +1,7 @@
 var navs = [{
 	"title": "主页",
 	"icon": "fa-cubes",
-	"spread": true,
+	"spread": false,
 	"children": [{
 		"title": "按钮",
 		"icon": "&#xe641;",
@@ -55,7 +55,7 @@ var navs = [{
 	}, {
 		"title": "回帖列表",
 		"icon": "fa-navicon",
-		"href": "navbar.html"
+		"href": "/admin/reply"
 	}, {
 		"title": "分类管理",
 		"icon": "fa-navicon",
@@ -73,7 +73,7 @@ var navs = [{
 },{
 	"title": "首页轮播图",
 	"icon": "fa-stop-circle",
-	"href": "/home",
+	"href": "/admin/carousel/",
 	"spread": false
 },{
 	"title": "设置",

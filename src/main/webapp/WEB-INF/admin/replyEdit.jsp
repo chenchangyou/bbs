@@ -26,13 +26,13 @@
         <li><a href="home">首页</a></li>
         <li class="active">编辑帖子</li>
     </ol>
-    <h2>编辑帖子</h2>
+    <h3>编辑内容</h3>
     <form class="layui-form" action="">
         <input value="${reply.id}" name="rid" type="hidden">
         <div class="layui-form-item">
             <label class="layui-form-label">帖子标题</label>
             <div class="layui-input-block">
-                <input value="${reply.post.title}" type="text" required unselectable="on"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                <input value="${reply.post.title}" type="text" disabled unselectable="on"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class = "layui-input layui-disabled">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">

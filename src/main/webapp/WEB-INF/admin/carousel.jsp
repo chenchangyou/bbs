@@ -44,7 +44,7 @@
             padding: 57px;
             display: none;
         }
-        .layui-icon-close{
+        .layui-icon-delete,.layui-icon-add-1{
             color: red;
             width: 36px;
             height: 36px;
@@ -52,7 +52,7 @@
             border-radius: 53px;
             background-color: rgba(188, 188, 188, 0.69);
         }
-        .layui-icon-close:hover{
+        .layui-icon-delete,.layui-icon-add-1:hover{
             background-color: rgba(237, 237, 237, 0.6);
         }
         .carousel-ul a:hover .carousel-span{
@@ -73,25 +73,32 @@
 
             <li class="carousel-li">
                 <a href="javascript:" style="background-image: url('../../static/images/userback.png')">
-                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-close"></i> </span>
+                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-delete"></i> </span>
                 </a>
             </li>
             <li class="carousel-li">
                 <a href="javascript:" style="background-image: url('../../static/images/userback.png')">
-                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="carousel-i layui-anim layui-anim-scaleSpring layui-icon layui-icon-close"></i> </span>
+                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="carousel-i layui-anim layui-anim-scaleSpring layui-icon layui-icon-delete"></i> </span>
                 </a>
             </li>
             <li class="carousel-li">
                 <a href="javascript:" style="background-image: url('../../static/images/userback.png')">
-                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-close"></i> </span>
+                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-delete"></i> </span>
                 </a>
             </li>
             <li class="carousel-li">
                 <a href="javascript:" style="background-image: url('../../static/images/userback.png')">
-                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-close"></i> </span>
+                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-delete"></i> </span>
                 </a>
             </li>
-
+            <li class="carousel-li">
+                <a href="javascript:" style="background-color: #FFFFFF;display: block">
+                    <span class="layui-anim layui-anim-upbit" style="background-color: #f2f2f2;display: block;">
+                        <i id="uploadimg" style="background:none; color: #c2c2c2" class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-add-1">
+                        </i>
+                    </span>
+                </a>
+            </li>
         </ul>
 
     </div>
@@ -100,6 +107,7 @@
 <script>
 
     $(function () {
+        /*删除事件*/
         $(".carousel-span i").click(function () {
             $(this).parent().parent().parent().animate({
                 opacity:'0.5',
@@ -109,6 +117,41 @@
                 $(this).remove();
             });
         });
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#uploadimg' //绑定元素
+                ,url: 'http://119.23.52.230/SSM/uploads/' //上传接口
+                ,done: function(res){
+                    //上传完毕回调
+                    $.post("/admin/carousel/add",{url:res.src},function(data) {
+                        if(data>0){
+
+                        }
+                    })
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+        /*添加按钮点击事件*/
+        $(".layui-icon-add-1").click(function () {
+
+        });
+        $.get("/admin/carousel/list/",function (data) {
+            var option = '';
+            $.each(data,function (i,v) {
+                option = '<li class="carousel-li">' +
+                    '                <a href="javascript:" style="background-image: url('+v.url+')">' +
+                    '                    <span class="layui-anim layui-anim-upbit carousel-span" style=""><i class="layui-anim layui-anim-scaleSpring layui-icon layui-icon-delete"></i> </span>' +
+                    '                </a>' +
+                    '            </li>'
+                $(".carousel-ul").html(option);
+            })
+        })
     })
 </script>
 </body>

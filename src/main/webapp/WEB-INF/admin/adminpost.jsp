@@ -50,6 +50,8 @@
                 {field:'id', width:80, title: 'ID'}
                 ,{field:'title', width:150, title: '标题'}
                 ,{field:'browse',width:80, title: '访问量' }
+                ,{field:'awesome',width:80, title: '点赞量' }
+                ,{field:'collectCount',width:80, title: '收藏量' }
                 ,{field:'createTime', title: '发布时间',templet:'<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }}</div>'}
                 ,{field:'state',width:80, title: '状态' }
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
@@ -73,14 +75,15 @@
                     });
                 });
             } else if(obj.event === 'edit'){//编辑按钮的事件
-                layer.open({
-                    title:'查看或者编辑公告',
+                var index = layer.open({
+                    title:'编辑帖子',
                     type: 2,
-                    area: ['800px', '650px'],
+                    area: ['800px', '100%'],
                     fixed: false, //不固定
-                    maxmin: true,
+                    maxmin: false,
                     content: '/admin/post/edit?pid='+data.id
                 });
+                layer.full(index);
             }else if(obj.event === 'detail'){
                 window.open("/postdetails?postlistId="+data.id);
             }

@@ -39,7 +39,7 @@
 		from t_reply r
 		left join t_post p on p.id = r.post_id
 		left join t_user u on u.id = r.user_id
-		where p.id=#{id}
+		where r.id=#{id}
 	</select>
 
 	<select id="findByPostId" parameterType="long" resultMap="replyResultMap">

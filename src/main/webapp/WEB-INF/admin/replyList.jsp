@@ -23,10 +23,11 @@
     <ol class="breadcrumb">
         <li>后台首页</li>
         <li class="active">管理中心</li>
-        <a href="javascript:location.reload()" style="content:none; width: 150px;margin-left: 85%">刷新
-            <a href="javascript:location.reload();">
-                <i style="color: #0000FF" class="layui-anim layui-anim-rotate layui-icon layui-icon-refresh">
-                </i></a></a>
+        <a href="javascript:location.reload();" style="content:none; width: 150px;float: right;text-align: center">
+            刷新
+            <i style="color: #0000FF" class="layui-anim layui-anim-rotate layui-icon layui-icon-refresh">
+            </i>
+        </a>
     </ol>
 
 <div style="width: 100%">
@@ -99,7 +100,7 @@
             } else if(obj.event === 'edit'){
 
                 layer.open({
-                    title:'查看或者编辑公告',
+                    title:'查看或者编辑用户回复',
                     type: 2,
                     area: ['800px', '650px'],
                     fixed: false, //不固定

@@ -80,14 +80,15 @@
         });
     });
     function tc(nid) {
-        layer.open({
+       var index = layer.open({
             title:'查看或者编辑公告',
             type: 2,
-            area: ['800px', '650px'],
+            area: ['800px', '100%'],
             fixed: false, //不固定
-            maxmin: true,
+            maxmin: false,
             content: '/admin/notice/edit?nid='+nid
         });
+       layer.full(index);
     }
 
 </script>
