@@ -21,22 +21,22 @@
     <div style=" width: 100%;margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
-                <li class="layui-nav-item <%--layui-this--%>"><a href="/user/index"><i class="fa fa-home fa-1x"
+                <li class="layui-nav-item "><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x"
                                                                                        style="color: purple"></i>
                     主页 </a></li>
                 <li class="layui-nav-item "><a href="/user/post/list?uid=${loginUser.id}"><i
                         class="fa fa-pencil-square-o fa-1x"
-                        style="color: #04bdff"></i> 帖子（999+）</a>
+                        style="color: #04bdff"></i> 帖子</a>
                 </li>
                 <li class="layui-nav-item "><a href="/user/followed?uid=${loginUser.id}"><i
-                        class="fa fa-user-plus fa-1x"></i> 关注（20）</a></li>
+                        class="fa fa-user-plus fa-1x"></i> 关注</a></li>
                 <li class="layui-nav-item"><a href="/user/collection?uid=${loginUser.id}"><i class="fa fa-star fa-1x"
                                                                                              style="color: orange"></i>
-                    收藏（99+）</a>
+                    收藏</a>
                 </li>
                 <li class="layui-nav-item"><a href="/user/fans?uid=${loginUser.id}"><i class="fa fa-heart fa-1x"
                                                                                        style="color: #eeb4c3"></i>
-                    粉丝（7800万+）</a></li>
+                    粉丝 </a></li>
                 <li class="layui-nav-item  layui-this"><a href="/user/setting?uid=${user.id}"><i
                         class="fa fa fa-cog fa-spin fa-1x" style="color: #041527"></i>
                     设置</a></li>
@@ -101,9 +101,7 @@
                 </div>
             </form>
     </div>
-
 </div>
-
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script>
@@ -129,7 +127,7 @@
                 , done: function (data) {
 
                     if (data.state === 1) {
-                        $(".bg-top").css("background", "url(/" + data.data.src + ") no-repeat 0 0");
+                        $(".bg-top").css("background", "url(" + data.data.src + ") no-repeat 0 0");
                         layer.closeAll('page');
                     } else if (data.state === 0) {
                         layer.msg("系通出错！更换失败", { //layui弹出层提示

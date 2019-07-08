@@ -10,7 +10,7 @@ public interface UserMapper {
     int create(User user);
     int update(User user);
     int updateThumbnail(User user);
-    int delete(long id);
+    int delete(User user);
     User findById(Long id);
     User findByUsername(String username);
     List<User> findAll();

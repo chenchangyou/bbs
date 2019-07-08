@@ -1,7 +1,9 @@
 package com.youren.bbs.controller;
 
+import com.youren.bbs.entity.Carousel;
 import com.youren.bbs.entity.Notice;
 import com.youren.bbs.entity.Post;
+import com.youren.bbs.service.CarouselSrevice;
 import com.youren.bbs.service.NoticeServiceJpa;
 import com.youren.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class HomeController {
     private PostService postService;
     @Autowired
     private NoticeServiceJpa noticeServiceJpa;
+    @Autowired
+    private CarouselSrevice carouselSrevice;
 
     @GetMapping("home")
     public String home(Model model){
@@ -29,6 +33,9 @@ public class HomeController {
 
         List<Notice> noticeList = noticeServiceJpa.findAll();
 
+        List<Carousel> carouselList = carouselSrevice.findAl();
+
+        model.addAttribute("carouselList",carouselList);
         model.addAttribute("noticeList",noticeList);
         model.addAttribute("postlist",postList);
         return "home";

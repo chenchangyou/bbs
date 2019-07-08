@@ -1,6 +1,7 @@
 package com.youren.bbs.controller.user;
 
 import com.youren.bbs.entity.*;
+import com.youren.bbs.mapper.UserSettingMapper;
 import com.youren.bbs.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class UserCenterController {
     @Autowired
     private PostService postService;
     @Autowired
+    private UserSettingMapper userSettingMapper;
+    @Autowired
     private FollowedService followedService;
     @Autowired
     private CollectService collectService;
@@ -42,6 +45,8 @@ public class UserCenterController {
         List<Followed> followedList = followedService.findByUid(uid);
         UserBackground byUid = userBackgroundService.findByUid(uid);
         User byId = userService.findById(uid);
+
+        model.addAttribute("setting", getSetting(uid));
         model.addAttribute("followedList",followedList);
         model.addAttribute("user",byId);
         model.addAttribute("userbg",byUid);
@@ -55,6 +60,7 @@ public class UserCenterController {
         List<Followed> fuidlist = followedService.findByFuid(uid);
         UserBackground userBackground = userBackgroundService.findByUid(uid);
 
+        model.addAttribute("setting", getSetting(uid));
         model.addAttribute("followedList",fuidlist);
         model.addAttribute("user",user);
         model.addAttribute("userbg",userBackground);
@@ -66,6 +72,7 @@ public class UserCenterController {
         List<Collect> collectList = collectService.findByUid(uid);
         UserBackground userBackground = userBackgroundService.findByUid(uid);
 
+        model.addAttribute("setting", getSetting(uid));
         model.addAttribute("collectList",collectList);
         model.addAttribute("user",user);
         model.addAttribute("userbg",userBackground);
@@ -76,9 +83,17 @@ public class UserCenterController {
         User user = userService.findById(uid);
         UserBackground userBackground = userBackgroundService.findByUid(uid);
 
+        model.addAttribute("setting", getSetting(uid));
         model.addAttribute("userSetting", userSettingService.findByUid(uid));
         model.addAttribute("user",user);
         model.addAttribute("userbg",userBackground);
         return "/user/setting";
+    }
+
+    private UserSetting getSetting(Long uid){
+
+        UserSetting setting = userSettingMapper.findByUid(uid);
+
+        return setting;
     }
 }

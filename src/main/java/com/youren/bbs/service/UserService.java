@@ -18,6 +18,8 @@ public interface UserService {
 
     int delete(Long id);
 
+    int restore(Long id);
+
     User findById(Long id);
     List<User> findAll();
 

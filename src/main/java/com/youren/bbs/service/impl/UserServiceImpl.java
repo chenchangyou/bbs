@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public Map<String, Object> register(String username, String password, String sex, String email, int age, String tel) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("ok", false);
-        String headshot = "static/images/user.png";//默认头像路径
+        String headshot = "/static/images/user.png";//默认头像路径
         User user = userMapper.findByUsername(username);
         if (user == null) {
             user = new User();
@@ -112,7 +112,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int delete(Long id) {
-        return userMapper.delete(id);
+
+        User user = new User();
+        user.setId(id);
+        user.setState(0);
+
+        return userMapper.delete(user);
     }
 
     @Override
@@ -144,5 +149,14 @@ public class UserServiceImpl implements UserService {
             }
         }
         return state;
+    }
+    //恢复用户
+    @Override
+    public int restore(Long id) {
+        User user = new User();
+        user.setId(id);
+        user.setState(1);
+
+        return userMapper.delete(user);
     }
 }

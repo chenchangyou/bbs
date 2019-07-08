@@ -1,4 +1,3 @@
-/*
 package com.hwua.sss.test;
 
 import com.youren.bbs.util.RandomCode;
@@ -24,7 +23,7 @@ public class SendEmail {
 
     private JavaMailSender javaMailSender;
 
-    private String toEmail = "18178051115@163.com";//接收端的邮箱（收件人邮箱）
+    private String toEmail = "1554693372@qq.com";//接收端的邮箱（收件人邮箱）
 
     private Configuration configuration;
 
@@ -99,10 +98,9 @@ public class SendEmail {
         }
     }
 
-    */
 /**
-     * 读取freemarker模板的方法
-     *//*
+     * 读取freemarker模板的方法*/
+
 
     private String getText(Configuration freeMarkerConfiguration) {
         String txt = "";
@@ -124,4 +122,3 @@ public class SendEmail {
         return txt;
     }
 }
-*/

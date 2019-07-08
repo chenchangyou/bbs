@@ -59,13 +59,14 @@
         <li class="active">帖子详情</li>
     </ol>
     <div class="box-left articlelist">
-        <p><img src="${ctx}/${user.headshot}" alt="..." class="img-circle" width="70px" height="70px"
-                style="text-align: center"></p>
-        <p>${user.username}</p>
+        <p><a href="/user/index?uid=${user.id}"><img src="${user.headshot}" alt="..." class="img-circle" width="70px" height="70px"
+                                                     style="text-align: center"></a></p>
+        <p><a href="/user/index?uid=${user.id}">${user.username}</a></p>
+        <hr>
         <p>个人信息</p>
         <div style="width: 100%; padding: 12px 10px">
-            <p><a href="#">帖子：${followedmap.postcount}</a> | <a href="#">关注：${followedmap.followedcount}</a></p>
-            <p><a href="#">粉丝：<span id="fans">${followedmap.collectNumber}</span></a> | <a href="#">收藏：${followedmap.collectcount}</a></p>
+            <p><a href="/user/post/list?uid=${user.id}">帖子：${followedmap.postcount}</a> | <a href="user/followed?uid=${user.id}">关注：${followedmap.followedcount}</a></p>
+            <p><a href="/user/fans?uid=${user.id}">粉丝：<span id="fans">${followedmap.collectNumber}</span></a> | <a href="/user/collection?uid=${user.id}">收藏：${followedmap.collectcount}</a></p>
         </div>
 
        <c:if test="${followedmap.state gt 0}">
@@ -103,7 +104,7 @@
                     </div>
                     <div style="width: 100%;height: 30px;padding: 0 5px;">
                         <div style="height: 30px;text-align: center;line-height: 30px;float: left">
-                            作者：${user.username}</div>
+                            作者：<a href="/user/index?uid=${user.id}">${user.username}</a></div>
                         <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
                             <fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></div>
                         <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
@@ -186,13 +187,13 @@
                         <input type="hidden" name="postId" value="${post.id}">
                         <div class="panel-body" style="padding: 5px;">
                             <div style="height: 35px;width: 100%">
-                                <div style="width: 50px;float: left"><img src="${ctx}/${reply.user.headshot}" alt="..."
+                                <div style="width: 50px;float: left"><img src="${reply.user.headshot}" alt="..."
                                                                           class="img-circle" width="35px" height="35px"
                                                                           style="text-align: center"></div>
                                 <div style="float: left;margin-left: 2px;text-align: center">
                                     <c:if test="${reply.user.id == post.user.id}"><span
                                             style="color:#1E9FFF;font-weight: bolder">楼主 </span></c:if>
-                                        ${reply.user.username}
+                                        <a href="/user/index?uid=${reply.user.id}">${reply.user.username}</a>
                                 </div>
                                 <span style="float: right;width: 70px;text-align: center">#${number.count}</span>
                             </div>
@@ -208,18 +209,18 @@
                                                                                      style="color:#1E9FFF;font-weight: bolder">删除</a></c:if>
                                 </div>
                                 <div style="width: 130px;float:right;margin-left: 5px">
-                                    <a href="javascript:;"><i class="fa fa-thumbs-o-up"></i>
+                                    <a href="javascript:"><i class="fa fa-thumbs-o-up"></i>
                                         <span style="margin-left: 3px">999+</span></a>
-                                    <a style="margin-left: 5px" href="javascript:;"><i class="fa fa-thumbs-o-down"></i>
+                                    <a style="margin-left: 5px" href="javascript:"><i class="fa fa-thumbs-o-down"></i>
                                         <span style="margin-left: 3px">250</span></a>
                                 </div>
                                 <div style="float: right;width: 50px">
                                     <input type="hidden" name="replyId" value="${reply.id}">
                                     <c:if test="${not empty loginUser}">
-                                        <a href="javascript:;" class="reply_btn">回复</a>
+                                        <a href="javascript:" class="reply_btn">回复</a>
                                     </c:if>
                                     <c:if test="${empty loginUser}">
-                                        <a href="javascript:;" data-toggle="modal" data-target="#myModal">回复</a>
+                                        <a href="javascript:" data-toggle="modal" data-target="#myModal">回复</a>
                                     </c:if>
                                 </div>
                             </div>
@@ -231,7 +232,7 @@
                     <c:forEach items="${reply.replyCommentList}" var="comment">
                         <div class="panel panel-default" style="margin-right: 6px;background:none;border:none">
                             <div class="panel-body" style="padding: 5px;margin-left: 60px">
-                                <sapn style="float: left"><img src="${ctx}/${comment.user.headshot}"
+                                <sapn style="float: left"><img src="${comment.user.headshot}"
                                                                style="width: 35px;height: 35px; border-radius:50%">
                                 </sapn>
                                 <div style="width: 100%;">

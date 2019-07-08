@@ -34,4 +34,11 @@ public class CarouselServiceImpl implements CarouselSrevice {
 
         return carouselDao.save(carousel);
     }
+
+    @Override
+    public int delete(String id) {
+        Carousel carousel = carouselDao.findById(id).get();
+        carouselDao.delete(carousel);
+        return 1;
+    }
 }

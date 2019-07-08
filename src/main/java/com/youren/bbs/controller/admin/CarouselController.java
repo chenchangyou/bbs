@@ -34,13 +34,19 @@ public class CarouselController {
         return carouselSrevice.findAl();
     }
 
+    @ResponseBody
     @PostMapping("/add")
-    public int add(String url){
+    public Carousel add(String url){
+
         Carousel carousel = carouselSrevice.add(url);
-        if(carousel!=null){
-            return 1;
-        }else {
-            return 0;
-        }
+
+        return carousel;
+    }
+
+    @ResponseBody
+    @PostMapping("/delete")
+    public int delete(String id){
+
+      return carouselSrevice.delete(id);
     }
 }

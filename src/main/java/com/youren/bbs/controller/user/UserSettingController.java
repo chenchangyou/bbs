@@ -67,6 +67,5 @@ public class UserSettingController {
 
        }
         UserSetting setting = userSettingDao.save(userSetting);
-
     }
 }

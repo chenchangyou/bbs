@@ -63,7 +63,7 @@
                     </div>
                     <div>性别：${user.sex}</div>
                     <div>年龄：${user.age}</div>
-                    <div>联系电话：${user.tel}</div>
+                    <%--<div>联系电话：${user.tel}</div>--%>
                     <div>邮箱：${user.email}</div>
                     <div>注册时间：<fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd"/></div>
                 </div>

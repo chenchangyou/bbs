@@ -18,8 +18,7 @@
 
     <div style="width: 100%">
         <div>
-            <table class="layui-hide" id="test"></table>
-
+            <table class="layui-hide" id="test"  lay-filter="test"></table>
         </div>
     </div>
 </div>
@@ -66,20 +65,27 @@
             var data = obj.data;
             //console.log(obj)
             if (obj.event === 'del') {
-                layer.confirm('真的删除' + data.username + '该用户吗？', function (index) {
-                    obj.del();
-                    layer.close(index);
+                layer.confirm('真的删除"<span style="color: red;">' + data.username + '</span>"该用户吗？', function (index) {
+                    $.post("/user/delete/",{id:data.id},function (state) {
+                        if(state > 0){
+                            layer.msg("删除成功");
+                            obj.del();
+                            layer.close(index);
+                        }else {
+                            layer.msg("删除失败");
+                        }
+                    });
                 });
             } else if (obj.event === 'edit') {
-                layer.prompt({
-                    formType: 2
-                    , value: data.email
-                }, function (value, index) {
-                    obj.update({
-                        email: value
-                    });
-                    layer.close(index);
+                 var index = layer.open({
+                    title:'修改个人资料',
+                    type: 2,
+                    area: ['450px', '600px'],
+                    fixed: true, //不固定
+                    maxmin: false,
+                    content: '/user/update?uid='+data.id
                 });
+                layer.full(index);
             }
         });
     });

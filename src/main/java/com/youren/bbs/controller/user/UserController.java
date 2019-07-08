@@ -2,6 +2,7 @@ package com.youren.bbs.controller.user;
 
 import com.youren.bbs.entity.User;
 import com.youren.bbs.entity.UserBackground;
+import com.youren.bbs.entity.UserSetting;
 import com.youren.bbs.mapper.UserSettingMapper;
 import com.youren.bbs.service.UserBackgroundService;
 import com.youren.bbs.service.UserService;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -89,18 +92,15 @@ public class UserController {
     }
 
     @GetMapping("/index")
-    public String index(HttpSession session, Model model) {
+    public String index(Long uid, Model model) {
 
-        User user = (User)session.getAttribute("loginUser");
+            User byId = userService.findById(uid);
 
-        if(user!=null){
-            User byId = userService.findById(user.getId());
+            UserBackground userBgByuid = userBackgroundService.findByUid(uid);
 
-            UserBackground userBgByuid = userBackgroundService.findByUid(user.getId());
-
+            model.addAttribute("setting", getSetting(uid));
             model.addAttribute("userbg",userBgByuid);
             model.addAttribute("user",byId);
-        }
         return "/user/HomePage";
 
     }
@@ -183,5 +183,27 @@ public class UserController {
     public int updatepassword(Long uid,String password,String newPassword){
 
         return  userService.updatepassword(uid, password, newPassword);
+    }
+    //删除用户
+    @ResponseBody
+    @PostMapping("/delete")
+    public int delete(Long id){
+
+        return userService.delete(id);
+    }
+
+    //恢复用户
+    @ResponseBody
+    @PostMapping("/restore")
+    public int restore(Long id){
+
+        return userService.restore(id);
+    }
+
+    private UserSetting getSetting(Long uid){
+
+        UserSetting setting = userSettingMapper.findByUid(uid);
+
+        return setting;
     }
 }

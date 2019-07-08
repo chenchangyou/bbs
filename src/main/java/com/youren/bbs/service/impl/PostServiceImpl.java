@@ -71,6 +71,7 @@ public class PostServiceImpl implements PostService {
     public int updateawesome(Long postId, Integer awesome) {
         Post post = new Post();
         post.setId(postId);
+        post.setAwesome(awesome);
         return postMapper.updateawesome(post);
     }
 

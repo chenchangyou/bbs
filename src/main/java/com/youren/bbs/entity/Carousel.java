@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class Carousel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//主键生成策略
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)//主键生成策略
     private String id;
     private String url;
     private Integer state;

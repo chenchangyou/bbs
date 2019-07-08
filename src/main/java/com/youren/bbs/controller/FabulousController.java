@@ -35,7 +35,7 @@ public class FabulousController {
                 return 0;
             } else {//没点过赞则添加记录
                 int row = fabulousService.create(pid, uid);
-                postService.updateawesome(pid,post.getAwesome()+1);
+                postService.updateawesome(pid,(post.getAwesome()+1));
                 return 1;
             }
         }else {//如果为空

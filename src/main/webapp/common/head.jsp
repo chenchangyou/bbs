@@ -58,12 +58,12 @@ background-image: url('../static/images/bg1.png')">
                     <li><a href="#">关于</a></li>
                 </c:if>
                 <c:if test="${not empty loginUser}">
-                    <li><a href="${ctx}/user/index">欢迎你，${loginUser.username}</a></li>
+                    <li><a href="${ctx}/user/index?uid=${loginUser.id}">欢迎你，${loginUser.username}</a></li>
                      <li> </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="${ctx}/user/index">个人中心</a></li>
+                            <li><a href="${ctx}/user/index?uid=${loginUser.id}">个人中心</a></li>
                             <li><a href="#">信息</a></li>
                             <li><a href="#">关于</a></li>
                             <li><a href="${ctx}/user/logout">注销</a></li>
