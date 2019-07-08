@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <hr style="color: #93D1FF;height: 3px">
-                    <div style=" background-color: #F2F2F2;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
+                    <div style=" line-height: 35px;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
                         ${post.content}
                     </div>
                 </div>
