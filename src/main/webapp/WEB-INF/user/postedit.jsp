@@ -61,7 +61,7 @@
                         <i class="layui-icon"></i>
                         <p>点击封面图，或将文件拖拽到此处</p>
                     </div>--%>
-                    <img class="layui-upload-img" id="demo1" src="${ctx}/${post.coverImage}">
+                    <img class="layui-upload-img" id="demo1" src="${post.coverImage}">
                 </div>
             </div>
             <div style="clear:both">
@@ -101,9 +101,8 @@
     editor.create();
     // 初始化 textarea 的值
     $content.val(editor.txt.html());
-</script>
-<script>
     //Demo
+
     layui.use('form', function(){
         var form = layui.form;
         form.render();
@@ -124,8 +123,7 @@
         });
     });
 
-</script>
-<script>
+
     $(function(){
         $("#accepted_answer").keyup(function(){
             var len = $(this).val().length;

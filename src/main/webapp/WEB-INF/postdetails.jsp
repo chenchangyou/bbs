@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>${post.title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <%@include file="../common/style.jsp" %>
     <script type="text/javascript">
         $(function () {
@@ -53,12 +54,14 @@
 <!-- 引入头部 --->
 <%@include file="../common/head.jsp" %>
 
-<div style="width: 1180px;margin:60px auto 0 auto;">
+<div class="layui-container" style="margin:60px auto 0 auto;">
+
     <ol class="breadcrumb">
         <li><a href="home">首页</a></li>
         <li class="active">帖子详情</li>
     </ol>
-    <div class="box-left articlelist">
+    <div class="layui-row layui-col-space1">
+    <div class="box-left articlelist layui-col-md2">
         <p><a href="/user/index?uid=${user.id}"><img src="${user.headshot}" alt="..." class="img-circle" width="70px" height="70px"
                                                      style="text-align: center"></a></p>
         <p><a href="/user/index?uid=${user.id}">${user.username}</a></p>
@@ -94,9 +97,9 @@
         </c:if>
 
     </div>
-    <div>
+    <div class="layui-col-md10">
 
-        <div class="box-middle articledetail" style="width: 980px">
+        <div class="box-middle articledetail">
             <div>
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -129,7 +132,7 @@
             </div>
             <%--文章末端--%>
             <div style="width: 100%;height: 120px;padding: 10px 50px;">
-                <div style="width: 500px;margin: 0 auto;text-align: center">
+                <div style="margin: 0 auto;text-align: center">
 
                     <%--点赞按钮--%>
                     <div style="width: 33.3%;float: left;">
@@ -239,7 +242,7 @@
                                     <c:if test="${reply.user.id == comment.user.id}"><span
                                             style="color:#1E9FFF;font-weight: bolder;float: left">层主：</span></c:if>
                                     <span style="float: left">${comment.user.username}：&nbsp;</span>
-                                    <span style="width: 500px;float: left">${comment.content}</span>
+                                    <span style="float: left">${comment.content}</span>
                                     <span style="width: 50px;float: right"><a href="javascript:;">回复</a></span>
                                 </div>
                             </div>
@@ -280,6 +283,7 @@
 
         </div>
     </div>
+  <div>
 </div>
 <div id="footer" style=" clear:both; width: 100%;height: 150px;background-color: #1E9FFF;margin-top: 10px"></div>
 <script>

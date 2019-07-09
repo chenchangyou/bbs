@@ -54,7 +54,7 @@
                             ${followed.followeId.username}
                         </span>
                     <span class="layui-form">
-                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest" lay-text="关注|已取消">
+                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="followSwitch" lay-text="关注|已取消">
                     </span>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             , form = layui.form
             , layer = layui.layer;
 
-        form.on('switch(switchTest)', function(data){
+        form.on('switch(followSwitch)', function(data){
             var status_id = data.value;
             var csrfToken = "<?= Yii::$app->request->csrfToken ?>";
             $.ajax({
@@ -100,97 +100,7 @@
         });
     });
 </script>
-<script>
+<script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
 
-    /*layui.use('form', function(){
-        var form = layui.form;
-        form.on('switch(filter)', function(data){
-            console.log(data.elem); //得到checkbox原始DOM对象
-            console.log(data.elem.checked); //开关是否开启，true或者false
-            console.log(data.value); //开关value值，也可以通过data.elem.value得到
-            console.log(data.othis); //得到美化后的DOM对象
-        });
-    });*/
-
-    $(function () {
-        var upload = layui.upload;
-        $(".bg-setting").click(function () {
-
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['420px', '240px'], //宽高
-                content: '<div class="layui-upload">' +
-                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
-                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
-                    '</div>'
-            });
-            upload.render({
-                elem: '#test8'
-                , url: '/upload/updatebg/'
-                , auto: false
-                //,multiple: true
-                , bindAction: '#test9'
-                , done: function (data) {
-
-                    if(data.state === 1){
-                        $(".bg-top").css("background","url("+data.data.src+") no-repeat 0 0");
-                        layer.closeAll('page');
-                    }else if (data.state === 0){
-                        layer.msg("系通出错！更换失败",{ //layui弹出层提示
-                            offset: '150'
-                        });
-                    } else if(data.state === 2){
-                        layer.msg("请您先登录",{
-                            offset: '150',
-                            time:800
-                        },function () {
-                            $('#denglu').trigger("click");
-                        });
-                    }
-
-                }
-            });
-        });
-        $("#replacehead").click(function () {
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['420px', '240px'], //宽高
-                content: '<div class="layui-upload">' +
-                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
-                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
-                    '</div>'
-            });
-            upload.render({
-                elem: '#test8'
-                , url: '/user/uploadThumbnail/'
-                , auto: false
-                //,multiple: true
-                , bindAction: '#test9'
-                , done: function (data) {
-
-                    if(data.state === 1){
-                        $("#replacehead").css({"background":"url(/"+data.data.src+")","background-size":"100% 100%"});
-                        layer.closeAll('page');
-                    }else if (data.state === 0){
-                        layer.msg("系通出错！更换失败",{ //layui弹出层提示
-                            offset: '150'
-                        });
-                    } else if(data.state === 2){
-                        layer.msg("请您先登录",{
-                            offset: '150',
-                            time:800
-                        },function () {
-                            $('#denglu').trigger("click");
-                        });
-                    }
-
-                }
-            });
-
-        })
-    });
-</script>
 </body>
 </html>

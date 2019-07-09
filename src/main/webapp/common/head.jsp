@@ -31,7 +31,9 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(255,255,255,0.75);
 z-index: 100;border: none;box-shadow: 2px 2px 2px #d8d6d6;
 background-image: url('../static/images/bg1.png')">
-    <div class="container-fluid" style="width: 1180px;">
+    <div class="layui-container">
+        <div class="layui-row">
+    <div class="container-fluid layui-col-md12">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -73,6 +75,8 @@ background-image: url('../static/images/bg1.png')">
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 99999" >
@@ -83,18 +87,20 @@ background-image: url('../static/images/bg1.png')">
                 <span class="modal-title" id="myModalLabel" style="font-size: 25px;font-weight: bolder">用户登录</span>
                 <span id="error" style="color: red;text-align: center;font-size: 15px;margin-left: 70px;"></span>
             </div>
-            <form class="layui-form" id="form1" method="post" style="width: 380px;margin: 5px auto">
+            <form class="layui-form" id="form1" method="post" style="max-width: 380px;margin: 5px auto;padding: 5px">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">用户名</label>
-                    <div class="layui-input-inline">
+                    <label class="layui-form-label layui-hide-xs">用户名</label>
+                    <div class="layui-input-inline  layui-hide-xs">
                         <input id="loginuser" type="text" name="username" required lay-verType="title" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
                     </div>
+                    <input id="loginuser" type="text" name="username" required lay-verType="title" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input layui-hide-md">
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">密码</label>
-                    <div class="layui-input-inline">
+                    <label class="layui-form-label layui-hide-xs">密码</label>
+                    <div class="layui-input-inline layui-hide-xs">
                         <input id="loginpassword" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
+                        <input id="loginpassword" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input layui-hide-md">
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">

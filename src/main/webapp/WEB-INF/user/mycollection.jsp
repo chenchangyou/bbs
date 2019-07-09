@@ -80,7 +80,8 @@
 
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
-<script>
+<script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
+<%--<script>
     $(function () {
         var upload = layui.upload;
         $(".bg-setting").click(function () {
@@ -121,7 +122,7 @@
                 }
             });
         });
-        $("#replacehead").click(function () {
+        $("#replacehead1").click(function () {
             layer.open({
                 type: 1,
                 skin: 'layui-layer-rim', //加上边框
@@ -163,6 +164,6 @@
 
         })
     });
-</script>
+</script>--%>
 </body>
 </html>

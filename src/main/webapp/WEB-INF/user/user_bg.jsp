@@ -8,12 +8,12 @@
                    href="javascript:;">
                     <c:if test="${not empty loginUser}">
                         <c:if test="${loginUser.id eq user.id}">
-                            <span class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
+                            <span  id="replacehead1" class="replace_bg layui-anim layui-anim-upbit">更换头像</span>
                         </c:if>
                     </c:if>
                 </a>
             </div>
-            <div style="width: 750px;float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
+            <div style="float: left;margin-left: 20px;margin-top: 10px;color: #FFFFFF">
                 <div>
                     <span style="font-weight: 700;font-size: 24px;color: #FFFFFF; vertical-align: middle">${user.username}</span>
                     <c:if test="${not empty loginUser}">

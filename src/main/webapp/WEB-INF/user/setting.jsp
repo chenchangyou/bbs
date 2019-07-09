@@ -80,7 +80,7 @@
         <div style="float: left;margin-left: 20px;margin-top: 12px;width: 50%;">
             <blockquote style="padding: 6px;font-size: 16px" class="layui-elem-quote">更改密码</blockquote>
             <form class="layui-form" method="post">
-                <input name="uid" value="${user.id}" type="hidden">
+                <input name="uid" id="user_id" value="${user.id}" type="hidden">
                 <div class="layui-form-item">
                     <label class="layui-form-label">原密码</label>
                     <div class="layui-input-inline">
@@ -104,119 +104,6 @@
 </div>
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        var upload = layui.upload;
-        $(".bg-setting").click(function () {
-
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['420px', '240px'], //宽高
-                content: '<div class="layui-upload">' +
-                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
-                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
-                    '</div>'
-            });
-            upload.render({
-                elem: '#test8'
-                , url: '/upload/updatebg/'
-                , auto: false
-                //,multiple: true
-                , bindAction: '#test9'
-                , done: function (data) {
-
-                    if (data.state === 1) {
-                        $(".bg-top").css("background", "url(" + data.data.src + ") no-repeat 0 0");
-                        layer.closeAll('page');
-                    } else if (data.state === 0) {
-                        layer.msg("系通出错！更换失败", { //layui弹出层提示
-                            offset: '150'
-                        });
-                    } else if (data.state === 2) {
-                        layer.msg("请您先登录", {
-                            offset: '150',
-                            time: 800
-                        }, function () {
-                            $('#denglu').trigger("click");
-                        });
-                    }
-                }
-            });
-        });
-        $("#replacehead").click(function () {
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['420px', '240px'], //宽高
-                content: '<div class="layui-upload">' +
-                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
-                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
-                    '</div>'
-            });
-            upload.render({
-                elem: '#test8'
-                , url: '/user/uploadThumbnail/'
-                , auto: false
-                //,multiple: true
-                , bindAction: '#test9'
-                , done: function (data) {
-
-                    if (data.state === 1) {
-                        $("#replacehead").css({
-                            "background": "url(/" + data.data.src + ")",
-                            "background-size": "100% 100%"
-                        });
-                        layer.closeAll('page');
-                    } else if (data.state === 0) {
-                        layer.msg("系通出错！更换失败", { //layui弹出层提示
-                            offset: '150'
-                        });
-                    } else if (data.state === 2) {
-                        layer.msg("请您先登录", {
-                            offset: '150',
-                            time: 800
-                        }, function () {
-                            $('#denglu').trigger("click");
-                        });
-                    }
-                }
-            });
-
-        });
-    });
-
-    layui.use('form', function(){
-        var form = layui.form;
-        //监听提交
-        form.on('submit(updatepassword)', function(data){
-            $.post("/user/updatepassword",data.field,function (data) {
-                if(data === 1){
-                    layer.msg("修改成功",{
-                        icon:1,
-                        time:800
-                    },function () {
-                        window.location.reload();
-                    })
-                }else if(data === 2){
-                    layer.msg("修改失败！系统出错",{
-                        icon:2
-                    })
-                }else  if(data === 0){
-                    layer.msg("您输入的原密码不正确，请重新输入",{
-                        icon:2
-                    })
-                }
-            });
-            return false;
-        });
-        var uid= ${user.id}
-        form.on('switch(switchTest)', function(data){
-            $.post("/user/saveUserSetting",{uid:uid,sname:data.elem.name,state:data.elem.checked},function (data) {
-
-            })
-        });
-    });
-</script>
+<script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
 </body>
 </html>

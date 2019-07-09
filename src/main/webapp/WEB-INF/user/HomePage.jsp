@@ -11,7 +11,6 @@
     <script src="${ctx}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
     <%--引入样式--%>
     <%@include file="userstyle.jsp" %>
-    <%--<%@include file="common/style.jsp" %>--%>
 
 </head>
 <body>
@@ -90,101 +89,7 @@
 
 </div>
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        var upload = layui.upload;
-        $(".bg-setting").click(function () {
+<script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
 
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['420px', '240px'], //宽高
-                content: '<div class="layui-upload">' +
-                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
-                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
-                    '</div>'
-            });
-            upload.render({
-                elem: '#test8'
-                , url: '/upload/updatebg/'
-                , auto: false
-                //,multiple: true
-                , bindAction: '#test9'
-                , done: function (data) {
-
-                    if (data.state === 1) {
-                        $(".bg-top").css("background", "url(" + data.data.src + ") no-repeat 0 0");
-                        layer.closeAll('page');
-                    } else if (data.state === 0) {
-                        layer.msg("系通出错！更换失败", { //layui弹出层提示
-                            offset: '150'
-                        });
-                    } else if (data.state === 2) {
-                        layer.msg("请您先登录", {
-                            offset: '150',
-                            time: 800
-                        }, function () {
-                            $('#denglu').trigger("click");
-                        });
-                    }
-
-                }
-            });
-        });
-        $("#replaceheads").click(function () {
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['420px', '240px'], //宽高
-                content: '<div class="layui-upload">' +
-                    '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
-                    '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
-                    '</div>'
-            });
-            upload.render({
-                elem: '#test8'
-                , url: '/user/uploadThumbnail/'
-                // , url: 'http://119.23.52.230/SSM/uploads/'
-                , auto: false
-                //,multiple: true
-                , bindAction: '#test9'
-                , done: function (data) {
-
-                    if (data.state === 1) {
-                        $("#replacehead").css({
-                            "background": "url(/" + data.data.src + ")",
-                            "background-size": "100% 100%"
-                        });
-                        layer.closeAll('page');
-                    } else if (data.state === 0) {
-                        layer.msg("系通出错！更换失败", { //layui弹出层提示
-                            offset: '150'
-                        });
-                    } else if (data.state === 2) {
-                        layer.msg("请您先登录", {
-                            offset: '150',
-                            time: 800
-                        }, function () {
-                            $('#denglu').trigger("click");
-                        });
-                    }
-
-                }
-            });
-
-        })
-    });
-
-    function updateuser(uid) {
-        layer.open({
-            title: '修改个人资料',
-            type: 2,
-            area: ['450px', '600px'],
-            fixed: true, //不固定
-            maxmin: false,
-            content: '/user/update?uid=' + uid
-        });
-    }
-</script>
 </body>
 </html>
