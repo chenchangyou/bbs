@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>${loginUser.username}的个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
     <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet">
     <link href="${ctx}/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -15,7 +16,7 @@
 <body>
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
-<div style="width: 1160px;padding:0px 10px;margin: 0 auto">
+<div class="layui-container" style="padding:0px 10px;margin: 0 auto">
     <%--引入背景--%>
     <%@include file="user_bg.jsp"%>
     <div style=" width: 100%;margin:10px auto;">
@@ -45,15 +46,17 @@
         </div>
     </div>
 
-    <div style="width: 100%;" class="layui-form">
-        <%--<div></div>--%>
-        <table style="width: 300px;float: left" class="layui-table" lay-skin="row" lay-size="lg">
+    <div class="layui-form layui-row layui-col-space20">
+
+        <div  class="layui-col-md4 layui-col-sm5 layui-col-xs12">
+        <table style="float: left" class="layui-table" lay-skin="row" lay-size="lg">
             <colgroup>
                 <col width="150">
                 <col width="120">
                 <col>
             </colgroup>
             <h5>隐私设置</h5>
+
             <tbody class="layui-form">
                 <tr>
                     <td>我的收藏</td>
@@ -77,7 +80,9 @@
                 </tr>
             </tbody>
         </table>
-        <div style="float: left;margin-left: 20px;margin-top: 12px;width: 50%;">
+        </div>
+
+        <div class="layui-col-md6 layui-col-sm7 layui-col-xs12" style="margin-top: 5%">
             <blockquote style="padding: 6px;font-size: 16px" class="layui-elem-quote">更改密码</blockquote>
             <form class="layui-form" method="post">
                 <input name="uid" id="user_id" value="${user.id}" type="hidden">

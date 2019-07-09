@@ -4,6 +4,7 @@
 <head>
     <title>${loginUser.username}修改资料</title>
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <%--引入样式--%>
     <%@include file="../../common/javascript.jsp"%>
 </head>

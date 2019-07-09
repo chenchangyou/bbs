@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div class="layui-col-row" style="margin: 10px auto;height: 50px; background-color: #FFFFFF;">
+    <div class="layui-col-row" style="margin: 40px auto 10px auto;height: 50px; background-color: #FFFFFF;">
         <form class="layui-col-md4 layui-col-xs11 layui-col-sm7" style="position: absolute;right: 0px;padding: 8px">
             <div class="layui-row" style="text-align: right">
                 <span class="form-group layui-col-md8 layui-col-sm8 layui-col-xs8">
@@ -84,10 +84,10 @@
         </form>
     </div>
 
-    <div class="layui-row" style="margin:20px auto 0 auto;">
+    <div class="layui-row  layui-col-space10" style="margin:10px auto 0 auto;">
         <div class="box-left articlelist layui-col-md2">
-            <div class="layui-row">
-                <div class="layui-col-md12">
+            <div class="layui-row" style="background-color: #FFFFFF;border-radius: 4px;">
+                <div class="layui-col-md12 layui-hide-xs">
                     <p><img src="${loginUser.headshot}" alt="..." class="img-circle" width="70px" height="70px"
                             style="text-align: center"></p>
                     <p>${loginUser.username}</p>
@@ -104,7 +104,7 @@
                     </c:if>
 
                     <%--公告--%>
-                    <div class="panel panel-info" style="margin-top: 5px;margin-bottom: 3px">
+                    <div class="panel panel-info layui-hide-xs" style="margin-top: 5px;margin-bottom: 3px">
                         <div class="panel-heading">公告</div>
                         <div class="panel-body">
                             <ul class="list-group" id="noticelist">
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-        <div class="box-middle articledetail layui-col-md10" style="padding: 0 0 0 10px;">
+        <div class="box-middle articledetail layui-col-md10">
             <div style=" background-color: #F2F2F2;border-radius: 4px;">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top: 0; border-radius: 4px;">
                     <ul class="layui-tab-title" style="background-color: #FFFFFF;border-radius: 5px">

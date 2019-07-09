@@ -4,7 +4,7 @@
 <head>
     <title>发表新帖</title>
     <%@include file="../../common/style.jsp"%>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <style>
         #demo1{
             width: 400px;

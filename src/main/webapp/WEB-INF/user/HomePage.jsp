@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>${loginUser.username}的个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
     <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet">
     <link href="${ctx}/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -16,11 +17,11 @@
 <body>
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
-<div style="width: 1160px;padding:0px 10px;margin: 0 auto">
+<div class="layui-container" style="padding:0px 10px;margin: 0 auto">
     <%--引入菜单栏跟头部--%>
     <%--引入头部--%>
     <%@include file="user_bg.jsp" %>
-    <div style=" width: 100%;margin:10px auto;">
+    <div style=" margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
 
@@ -51,9 +52,9 @@
         </div>
     </div>
 
-    <div style="width: 100%;">
+    <div class="layui-row layui-col-space8">
 
-        <div style="width: 800px;float: left;">
+        <div class="layui-col-md9 layui-col-sm9 layui-col-xs12" style="float: left;">
             <blockquote class="layui-elem-quote">我的介绍</blockquote>
             <div style="width: 100%;font-size: 16px">
                 <div style="width: 100%;height: 30px">
@@ -75,7 +76,7 @@
             <h4>简介：</h4>
             <div style="min-height: 120px" class="form-control">${user.synopsis}</div>
         </div>
-        <div style="width: 316px;float: right">
+        <div class="layui-col-md3 layui-col-sm3 layui-col-xs12" style="float: right">
             <div class="panel panel-warning">
                 <div class="panel-body">
                     我的公告

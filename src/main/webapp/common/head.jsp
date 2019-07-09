@@ -89,18 +89,10 @@ background-image: url('../static/images/bg1.png')">
             </div>
             <form class="layui-form" id="form1" method="post" style="max-width: 380px;margin: 5px auto;padding: 5px">
                 <div class="layui-form-item">
-                    <label class="layui-form-label layui-hide-xs">用户名</label>
-                    <div class="layui-input-inline  layui-hide-xs">
                         <input id="loginuser" type="text" name="username" required lay-verType="title" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
-                    </div>
-                    <input id="loginuser" type="text" name="username" required lay-verType="title" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input layui-hide-md">
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label layui-hide-xs">密码</label>
-                    <div class="layui-input-inline layui-hide-xs">
                         <input id="loginpassword" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-                    </div>
-                        <input id="loginpassword" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input layui-hide-md">
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">

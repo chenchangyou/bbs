@@ -5,9 +5,7 @@ body{
 }
 
 .box-left{
-    border-radius: 4px;
     padding: 3px;
-    background-color: #FFFFFF;
     top: 0;
     text-align: center;
 }

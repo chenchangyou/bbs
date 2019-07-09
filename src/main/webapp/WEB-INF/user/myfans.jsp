@@ -54,7 +54,7 @@
             </div>
         </div>
         <hr>
-        <div style="width: 100%;min-height: 100%">
+        <div style="width: 100%;">
 
             <c:if test="${not empty loginUser}">
                 <c:if test="${loginUser.id eq user.id}">

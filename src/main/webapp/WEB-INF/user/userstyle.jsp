@@ -8,6 +8,9 @@
         font-size: 14px;
     }
 
+    /*.layui-nav li{
+        float: left;
+    }*/
     .layui-nav .layui-nav-item a i {
         line-height: 20px;
     }
@@ -85,10 +88,8 @@
         width: 100%;
     }
     .postmsg span{
-        margin-left: 15px;
         min-width: 50px;
-        float: left;
-        max-width: 150px;
+
     }
     .postmsg >.post_r{
         min-width: 80px;
@@ -100,5 +101,8 @@
     }
     #replacehead:hover .replace_bg{
         display: block;
+    }
+    .left_boxs span{
+        margin-left: 5px;
     }
 </style>

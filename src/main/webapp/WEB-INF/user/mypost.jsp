@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>${loginUser.username}的个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
     <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet">
     <link href="${ctx}/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -16,30 +17,24 @@
 </head>
 <body>
 <script>
-
     function load() {
-
         layer.load();
-
         //加载层-默认风格
         //此处演示关闭
         setTimeout(function () {
             layer.closeAll('loading');
         }, 1500);
-
     }
-
-
 </script>
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
-<div style="width: 1160px;padding:0px 10px;margin: 0 auto">
+<div class="layui-container" style="padding:0px 10px;margin: 0 auto">
     <%--引入头部--%>
     <%@include file="user_bg.jsp" %>
-    <div style=" width: 100%;margin:10px auto;">
+    <div style="margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
-                <li class="layui-nav-item <%--layui-this--%>"><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x"
+                <li class="layui-nav-item "><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x"
                                                                                        style="color: purple"></i>
                     主页 </a></li>
                 <li class="layui-nav-item layui-this"><a href="/user/post/list?uid=${user.id}"><i
@@ -68,7 +63,7 @@
     </div>
 
 
-    <div style="width: 100%;" onload="load();">
+    <div class="layui-row" style="" onload="load();">
         <ul class="list-group">
             <c:if test="${empty postlist}">
                 <div class="panel panel-default">
@@ -79,14 +74,22 @@
             </c:if>
             <c:forEach items="${postlist}" var="post">
                 <li class="list-group-item" style="min-height: 50px">
-                    <div class="postmsg">
-                        <span style="min-width: 150px"><a
+                    <div class="postmsg layui-row">
+                        <span class="layui-col-xs12" style="min-width: 150px"><a
                                 href="/postdetails?postlistId=${post.id}">${post.title}</a></span>
-                        <span><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/> 发表</span>
-                        <span><i class="fa fa-eye"> ${post.browse}</i></span>
-                        <span><i class="fa fa-thumbs-o-up"></i> ${post.collectCount}</span>
-                        <span><i class="fa fa-commenting"></i> ${post.replynumber}</span>
-
+                        <span class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div  class="layui-col-xs6">
+                                    <span class="layui-hide-xs"><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/> 发表</span>
+                                    <span><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></span>
+                                </div>
+                                <div class="layui-col-xs6 left_boxs" style="text-align: right">
+                                    <span><i class="fa fa-eye"> ${post.browse}</i></span>
+                                    <span><i class="fa fa-thumbs-o-up"></i> ${post.collectCount}</span>
+                                    <span><i class="fa fa-commenting"></i> ${post.replynumber}</span>
+                                </div>
+                             </div>
+                        </span>
                         <c:if test="${not empty loginUser}">
                             <c:if test="${loginUser.id eq user.id}">
                                <span class="post_r">

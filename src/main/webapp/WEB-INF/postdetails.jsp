@@ -12,7 +12,7 @@
                 $(".reply_textarea").remove();
                 $(this).parent().parent().parent().parent().append("" +
                     "<div class='reply_textarea'><textarea id='user_reply' class='form-control' name='content' rows='3'></textarea><br/>" +
-                    "<button type='button' class='btn btn-info btn-right' id='tjpublish' style='position: relative;left: 94%'>回复</button></div>");
+                    "<button type='button' class='btn btn-info btn-right' id='tjpublish'>回复</button></div>");
             });
         });
 
@@ -44,7 +44,13 @@
         a:visited{
             /*color: #000000;*/
         }
-
+        .w-e-toolbar{
+            overflow: auto;
+        }
+        .reply_textarea{
+            position: relative;
+            text-align: right;
+        }
     </style>
 </head>
 <body onload="load()">
@@ -283,9 +289,8 @@
 
         </div>
     </div>
-  <div>
-</div>
-<div id="footer" style=" clear:both; width: 100%;height: 150px;background-color: #1E9FFF;margin-top: 10px"></div>
+            <div class="layui-col-md10" id="footer" style=" clear:both; width: 100%;height: 150px;background-color: #1E9FFF;margin-top: 10px">
+            </div>
 <script>
     var E = window.wangEditor;
     var editor = new E('#editor');
@@ -477,9 +482,7 @@
 
         /*收藏Ajax*/
         $("#collect").click(function () {
-
             var collectNumber = $("#collectNumber").text();
-
             $.ajax({
                 url: "/user/collect",  // 发送请求的URL字符串。
                 data: {pid: pid}, // 发送到服务器的数据。

@@ -4,6 +4,7 @@
 <head>
     <title>${loginUser.username}的个人中心</title>
     <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet">
     <link href="${ctx}/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="${ctx}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,10 +17,10 @@
 <body>
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
-<div style="width: 1160px;padding:0px 10px;margin: 0 auto">
+<div class="layui-container" style="padding:0px 10px;margin: 0 auto">
     <%--引入头部--%>
     <%@include file="user_bg.jsp" %>
-    <div style=" width: 100%;margin:10px auto;">
+    <div  style=" width: 100%;margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
                 <li class="layui-nav-item "><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x"
