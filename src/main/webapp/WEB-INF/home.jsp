@@ -61,8 +61,8 @@
 
 <div class="layui-container">
 
-    <div class="layui-row" style="margin: 60px auto 30px auto;height: 300px;padding: 0">
-        <div class="layui-carousel" id="test1">
+    <div class="layui-row" style="margin: 60px auto 0 auto;max-height: 68%;padding: 0">
+        <div class="layui-carousel" id="test1" style="max-height: 36%">
             <div carousel-item id="carousel">
                 <C:forEach items="${carouselList}" var="carouse">
                     <div><img style="width: 100%;" src="${carouse.url}"/></div>
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div class="layui-col-row" style="margin: 40px auto 10px auto;height: 50px; background-color: #FFFFFF;">
+    <div class="layui-col-row" style="margin: 10px auto;height: 50px; background-color: #FFFFFF;">
         <form class="layui-col-md4 layui-col-xs11 layui-col-sm7" style="position: absolute;right: 0px;padding: 8px">
             <div class="layui-row" style="text-align: right">
                 <span class="form-group layui-col-md8 layui-col-sm8 layui-col-xs8">
@@ -86,7 +86,7 @@
 
     <div class="layui-row  layui-col-space10" style="margin:10px auto 0 auto;">
         <div class="box-left articlelist layui-col-md2">
-            <div class="layui-row" style="background-color: #FFFFFF;border-radius: 4px;">
+            <div class="layui-row" style="padding: 5px; background-color: #FFFFFF;border-radius: 4px;">
                 <div class="layui-col-md12 layui-hide-xs">
                     <p><img src="${loginUser.headshot}" alt="..." class="img-circle" width="70px" height="70px"
                             style="text-align: center"></p>

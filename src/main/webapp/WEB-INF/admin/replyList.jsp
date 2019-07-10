@@ -62,13 +62,13 @@
                 ,cols: [[
                 {type:'numbers' ,fixed:'left'}
                 ,{field:'id', width:80, title: 'ID', hide:true}
-                ,{field:'user.username', width:120, title: '回帖人',templet: function(d){
+                ,{field:'user', width:120, title: '回帖人',templet: function(d){
                         return''+ d.user.username +''
                     }}
                 ,{field:'dormitory', width:80, title: '回帖ID',templet: function(d){
                         return''+ d.post.id +''
                     }}
-                ,{field:'post.title', width:180, title: '回帖标题',templet: function(d){
+                ,{field:'post', width:180, title: '回帖标题',templet: function(d){
                         return''+ d.post.title +''
                     }}
                 ,{field:'content', width:220, title: '回帖内容'}

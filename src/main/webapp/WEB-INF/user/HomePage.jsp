@@ -32,6 +32,8 @@
                         class="fa fa-pencil-square-o fa-1x"
                         style="color: #04bdff"></i> 帖子</a>
                 </li>
+                <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);" class="layui-icon layui-icon-picture"></i>
+                    相册</a></li>
                 <li class="layui-nav-item"><a href="/user/followed?uid=${user.id}"><i class="fa fa-user-plus fa-1x"></i>
                     关注</a></li>
                 <li class="layui-nav-item"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x"
@@ -62,8 +64,10 @@
 
                     <c:if test="${not empty loginUser}">
                         <c:if test="${loginUser.id eq user.id}">
-                            <a style="line-height: 30px ;width: 100px;padding: 0 3px;float: right;color: #1E9FFF"
-                               href="javascript:;" onclick="updateuser(${user.id});">修改资料>></a>
+                            <a class="layui-hide-xs" style="line-height: 30px ;width: 100px;padding: 0 3px;float: right;color: #1E9FFF"
+                               href="javascript:" onclick="updateuser(${user.id});">修改资料>></a>
+                            <a class="layui-hide-md layui-hide-sm" style="line-height: 30px ;width: 100px;padding: 0 3px;float: right;color: #1E9FFF"
+                               href="javascript:" onclick="updateuser_m(${user.id});">修改资料>></a>
                         </c:if>
                     </c:if>
                 </div>
@@ -84,10 +88,7 @@
                 <div class="panel-footer">欢迎来到我的主页</div>
             </div>
         </div>
-
     </div>
-
-
 </div>
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>

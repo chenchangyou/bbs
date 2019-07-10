@@ -31,6 +31,6 @@
 </script>
 
 <script>
-    location.href = "home";
+    location.href = "/home";
 </script>
 </html>

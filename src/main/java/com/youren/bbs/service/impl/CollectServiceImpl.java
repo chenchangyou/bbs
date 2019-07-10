@@ -41,7 +41,6 @@ public class CollectServiceImpl implements CollectService {
         collect.setUser(user);
         collect.setPost(post);
         return collect;
-
     }
 
     /**

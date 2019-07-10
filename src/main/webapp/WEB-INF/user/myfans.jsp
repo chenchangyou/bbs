@@ -18,10 +18,10 @@
 <body>
 <%--引入导航栏--%>
 <%@include file="../../common/head.jsp" %>
-<div class="layui-container">
+<div class="layui-container" style="padding:0px 10px;margin: 0 auto">
 <div style="margin: 0 auto" class="layui-row">
     <div class="layui-col-xs12 layui-col-sm12 layui-col-md12"
-         style="/*width: 1160px;*/padding:0px 10px;margin: 0 auto;min-height: 100%;background-color: #FFFFFF">
+         style="margin: 0 auto;min-height: 100%;background-color: #FFFFFF">
         <%--引入头部--%>
         <%@include file="user_bg.jsp" %>
         <div style=" width: 100%;margin:10px auto;">
@@ -34,6 +34,8 @@
                             class="fa fa-pencil-square-o fa-1x"
                             style="color: #04bdff"></i> 帖子</a>
                     </li>
+                    <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);" class="layui-icon layui-icon-picture"></i>
+                        相册</a></li>
                     <li class="layui-nav-item "><a href="/user/followed?uid=${user.id}"><i
                             class="fa fa-user-plus fa-1x"></i> 关注</a></li>
                     <li class="layui-nav-item"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x"

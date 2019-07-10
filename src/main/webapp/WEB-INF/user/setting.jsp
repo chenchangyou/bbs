@@ -29,6 +29,8 @@
                         class="fa fa-pencil-square-o fa-1x"
                         style="color: #04bdff"></i> 帖子</a>
                 </li>
+                <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);" class="layui-icon layui-icon-picture"></i>
+                    相册</a></li>
                 <li class="layui-nav-item "><a href="/user/followed?uid=${loginUser.id}"><i
                         class="fa fa-user-plus fa-1x"></i> 关注</a></li>
                 <li class="layui-nav-item"><a href="/user/collection?uid=${loginUser.id}"><i class="fa fa-star fa-1x"

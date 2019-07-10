@@ -23,11 +23,13 @@
     <div style=" width: 100%;margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
-                <li class="layui-nav-item <%--layui-this--%>"><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x" style="color: purple"></i>
+                <li class="layui-nav-item "><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x" style="color: purple"></i>
                     主页 </a></li>
                 <li class="layui-nav-item "><a href="/user/post/list?uid=${user.id}"><i class="fa fa-pencil-square-o fa-1x"
                                                                                                        style="color: #04bdff"></i> 帖子</a>
                 </li>
+                <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);" class="layui-icon layui-icon-picture"></i>
+                    相册</a></li>
                 <li class="layui-nav-item layui-this"><a href="/user/followed?uid=${user.id}"><i class="fa fa-user-plus fa-1x"></i> 关注</a></li>
                 <li class="layui-nav-item"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x" style="color: orange"></i> 收藏</a>
                 </li>

@@ -41,6 +41,8 @@
                         class="fa fa-pencil-square-o fa-1x"
                         style="color: #04bdff"></i> 帖子</a>
                 </li>
+                <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);" class="layui-icon layui-icon-picture"></i>
+                    相册</a></li>
                 <li class="layui-nav-item"><a href="/user/followed?uid=${user.id}"><i class="fa fa-user-plus fa-1x"></i>
                     关注</a></li>
                 <li class="layui-nav-item"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x"
@@ -73,7 +75,7 @@
                 </div>
             </c:if>
             <c:forEach items="${postlist}" var="post">
-                <li class="list-group-item" style="min-height: 50px">
+                <li class="list-group-item" style="min-height: 50px;color: #c2c2c2">
                     <div class="postmsg layui-row">
                         <span class="layui-col-xs12" style="min-width: 150px"><a
                                 href="/postdetails?postlistId=${post.id}">${post.title}</a></span>
@@ -81,7 +83,7 @@
                             <div class="layui-row">
                                 <div  class="layui-col-xs6">
                                     <span class="layui-hide-xs"><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/> 发表</span>
-                                    <span><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></span>
+                                    <span class="layui-hide-sm layui-hide-md"><fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></span>
                                 </div>
                                 <div class="layui-col-xs6 left_boxs" style="text-align: right">
                                     <span><i class="fa fa-eye"> ${post.browse}</i></span>

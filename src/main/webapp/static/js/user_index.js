@@ -57,7 +57,7 @@ $(function () {
 
                 if (data.state === 1) {
                     $("#replacehead").css({
-                        "background": "url(/" + data.data.src + ")",
+                        "background": "url(" + data.data.src + ")",
                         "background-size": "100% 100%"
                     });
                     layer.closeAll('page');
@@ -119,4 +119,15 @@ layui.use('form', function(){
             maxmin: false,
             content: '/user/update?uid=' + uid
         });
+    }
+    function updateuser_m(uid) {
+        var index = layer.open({
+            title: '修改个人资料',
+            type: 2,
+            area: ['100%', '100%'],
+            fixed: true, //不固定
+            maxmin: false,
+            content: '/user/update?uid=' + uid
+        });
+        layer.full(index);
     }

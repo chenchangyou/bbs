@@ -66,8 +66,9 @@
         <li><a href="home">首页</a></li>
         <li class="active">帖子详情</li>
     </ol>
-    <div class="layui-row layui-col-space1">
-    <div class="box-left articlelist layui-col-md2">
+    <div class="layui-row layui-col-space10">
+    <div style="padding: 4px;" class="box-left articlelist layui-col-md2">
+        <div  style="padding: 10px;background-color: #FFFFFF;border:1px #ddd solid;border-radius: 4px" >
         <p><a href="/user/index?uid=${user.id}"><img src="${user.headshot}" alt="..." class="img-circle" width="70px" height="70px"
                                                      style="text-align: center"></a></p>
         <p><a href="/user/index?uid=${user.id}">${user.username}</a></p>
@@ -81,11 +82,11 @@
        <c:if test="${followedmap.state gt 0}">
 
            <c:if test="${user.id ne loginUser.id}">
-               <button type="button" id="attention" style="width: 120px;border:none;text-align: center;margin: 0 32px;background-color: gray" class="btn btn-info btn-right">
+               <button type="button" id="attention" style="width: 120px;border:none;text-align: center;margin: 0 auto;background-color: gray" class="btn btn-info btn-right">
                    <i class="fa fa-check attentionfont"></i> <span>已关注</span></button>
            </c:if>
            <c:if test="${user.id eq loginUser.id}">
-               <a type="button" style="width: 120px;border:none;text-align: center;margin: 0 32px;" class="btn btn-info btn-right">
+               <a href="${ctx}/user/index?uid=${loginUser.id}" type="button" style="width: 120px;border:none;text-align: center;margin: 0 auto;" class="btn btn-info btn-right">
                     <span>个人中心</span></a>
            </c:if>
 
@@ -93,15 +94,16 @@
 
         <c:if test="${followedmap.state le 0}">
             <c:if test="${user.id ne loginUser.id}">
-                <button type="button" id="attention" style="width: 120px;border:none;text-align: center;margin: 0 32px;"class="btn btn-info btn-right">
+                <button type="button" id="attention" style="width: 120px;border:none;text-align: center;margin: 0 auto;"class="btn btn-info btn-right">
                     <i class="fa fa-plus attentionfont"></i> <span>关注</span></button>
             </c:if>
             <c:if test="${user.id eq loginUser.id}">
-                <a href="${ctx}/user/index" type="button" style="width: 120px;border:none;text-align: center;margin: 0 32px;" class="btn btn-info btn-right">
+                <a href="${ctx}/user/index?uid=${loginUser.id}" type="button" style="width: 120px;border:none;text-align: center;margin: 0 auto;" class="btn btn-info btn-right">
                     <span>个人中心</span></a>
             </c:if>
         </c:if>
 
+    </div>
     </div>
     <div class="layui-col-md10">
 
@@ -196,9 +198,9 @@
                         <input type="hidden" name="postId" value="${post.id}">
                         <div class="panel-body" style="padding: 5px;">
                             <div style="height: 35px;width: 100%">
-                                <div style="width: 50px;float: left"><img src="${reply.user.headshot}" alt="..."
+                                <div style="width: 50px;float: left"><a href="/user/index?uid=${reply.user.id}"><img src="${reply.user.headshot}" alt="..."
                                                                           class="img-circle" width="35px" height="35px"
-                                                                          style="text-align: center"></div>
+                                                                          style="text-align: center"></a></div>
                                 <div style="float: left;margin-left: 2px;text-align: center">
                                     <c:if test="${reply.user.id == post.user.id}"><span
                                             style="color:#1E9FFF;font-weight: bolder">楼主 </span></c:if>
@@ -241,13 +243,13 @@
                     <c:forEach items="${reply.replyCommentList}" var="comment">
                         <div class="panel panel-default" style="margin-right: 6px;background:none;border:none">
                             <div class="panel-body" style="padding: 5px;margin-left: 60px">
-                                <sapn style="float: left"><img src="${comment.user.headshot}"
-                                                               style="width: 35px;height: 35px; border-radius:50%">
+                                <sapn style="float: left"><a href="/user/index?uid=${comment.user.headshot}"><img src="${comment.user.headshot}"
+                                                               style="width: 35px;height: 35px; border-radius:50%"></a>
                                 </sapn>
                                 <div style="width: 100%;">
                                     <c:if test="${reply.user.id == comment.user.id}"><span
                                             style="color:#1E9FFF;font-weight: bolder;float: left">层主：</span></c:if>
-                                    <span style="float: left">${comment.user.username}：&nbsp;</span>
+                                    <span style="float: left"><a href="/user/index?uid=${comment.user.id}">${comment.user.username}</a>：&nbsp;</span>
                                     <span style="float: left">${comment.content}</span>
                                     <span style="width: 50px;float: right"><a href="javascript:;">回复</a></span>
                                 </div>
