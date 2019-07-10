@@ -84,11 +84,17 @@
             <div class="layui-row" >
                 <blockquote class="layui-elem-quote layui-col-md12">${albumCategory.name}</blockquote>
                 <div id="layer-photos-demo" class="layer-photos-demo user_album">
-                    <c:forEach items="${album.album}" var="album">
-                        <div>${album.url}</div>
+                    <input class="acid" type="hidden" value="${albumCategory.id}">
+                    <c:forEach items="${albumCategory.album}" var="album">
+                        <img layer-pid="图片id，可以不写" layer-src="${album.url}" src="${album.url}" alt="${album.createTime}">
                     </c:forEach>
-                    <%--<img layer-pid="图片id，可以不写" layer-src="http://119.23.52.230/upload/1562756337431.jpg" src="http://119.23.52.230/upload/1562756337431.jpg" alt="图片名">--%>
-                    <%--<img layer-pid="图片id，可以不写" layer-src="http://119.23.52.230/upload/1562756337431.jpg" src="http://119.23.52.230/upload/1562756337431.jpg" alt="图片名">--%>
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="test2">多图片上传</button>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            预览图：
+                            <div class="layui-upload-list" id="demo2"></div>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </c:forEach>
@@ -125,7 +131,7 @@
                     $.post("/user/album/add/",{
                         uid:uid,
                         url:res.data.src,
-                        acid:acid
+                        acid:${this}
                     },function (state) {
 
                     })
