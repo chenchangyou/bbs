@@ -23,7 +23,7 @@ public class AlbumCategory {
     @Temporal(TemporalType.DATE)
     @Column(name="create_time")
     private Date createTime;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "albumCategory")
+    @OneToMany( cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "albumCategory")
     private List<Album> album; //拥有的照片
 
     public String getId() {
@@ -64,5 +64,15 @@ public class AlbumCategory {
 
     public void setAlbum(List<Album> album) {
         this.album = album;
+    }
+
+    @Override
+    public String toString() {
+        return "AlbumCategory{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", user=" + user +
+                ", createTime=" + createTime +
+                '}';
     }
 }

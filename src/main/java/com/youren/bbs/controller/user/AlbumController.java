@@ -42,6 +42,15 @@ public class AlbumController {
         UserBackground byUid = userBackgroundService.findByUid(uid);
         User byId = userService.findById(uid);
 
+        for (AlbumCategory albumCategory:albumCategoryList){
+            System.out.println(albumCategory.getName());
+
+            List<Album> albumlist = albumCategory.getAlbum();
+            for (Album album:albumlist){
+                System.out.println(album.getUrl());
+            }
+        }
+
         model.addAttribute("albumCategoryList",albumCategoryList);
         model.addAttribute("user",byId);
         model.addAttribute("userbg",byUid);

@@ -80,13 +80,18 @@
         </div>
 
     </div>
-        <div class="layui-row" >
-            <blockquote class="layui-elem-quote layui-col-md12">引用区域的文字</blockquote>
-            <div id="layer-photos-demo" class="layer-photos-demo user_album">
-                <img layer-pid="图片id，可以不写" layer-src="http://119.23.52.230/upload/1562756337431.jpg" src="http://119.23.52.230/upload/1562756337431.jpg" alt="图片名">
-                <img layer-pid="图片id，可以不写" layer-src="http://119.23.52.230/upload/1562756337431.jpg" src="http://119.23.52.230/upload/1562756337431.jpg" alt="图片名">
+        <c:forEach items="${albumCategoryList}" var="albumCategory">
+            <div class="layui-row" >
+                <blockquote class="layui-elem-quote layui-col-md12">${albumCategory.name}</blockquote>
+                <div id="layer-photos-demo" class="layer-photos-demo user_album">
+                    <c:forEach items="${album.album}" var="album">
+                        <div>${album.url}</div>
+                    </c:forEach>
+                    <%--<img layer-pid="图片id，可以不写" layer-src="http://119.23.52.230/upload/1562756337431.jpg" src="http://119.23.52.230/upload/1562756337431.jpg" alt="图片名">--%>
+                    <%--<img layer-pid="图片id，可以不写" layer-src="http://119.23.52.230/upload/1562756337431.jpg" src="http://119.23.52.230/upload/1562756337431.jpg" alt="图片名">--%>
+                </div>
             </div>
-        </div>
+        </c:forEach>
 </div>
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>\

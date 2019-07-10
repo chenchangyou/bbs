@@ -10,3 +10,4 @@ public interface CarouselSrevice {
     Carousel add(String url);
     int delete(String id);
 }
+
