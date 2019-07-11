@@ -39,17 +39,17 @@ public class UserPostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String register(Long uid,Model model) {
         List<Post> postList = postService.findByUserId(uid);
         User user = userService.findById(uid);
-        UserBackground userByuid = userBackgroundService.findByUid(uid);
+        UserBackground userByuid = userBackgroundService.findByUid(user.getId());
 
         model.addAttribute("userbg",userByuid);
         model.addAttribute("user",user);
         model.addAttribute("postlist",postList);
 
-        return "/user/mypost?uid="+uid;
+        return "/user/mypost";
     }
 
     @GetMapping("login")
