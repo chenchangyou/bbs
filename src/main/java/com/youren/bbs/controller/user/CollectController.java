@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * 收藏
+ */
 @Controller
 @RequestMapping("/user/")
 public class CollectController {
@@ -16,6 +19,7 @@ public class CollectController {
     @Autowired
     private CollectService collectService;
 
+    //判断用户是否收藏有该帖子
     @ResponseBody
     @PostMapping("collect")
     public int judgeCollect(Long pid, HttpSession session){

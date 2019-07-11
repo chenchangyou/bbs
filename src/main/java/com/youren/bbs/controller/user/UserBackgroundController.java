@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 用户中心背景图更换
+ */
 @Controller
 @RequestMapping("/upload/")
 public class UserBackgroundController {
@@ -49,8 +52,7 @@ public class UserBackgroundController {
                     if(update>0){
                         File deletefile = new File(Constant.CONSTANT_DELETE_PATH + byUid.getUrl());
 
-
-                        deletefile.delete();
+                        deletefile.delete(); //删除原文件
                         map.put("msg","OK");
                         state = 1;
                     }else {

@@ -20,11 +20,11 @@ public class Album {
     @JoinColumn(name = "uid",referencedColumnName = "id")
     private User user;
     private Integer state;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="create_time")
     private Date createTime;
     @ManyToOne
-    @JoinColumn(name = "album_category")
+    @JoinColumn(name = "album_category",referencedColumnName = "id")
     private AlbumCategory albumCategory;//所属相册名
 
     public String getId() {

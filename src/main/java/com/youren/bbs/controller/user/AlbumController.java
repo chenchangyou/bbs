@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * 用户照片
+ */
 @Controller
 @RequestMapping("/user/album")
 public class AlbumController {
@@ -35,6 +40,7 @@ public class AlbumController {
     @Autowired
     private AlbumCategoryService albumCategoryService;
 
+    //跳转
     @GetMapping("/")
     public String album(Long uid, Model model){
 
@@ -42,15 +48,7 @@ public class AlbumController {
         UserBackground byUid = userBackgroundService.findByUid(uid);
         User byId = userService.findById(uid);
 
-        for (AlbumCategory albumCategory:albumCategoryList){
-            System.out.println(albumCategory.getName());
-
-            List<Album> albumlist = albumCategory.getAlbum();
-            for (Album album:albumlist){
-                System.out.println(album.getUrl());
-            }
-        }
-
+        model.addAttribute("setting", getSetting(uid));
         model.addAttribute("albumCategoryList",albumCategoryList);
         model.addAttribute("user",byId);
         model.addAttribute("userbg",byUid);
@@ -58,19 +56,29 @@ public class AlbumController {
     }
 
     /**
-     * 添加相片
+     * 添加照片
      * @param uid 用户ID
-     * @param url 相片链接
+     * @param url 照片链接
      * @param acid 所属相册ID
      * @return
      */
     @ResponseBody
     @PostMapping("/add")
-    public Album add(Long uid ,String url,String acid){
+    public Map<String, Object> add(Long uid , String url, String acid){
 
-        return albumService.save(uid,url,acid);
+        Album album = albumService.save(uid, url, acid);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("url",album.getUrl());
+        map.put("id",album.getId());
+        map.put("createTime",album.getCreateTime());
+        return  map;
     }
 
+    /**
+     * 获取用户的相册及包含的照片
+     * @param uid 用户ID
+     * @return JOIN格式
+     */
     @ResponseBody
     @GetMapping("/list")
     public List<AlbumCategory> list(Long uid){
@@ -79,10 +87,21 @@ public class AlbumController {
 
         return albumCategoryList;
     }
+
     private UserSetting getSetting(Long uid){
 
         UserSetting setting = userSettingMapper.findByUid(uid);
 
         return setting;
+    }
+
+    /**
+     * 删除照片
+     * @param id 照片的ID
+     */
+    @ResponseBody
+    @PostMapping("/delete")
+    public void delete(String id){
+        albumService.delete(id);
     }
 }

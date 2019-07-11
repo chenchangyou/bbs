@@ -20,9 +20,10 @@ public class AlbumCategory {
     @OneToOne
     @JoinColumn(name = "uid",referencedColumnName = "id")
     private User user; //相册所属用户
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="create_time")
     private Date createTime;
+    private String state;
     @OneToMany( cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "albumCategory")
     private List<Album> album; //拥有的照片
 
@@ -66,6 +67,14 @@ public class AlbumCategory {
         this.album = album;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "AlbumCategory{" +
@@ -73,6 +82,7 @@ public class AlbumCategory {
                 ", name='" + name + '\'' +
                 ", user=" + user +
                 ", createTime=" + createTime +
+                ", state='" + state + '\'' +
                 '}';
     }
 }

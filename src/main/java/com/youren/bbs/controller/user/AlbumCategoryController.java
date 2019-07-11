@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+/**
+ * 用户相册
+ */
 @Controller
 @RequestMapping("/user/albumCategory/")
 public class AlbumCategoryController {
@@ -18,12 +20,18 @@ public class AlbumCategoryController {
     private AlbumCategoryService albumCategoryService;
 
 
+    //添加相册
     @ResponseBody
     @PostMapping("add")
     public AlbumCategory add(Long uid,String name){
 
-        AlbumCategory albumCategory = albumCategoryService.save(uid, name);
+        return albumCategoryService.save(uid, name);
+    }
 
-        return albumCategory;
+    //修改用户相册状态（是否公开）
+    @ResponseBody
+    @PostMapping("updateState")
+    public void updateState(String id,String state){
+        albumCategoryService.upadteState(id,state);
     }
 }

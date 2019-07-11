@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
 import java.util.List;
 
 @Controller
@@ -40,8 +38,6 @@ public class UserCenterController {
     @GetMapping("followed")
     public String followed(Long uid,HttpSession session,Model model){
 
-       /* User user = getuser(session);
-        User byId = userService.findById(user.getId());*/
         List<Followed> followedList = followedService.findByUid(uid);
         UserBackground byUid = userBackgroundService.findByUid(uid);
         User byId = userService.findById(uid);

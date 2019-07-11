@@ -11,4 +11,5 @@ public interface AlbumCategoryService {
     void delete(String id);
     AlbumCategory update(String id,String name);
     List<AlbumCategory> findByUserId(Long uid);
+    AlbumCategory upadteState(String id,String state);
 }

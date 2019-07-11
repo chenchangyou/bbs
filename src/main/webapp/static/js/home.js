@@ -27,7 +27,7 @@ function getNewPost() {
                             postImg = '';
                         }
                         lis.push('' +
-                            '<div class="contentbox layui-row" style="height: 130px;margin:0 auto;border-bottom: 1px solid #f4f5f7;padding: 8px 0px;">' +
+                            '<div class="contentbox layui-row" style="height: 120px;margin:0 auto;border-bottom: 1px solid #f4f5f7;">' +
                             ' <a class="layui-col-xs12 layui-col-md9" href="postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
                             '        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="float: left">' +
                             '            <ul class="list-group" style="border: none">' +
@@ -48,7 +48,7 @@ function getNewPost() {
                             '            </ul>' +
                             '        </div>' +
                             '       </a>' +
-                            '        <div class="layui-hide-xs layui-col-md3 layui-col-sm3" style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
+                            '        <div class="layui-hide-xs layui-hide-sm layui-col-md3 layui-col-sm3" style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
                             ''+postImg+'' +
                             '        </div>' +
                             '    </div>' +

@@ -72,6 +72,9 @@ public class UserController {
         }
     }
 
+    /**
+     *  登录
+     */
     @ResponseBody
     @PostMapping("login")
     public Map login(String username, String password, HttpSession session) {
@@ -85,12 +88,19 @@ public class UserController {
         }
     }
 
+    /**
+     * 退出登录
+     */
     @GetMapping("logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
 
+    /**
+     * 跳转到用户中心
+     * @param uid userID
+     */
     @GetMapping("/index")
     public String index(Long uid, Model model) {
 
@@ -105,6 +115,11 @@ public class UserController {
 
     }
 
+    /**
+     * 更用户的头像
+     * @param file 上传头像
+     * @throws IOException 保存异常
+     */
     @ResponseBody
     @PostMapping("/uploadThumbnail")
     public Map<String, Object> upload(MultipartFile file,HttpSession session) throws IOException {
@@ -161,6 +176,7 @@ public class UserController {
         return map;
     }
 
+    //跳转修改页
     @GetMapping("/update")
     public String update(Long uid,Model model){
         User user = userService.findById(uid);
@@ -170,6 +186,7 @@ public class UserController {
         return "/user/updateuser";
     }
 
+    //修改个人信息
     @ResponseBody
     @PostMapping("/update")
     public int update(Long uid,String nickname,String username, String sex, String email, Integer age, String tel,
@@ -178,6 +195,7 @@ public class UserController {
 
         return row;
     }
+    //修改密码
     @ResponseBody
     @PostMapping("/updatepassword")
     public int updatepassword(Long uid,String password,String newPassword){

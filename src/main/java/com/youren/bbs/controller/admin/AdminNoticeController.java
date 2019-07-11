@@ -1,7 +1,6 @@
 package com.youren.bbs.controller.admin;
 
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.youren.bbs.entity.Notice;
 import com.youren.bbs.service.NoticeService;
 import com.youren.bbs.service.NoticeServiceJpa;
@@ -17,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 公告
+ */
 @Controller
 @RequestMapping("/admin/notice")
 public class AdminNoticeController {
@@ -32,6 +34,7 @@ public class AdminNoticeController {
         return "/admin/notice";
     }
 
+    //所有公告
     @ResponseBody
     @GetMapping("/list")
     public Map findAllNotice(){
@@ -55,6 +58,7 @@ public class AdminNoticeController {
         return notice;
     }
 
+    //跳转编辑页
     @GetMapping("/edit")
     public String edit(String nid,Model model){
 
@@ -64,6 +68,8 @@ public class AdminNoticeController {
 
         return "/admin/noticeEdit";
     }
+
+    //删除
     @ResponseBody
     @PostMapping("/delete")
     public int delete(String nid){

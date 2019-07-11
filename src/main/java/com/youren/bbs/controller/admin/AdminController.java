@@ -32,6 +32,7 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    //跳转
     @GetMapping("/index")
     public String admin(Model model){
         List<Notice> noticeList = noticeService.findAll();
@@ -39,7 +40,12 @@ public class AdminController {
         return "/admin/index";
     }
 
-
+    /**
+     * 站内所有帖子
+     * @param pageNum 页数
+     * @param pageSize 一页条数
+     * @return JSON格式数据
+     */
     @ResponseBody
     @GetMapping("/postlist")
     public Map postlist(@RequestParam(name = "page",defaultValue = "1") int pageNum,
@@ -57,12 +63,19 @@ public class AdminController {
         postmap.put("data",page.getList());
         return postmap;
     }
+
+    //跳转
     @GetMapping("/post")
     public String post(){
         return "/admin/adminpost";
     }
 
-
+    /**
+     * 站内所有用户
+     * @param pageNum 页数
+     * @param pageSize 一页条数
+     * @return JSON格式数据
+     */
     @ResponseBody
     @GetMapping("/userlist")
     public Map userlist(@RequestParam(name = "page",defaultValue = "1") int pageNum,
@@ -82,16 +95,17 @@ public class AdminController {
         usermap.put("data",page.getList());
         return usermap;
     }
+    //跳转
     @GetMapping("/user")
     public String user(){
         return "/admin/adminuser";
     }
-
+    //跳转
     @GetMapping("/indexs")
     public String indexs(){
         return "adminSystem/index";
     }
-
+    //跳转
     @GetMapping("main")
      public String main(){
 

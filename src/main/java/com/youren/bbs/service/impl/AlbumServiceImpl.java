@@ -8,12 +8,10 @@ import com.youren.bbs.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
@@ -27,9 +25,12 @@ public class AlbumServiceImpl implements AlbumService {
         album.setCreateTime(new Date());
         album.setUrl(url);
         album.setState(1);
+
         User user = new User();
         user.setId(uid);
+
         album.setUser(user);
+
         AlbumCategory albumCategory = new AlbumCategory();
              albumCategory.setId(cid);
         album.setAlbumCategory(albumCategory);

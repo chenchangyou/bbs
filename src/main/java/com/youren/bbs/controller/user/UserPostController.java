@@ -25,6 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * 获取用户的帖子
+ */
 @Controller
 @RequestMapping("/user/post/")
 public class UserPostController {
@@ -39,13 +43,13 @@ public class UserPostController {
     public String register(Long uid,Model model) {
         List<Post> postList = postService.findByUserId(uid);
         User user = userService.findById(uid);
-        UserBackground userBgByuid = userBackgroundService.findByUid(user.getId());
+        UserBackground userByuid = userBackgroundService.findByUid(uid);
 
-        model.addAttribute("userbg",userBgByuid);
+        model.addAttribute("userbg",userByuid);
         model.addAttribute("user",user);
         model.addAttribute("postlist",postList);
 
-        return "/user/mypost";
+        return "/user/mypost?uid="+uid;
     }
 
     @GetMapping("login")

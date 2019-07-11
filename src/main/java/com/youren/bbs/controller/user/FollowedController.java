@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * 判断收藏
+ */
 @Controller
 @RequestMapping("/user/")
-public class FollwedController {
+public class FollowedController {
 
     @Autowired
     private FollowedService followedService;

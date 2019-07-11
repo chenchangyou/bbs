@@ -7,13 +7,11 @@ import com.youren.bbs.service.AlbumCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class AlbumCategoryServiceImpl implements AlbumCategoryService {
 
     @Autowired
@@ -29,6 +27,7 @@ public class AlbumCategoryServiceImpl implements AlbumCategoryService {
         user.setId(uid);
         albumCategory.setUser(user);
         albumCategory.setCreateTime(new Date());
+        albumCategory.setState("true");
 
         return albumCategoryDao.save(albumCategory);
     }
@@ -52,5 +51,14 @@ public class AlbumCategoryServiceImpl implements AlbumCategoryService {
     public List<AlbumCategory> findByUserId(Long uid) {
 
         return albumCategoryDao.findByUserId(uid);
+    }
+
+    @Override
+    public AlbumCategory upadteState(String id, String state) {
+
+        AlbumCategory albumCategory = albumCategoryDao.findById(id).get();
+        albumCategory.setState(state);
+
+        return albumCategoryDao.save(albumCategory);
     }
 }

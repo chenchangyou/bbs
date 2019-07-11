@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * 贴子类别（添加\修改\删除）
+ */
 @Controller
 @RequestMapping("/admin/category/")
 public class CategoryConrroller {

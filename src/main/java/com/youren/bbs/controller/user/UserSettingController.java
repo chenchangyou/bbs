@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * 用户的设置
+ */
 @Controller
 @RequestMapping("/user")
 public class UserSettingController {
@@ -28,6 +31,7 @@ public class UserSettingController {
     @Autowired
     private UserService userService;
 
+    //测试用（无视）
     @GetMapping("/createSetting")
     public void createSetting(){
         List<User> userList = userService.findAll();
@@ -43,7 +47,12 @@ public class UserSettingController {
         }
     }
 
-    //保存用户的设置
+    /**
+     * 保存用户的设置
+     * @param uid userID
+     * @param sname 要修改的配置名称
+     * @param state 修改的状态
+     */
     @ResponseBody
     @PostMapping("/saveUserSetting")
     public void saveUserSetting(Long uid,String sname,String state){
