@@ -70,6 +70,14 @@
                </button>
         </diV>
 
+        <c:if test="${empty albumCategoryList}">
+            <div class="panel panel-default">
+                <div class="panel-body" style="text-align: center">
+                    还没有相册
+                </div>
+            </div>
+        </c:if>
+
         <c:forEach items="${albumCategoryList}" var="albumCategory">
             <div class="layui-row" >
                 <blockquote class="layui-elem-quote layui-col-md12 layui-form"style="height: 60px">
@@ -80,13 +88,23 @@
                 </blockquote>
                 <div class="layer-photos-demo user_album layui-col-md12 layer-photos-demo">
                     <div class="layui-row"  style="text-align: center">
+
+                        <c:if test="${empty albumCategory.album}">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="text-align: center">
+                                    该相册下没有照片
+                                </div>
+                            </div>
+                        </c:if>
+
                         <div class="layui-col-md10" style="padding:5px; overflow: auto;height: 190px">
                             <c:forEach items="${albumCategory.album}" var="album">
                                 <img layer-pid="${album.id}" layer-src="${album.url}" src="${album.url}" alt="${album.createTime}">
                             </c:forEach>
                         </div>
+
                         <div class="layui-upload layui-col-md2" style="text-align: center">
-                            <button type="button" class="layui-btn uploadAlbum" id="${albumCategory.id}">上传相片</button>
+                            <button type="button" class="layui-btn uploadAlbum" id="${albumCategory.id}">上传照片</button>
                         </div>
                     </div>
                 </div>
@@ -209,10 +227,6 @@
                 $.post("/user/albumCategory/updateState/",{id:id,state:this.checked},function () {
 
                 });
-                // layer.msg('开关checked：'+ (this.checked), {
-                //     offset: '6px'
-                // });
-                //
                 layer.tips(this.checked ? '已公开' : '已隐藏',data.othis)
             });
 

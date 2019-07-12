@@ -13,6 +13,31 @@
     <%--引入样式--%>
     <%@include file="userstyle.jsp" %>
     <%--<%@include file="common/style.jsp" %>--%>
+    <style>
+
+        .panel-body {
+            display: none;
+            position: relative;
+            z-index: 2;
+            padding: 8px;
+            /*color: #FFFFFF;*/
+            /*background-color: rgba(22, 22, 22, 0.75 );*/
+        }
+
+        .panel-info{
+            margin-bottom:-1;
+            z-index: 1;
+            position: relative;
+        }
+        .panel-info:hover .panel-body {
+            display: block;
+        }
+        .panel-info>.panel-heading{
+            padding: 10px;
+            background-color:#FFFFFF;
+            border: none;
+        }
+    </style>
 </head>
 <body>
 <%--引入导航栏--%>
@@ -20,17 +45,18 @@
 <div class="layui-container" style="padding:0px 10px;margin: 0 auto">
     <%--引入头部--%>
     <%@include file="user_bg.jsp" %>
-    <div  style=" width: 100%;margin:10px auto;">
+    <div style=" width: 100%;margin:10px auto;">
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-nav" style="background-color: #FFFFFF;color: black">
                 <li class="layui-nav-item "><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x"
-                                                                                       style="color: purple"></i>
+                                                                                    style="color: purple"></i>
                     主页 </a></li>
                 <li class="layui-nav-item "><a href="/user/post/list?uid=${user.id}"><i
                         class="fa fa-pencil-square-o fa-1x"
                         style="color: #04bdff"></i> 帖子</a>
                 </li>
-                <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);" class="layui-icon layui-icon-picture"></i>
+                <li class="layui-nav-item"><a href="/user/album/?uid=${user.id}"><i style="color: rgba(4,150,98,0.98);"
+                                                                                    class="layui-icon layui-icon-picture"></i>
                     相册</a></li>
                 <li class="layui-nav-item "><a href="/user/followed?uid=${user.id}"><i
                         class="fa fa-user-plus fa-1x"></i> 关注</a></li>
@@ -55,14 +81,37 @@
         <c:if test="${not empty loginUser}">
             <c:if test="${loginUser.id eq user.id}">
                 <c:forEach items="${collectList}" var="collect">
-                    <span>${collect.post.title}</span>
+
+                    <div class="layui-row panel panel-info layui-anim layui-anim-up">
+                        <div class="panel-heading layui-col-md12">
+                            <h4 class="panel-title">
+                                <a href="/postdetails?postlistId=${collect.post.id}">${collect.post.title}</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body layui-anim layui-anim-up layui-col-md12">
+                            <span class="layui-col-md11">简介： ${collect.post.synopsis}</span>
+                            <span class="layui-col-md1"><a href="javascript:"><i class="layui-icon layui-icon-close"></i></a></span>
+                        </div>
+                    </div>
+
                 </c:forEach>
             </c:if>
 
             <c:if test="${loginUser.id != user.id}">
                 <c:if test="${setting.collect}">
                     <c:forEach items="${collectList}" var="collect">
-                        <span>${collect.post.title}</span>
+
+                        <div class="layui-row panel panel-info layui-anim layui-anim-up">
+                            <div class="panel-heading layui-col-md12">
+                                <h4 class="panel-title">
+                                    <a href="/postdetails?postlistId=${collect.post.id}">${collect.post.title}</a>
+                                </h4>
+                            </div>
+                            <div class="panel-body layui-anim layui-anim-up layui-col-md12">
+                                <span class="layui-col-md11">简介： ${collect.post.synopsis}</span>
+                            </div>
+                        </div>
+
                     </c:forEach>
                 </c:if>
             </c:if>
@@ -70,11 +119,27 @@
         <c:if test="${empty loginUser}">
             <c:if test="${setting.collect}">
                 <c:forEach items="${collectList}" var="collect">
-                    <span>${collect.post.title}</span>
+
+                    <div class="layui-row panel panel-info layui-anim layui-anim-up">
+                        <div class="panel-heading layui-col-md12">
+                            <h4 class="panel-title">
+                                <a href="/postdetails?postlistId=${collect.post.id}">${collect.post.title}</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body layui-anim layui-anim-up layui-col-md12">
+                            <span class="layui-col-md11">简介： ${collect.post.synopsis}</span>
+                        </div>
+                    </div>
+
                 </c:forEach>
             </c:if>
             <c:if test="${setting.collect == false}">
-            <span>很抱歉，该用户设置了不向外公开</span>
+                <div class="layui-container" style=" background-color:#ffffff;width: 100%;text-align: center">
+                    <div>
+                        <img src="/static/images/expression_helpless.gif">
+                        <span> 很抱歉该用户设置了内容不对外公开 </span>
+                    </div>
+                </div>
             </c:if>
         </c:if>
     </div>

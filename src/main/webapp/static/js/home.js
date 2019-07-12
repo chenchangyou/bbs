@@ -48,7 +48,7 @@ function getNewPost() {
                             '            </ul>' +
                             '        </div>' +
                             '       </a>' +
-                            '        <div class="layui-hide-xs layui-hide-sm layui-col-md3 layui-col-sm3" style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
+                            '        <div class="layui-hide-xs layui-col-md3 layui-col-sm3" style="width:22%;height: 100%;margin-left:15px;float: left;padding: 8px">' +
                             ''+postImg+'' +
                             '        </div>' +
                             '    </div>' +

@@ -8,13 +8,13 @@
 	<resultMap id="followedResultMap" type="Followed">
 		<result property="createTime" column="create_time" />
 		<association property="userId" column="user_id" javaType="User">
-			<id property="id" column="user_id" />
+			<id property="id" column="id" />
 			<result property="username" column="username"/>
 			<result property="headshot" column="headshot"/>
 		</association>
 
 		<association property="followeId" column="followed_user_id" javaType="User">
-			<id property="id" column="followed_user_id" />
+			<id property="id" column="fid" />
 			<result property="username" column="fusername"/>
 			<result property="headshot" column="fheadshot"/>
 		</association>

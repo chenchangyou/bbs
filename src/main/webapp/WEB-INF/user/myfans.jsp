@@ -39,7 +39,7 @@
                     <li class="layui-nav-item "><a href="/user/followed?uid=${user.id}"><i
                             class="fa fa-user-plus fa-1x"></i> 关注</a></li>
                     <li class="layui-nav-item"><a href="/user/collection?uid=${user.id}"><i class="fa fa-star fa-1x"
-                                                                                             style="color: orange"></i>
+                                                                                            style="color: orange"></i>
                         收藏</a>
                     </li>
                     <li class="layui-nav-item layui-this"><a href="/user/fans?uid=${user.id}"><i
@@ -56,20 +56,31 @@
             </div>
         </div>
         <hr>
+
         <div style="width: 100%;">
+
+            <c:if test="${empty followedList}">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="text-align: center">
+                        赶紧写一篇优质的帖子让更多的人关注你吧
+                    </div>
+                </div>
+            </c:if>
 
             <c:if test="${not empty loginUser}">
                 <c:if test="${loginUser.id eq user.id}">
                     <c:forEach items="${followedList}" var="followed">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <a href="javascript:;">
+                                <a href="/user/index?uid=${followed.userId.id}">
                                     <img style="width: 60px;height: 60px" src="${followed.userId.headshot}" alt="..."
                                          class="img-circle">
                                 </a>
-                                <span>
-                                        ${followed.userId.username}
-                                </span>
+                                <a href="/user/index?uid=${followed.userId.id}">
+                                    <span>
+                                            ${followed.userId.username}
+                                    </span>
+                                </a>
                                 <span class="layui-form">
                             <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest"
                                    lay-text="关注|已取消">
@@ -84,20 +95,26 @@
                         <c:forEach items="${followedList}" var="followed">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <a href="javascript:;">
+                                    <a href="/user/index?uid=${followed.userId.id}">
                                         <img style="width: 60px;height: 60px" src="${followed.userId.headshot}"
                                              alt="..." class="img-circle">
                                     </a>
+                                    <a href="/user/index?uid=${followed.userId.id}">
                                     <span>
                                             ${followed.userId.username}
                                     </span>
-                                    <span class="layui-form">
-                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest"
-                                   lay-text="关注|已取消">
-                    </span>
+                                    </a>
                                 </div>
                             </div>
                         </c:forEach>
+                    </c:if>
+                    <c:if test="${setting.fans == false}">
+                        <div class="layui-container" style=" background-color:#ffffff;width: 100%;text-align: center">
+                            <div>
+                                <img src="/static/images/expression_helpless.gif">
+                                <span> 很抱歉该用户设置了内容不对外公开 </span>
+                            </div>
+                        </div>
                     </c:if>
                 </c:if>
             </c:if>
@@ -107,17 +124,15 @@
                     <c:forEach items="${followedList}" var="followed">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <a href="javascript:;">
+                                <a href="/user/index?uid=${followed.userId.id}">
                                     <img style="width: 60px;height: 60px" src="${followed.userId.headshot}" alt="..."
                                          class="img-circle">
                                 </a>
-                                <span>
-                                        ${followed.userId.username}
-                                </span>
-                                <span class="layui-form">
-                                     <input type="checkbox" name="switch" lay-skin="switch" lay-filter="fansSwitch"
-                                   lay-text="关注|已取消">
-                                </span>
+                                <a href="/user/index?uid=${followed.userId.id}">
+                                    <span>
+                                            ${followed.userId.username}
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </c:forEach>

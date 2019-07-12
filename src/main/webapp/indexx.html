@@ -33,8 +33,9 @@
             background-color: orange;
             color: #000000;
         }
-        .green{
-            background-color:green;
+
+        .green {
+            background-color: green;
             color: #000000;
         }
 
@@ -122,7 +123,7 @@
 
         <blockquote class="layui-elem-quote layui-col-md12">
             <span class="layui-col-md7" style="line-height: 34px;">热点关注</span>
-                <span class="layui-col-md5">
+            <span class="layui-col-md5">
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="Search for...">
                       <span class="input-group-btn">
@@ -221,7 +222,7 @@
 <!--以下路径改回自己本地的路径-->
 <script src="static/layui/layui.js" type="text/javascript"></script>
 <script>
-    layui.use(['carousel', 'form','laypage', 'layer'], function () {
+    layui.use(['carousel', 'form', 'laypage', 'layer'], function () {
         var carousel = layui.carousel,
             laypage = layui.laypage,
             layer = layui.layer;
@@ -237,9 +238,9 @@
         //完整功能
         laypage.render({
             elem: 'demo7'
-            ,count: 100
-            ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-            ,jump: function(obj){
+            , count: 100
+            , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+            , jump: function (obj) {
                 console.log(obj)
             }
         });

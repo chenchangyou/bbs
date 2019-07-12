@@ -28,7 +28,7 @@
                 <li class="layui-nav-item layui-this"><a href="/user/index?uid=${user.id}"><i class="fa fa-home fa-1x"
                                                                                               style="color: purple"></i>
                     主页 </a></li>
-                <li class="layui-nav-item <%--layui-this--%>"><a href="/user/post/list?uid=${user.id}"><i
+                <li class="layui-nav-item "><a href="/user/post/list?uid=${user.id}"><i
                         class="fa fa-pencil-square-o fa-1x"
                         style="color: #04bdff"></i> 帖子</a>
                 </li>

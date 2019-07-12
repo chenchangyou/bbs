@@ -52,7 +52,7 @@
 	</select>
 
 	<select id="findByuid"  resultMap="collectResultMap" parameterType="Collect">
-		select p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,ca.name caname,p.category,
+		select p.id pid,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,ca.name caname,p.category,
 			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
 		from t_collect c
 		left join t_user u on u.id = c.uid
