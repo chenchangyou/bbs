@@ -45,4 +45,15 @@ public class CategoryConrroller {
         int row = categoryService.create(cname);
         return row;
     }
+    @ResponseBody
+    @PostMapping("update")
+    public int update(Long id,String name){
+
+        return categoryService.update(id,name);
+    }
+    @ResponseBody
+    @PostMapping("delete")
+    public int delete (Long id){
+       return categoryService.delete(id);
+    }
 }

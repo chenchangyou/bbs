@@ -17,4 +17,9 @@
 	<select id="findAll"  resultType="Category">
 		select id,name from t_category
 	</select>
+
+	<update id="update"  parameterType="Category">
+		update t_category set name=#{name}
+		 where id=#{id}
+	</update>
 </mapper>

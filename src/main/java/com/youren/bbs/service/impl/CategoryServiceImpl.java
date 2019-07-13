@@ -39,4 +39,13 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAll() {
         return categoryMapper.findAll();
     }
+
+    @Override
+    public int update(Long id, String name) {
+        Category category = new Category();
+        category.setId(id);
+        category.setName(name);
+
+        return categoryMapper.update(category);
+    }
 }

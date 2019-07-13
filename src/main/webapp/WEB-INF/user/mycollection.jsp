@@ -25,7 +25,7 @@
         }
 
         .panel-info{
-            margin-bottom:-1;
+            margin-bottom: -1px;
             z-index: 1;
             position: relative;
         }

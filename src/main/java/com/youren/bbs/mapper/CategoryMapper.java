@@ -11,4 +11,5 @@ public interface CategoryMapper {
     int delete(long id);
     Category findById(long id);
     List<Category> findAll();
+    int update(Category category);
 }
