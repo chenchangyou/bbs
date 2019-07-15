@@ -22,13 +22,13 @@
             <div class="layui-col-sm3">
                 <input type="radio" name="field" value="p.id" title="ID">
                 <input type="radio" name="field" value="p.title" title="标题" checked>
-                <input type="radio" name="field" value="u.username" title="用户名" checked>
+                <input type="radio" name="field" value="u.username" title="用户名">
             </div>
 
             <div class="layui-input-block layui-col-md5">
                 <input type="text" name="keyword" required lay-verify="required"  id="keyword"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-col-md2">
+            <div class="layui-col-md2" style="text-align: left; margin-left: 2px;">
                 <button type="button"  lay-submit  lay-filter="formDemo" class="layui-btn layui-btn-normal">搜索</button>
             </div>
         </form>
@@ -67,8 +67,11 @@
             ,cols: [[
                 {field:'id', width:80, title: 'ID'}
                 ,{field:'title', width:150, title: '标题'}
-                ,{field:'title', width:150, title: '类型',templet: function(d){
+                ,{field:'category', width:150, title: '类型',templet: function(d){
                         return''+ d.category.name +''
+                    }}
+                ,{field:'user', width:150, title: '发布人',templet: function(d){
+                        return''+ d.user.username +''
                     }}
                 ,{field:'browse',width:80, title: '访问量' }
                 ,{field:'awesome',width:80, title: '点赞量' }
@@ -81,9 +84,9 @@
         });
 
         form.on('submit(formDemo)', function(data){
-            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+           /* console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}*/
             //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 
             tableIns.reload({

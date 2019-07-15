@@ -29,7 +29,23 @@
             </i>
         </a>
     </ol>
+    <div class="layui-row layui-form" style="text-align: center">
+        <form class="layui-form">
+            <div class="layui-col-sm3">
+                <input type="radio" name="field" value="r.id" title="ID">
+                <input type="radio" name="field" value="u.username" title="用户名">
+                <input type="radio" name="field" value="p.title" title="标题">
+                <input type="radio" name="field" value="r.content" title="内容" checked>
+            </div>
 
+            <div class="layui-input-block layui-col-md5">
+                <input type="text" name="keyword" required lay-verify="required"  id="keyword"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-col-md2" style="text-align: left; margin-left: 2px;">
+                <button type="button"  lay-submit  lay-filter="formDemo" class="layui-btn layui-btn-normal">搜索</button>
+            </div>
+        </form>
+    </div>
 <div style="width: 100%">
         <div>
             <table class="layui-hide" id="test" lay-filter="test"></table>
@@ -43,8 +59,9 @@
 </script>
 
 <script>
-    layui.use(['table','layedit'], function(){
-        var table = layui.table;
+    layui.use(['table','layedit','form'], function(){
+        var table = layui.table
+            ,form = layui.form;
 
 
         table.render({
@@ -76,6 +93,45 @@
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]]
         });
+
+        form.on('submit(formDemo)', function(data){
+            /* console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}*/
+            //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+
+            tableIns.reload({
+                elem: '#test'
+
+                ,url: '/admin/bypostkeyword' //设置异步接口
+                ,id: 'idTest'
+                ,where: { //设定异步数据接口的额外参数，任意设
+                    field: data.field.field
+                    ,keyword: data.field.keyword
+                    //…
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                },cols: [[
+                    {type:'numbers' ,fixed:'left'}
+                    ,{field:'id', width:80, title: 'ID', hide:true}
+                    ,{field:'user', width:120, title: '回帖人',templet: function(d){
+                            return''+ d.user.username +''
+                        }}
+                    ,{field:'dormitory', width:80, title: '回帖ID',templet: function(d){
+                            return''+ d.post.id +''
+                        }}
+                    ,{field:'post', width:180, title: '回帖标题',templet: function(d){
+                            return''+ d.post.title +''
+                        }}
+                    ,{field:'content', width:220, title: '回帖内容'}
+                    ,{field:'createTime', width:160,sort:true, title: '回帖时间',templet:'<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }}</div>'}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]]//设置表头
+            });
+            return false;
+        });
+
         //监听行工具事件
         table.on('tool(test)', function(obj){
             var data = obj.data;

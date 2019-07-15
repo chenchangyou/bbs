@@ -74,6 +74,10 @@
         .contentbox:hover {
             cursor: pointer;
         }
+        .sectionback{
+            background-color: rgba(30, 159, 255, 0.5);
+            color: #ffffff;
+        }
 
     </style>
 </head>
@@ -86,7 +90,7 @@
         <li class="active">版块</li>
     </ol>
     <blockquote class="layui-elem-quote " style="background-color: #FFFFFF;margin-bottom: 5px">所有版块</blockquote>
-    <div class="layui-row" id="Section" style="background-color: #ffffff; min-height: 20%;padding: 5px">
+    <div class="layui-row" id="Section" style="background-color: #ffffff; overflow: auto;min-height: 20%;max-height: 60%;padding: 5px">
         <%--版块区--%>
     </div>
     <div class="layui-row" style="min-height: 100%;background-color: #ffffff">

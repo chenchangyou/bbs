@@ -20,6 +20,9 @@ public class Section {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_time")
     private Date createTime;
+    @OneToOne
+    @JoinColumn(name = "moderator_id",referencedColumnName = "id")
+    private User user;
     private Integer state;
     @OneToMany( cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "section")
     private List<SectionCategory> sectionCategory;
@@ -64,12 +67,21 @@ public class Section {
         this.sectionCategory = sectionCategory;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Section{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", createTime=" + createTime +
+                ", user=" + user +
                 ", state=" + state +
                 '}';
     }

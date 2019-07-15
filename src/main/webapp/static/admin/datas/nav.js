@@ -60,7 +60,7 @@ var navs = [{
 },{
 	"title": "板块管理",
 	"icon": "fa-stop-circle",
-	"href": "/home",
+	"href": "/admin/section/",
 	"spread": false
 },{
 	"title": "首页轮播图",

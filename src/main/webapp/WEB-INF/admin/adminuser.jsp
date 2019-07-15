@@ -26,7 +26,7 @@
             <div class="layui-input-block layui-col-md6">
                 <input type="text" name="keyword" required lay-verify="required"  id="keyword"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-col-md2">
+            <div class="layui-col-md2" style="text-align: left; margin-left: 2px;">
                 <button type="button"  lay-submit  lay-filter="formDemo" class="layui-btn layui-btn-normal">搜索</button>
             </div>
         </form>
