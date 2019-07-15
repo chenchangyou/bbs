@@ -10,9 +10,8 @@
 	<title>主页</title>
 	<link rel="stylesheet" href="/static/resources/css/layui.css">
 	<link rel="stylesheet" href="/static/resources/css/admin.css">
-
+	<%--<link href="${ctx}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">--%>
 	<script src="/static/resources/js/jquery.1.12.4.min.js"></script>
-	<script src="/static/resources/js/layui.js"></script>
 	<script src="/static/resources/js/echarts.js"></script>
 	<script src="/static/resources/js/wonderland.js"></script>
 
@@ -24,6 +23,10 @@
 		.layadmin-backlog-body{
 			width:180px;
 			height:90px;
+		}
+		.list-group-item{
+			padding: 10px;
+
 		}
 	</style>
 </head>
@@ -61,7 +64,7 @@
 			</li>
 			<li class="layui-col-xs6">
 				<a class="layadmin-backlog-body">
-					<h3>帖子数</h3>
+					<h3>回帖数</h3>
 					<p><cite style="line-height:45px;" id="toDoOrder1"></cite></p>
 				</a>
 			</li>
@@ -69,21 +72,51 @@
 	</div>
 </div>
 <div class="layui-col-md10">
-	<div class="layui-card">
-		<div class="layui-card-header">
-			热门帖子
-		</div>
-		<div class="layui-card-body">
-
-
-
-		</div>
-	</div>
-
+	<blockquote class="layui-elem-quote">热门帖子</blockquote>
+	<ul class="list-group" id="content">
+			<li class="list-group-item">
+				<a class="" href="/postdetails?postlistId="></a>
+				<span style="position: absolute;right: 2%">发布于 </span>
+			</li>
+	</ul>
 </div>
 
+	<script src="/static/layui/layui.all.js"></script>
+	<script type="text/javascript">
 
-<%--<div class="layui-card" style="width: 600px; height: 195px;float:left;margin-left:15px;">
+		layui.use(['laypage', 'layer','util'], function () {
+			var laypage = layui.laypage
+					, layer = layui.layer
+					, util = layui.util;
+
+		$(function () {
+			$.get("/admin/getUserNum",function (data) {
+				$("#totalOrder").text(data);
+			});
+			$.get("/admin/getPostNum",function (data) {
+				$("#toDoOrder").text(data);
+			});
+			$.get("/admin/getReplyNum",function (data) {
+				$("#toDoOrder1").text(data);
+			});
+			$.get("/admin/findHighest",function (data) {
+
+				var content="";
+				for (var i=0;i<8;i++){
+					content +=" <li class=\"list-group-item\">" +
+							"<a class=\"\" href=\"/postdetails?postlistId="+data[i].id+" \">"+data[i].title+"</a>\n" +
+							"                                <span style=\"position: absolute;right: 2%\">发布于 "+util.toDateString(data[i].createTime, "yyyy-MM-dd HH:mm")+"</span>" +
+							"</li>"
+				}
+				$("#content").html(content);
+				// $("#totalOrder").text(data);
+			})
+		})
+		});
+	</script>
+
+<%-- Section
+<div class="layui-card" style="width: 600px; height: 195px;float:left;margin-left:15px;">
 	<!-- <div class="layui-card-header">热门商品浏览量</div> -->
 	<div class="layui-card-body" id="hot" style="width: 560px; height:180px;"></div>
 </div>

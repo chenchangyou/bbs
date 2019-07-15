@@ -47,6 +47,9 @@
         .w-e-toolbar{
             overflow: auto;
         }
+        .w-e-toolbar:hover{
+            overflow: inherit;
+        }
         .reply_textarea{
             position: relative;
             text-align: right;
@@ -105,7 +108,7 @@
 
     </div>
     </div>
-        <div class="layui-col-md10" style="background-color: #ffffff">
+        <div class="layui-col-md10">
 
             <div class="box-middle articledetail">
                 <div>

@@ -18,6 +18,9 @@
         .w-e-toolbar {
             overflow: auto;
         }
+        .w-e-toolbar:hover{
+            overflow: inherit;
+        }
     </style>
 </head>
 <body>

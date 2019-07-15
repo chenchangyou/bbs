@@ -1,7 +1,7 @@
 package com.youren.bbs.entity;
 
 
-import lombok.Data;
+
 
 import java.util.Date;
 

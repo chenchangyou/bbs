@@ -18,17 +18,17 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
         //指定拦截的路径，需要登录才可以进入的页面
         final String[] PRE_UNIGNORE_URI = {
-                "/admin/indexs", "/admin/index","/admin/post/","/admin/reply/",
-                "/admin/update","/admin/updateUser", "/admin/**","/admin"
+               "/admin/indexs","/admin/postlist","/admin/reply/","/admin/userlist",
+                "/admin/notice/list","/admin/carouse/list","/admin/category/list","/admin/index"
         };
 
         //jsp获得当前页面名称 sunString：截取一部分   requestURI.lastIndexOf：表示从uri的最后一个/开始截取
         //比如uri是"C:/abc/edf/123.txt" ,结果就是/123   截取最后一个/和.之间的部分
         String uri = requestURI.substring(requestURI.lastIndexOf("/"));
         //这部分url是特定的，不拦截。   return true表示放行
-        /*if (uri.startsWith("/user/registerjump") || uri.startsWith("/admin/loginjump") || uri.startsWith("/register")|| uri.startsWith("/login")) {
+        if (uri.startsWith("/admin/") || uri.startsWith("/admin/out") || uri.startsWith("/register")|| uri.startsWith("/admin/login")) {
             return true;
-        }*/
+        }
 
         //从session中获取对象
         User user = (User) request.getSession().getAttribute("loginAdmin");
@@ -41,6 +41,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
                 }else{
                     String loginUrl = "/admin/";
                     response.sendRedirect(request.getContextPath() + loginUrl);
+
                 }
             }
         }

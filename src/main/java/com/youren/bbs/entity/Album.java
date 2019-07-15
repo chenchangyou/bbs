@@ -1,15 +1,13 @@
 package com.youren.bbs.entity;
 
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
 
 /**
  * 用户相片
  */
-//@Data
+
 @Entity
 @Table(name = "t_album")
 public class Album {

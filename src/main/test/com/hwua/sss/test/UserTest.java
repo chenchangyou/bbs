@@ -15,6 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 import java.util.Optional;
+import java.util.UUID;
 
 
 public class UserTest {
@@ -62,5 +63,8 @@ public class UserTest {
         System.out.println(notice);
     }
 
-
+    @Test
+    public void UUid(){
+        System.out.println(UUID.randomUUID().toString());
+    }
 }

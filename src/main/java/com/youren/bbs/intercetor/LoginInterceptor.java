@@ -1,4 +1,3 @@
-/*
 package com.youren.bbs.intercetor;
 
 import com.youren.bbs.entity.User;
@@ -66,4 +65,3 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
 }
-*/

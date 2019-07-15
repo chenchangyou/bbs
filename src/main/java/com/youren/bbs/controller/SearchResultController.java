@@ -13,9 +13,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * 帖子搜索及分页
+ */
+
 @Controller
 @RequestMapping("/post/searchResult")
-public class SearchResult {
+public class SearchResultController {
 
     @Autowired
     private PostService postService;

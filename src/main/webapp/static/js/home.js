@@ -18,7 +18,7 @@ function getNewPost() {
                     layui.each(res.date, function (index, item) {
                         if(item.coverImage!=null){
                             postImg = '<div class="layui-hide-xs">' +
-                                '<a href="postdetails?postlistId=' + item.id + '" target="_blank" class="thumbnail" style="width: 93%;height: 100%">' +
+                                '<a href="/postdetails?postlistId=' + item.id + '" target="_blank" class="thumbnail" style="width: 93%;height: 100%">' +
                                 '<img style="max-height: 100%;width:100%;height:100%' +
                                 '" src="'+item.coverImage+'" alt="...">'+
                                 '</a> ' +
@@ -29,7 +29,7 @@ function getNewPost() {
                         if(item.state ==1){
                             lis.push('' +
                                 '<div class="contentbox layui-row" style="height: 120px;margin:0 auto;border-bottom: 1px solid #f4f5f7;">' +
-                                ' <a class="layui-col-xs12 layui-col-md9" href="postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
+                                ' <a class="layui-col-xs12 layui-col-md9" href="/postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
                                 '        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="float: left">' +
                                 '            <ul class="list-group" style="border: none">' +
                                 '                <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden"><span class="titlebox" style="font-size: 20px;white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;font-weight: bolder;">' + item.title + '</span></li>' +
@@ -82,7 +82,7 @@ function getPopularPost(){
                     layui.each(res.date, function (index, item) {
                         if(item.coverImage!=null){
                             postImg = '<div class="layui-hide-xs">' +
-                                '<a href="postdetails?postlistId=' + item.id + '" target="_blank" class="thumbnail" style="width: 93%;height: 100%">' +
+                                '<a href="/postdetails?postlistId=' + item.id + '" target="_blank" class="thumbnail" style="width: 93%;height: 100%">' +
                                 '<img style="max-height: 100%;width:100%;height:100%' +
                                 '" src="'+item.coverImage+'" alt="...">'+
                                 '</a> ' +
@@ -93,7 +93,7 @@ function getPopularPost(){
                         if(item.state ==1){
                             lis.push('' +
                                 '<div class="contentbox layui-row" style="height: 120px;margin:0 auto;border-bottom: 1px solid #f4f5f7;">' +
-                                ' <a class="layui-col-xs12 layui-col-md9" href="postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
+                                ' <a class="layui-col-xs12 layui-col-md9" href="/postdetails?postlistId=' + item.id + '"  target="_blank" style="display: block">' +
                                 '        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="float: left">' +
                                 '            <ul class="list-group" style="border: none">' +
                                 '                <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden"><span class="titlebox" style="font-size: 20px;white-space:nowrap;width: 100%; overflow: hidden;text-overflow:ellipsis;font-weight: bolder;">' + item.title + '</span></li>' +

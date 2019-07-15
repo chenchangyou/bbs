@@ -30,7 +30,7 @@ public class EmailController {
      * @return
      */
     @ResponseBody
-    @GetMapping("sendEmail")
+    @GetMapping("/sendEmail")
     public String  sendMail4Freemarker(String toEmail, HttpSession session){
         MimeMessage mMessage = javaMailSender.createMimeMessage();// 创建邮件对象
         MimeMessageHelper mMessageHelper;

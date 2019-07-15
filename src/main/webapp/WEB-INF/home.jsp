@@ -122,11 +122,13 @@
         <div class="box-middle articledetail layui-col-md10">
             <div style=" background-color: #F2F2F2;border-radius: 4px;">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top: 0; border-radius: 4px;">
-                    <ul class="layui-tab-title" style="background-color: #FFFFFF;border-radius: 5px">
-                        <%--<li class="layui-this">最新回复</li>--%>
+                    <div class="layui-col-md12">
+                    <ul class="layui-tab-title layui-col-md11" style="background-color: #FFFFFF;border-radius: 5px;height: 44px">
                         <li id="clicknewpost" onclick="getNewPost()">新帖</li>
                         <li onclick="getPopularPost()"><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
                     </ul>
+                    <span class="layui-col-md1" style="padding: 11.1px;border-bottom: 1px #e2e2e2 solid"><a href="/section/">更多>></a></span>
+                    </div>
                     <div class="layui-tab-content" style="padding: 0; border-radius: 4px;">
 
                         <div class="layui-tab-item" id="NewPost" style="border-radius: 5px"></div>

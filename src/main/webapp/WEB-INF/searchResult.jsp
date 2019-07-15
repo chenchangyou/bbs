@@ -58,7 +58,7 @@
              ,layer = layui.layer
               ,util = layui.util;
 
-        //分页完整功能
+        //分页功能
         laypage.render({
             elem: 'pages'
             , count: ${keywordMap.cont}
@@ -72,21 +72,21 @@
                 var createTime='';
                 $.post("/post/searchResult/bykeyword/",{keyword:keyword,page:page,limit:obj.limit},function (data) {
                     $.each(data.date,function (i,v) {
+
                         id=v.id;title=v.title;createTime=util.toDateString(v.createTime, "yyyy-MM-dd HH:mm");
-                        console.log(v);
+
                        content +=" <li class=\"list-group-item\">" +
                            "<a class=\"\" href=\"/postdetails?postlistId="+id+" \">"+title+"</a>\n" +
                            "                                <span style=\"position: absolute;right: 2%\">发布于 "+createTime+"</span>" +
                            "</li>"
+
                     });
-                    $("#content").html(content);-
+                    $("#content").html(content);
                     prominent();
                 });
-                console.log(obj)
-            }
+              }
         });
     });
-
 </script>
 <script>
         //搜索内容高亮

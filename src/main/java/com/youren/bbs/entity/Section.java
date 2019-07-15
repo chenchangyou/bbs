@@ -6,26 +6,23 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
- * 相册名
+ * 版块
  */
 
 @Entity
-@Table(name = "t_album_category")
-public class AlbumCategory {
+@Table(name = "t_section")
+public class Section {
+
     @Id
     private String id;
     private String name;
-    @OneToOne
-    @JoinColumn(name = "uid",referencedColumnName = "id")
-    private User user; //相册所属用户
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="create_time")
+    @Column(name = "create_time")
     private Date createTime;
-    private String state;
-    @OneToMany( cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "albumCategory")
-    private List<Album> album; //拥有的照片
+    private Integer state;
+    @OneToMany( cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "section")
+    private List<SectionCategory> sectionCategory;
 
     public String getId() {
         return id;
@@ -43,14 +40,6 @@ public class AlbumCategory {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -59,30 +48,29 @@ public class AlbumCategory {
         this.createTime = createTime;
     }
 
-    public List<Album> getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(List<Album> album) {
-        this.album = album;
-    }
-
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
+    }
+
+    public List<SectionCategory> getSectionCategory() {
+        return sectionCategory;
+    }
+
+    public void setSectionCategory(List<SectionCategory> sectionCategory) {
+        this.sectionCategory = sectionCategory;
     }
 
     @Override
     public String toString() {
-        return "AlbumCategory{" +
+        return "Section{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", user=" + user +
                 ", createTime=" + createTime +
-                ", state='" + state + '\'' +
+                ", state=" + state +
                 '}';
     }
 }

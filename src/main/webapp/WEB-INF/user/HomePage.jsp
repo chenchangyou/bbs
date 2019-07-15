@@ -2,7 +2,7 @@
 <%@include file="../../common/taglib.jsp" %>
 <html>
 <head>
-    <title>${loginUser.username}的个人中心</title>
+    <title>${user.username}的个人中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
     <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet">
