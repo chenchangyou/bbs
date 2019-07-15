@@ -1,5 +1,7 @@
 package com.youren.bbs.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youren.bbs.entity.*;
 import com.youren.bbs.service.*;
 import com.youren.bbs.util.Constant;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,8 +22,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.youren.bbs.util.Constant.POST_POSTCOVER_SAVE_PATH;
 
 
 /**
@@ -98,6 +98,10 @@ public class PostController {
 
         //获取当前帖子的所有评论
         List<Reply> replyLists = replyService.findByPostId(postlistId);
+
+        for(Reply reply : replyLists){
+            System.out.println(reply);
+        }
 
         model.addAttribute("followedmap",followedmap);
         model.addAttribute("collectMap",collectMap);
@@ -225,13 +229,13 @@ public class PostController {
         return "/admin/postEdit";
     }
     //提交编辑的帖子
+//    @ResponseBody
     @PostMapping("/post/edit")
     public String edit(MultipartFile file,Long pid,  String title,String content, HttpSession session,
                        Model model,Long category,String synopsis) throws IOException {
 
-
         Post post = postService.findById(pid);
-
+        Long uid = post.getUser().getId();
         Category categorys = new Category();
         categorys.setId(category);
         post.setTitle(title);
@@ -256,9 +260,54 @@ public class PostController {
         if(i>0){
             System.out.println("OK");
         }else {
-            System.out.println("NO");
+            System.out.println("No");
         }
 
-        return "redirect:/user/index";
+        return "redirect:/user/post/list?uid="+uid;
+    }
+    //提交编辑的帖子
+//    @ResponseBody
+    @PostMapping("/admin/post/edit")
+    public String adminedit(MultipartFile file,Long pid,  String title,String content, HttpSession session,
+                       Model model,Long category,String synopsis) throws IOException {
+
+               edit( file,pid, title,content, session,
+                 model, category,synopsis);
+
+        return "/admin/adminpost";
+    }
+    @ResponseBody
+    @GetMapping("/getpostlist")
+    public Map home(@RequestParam(name = "page",defaultValue = "1") int pageNum,
+                    @RequestParam(name = "limit",defaultValue = "5") int pageSize){
+
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Post>  postList = postService.findAll();
+
+        PageInfo<Post> page = new PageInfo<Post>(postList);
+        map.put("date",page.getList());
+        map.put("pages",page.getPages());
+
+        return map;
+    }
+    @ResponseBody
+    @GetMapping("/getpostlistBypopular")
+    public Map postBypopular(@RequestParam(name = "page",defaultValue = "1") int pageNum,
+                    @RequestParam(name = "limit",defaultValue = "5") int pageSize){
+
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Post>  postList = postService.findAllByPopular();
+
+        PageInfo<Post> page = new PageInfo<Post>(postList);
+        map.put("date",page.getList());
+        map.put("pages",page.getPages());
+
+        return map;
     }
 }

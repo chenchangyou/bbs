@@ -77,14 +77,15 @@
                                          class="img-circle">
                                 </a>
                                 <a href="/user/index?uid=${followed.userId.id}">
+
                                     <span>
                                             ${followed.userId.username}
                                     </span>
                                 </a>
-                                <span class="layui-form">
+                              <%--  <span class="layui-form">
                             <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest"
                                    lay-text="关注|已取消">
-                    </span>
+                    </span>--%>
                             </div>
                         </div>
                     </c:forEach>

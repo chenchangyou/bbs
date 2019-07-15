@@ -64,10 +64,14 @@
     <div class="layui-row layui-col-space8 uploadload">
 
         <diV>
-               <button id="addAlbum" type="button" class="layui-btn layui-btn-warm">
-                   <i class="layui-icon layui-icon-add-1"></i>
-                   添加相册
-               </button>
+            <c:if test="${not empty loginUser}">
+                <c:if test="${loginUser.id eq user.id}">
+                   <button id="addAlbum" type="button" class="layui-btn layui-btn-warm">
+                       <i class="layui-icon layui-icon-add-1"></i>
+                       添加相册
+                   </button>
+                </c:if>
+            </c:if>
         </diV>
 
         <c:if test="${empty albumCategoryList}">
@@ -77,13 +81,18 @@
                 </div>
             </div>
         </c:if>
-
+<c:if test="${not empty loginUser}">
+    <c:if test="${loginUser.id eq user.id}">
         <c:forEach items="${albumCategoryList}" var="albumCategory">
             <div class="layui-row" >
                 <blockquote class="layui-elem-quote layui-col-md12 layui-form"style="height: 60px">
                     <span class="layui-col-md11 layui-col-xs9">${albumCategory.name}</span>
                     <span class="layui-col-md1 layui-col-xs3">
-                        <input id="${albumCategory.id}" type="checkbox" <c:if test="${albumCategory.state}">checked</c:if> name="open" lay-skin="switch" lay-filter="Albumchecked" lay-text="公开|隐藏">
+                         <c:if test="${not empty loginUser}">
+                            <c:if test="${loginUser.id eq user.id}">
+                                <input id="${albumCategory.id}" type="checkbox" <c:if test="${albumCategory.state}">checked</c:if> name="open" lay-skin="switch" lay-filter="Albumchecked" lay-text="公开|隐藏">
+                            </c:if>
+                         </c:if>
                     </span>
                 </blockquote>
                 <div class="layer-photos-demo user_album layui-col-md12 layer-photos-demo">
@@ -103,26 +112,123 @@
                             </c:forEach>
                         </div>
 
-                        <div class="layui-upload layui-col-md2" style="text-align: center">
-                            <button type="button" class="layui-btn uploadAlbum" id="${albumCategory.id}">上传照片</button>
-                        </div>
+                        <c:if test="${not empty loginUser}">
+                            <c:if test="${loginUser.id eq user.id}">
+                                <div class="layui-upload layui-col-md2" style="text-align: center">
+                                    <button type="button" class="layui-btn uploadAlbum" id="${albumCategory.id}">上传照片</button>
+                                </div>
+                            </c:if>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </c:forEach>
+    </c:if>
+    <c:if test="${loginUser.id != user.id}">
+
+        <c:forEach items="${albumCategoryList}" var="albumCategory">
+            <c:if test="${albumCategory.state}">
+            <div class="layui-row" >
+                <blockquote class="layui-elem-quote layui-col-md12 layui-form"style="height: 60px">
+                    <span class="layui-col-md11 layui-col-xs9">${albumCategory.name}</span>
+                    <span class="layui-col-md1 layui-col-xs3">
+                         <c:if test="${not empty loginUser}">
+                             <c:if test="${loginUser.id eq user.id}">
+                                 <input id="${albumCategory.id}" type="checkbox" <c:if test="${albumCategory.state}">checked</c:if> name="open" lay-skin="switch" lay-filter="Albumchecked" lay-text="公开|隐藏">
+                             </c:if>
+                         </c:if>
+                    </span>
+                </blockquote>
+                <div class="layer-photos-demo user_album layui-col-md12 layer-photos-demo">
+                    <div class="layui-row"  style="text-align: center">
+
+                        <c:if test="${empty albumCategory.album}">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="text-align: center">
+                                    该相册下没有照片
+                                </div>
+                            </div>
+                        </c:if>
+
+                        <div class="layui-col-md10" style="padding:5px; overflow: auto;height: 190px">
+                            <c:forEach items="${albumCategory.album}" var="album">
+                                <img layer-pid="${album.id}" layer-src="${album.url}" src="${album.url}" alt="${album.createTime}">
+                            </c:forEach>
+                        </div>
+
+                        <c:if test="${not empty loginUser}">
+                            <c:if test="${loginUser.id eq user.id}">
+                                <div class="layui-upload layui-col-md2" style="text-align: center">
+                                    <button type="button" class="layui-btn uploadAlbum" id="${albumCategory.id}">上传照片</button>
+                                </div>
+                            </c:if>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+            </c:if>
+        </c:forEach>
+    </c:if>
+</c:if>
+
+        <c:if test="${empty loginUser}">
+
+                <c:forEach items="${albumCategoryList}" var="albumCategory">
+
+                    <c:if test="${albumCategory.state}">
+                    <div class="layui-row" >
+                        <blockquote class="layui-elem-quote layui-col-md12 layui-form"style="height: 60px">
+                            <span class="layui-col-md11 layui-col-xs9">${albumCategory.name}</span>
+                            <span class="layui-col-md1 layui-col-xs3">
+                         <c:if test="${not empty loginUser}">
+                             <c:if test="${loginUser.id eq user.id}">
+                                 <input id="${albumCategory.id}" type="checkbox" <c:if test="${albumCategory.state}">checked</c:if> name="open" lay-skin="switch" lay-filter="Albumchecked" lay-text="公开|隐藏">
+                             </c:if>
+                         </c:if>
+                    </span>
+                        </blockquote>
+                        <div class="layer-photos-demo user_album layui-col-md12 layer-photos-demo">
+                            <div class="layui-row"  style="text-align: center">
+
+                                <c:if test="${empty albumCategory.album}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body" style="text-align: center">
+                                            该相册下没有照片
+                                        </div>
+                                    </div>
+                                </c:if>
+
+                                <div class="layui-col-md10" style="padding:5px; overflow: auto;height: 190px">
+                                    <c:forEach items="${albumCategory.album}" var="album">
+                                        <img layer-pid="${album.id}" layer-src="${album.url}" src="${album.url}" alt="${album.createTime}">
+                                    </c:forEach>
+                                </div>
+
+                                <c:if test="${not empty loginUser}">
+                                    <c:if test="${loginUser.id eq user.id}">
+                                        <div class="layui-upload layui-col-md2" style="text-align: center">
+                                            <button type="button" class="layui-btn uploadAlbum" id="${albumCategory.id}">上传照片</button>
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                            </div>
+                        </div>
+                    </div>
+                    </c:if>
+                </c:forEach>
+        </c:if>
+
     </div>
 </div>
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script>
     //调用示例
-    layer.photos({
+    var ind =layer.photos({
         photos: '.layer-photos-demo'
         ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
     });
-</script>
 
-    <script>
         var uid;
         layui.use(['upload','form'], function() {
             var $ = layui.jquery
@@ -173,6 +279,7 @@
                                     $("#load").remove();
                                     $this.parent().prev().prepend('<img layer-pid="'+state.id+'" layer-src="'+state.url+'" src="'+state.url+'" alt="'+state.createTime+'">')
                                    layer.msg('上传成功');
+                                    ind.readable()
                                 },
                                 error:function(){
                                     $("#load").remove();
@@ -208,7 +315,12 @@
                             '            </div>'
 
                         if(data!=null){
-                            layer.msg("新建相册成功");
+                            layer.msg("新建相册成功",{
+                                iocn:1,
+                                time:600
+                            },function () {
+                                window.location.reload();
+                            });
                             $(".uploadload").append(content)
                         }else {
                             layer.msg(

@@ -58,6 +58,7 @@ public class ReplyServiceImpl implements ReplyService {
                 reply.setUser(replylist.getUser());
                 reply.setCreateTime(replylist.getCreateTime());
                 reply.setPost(replylist.getPost());
+                reply.setLikecont(replylist.getLikecont());
             }
             long replyId = replylist.getId();
             List<ReplyComment> byReplyId = replyCommentDao.findByReplyId(replyId);
@@ -102,5 +103,13 @@ public class ReplyServiceImpl implements ReplyService {
         reply.setContent(content);
 
         return replyMapper.update(reply);
+    }
+
+    @Override
+    public int updateLikeCont(Long rid, Integer likeNum) {
+        Reply reply = new Reply();
+        reply.setId(rid);
+        reply.setLikecont(likeNum);
+        return replyMapper.updateLikeCont(reply);
     }
 }

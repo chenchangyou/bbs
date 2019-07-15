@@ -1,5 +1,6 @@
 package com.youren.bbs.service.impl;
 
+import com.youren.bbs.entity.User;
 import com.youren.bbs.mapper.PostMapper;
 import com.youren.bbs.entity.Post;
 import com.youren.bbs.service.PostService;
@@ -89,5 +90,22 @@ public class PostServiceImpl implements PostService {
         post.setId(postId);
         post.setCollectCount(collectCount);
         return postMapper.updateCollectCount(post);
+    }
+
+    @Override
+    public List<Post> findByKeyWord(String keyword) {
+
+        return postMapper.findByKeyWord("%"+keyword+"%");
+    }
+
+    @Override
+    public List<Post> findAllByPopular() {
+        return postMapper.findAllByPopular();
+    }
+
+    @Override
+    public List<Post> ByKeyword(String Field, String keyword) {
+
+        return postMapper.ByKeyWord(Field,"%"+keyword+"%");
     }
 }

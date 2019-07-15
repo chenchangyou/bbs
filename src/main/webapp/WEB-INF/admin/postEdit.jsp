@@ -27,7 +27,7 @@
         <li class="active">编辑帖子</li>
     </ol>
     <h2>编辑帖子</h2>
-    <form action="/post/edit" method="post" class="layui-form" enctype="multipart/form-data">
+    <form action="/admin/post/edit" method="post" class="layui-form" enctype="multipart/form-data">
         <input type="hidden" name="pid" value="${post.id}">
         <input type="hidden" name="uid" value="${post.user.id}">
         <input type="hidden" name="act" value="add" />

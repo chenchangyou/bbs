@@ -51,7 +51,7 @@
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<img src="${ctx}/static/admin/images/0.jpg" />
-								<span>站长：CCY</span>
+								<span>站长：${loginAdmin.username}</span>
 							</a>
 							<dl class="layui-nav-child">
 								<dd>
@@ -66,14 +66,14 @@
 									</a>
 								</dd>
 								<dd>
-									<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+									<a href="/admin/out"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 								</dd>
 							</dl>
 						</li>
 					</ul>
 					<ul class="layui-nav admin-header-item-mobile">
 						<li class="layui-nav-item">
-							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+							<a href="/admin/out"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 						</li>
 					</ul>
 				</div>
@@ -100,7 +100,7 @@
 			<div class="layui-footer footer footer-demo" id="admin-footer">
 				<div class="layui-main">
 					<p>2019 &copy;
-						<a href="http://m.zhengjinfan.cn/"> 暂无信息 </a> LGPL license
+						<a href="javascript:"> 暂无信息 </a> LGPL license
 					</p>
 				</div>
 			</div>

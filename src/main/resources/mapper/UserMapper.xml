@@ -48,4 +48,18 @@
 		 from t_user
 		 where state = 1
 	</select>
+
+	<select id="findByKeyword" resultType="User">
+		select id,username,password,tel,sex,age,tel,email,headshot,state,type,create_time createTime,
+		      nickname,synopsis
+		 from t_user
+		 <where>
+			 <if test="field!=null">
+				 and ${field} like #{keyword}
+			 </if>
+
+				and state = 1
+		 </where>
+
+	</select>
 </mapper>

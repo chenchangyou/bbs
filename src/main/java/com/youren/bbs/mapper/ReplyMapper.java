@@ -13,4 +13,5 @@ public interface ReplyMapper {
     List<Reply> findByPostId(long postId);
     List<Reply> findAll();
     int update(Reply reply);
+    int updateLikeCont(Reply reply);
 }

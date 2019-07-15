@@ -7,34 +7,47 @@
 
 	<resultMap id="replyResultMap" type="Reply">
 		<id property="id" column="id" />
+		<result property="likecont" column="likecont" />
 		<result property="content" column="content" />
 		<result property="createTime" column="create_time" />
-		<!-- 一对多的映射 -->
+		<!-- 多对一的映射 -->
 		<association property="user" javaType="User">
 			<id property="id" column="uid"/>
 			<result property="username" column="username"/>
 			<result property="headshot" column="headshot"/>
 		</association>
+
 		<association property="post" javaType="Post">
 			<id property="id" column="pid"/>
 			<result property="title" column="title"/>
 		</association>
+
+		<association property="replyLike" javaType="ReplyLike">
+
+		</association>
+
 	</resultMap>
 
     <insert id="create" parameterType="Reply" useGeneratedKeys="true" keyProperty="id">
-		insert into t_reply(user_id,post_id,content,create_time) values(#{user.id},#{post.id},#{content},#{createTime})
+		insert into t_reply(user_id,post_id,content,create_time)
+		 values(#{user.id},#{post.id},#{content},#{createTime})
 	</insert>
 
 	<delete id="delete" parameterType="long">
 		delete from t_reply where id=#{id}
 	</delete>
 
+
 	<update id="update" parameterType="Reply">
 		update t_reply set content=#{content} where id=#{id}
 	</update>
 
+	<update id="updateLikeCont" parameterType="Reply">
+		update t_reply set likecont=#{likecont} where id=#{id}
+	</update>
+
 	<select id="findById" parameterType="long" resultMap="replyResultMap">
-		select r.id,r.content,r.create_time,u.headshot,
+		select r.id,r.content,r.create_time,r.likecont,u.headshot,
 			   u.id uid, u.username,p.title,p.id pid
 		from t_reply r
 		left join t_post p on p.id = r.post_id
@@ -43,15 +56,16 @@
 	</select>
 
 	<select id="findByPostId" parameterType="long" resultMap="replyResultMap">
-		select r.id,r.content,r.create_time,u.headshot,
-			   u.id uid, u.username
+		select r.id,r.content,r.create_time,r.likecont,u.headshot,
+			   u.id uid, u.username,p.title,p.id pid
 		from t_reply r
-		left join t_user u on r.user_id=u.id
+		left join t_post p on p.id = r.post_id
+		left join t_user u on u.id = r.user_id
 		where r.post_id=#{postId}
 		order by create_time desc
 	</select>
 	<select id="findAll" resultMap="replyResultMap">
-		select r.id,r.content,r.create_time,u.headshot,
+		select r.id,r.content,r.create_time,r.likecont,u.headshot,
 			   u.id uid, u.username,p.title,p.id pid
 		from t_reply r
 		left join t_post p on p.id = r.post_id

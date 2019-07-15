@@ -72,10 +72,10 @@
     </div>
 
     <div class="layui-col-row" style="margin: 10px auto;height: 50px; background-color: #FFFFFF;">
-        <form class="layui-col-md4 layui-col-xs11 layui-col-sm7" style="position: absolute;right: 0px;padding: 8px">
+        <form method="get" action="/post/searchResult/"  class="layui-col-md4 layui-col-xs11 layui-col-sm7" style="position: absolute;right: 0px;padding: 8px">
             <div class="layui-row" style="text-align: right">
                 <span class="form-group layui-col-md8 layui-col-sm8 layui-col-xs8">
-                    <input type="text" class="form-control" placeholder="请输入关键字">
+                    <input type="text" name="keyword" class="form-control" placeholder="请输入关键字">
                 </span>
                 <span class="layui-col-md3 layui-col-sm3 layui-col-xs3">
                     <button type="submit" class="btn btn-danger" style="width: 100%;">搜索</button>
@@ -124,13 +124,13 @@
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top: 0; border-radius: 4px;">
                     <ul class="layui-tab-title" style="background-color: #FFFFFF;border-radius: 5px">
                         <%--<li class="layui-this">最新回复</li>--%>
-                        <li id="newpost" onclick="getNewPost()">新帖</li>
-                        <li><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
+                        <li id="clicknewpost" onclick="getNewPost()">新帖</li>
+                        <li onclick="getPopularPost()"><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
                     </ul>
                     <div class="layui-tab-content" style="padding: 0; border-radius: 4px;">
 
                         <div class="layui-tab-item" id="NewPost" style="border-radius: 5px"></div>
-                        <div class="layui-tab-item">内容3</div>
+                        <div class="layui-tab-item" id="PopularPost"></div>
                     </div>
                 </div>
 

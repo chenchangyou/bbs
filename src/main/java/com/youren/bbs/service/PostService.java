@@ -1,6 +1,7 @@
 package com.youren.bbs.service;
 
 import com.youren.bbs.entity.Post;
+import com.youren.bbs.entity.User;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface PostService {
     int updateawesome(Long postId,Integer awesome);
     int updatereplynumber(Long postId,Integer replynumber);
     int updatecollectCount(Long postId,Integer collectCount);
+    List<Post> findByKeyWord(String keyword);
+    List<Post> findAllByPopular();
+    List<Post>ByKeyword(String Field, String keyword);
 }

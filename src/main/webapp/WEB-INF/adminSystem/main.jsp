@@ -1,187 +1,304 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@include file="../../common/taglib.jsp"%>
+
 <!DOCTYPE html>
 <html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>主页</title>
+	<link rel="stylesheet" href="/static/resources/css/layui.css">
+	<link rel="stylesheet" href="/static/resources/css/admin.css">
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="${ctx}/static/admin/plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="${ctx}/static/admin/css/main.css" />
-	</head>
+	<script src="/static/resources/js/jquery.1.12.4.min.js"></script>
+	<script src="/static/resources/js/layui.js"></script>
+	<script src="/static/resources/js/echarts.js"></script>
+	<script src="/static/resources/js/wonderland.js"></script>
 
-	<body>
-		<div class="admin-main">
-			<blockquote class="layui-elem-quote">
-				<p>本模板基于LayUI实现 ,支持所有LayUI组件.</p>
-				LayUI文档地址：
-				<a href="http://www.layui.com/doc" target="_blank">http://www.layui.com/doc</a>
-				<p>项目地址：
-					<a href="http://git.oschina.net/besteasyteam/beginner_admin" target="_blank">http://git.oschina.net/besteasyteam/beginner_admin</a>
-				</p>
-				<p>建议反馈和问题收集地址:
-					<a href="http://fly.zhengjinfan.cn/" target="_blank">http://fly.zhengjinfan.cn/</a>
-				</p>
-				<p>交流群：248049395</p>
-				<br/>
-				<p style="color: #01AAED;">子窗体弹出对话框编辑表单的一些建议：如果是处理表单的，建议在子窗口弹出。把背景设置为无，如果只是提示信息，可以在父窗口弹出。</p>
-			</blockquote>
-			<fieldset class="layui-elem-field">
-				<legend>更新日志</legend>
-				<div class="layui-field-box">
-                    <fieldset class="layui-elem-field layui-field-title">
-                        <legend>版本号:# v0.2.2 2017-04-01</legend>
-                        <div class="layui-field-box">
-                            <p>1、tab组件，添加onSwitch事件，切换时发生，回调参数data.id ,data,index,data.elem 详情见index.js示例(21行代码)</p>
-                            <p>2、tab组件，添加getCurrentTabId方法，用于获取当前焦点的tabId</p>
-                            <p>3、tab组件，添加deleteTab,删除指定tab ，参数为tabId. 示例：parent.tab.deleteTab(parent.tab.getCurrentTabId());</p>
-                        </div>
-                    </fieldset>
-                    <fieldset class="layui-elem-field layui-field-title">
-                        <legend>版本号:# v0.2.1 2017-03-30</legend>
-                        <div class="layui-field-box">
-                            <p>1、paging组件，添加renderBefore方法</p>
-                            <p>2、paging组件，修改数据结构：code(number)改成rel(boolean)</p>
-                            <p>3、btable组件，添加openWait属性[是否显示加载等待框]</p>
-                            <p>4、btable组件，添加onSuccess回调方法[数据加载成功之后触发]</p>
-                            <p>5、btable组件，添加isSelected方法[获取当前是否有选中行]</p>
-                            <p>6、btable组件，columns属性添加format属性，用于格式化显示</p>
-                            <p>7、btable组件，添加序号列</p>
-                            <p>8、修复若干已知bug.</p>
-                        </div>
-                    </fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.1.9 2017-03-06</legend>
-						<div class="layui-field-box">
-							<p>1、修复table组件一些样式问题。</p>			
-							<p>详情请查看：<span style="color: #01AAED;">基本元素->表格</span></p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.1.8 2017-03-05</legend>
-						<div class="layui-field-box">
-							<p>1、添加table组件。</p>							
-							<p>2、paging组件添加elemType属性。</p>
-							<p>详情请查看：<span style="color: #01AAED;">基本元素->表格</span></p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.1.7 2017-03-02</legend>
-						<div class="layui-field-box">
-							<p>1、更新table.html的实现，基于paging组件。</p>
-							<p>详情请查看：<span style="color: #01AAED;">基本元素->表格</span></p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.1.6 2017-03-02</legend>
-						<div class="layui-field-box">
-							<p>1、修复<a href="layout.html" target="_blank">layout.html</a>显示不正常的一些bug</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.1.5 2017-03-02</legend>
-						<div class="layui-field-box">
-							<p>1、修复tab选项卡向上移动的bug</p>
-							<p>2、layui 更新到1.0.9_rls</p>	
-							<p>3、新增子窗口提交表单并刷新当前窗口的demo,详见 <span style="color: #01AAED;">基本元素->表格->添加信息(按钮)</span></p>									
-							<p><a href="http://fly.layui.com/jie/7582.html" target="_blank">layui1.0.9_rls更新日志</a></p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.1.4 2017-02-23</legend>
-						<div class="layui-field-box">
-							<p>1、修复若干个bug</p>
-							<p>2、添加在子页面打开选项卡的demo,详见 -- 其他 -> 子窗体中打开选项卡</p>
-							<p>3、layui 更新到1.0.8</p>
-							<p>4、最后添加了你们期待已久的tab选项卡右键菜单。需要设置contextMenu为true</p>							
-							<p>...</p>
-							<p>好啦啦~~~本次更新的内容就是这些，有疑问可以在群里面提出哦~~~~~</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.9 2016-12-22</legend>
-						<div class="layui-field-box">
-							<p>1、添加锁屏界面，按Alt+L组合键也能触发哦 ~~~~</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.8 2016-12-21</legend>
-						<div class="layui-field-box">
-							<p>1、navbar组件 添加属性 <cite style="color: #1AA094;">spreadOne </cite>"设置是否只展开一个二级菜单，默认为false"</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.8 2016-12-05</legend>
-						<div class="layui-field-box">
-							<p>1、对navbar组件添加缓存支持</p>
-							<p>2、更新navbar组件说明文档</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.8 2016-12-02</legend>
-						<div class="layui-field-box">
-							<p>1、layui版本更新到1.0.7</p>
-							<p>2、添加layout三级菜单布局页面
-								<a href="http://m.zhengjinfan.cn/layout.html" style="color: #1AA094;" target="_blank">点击这里查看演示</a>
-							</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.7 2016-11-29</legend>
-						<div class="layui-field-box">
-							<p>1、layui版本更新到1.0.6</p>
-							<p>2、添加常用的正则</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.6 2016-11-27</legend>
-						<div class="layui-field-box">
-							<p>1、添加tab组件</p>
-							<p>2、使用tab组件优化tab选项卡的代码</p>
-							<p>3、将index.html页面的js代码独立出来</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.5 2016-11-26</legend>
-						<div class="layui-field-box">
-							<p>1、添加隐藏左侧导航栏功能</p>
-							<p>2、修改tab选项卡样式</p>
-							<p>3、添加左侧nav导航栏选中状态</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.4 2016-11-25</legend>
-						<div class="layui-field-box">
-							<p>1、添加Navbar组件（动态渲染nav）</p>
-							<p>2、更新首页nav的渲染方式 (使用Navbar组件动态渲染)</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.3 2016-11-22</legend>
-						<div class="layui-field-box">
-							<p>1、table 添加单选，全选功能</p>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;1.1、依赖组件iCheck 文档地址：
-								<a href="http://www.bootcss.com/p/icheck/" target="_blank">http://www.bootcss.com/p/icheck/</a>
-							</p>
-							<p>2、添加登录页面</p>
-							<p>--------------------------------------------------------------------</p>
-							<p>3、top样式修改</p>
-							<p>4、修复直接选中checkbox时背景色没变化，感谢
-								<a href="http://fly.layui.com/u/2451288/" target="_blank">@瀮月</a>的反馈</p>
-						</div>
-					</fieldset>
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>版本号:# v0.0.1 2016-11-20</legend>
-						<div class="layui-field-box">
-							<p>1、基本布局 tab + iframe</p>
-							<p>2、动态添加，删除tab</p>
-							<p>3、表格样式</p>
-							<p>4、分页组件</p>
-						</div>
-					</fieldset>
-				</div>
-			</fieldset>
+	<style type="text/css">
+		.layui-col-xs6{
+			width:220px;
+			height:90px;
+		}
+		.layadmin-backlog-body{
+			width:180px;
+			height:90px;
+		}
+	</style>
+</head>
+<body style="background-color:#F2F2F2;padding-top:15px;padding-left:15px;padding-bottom:0px;">
+<div>
+<div class="layui-card" style="width: 480px; height: 195px;float:left;">
+	<div class="layui-card-header">友人论坛</div>
+	<div class="layui-card-body" id="todo" style="width: 440px; height: 120px;">
+		<div class="layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 80px;">
+			<li class="layui-col-xs6">
+				<a class="layadmin-backlog-body">
+					<h3>网站用户</h3>
+					<p><cite style="line-height:45px;" id="totalOrder"></cite></p>
+				</a>
+			</li>
+			<li class="layui-col-xs6">
+				<a class="layadmin-backlog-body">
+					<h3>帖子数</h3>
+					<p><cite style="line-height:45px;" id="toDoOrder"></cite></p>
+				</a>
+			</li>
 		</div>
-	</body>
+	</div>
+</div>
 
+<div class="layui-card" style="width: 480px; height: 195px;float:left;">
+	<div class="layui-card-header">热门</div>
+	<div class="layui-card-body" id="todo1" style="width: 440px; height: 120px;">
+		<div class="layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 80px;">
+			<li class="layui-col-xs6">
+				<a class="layadmin-backlog-body">
+					<h3>热门帖子</h3>
+					<p><cite style="line-height:45px;" id="totalOrder1"></cite></p>
+				</a>
+			</li>
+			<li class="layui-col-xs6">
+				<a class="layadmin-backlog-body">
+					<h3>帖子数</h3>
+					<p><cite style="line-height:45px;" id="toDoOrder1"></cite></p>
+				</a>
+			</li>
+		</div>
+	</div>
+</div>
+<div class="layui-col-md10">
+	<div class="layui-card">
+		<div class="layui-card-header">
+			热门帖子
+		</div>
+		<div class="layui-card-body">
+
+
+
+		</div>
+	</div>
+
+</div>
+
+
+<%--<div class="layui-card" style="width: 600px; height: 195px;float:left;margin-left:15px;">
+	<!-- <div class="layui-card-header">热门商品浏览量</div> -->
+	<div class="layui-card-body" id="hot" style="width: 560px; height:180px;"></div>
+</div>
+<div class="layui-card" style="width: 480px; height: 310px;float:left;">
+	<div class="layui-card-header">销售额及订单量趋势</div>
+	<div class="layui-card-body" id="order" style="width: 480px; height: 260px;"></div>
+</div>
+<div class="layui-card" style="width: 600px; height: 310px;float:left;margin-left:15px;">
+	<div class="layui-card-header">帖子浏览排行</div>
+	<div class="layui-card-body" id="volume" style="width: 580px; height: 260px;"></div>
+</div>--%>
+</body>
+<%--<script type="text/javascript">
+	// 基于准备好的dom，初始化echarts实例
+	$(function(){
+		showToDo();
+		var myChart = echarts.init(document.getElementById('volume'),'wonderland');
+		var orderChart = echarts.init(document.getElementById('order'),'wonderland');
+		var hotChart = echarts.init(document.getElementById('hot'),'wonderland');
+		var layer;
+		layui.use('layer',function(){
+			layer=layui.layer;
+		});
+		// 指定图表的配置项和数据
+		myChart.setOption({
+			tooltip: {},
+			legend: {
+			},
+			xAxis: {
+				data: [],
+				axisLabel:{//横轴信息全部显示
+					interval:0
+				}
+			},
+			yAxis: {},
+			series: [{
+				type: 'bar',
+				data: []
+			}]
+		});
+		orderChart.setOption({
+			tooltip: {
+				trigger: 'axis'
+			},
+			//图例名
+			legend: {
+				data:['销售额','订单量']
+			},
+			//工具框，可以选择
+			toolbox: {
+			},
+			//x轴信息样式
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: [],
+				axisLabel:{
+					interval:0
+				},
+			},
+
+			yAxis : [
+				{
+					type : 'value'
+				}
+			],
+			series: [
+				//虚线
+				{
+					name:'订单量',
+					type:'line',
+					symbolSize:4,   //拐点圆的大小
+					data:[],
+					smooth:false,   //关键点，为true是不支持虚线的，实线就用true
+					itemStyle:{
+						normal:{
+							lineStyle:{
+								width:2,
+								type:'dotted'  //'dotted'虚线 'solid'实线
+							}
+						}
+					}
+				},
+				//实线
+				{
+					name:'销售额',
+					type:'line',
+					symbol:'circle',
+					symbolSize:4,
+					data:[]
+				}
+			]
+		});
+		hotChart.setOption({
+			title: {
+				text: '热门帖子浏览量',
+				x:'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				orient: 'vertical',
+				x: 'left',
+				data: []
+			},
+			toolbox: {
+				show: true,
+				feature: {
+					mark: { show: true },
+					magicType: {
+						show: true,
+						type: ['pie', 'funnel'],
+						option: {
+							funnel: {
+								x: '25%',
+								width: '50%',
+								funnelAlign: 'left',
+								max: 1548
+							}
+						}
+					},
+					restore: { show: true }
+				}
+			},
+			series: [{
+				type: 'pie',
+				name:"浏览量",
+				radius: '55%',
+				center: ['50%', '60%'],
+				data: []
+			}]
+		});
+		myChart.showLoading();
+		$.ajax({
+			type:"post",
+			url:"goods/findGoodsByVolume",
+			dataType:"json",
+			success:function(res){
+				myChart.hideLoading();    //隐藏加载动画
+				myChart.setOption({        //加载数据图表
+					xAxis: {
+						data: res.name
+					},
+					series: [{
+						type: 'bar',
+						data: res.volume
+					}]
+				});
+			},
+			error:function(){
+				layer.msg("图表数据请求失败！",{icon:5,anim:6,time:1000});
+				myChart.hideLoading();
+			}
+		});
+		$.ajax({
+			type:"post",
+			url:"order/findTotalOrder",
+			dataType:"json",
+			success:function(res){
+				orderChart.setOption({        //加载数据图表
+					xAxis: {
+						data: res.month
+					},
+					series: [{
+						name:'订单量',
+						type:'line',
+						data:res.sheets
+					},
+						{
+							name:'销售额',
+							type:'line',
+							symbol:'circle',
+							data:res.total
+						}
+					]
+				});
+			}
+		});
+		var names = [];
+		var brower = [];
+		$.ajax({
+			type:"post",
+			url:"guess/findMostHotGoods",
+			dataType:"json",
+			success:function(res){
+				$.each(res, function (index, item) {
+					names.push(item.name);    //挨个取出类别并填入类别数组
+					brower.push({
+						name: item.name,
+						value: item.num
+					});
+				});
+				hotChart.setOption({        //加载数据图表
+					legend: {
+						data: names
+					},
+					series: [{
+						data: brower
+					}]
+				});
+			}
+		});
+	});
+	function showToDo(){
+		$.ajax({
+			type:"post",
+			url:"order/findToDo",
+			dataType:"json",
+			success:function(data){
+				$("#totalOrder").html(data.total);
+				$("#toDoOrder").html(data.deliver);
+			}
+		});
+	}
+</script>--%>
 </html>

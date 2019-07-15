@@ -70,8 +70,8 @@
         var form = layui.form;
         //监听提交
         form.on('submit(formDemo)', function(data){
-            $.post("/user/update",data.field,function (date) {
-                if(date > 0){
+            $.post("/user/update",data.field,function (data) {
+                if(data > 0){
                     parent.layer.msg('修改成功！', {
                          icon: 1,
                          time: 1000 //2秒关闭（如果不配置，默认是3秒）

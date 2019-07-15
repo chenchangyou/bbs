@@ -35,6 +35,16 @@
 		(#{user.id},#{title},#{content},#{createTime},#{state},#{category.id},#{coverImage},#{synopsis})
 	</insert>
 
+	<sql id="user_column_list">
+		p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
+	</sql>
+
+	<sql id="user_column_list_NoContent">
+		p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
+	</sql>
+
 	<update id="updatebrowse" parameterType="Post">
 		update t_post set browse=#{browse} where id=#{id}
 	</update>
@@ -68,17 +78,17 @@
 	</update>
 
 	<select id="findById" parameterType="long" resultMap="postResultMap">
-		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
-			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.collectcount,p.cover_image,p.synopsis
-		from t_post p
+		select
+        <include refid="user_column_list" />
+        from t_post p
 		left join t_user u on p.user_id=u.id
 		left join t_category ca on ca.id=p.category
 		where p.id=#{id}
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="postResultMap">
-		select p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
-			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.collectcount,p.cover_image,p.synopsis
+		select
+		<include refid="user_column_list_NoContent" />
 		from t_post p
 		left join t_user u on p.user_id=u.id
 		left join t_category ca on ca.id=p.category
@@ -87,12 +97,50 @@
 	</select>
 
 	<select id="findAll" resultMap="postResultMap">
-		select p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,ca.name caname,p.category,
-			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
+		select
+        <include refid="user_column_list_NoContent" />
 		from t_post p
 		left join t_user u on p.user_id=u.id
 		left join t_category ca on ca.id=p.category
-		where p.state >0
 		GROUP BY p.create_time desc
 	</select>
+
+    <select id="findByKeyWord" resultMap="postResultMap">
+        select
+        <include refid="user_column_list_NoContent" />
+        from t_post p
+        left join t_user u on p.user_id=u.id
+        left join t_category ca on ca.id=p.category
+        <where>
+
+            <if test="keyword!=null">
+               and p.title like #{keyword}
+            </if>
+               GROUP BY p.create_time desc
+        </where>
+    </select>
+
+	<select id="ByKeyWord" resultMap="postResultMap">
+		select
+		<include refid="user_column_list_NoContent" />
+		from t_post p
+		left join t_user u on p.user_id=u.id
+		left join t_category ca on ca.id=p.category
+		<where>
+
+			<if test="field!=null">
+				and ${field} like #{keyword}
+			</if>
+			GROUP BY p.create_time desc
+		</where>
+	</select>
+
+    <select id="findAllByPopular" resultMap="postResultMap">
+        select
+        <include refid="user_column_list_NoContent" />
+        from t_post p
+        left join t_user u on p.user_id=u.id
+        left join t_category ca on ca.id=p.category
+        GROUP BY p.browse desc
+    </select>
 </mapper>

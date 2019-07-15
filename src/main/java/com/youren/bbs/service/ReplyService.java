@@ -20,4 +20,5 @@ public interface ReplyService {
     int add(String content,long postId,long userId);
     int update(Long rid,String content);
     List<Reply> findAll();
+    int updateLikeCont(Long rid,Integer likeNum);
 }

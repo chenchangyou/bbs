@@ -35,23 +35,7 @@ public class AjaxTest {
 
     @Autowired
     private VacationTabDao vacationTabDao;
-    @ResponseBody
-    @GetMapping("/getpostlist")
-    public Map home(@RequestParam(name = "page",defaultValue = "1") int pageNum,
-                    @RequestParam(name = "limit",defaultValue = "5") int pageSize){
 
-        Map<String,Object> map = new HashMap<String, Object>();
-
-            PageHelper.startPage(pageNum, pageSize);
-
-            List<Post>  postList = postService.findAll();
-
-            PageInfo<Post> page = new PageInfo<Post>(postList);
-        map.put("date",page.getList());
-        map.put("pages",page.getPages());
-
-        return map;
-    }
     @ResponseBody
     @GetMapping("getnumber")
     public List getnumber(Long pid){

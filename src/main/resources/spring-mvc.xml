@@ -46,6 +46,15 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 		</mvc:interceptor>
 	</mvc:interceptors>
 
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<!-- 配置登陆拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/user/*"/>
+			<bean class="com.youren.bbs.intercetor.AdminLoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- 文件上传配置 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 最大上传100M的文件 -->

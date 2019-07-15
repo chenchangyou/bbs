@@ -105,194 +105,198 @@
 
     </div>
     </div>
-    <div class="layui-col-md10">
+        <div class="layui-col-md10" style="background-color: #ffffff">
 
-        <div class="box-middle articledetail">
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h2> ${post.title} </h2>
-                    </div>
-                    <div style="width: 100%;height: 30px;padding: 0 5px;">
-                        <div style="height: 30px;text-align: center;line-height: 30px;float: left">
-                            作者：<a href="/user/index?uid=${user.id}">${user.username}</a></div>
-                        <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
-                            <fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></div>
-                        <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
-                            <i class="fa fa-eye"></i> ${post.browse}</div>
-                        <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
-                            <i  class="fa fa-commenting"></i> ${post.replynumber}</div>
-                        <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
-                            <i  class="fa fa-thumbs-o-up"></i>
-                            <c:if test="${not empty count}">
-                               ${count}
-                            </c:if>
-                            <c:if test="${empty count}">
-                                0
-                            </c:if>
+            <div class="box-middle articledetail">
+                <div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2> ${post.title} </h2>
+                        </div>
+                        <div style="width: 100%;height: 30px;padding: 0 5px;">
+                            <div style="height: 30px;text-align: center;line-height: 30px;float: left">
+                                作者：<a href="/user/index?uid=${user.id}">${user.username}</a></div>
+                            <div style="width: 100px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                                <fmt:formatDate value="${post.createTime}" pattern="yyyy-MM-dd HH:mm"/></div>
+                            <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                                <i class="fa fa-eye"></i> ${post.browse}</div>
+                            <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                                <i  class="fa fa-commenting"></i> ${post.replynumber}</div>
+                            <div style="width: 60px;font-size: 12px;color: #A9A9A9;float: right;line-height: 30px;">
+                                <i  class="fa fa-thumbs-o-up"></i>
+                                <c:if test="${not empty count}">
+                                    ${count}
+                                </c:if>
+                                <c:if test="${empty count}">
+                                    0
+                                </c:if>
+                            </div>
+                        </div>
+                        <hr style="color: #93D1FF;height: 3px">
+                        <div style=" line-height: 35px;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
+                            ${post.content}
                         </div>
                     </div>
-                    <hr style="color: #93D1FF;height: 3px">
-                    <div style=" line-height: 35px;min-height:300px;overflow: hidden;word-wrap:break-word;word-break:break-all;padding: 5px 10px">
-                        ${post.content}
-                    </div>
                 </div>
-            </div>
-            <%--文章末端--%>
-            <div style="width: 100%;height: 120px;padding: 10px 50px;">
-                <div style="margin: 0 auto;text-align: center">
+                <%--文章末端--%>
+                <div style="width: 100%;height: 120px;padding: 10px 50px;">
+                    <div style="margin: 0 auto;text-align: center">
 
-                    <%--点赞按钮--%>
-                    <div style="width: 33.3%;float: left;">
-                       <a class="dianzan <c:if test="${state le 0}">dianzan-no</c:if>
+                        <%--点赞按钮--%>
+                        <div style="width: 33.3%;float: left;">
+                            <a class="dianzan <c:if test="${state le 0}">dianzan-no</c:if>
                                         <c:if test="${state gt 0}">dianzan-ok</c:if>"
-                            style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
-                            <c:if test="${not empty count}">
-                               <p class="number">${count}</p>
-                            </c:if>
-                            <c:if test="${empty count}">
-                               <p class="number">0</p>
-                            </c:if>
-                       </a>
-                    </div>
+                               style="display: block;"href="javascript:;"> <i  class="fa fa-thumbs-o-up fa-3x"></i>
+                                <c:if test="${not empty count}">
+                                    <p class="number">${count}</p>
+                                </c:if>
+                                <c:if test="${empty count}">
+                                    <p class="number">0</p>
+                                </c:if>
+                            </a>
+                        </div>
 
-                    <%--收藏按钮--%>
-                    <div style="float: left;width: 33.3%;">
-                       <a href="javascript:;" id="collect"><i id="collectsty" style="
-                               <c:if test="${collectMap.state gt 0}">color:orange</c:if>
-                       " class="fa fa-star fa-3x"></i>
+                        <%--收藏按钮--%>
+                        <div style="float: left;width: 33.3%;">
+                            <a href="javascript:;" id="collect"><i id="collectsty" style="
+                            <c:if test="${collectMap.state gt 0}">color:orange</c:if>
+                                    " class="fa fa-star fa-3x"></i>
 
-                           <c:if test="${not empty collectMap.collectNumber}">
-                           <p id="collectNumber">${collectMap.collectNumber}</p>
-                           </c:if>
-                           <c:if test="${empty collectMap.collectNumber}">
-                               <p id="collectNumber">0</p>
-                           </c:if>
-                       </a>
-                    </div>
+                                <c:if test="${not empty collectMap.collectNumber}">
+                                    <p id="collectNumber">${collectMap.collectNumber}</p>
+                                </c:if>
+                                <c:if test="${empty collectMap.collectNumber}">
+                                    <p id="collectNumber">0</p>
+                                </c:if>
+                            </a>
+                        </div>
 
-                    <%--举报按钮--%>
-                    <div style="float: left;width: 33.3%;">
-                        <a href="javascript:;"><i style="color: red" class="fa fa-warning fa-3x"></i>
-                            <p>举报</p>
-                        </a>
+                        <%--举报按钮--%>
+                        <div style="float: left;width: 33.3%;">
+                            <a href="javascript:;"><i style="color: red" class="fa fa-warning fa-3x"></i>
+                                <p>举报</p>
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
+                <%--评论区--%>
+                <div style="width: 100%;height: 68px;padding: 2px;">
+                    <blockquote style="height: 53px;border-bottom:1px  #92bdc1 solid " class="layui-elem-quote">
+                        <div style="width: 100px;height: 100%;font-size: 25px;font-weight: bolder;float: left">评论区</div>
+                        <div style="width: 58px;float: right;height: 100%"><a class="btn btn-default" href="#replys"
+                                                                              role="button">回复</a></div>
+                    </blockquote>
+                </div>
 
-            <%--评论区--%>
-            <div style="width: 100%;height: 68px;padding: 2px;">
-                <blockquote style="height: 53px;border-bottom:1px  #92bdc1 solid " class="layui-elem-quote">
-                    <div style="width: 100px;height: 100%;font-size: 25px;font-weight: bolder;float: left">评论区</div>
-                    <div style="width: 58px;float: right;height: 100%"><a class="btn btn-default" href="#replys"
-                                                                          role="button">回复</a></div>
-                </blockquote>
-            </div>
-            
-            <c:forEach items="${replyList}" var="reply" varStatus="number">
-                <div class="panel panel-default" style="padding: 2px; background-color: rgba(0,255,255,0.02);border: none">
-                    <!-- 回复区 -->
-                    <form method="post" class="reply1">
-                        <input type="hidden" name="postId" value="${post.id}">
-                        <div class="panel-body" style="padding: 5px;">
-                            <div style="height: 35px;width: 100%">
-                                <div style="width: 50px;float: left"><a href="/user/index?uid=${reply.user.id}"><img src="${reply.user.headshot}" alt="..."
-                                                                          class="img-circle" width="35px" height="35px"
-                                                                          style="text-align: center"></a></div>
-                                <div style="float: left;margin-left: 2px;text-align: center">
-                                    <c:if test="${reply.user.id == post.user.id}"><span
-                                            style="color:#1E9FFF;font-weight: bolder">楼主 </span></c:if>
+                <c:forEach items="${replyList}" var="reply" varStatus="number">
+                    <div class="panel panel-default" style="padding: 2px; background-color: rgba(0,255,255,0.02);border: none">
+                        <!-- 回复区 -->
+                        <form method="post" class="reply1">
+                            <input type="hidden" name="postId" value="${post.id}">
+                            <div class="panel-body" style="padding: 5px;">
+                                <div style="height: 35px;width: 100%">
+                                    <div style="width: 50px;float: left"><a href="/user/index?uid=${reply.user.id}"><img src="${reply.user.headshot}" alt="..."
+                                                                                                                         class="img-circle" width="35px" height="35px"
+                                                                                                                         style="text-align: center"></a></div>
+                                    <div style="float: left;margin-left: 2px;text-align: center">
+                                        <c:if test="${reply.user.id == post.user.id}"><span
+                                                style="color:#1E9FFF;font-weight: bolder">楼主 </span></c:if>
                                         <a href="/user/index?uid=${reply.user.id}">${reply.user.username}</a>
+                                    </div>
+                                    <span style="float: right;width: 70px;text-align: center">#${number.count}</span>
                                 </div>
-                                <span style="float: right;width: 70px;text-align: center">#${number.count}</span>
-                            </div>
-                            <div style="padding: 5px 10px 10px 60px;overflow: hidden;min-height:35px">${reply.content}</div>
-                            <div style="width: 100%;height: 25px;" class="comment">
-                                <div style="width: 150px;float: left;font-size: 12px;color: #A9A9A9;"><fmt:formatDate
-                                        value="${reply.createTime}" pattern="yyyy-MM-dd HH:mm"/>
-                                </div>
-                                <div style="width: 40px;float: right;margin-left: 3px;">
-                                    <c:if test="${reply.user.id == loginUser.id}"><a id="${reply.id}"
-                                                                                     href="javascript:;"
-                                                                                     class="delectreply"
-                                                                                     style="color:#1E9FFF;font-weight: bolder">删除</a></c:if>
-                                </div>
-                                <div style="width: 130px;float:right;margin-left: 5px">
-                                    <a href="javascript:"><i class="fa fa-thumbs-o-up"></i>
-                                        <span style="margin-left: 3px">999+</span></a>
-                                    <a style="margin-left: 5px" href="javascript:"><i class="fa fa-thumbs-o-down"></i>
-                                        <span style="margin-left: 3px">250</span></a>
-                                </div>
-                                <div style="float: right;width: 50px">
-                                    <input type="hidden" name="replyId" value="${reply.id}">
-                                    <c:if test="${not empty loginUser}">
-                                        <a href="javascript:" class="reply_btn">回复</a>
-                                    </c:if>
-                                    <c:if test="${empty loginUser}">
-                                        <a href="javascript:" data-toggle="modal" data-target="#myModal">回复</a>
-                                    </c:if>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                        <%--评论回复区--%>
-
-                    <c:forEach items="${reply.replyCommentList}" var="comment">
-                        <div class="panel panel-default" style="margin-right: 6px;background:none;border:none">
-                            <div class="panel-body" style="padding: 5px;margin-left: 60px">
-                                <sapn style="float: left"><a href="/user/index?uid=${comment.user.headshot}"><img src="${comment.user.headshot}"
-                                                               style="width: 35px;height: 35px; border-radius:50%"></a>
-                                </sapn>
-                                <div style="width: 100%;">
-                                    <c:if test="${reply.user.id == comment.user.id}"><span
-                                            style="color:#1E9FFF;font-weight: bolder;float: left">层主：</span></c:if>
-                                    <span style="float: left"><a href="/user/index?uid=${comment.user.id}">${comment.user.username}</a>：&nbsp;</span>
-                                    <span style="float: left">${comment.content}</span>
-                                    <span style="width: 50px;float: right"><a href="javascript:;">回复</a></span>
+                                <div style="padding: 5px 10px 10px 60px;overflow: hidden;min-height:35px">${reply.content}</div>
+                                <div style="width: 100%;height: 25px;" class="comment">
+                                    <div style="width: 150px;float: left;font-size: 12px;color: #A9A9A9;"><fmt:formatDate
+                                            value="${reply.createTime}" pattern="yyyy-MM-dd HH:mm"/>
+                                    </div>
+                                    <div style="width: 40px;float: right;margin-left: 3px;">
+                                        <c:if test="${reply.user.id == loginUser.id}"><a id="${reply.id}"
+                                                                                         href="javascript:;"
+                                                                                         class="delectreply"
+                                                                                         style="color:#1E9FFF;font-weight: bolder">删除</a></c:if>
+                                    </div>
+                                    <div style="width: 130px;float:right;margin-left: 5px">
+                                        <a class="relyLike" href="javascript:" id="${reply.id}"><i class="fa fa-thumbs-o-up"></i>
+                                            <span style="margin-left: 3px">${reply.likecont}</span></a>
+                                        <%--<a style="margin-left: 5px" href="javascript:"><i class="fa fa-thumbs-o-down"></i>
+                                            <span style="margin-left: 3px">250</span></a>--%>
+                                    </div>
+                                    <div style="float: right;width: 50px">
+                                        <input type="hidden" name="replyId" value="${reply.id}">
+                                        <c:if test="${not empty loginUser}">
+                                            <a href="javascript:" class="reply_btn">回复</a>
+                                        </c:if>
+                                        <c:if test="${empty loginUser}">
+                                            <a href="javascript:" data-toggle="modal" data-target="#myModal">回复</a>
+                                        </c:if>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </c:forEach>
+                        </form>
 
-            <c:if test="${empty replyList}">
-                <div class="panel panel-default"
-                     style="background-color: rgba(0,255,255,0.02);height: 100px; text-align: center">
-                    <p style="line-height: 100px">趁没人赶紧抢沙发吧</p>
-                </div>
-            </c:if>
-            <hr>
-            <h3>发表一下看法吧</h3>
-            <c:if test="${not empty loginUser}">
-                <div id="replys" style="width: 100%;height: 310px;margin-top: 50px">
-                    <form id="publish">
-                        <div id="editor" style="width:100%;"></div>
-                        <input type="hidden" name="postId" value="${post.id}">
-                        <textarea id="content" name="content" style="display: none;" ></textarea></br>
-                        <button class="btn btn-danger" style="width:100px;float: right" type="button" id="publishbtn">
-                            发表
+                            <%--评论回复区--%>
+
+                        <c:forEach items="${reply.replyCommentList}" var="comment">
+                            <div class="panel panel-default" style="margin-right: 6px;background:none;border:none">
+                                <div class="panel-body" style="padding: 5px;margin-left: 60px">
+                                    <sapn style="float: left"><a href="/user/index?uid=${comment.user.headshot}"><img src="${comment.user.headshot}"
+                                                                                                                      style="width: 35px;height: 35px; border-radius:50%"></a>
+                                    </sapn>
+                                    <div style="width: 100%;">
+                                        <c:if test="${reply.user.id == comment.user.id}"><span
+                                                style="color:#1E9FFF;font-weight: bolder;float: left">层主：</span></c:if>
+                                        <span style="float: left"><a href="/user/index?uid=${comment.user.id}">${comment.user.username}</a>：&nbsp;</span>
+                                        <span style="float: left">${comment.content}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:forEach>
+
+                <c:if test="${empty replyList}">
+                    <div class="panel panel-default"
+                         style="background-color: rgba(0,255,255,0.02);height: 100px; text-align: center">
+                        <p style="line-height: 100px">趁没人赶紧抢沙发吧</p>
+                    </div>
+                </c:if>
+                <hr>
+                <h3>发表一下看法吧</h3>
+                <c:if test="${not empty loginUser}">
+                    <div id="replys" style="width: 100%;height: 310px;margin-top: 50px">
+                        <form id="publish">
+                            <div id="editor" style="width:100%;"></div>
+                            <input type="hidden" name="postId" value="${post.id}">
+                            <textarea id="content" name="content" style="display: none;" ></textarea></br>
+                            <button class="btn btn-danger" style="width:100px;float: right" type="button" id="publishbtn">
+                                发表
+                            </button>
+                        </form>
+                    </div>
+                </c:if>
+
+                <c:if test="${empty loginUser}">
+                    <div id="replys"
+                         style="width: 100%;height: 200px;margin-top: 50px;border: 1px silver solid;margin-bottom: 10px;text-align: center;">
+                        <button data-toggle="modal" data-target="#myModal"
+                                style="width: 150px;text-align: center;height: 30px;margin:85px auto">登陆后才可发表
                         </button>
-                    </form>
-                </div>
-            </c:if>
+                    </div>
+                </c:if>
 
-            <c:if test="${empty loginUser}">
-                <div id="replys"
-                     style="width: 100%;height: 200px;margin-top: 50px;border: 1px silver solid;margin-bottom: 10px;text-align: center;">
-                    <button data-toggle="modal" data-target="#myModal"
-                            style="width: 150px;text-align: center;height: 30px;margin:85px auto">登陆后才可发表
-                    </button>
-                </div>
-            </c:if>
-
+            </div>
         </div>
     </div>
-            <div class="layui-col-md10" id="footer" style=" clear:both; width: 100%;height: 150px;background-color: #1E9FFF;margin-top: 10px">
+
+            <div class="layui-col-md10" id="footer" style=" clear:both; width: 100%;height: 150px;background-color: rgba(85,85,85,0.98);margin-top: 10px">
             </div>
+
+    </div>
 <script>
     var E = window.wangEditor;
     var editor = new E('#editor');
@@ -591,6 +595,34 @@
                 }
             })
         });
+        $(".relyLike").click(function () {
+            var $this = $(this);
+            var num = $this.text();
+            var rid = $this.attr("id");
+            $.post("/replyLike/add/",{rid:rid},function (state) {
+                if(state===0){
+                    layer.msg("失败",{
+                        icon:2,
+                        offset: '150'
+                    })
+                }else if (state===1){
+                    num++;
+                    $this.css("color","blue");
+                    $this.text(num);
+                    layer.msg("成功",{
+                        icon:1,
+                        offset: '150'
+                    })
+                } else if (state===2){
+                    layer.msg("请您先登录",{
+                        offset: '150',
+                        time:800
+                    },function () {
+                        $('#denglu').trigger("click");
+                    })
+                }
+            })
+        })
     })
 </script>
 

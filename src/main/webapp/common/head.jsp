@@ -48,10 +48,10 @@ background-image: url('../static/images/bg1.png')">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="${ctx}/home">首页 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">新帖</a></li>
-                <li><a href="#">版块</a></li>
-                <li><a href="#">博客</a></li>
-                <li><a href="#">留言</a></li>
+<%--                <li><a href="#">新帖</a></li>--%>
+                <li><a href="#">分类</a></li>
+<%--                <li><a href="#">博客</a></li>--%>
+<%--                <li><a href="#">留言</a></li>--%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty loginUser}">

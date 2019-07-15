@@ -77,7 +77,17 @@
         </div>
     </div>
 
-    <div style="width: 100%;">
+    <div class="layui-row" style="">
+
+        <c:if test="${empty collectList}">
+            <div class="panel panel-default">
+                <div class="panel-body" style="text-align: center">
+                    还没有收藏呢
+                </div>
+            </div>
+        </c:if>
+
+
         <c:if test="${not empty loginUser}">
             <c:if test="${loginUser.id eq user.id}">
                 <c:forEach items="${collectList}" var="collect">
@@ -114,6 +124,14 @@
 
                     </c:forEach>
                 </c:if>
+                <c:if test="${setting.collect == false}">
+                    <div class="layui-container" style=" background-color:#ffffff;width: 100%;text-align: center">
+                        <div>
+                            <img src="/static/images/expression_helpless.gif">
+                            <span> 很抱歉该用户设置了内容不对外公开 </span>
+                        </div>
+                    </div>
+                </c:if>
             </c:if>
         </c:if>
         <c:if test="${empty loginUser}">
@@ -145,7 +163,6 @@
     </div>
 
 </div>
-
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
