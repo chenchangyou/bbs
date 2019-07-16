@@ -5,6 +5,7 @@ import com.youren.bbs.dao.SectionCategoryDao;
 import com.youren.bbs.entity.Section;
 import com.youren.bbs.entity.SectionCategory;
 import com.youren.bbs.service.SectionCategoryService;
+import com.youren.bbs.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class SectionCategoryServiceImpl implements SectionCategoryService {
     @Autowired
     private SectionCategoryDao sectionCategoryDao;
 
+    @Autowired
+    private SectionService sectionService;
+
     @Override
     public SectionCategory save(String sname, String id) {
         SectionCategory sectionCategory = new SectionCategory();
@@ -25,9 +29,8 @@ public class SectionCategoryServiceImpl implements SectionCategoryService {
         sectionCategory.setName(sname);
         sectionCategory.setId(UUID.randomUUID().toString());
         sectionCategory.setState(1);
-        Section section = new Section();
-        section.setId(id);
-        sectionCategory.setSection(section);
+        Section byId = sectionService.findById(id);
+        sectionCategory.setSection(byId);
 
         return sectionCategoryDao.save(sectionCategory);
     }

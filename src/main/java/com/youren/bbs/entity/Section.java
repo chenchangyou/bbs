@@ -2,6 +2,8 @@ package com.youren.bbs.entity;
 
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,7 @@ public class Section {
     private User user;
     private Integer state;
     @OneToMany( cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "section")
-    private List<SectionCategory> sectionCategory;
+    private List<SectionCategory> sectionCategory;//拥有的类型
 
     public String getId() {
         return id;
@@ -51,6 +53,14 @@ public class Section {
         this.createTime = createTime;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getState() {
         return state;
     }
@@ -65,14 +75,6 @@ public class Section {
 
     public void setSectionCategory(List<SectionCategory> sectionCategory) {
         this.sectionCategory = sectionCategory;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override

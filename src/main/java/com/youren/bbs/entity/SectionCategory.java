@@ -1,6 +1,8 @@
 package com.youren.bbs.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,11 +17,13 @@ public class SectionCategory {
     private String id;
     private String name;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_time")    private Date createTime;
+    @Column(name = "create_time")
+    private Date createTime;
     private Integer state;
-    @ManyToOne
-    @JoinColumn(name = "section_id",referencedColumnName = "id")
-    private Section section;
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.REFRESH},optional = false)
+    @JoinColumn(name = "section_id")
+    private Section section;//所属板块
 
     public String getId() {
         return id;
@@ -68,7 +72,6 @@ public class SectionCategory {
                 ", name='" + name + '\'' +
                 ", createTime=" + createTime +
                 ", state=" + state +
-                ", section=" + section +
                 '}';
     }
 }

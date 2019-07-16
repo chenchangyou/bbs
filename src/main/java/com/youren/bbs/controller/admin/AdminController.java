@@ -139,7 +139,7 @@ public class AdminController {
     @GetMapping("main")
      public String main(){
 
-        return "adminSystem/main";
+        return "/adminSystem/main";
     }
 
     @ResponseBody

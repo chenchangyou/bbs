@@ -2,8 +2,10 @@ package com.hwua.sss.test;
 
 import com.sun.management.UnixOperatingSystemMXBean;
 import com.youren.bbs.dao.NoticeDao;
+import com.youren.bbs.dao.SectionDao;
 import com.youren.bbs.dao.UserSettingDao;
 import com.youren.bbs.entity.Notice;
+import com.youren.bbs.entity.Section;
 import com.youren.bbs.entity.User;
 import com.youren.bbs.entity.UserSetting;
 import org.junit.Before;
@@ -14,6 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,13 +26,14 @@ public class UserTest {
     private UserDao userDao;
     private NoticeDao noticeDao;
     private UserSettingDao userSettingDao;
+    private SectionDao sectionDao;
     @Before
     public void init(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         userDao = context.getBean(UserDao.class);
         userSettingDao = context.getBean(UserSettingDao.class);
         noticeDao=context.getBean(NoticeDao.class);
-
+        sectionDao=context.getBean(SectionDao.class);
     }
 
     @Test
@@ -66,5 +70,14 @@ public class UserTest {
     @Test
     public void UUid(){
         System.out.println(UUID.randomUUID().toString());
+    }
+
+    @Test
+    public void findAllSection(){
+
+        List<Section> sections = (List<Section>)sectionDao.findAll();
+        for (Section section :sections){
+            System.out.println(section);
+        }
     }
 }

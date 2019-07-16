@@ -71,7 +71,11 @@
         </div>
     </div>
 
-    <div class="layui-col-row" style="margin: 10px auto;height: 50px; background-color: #FFFFFF;">
+    <div class="layui-col-row" style="border-radius: 5px;margin: 10px auto;height: 50px; background-color: #FFFFFF;">
+        <div class="layui-col-md8" style="padding: 15px;color: #c2c2c2;">
+            <span>今日投稿数：</span>
+            <span id="toDayPostNum">999+</span>
+        </div>
         <form method="get" action="/post/searchResult/"  class="layui-col-md4 layui-col-xs11 layui-col-sm7" style="position: absolute;right: 0px;padding: 8px">
             <div class="layui-row" style="text-align: right">
                 <span class="form-group layui-col-md8 layui-col-sm8 layui-col-xs8">
@@ -127,7 +131,7 @@
                         <li id="clicknewpost" onclick="getNewPost()">新帖</li>
                         <li onclick="getPopularPost()"><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
                     </ul>
-                    <span class="layui-col-md1" style="padding: 11.1px;border-bottom: 1px #e2e2e2 solid"><a href="/section/">更多>></a></span>
+                    <span class="layui-col-md1" style="padding: 12px;border-bottom: 1px #e2e2e2 solid"><a href="/section/">更多>></a></span>
                     </div>
                     <div class="layui-tab-content" style="padding: 0; border-radius: 4px;">
 
@@ -143,5 +147,13 @@
 </div>
 <div id="footer"></div>
 <script src="../static/js/home.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        $.get("/admin/getToday",function (data) {
+            $("#toDayPostNum").text(data)
+        })
+    })
+
+</script>
 </body>
 </html>

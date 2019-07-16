@@ -47,7 +47,11 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public List<Section> findAll() {
-        return (List<Section>)sectionDao.findAll();
+        List<Section> all = (List<Section>) sectionDao.findAll();
+        for (Section section: all){
+            System.out.println(section);
+        }
+        return all;
     }
 
     @Override

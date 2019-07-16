@@ -44,16 +44,16 @@ public class PostController {
     @Autowired
     private FollowedService followedService;
     @Autowired
-    private PostImageService postImageService;
-    @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private SectionService sectionService;
 
     @GetMapping("addpost")
     public String addpost(Model model){
 
-        List<Category> categoryList = categoryService.findAll();
-        model.addAttribute("categoryList",categoryList);
+        List<Section> sectionList = sectionService.findAll();
+
+        model.addAttribute("categoryList",sectionList);
 
         return "user/addpost";
     }
@@ -67,7 +67,7 @@ public class PostController {
      * @return 帖子详情页
      */
     @GetMapping("postdetails")
-    public String postdetails(long postlistId,Model model,HttpSession session){
+    public String postdetails(Long postlistId,Model model,HttpSession session){
 
         User user = (User)session.getAttribute("loginUser");
 
@@ -123,7 +123,7 @@ public class PostController {
      */
     @PostMapping("addpost")
     public String addpost(MultipartFile file,String title,String content, HttpSession session,
-                          Model model,Long category,String synopsis) throws IOException {
+                          Model model,String category,String synopsis) throws IOException {
 
         String postImg = null;
 
@@ -141,13 +141,13 @@ public class PostController {
 
         User user = (User)session.getAttribute("loginUser");
         Date datetime = new Date();
-        Category categorys = new Category();
+        SectionCategory categorys = new SectionCategory();
         categorys.setId(category);
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
         post.setCreateTime(datetime);
-        post.setCategory(categorys);
+        post.setSectionCategory(categorys);
         post.setUser(user);
         post.setState(1);
         post.setSynopsis(synopsis);
@@ -206,15 +206,23 @@ public class PostController {
     }
     //跳转编辑帖子页
     @GetMapping("/user/post/edit")
-    public String editpage(Long pid,Model model){
+    public String editpage(Long pid,Model model,HttpSession session){
 
-        List<Category> categoryList = categoryService.findAll();
+        User loginUser = (User) session.getAttribute("loginUser");
         Post post = postService.findById(pid);
 
-        model.addAttribute("post",post);
-        model.addAttribute("categoryList",categoryList);
+        if (loginUser!=null){
+            if(loginUser.equals(post.getUser().getId())){
 
-        return "/user/postedit";
+                List<Category> categoryList = categoryService.findAll();
+
+                model.addAttribute("post",post);
+                model.addAttribute("categoryList",categoryList);
+
+                return "/user/postedit";
+            }
+        }
+        return "";
     }
 
     @GetMapping("/admin/post/edit")

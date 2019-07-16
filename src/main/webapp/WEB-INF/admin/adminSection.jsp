@@ -100,10 +100,6 @@
              ,layer = layui.layer
               ,util = layui.util;
 
-        $(function () {
-
-
-        });
 
     });
     $(function () {
@@ -117,10 +113,10 @@
                 number++;
                 content+="" +
                 "<div class=\"layui-col-md2 sectionbody\">\n" +
-                "            <a class='thisSection' id='"+data[i].id+"' href='javascript:'\">\n" +
+                "            <a class='thisSection' id='"+data[i].id+"' href='/section/sectionCategory?id="+data[i].id+"'\">\n" +
                 "            <div class=\"panel panel-default\">\n" +
                 "                <div class=\"panel-body sectionbg\">\n" +
-                "                   "+data[i].name+" <span class=\"layui-badge\">  "+data[i].sectionCategory.length+"</span>\n" +
+                "                   "+data[i].name+" <span class=\"layui-badge\"> "+data[i].sectionCategory.length+"</span>\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "            </a>\n" +
@@ -155,17 +151,17 @@
     });
     $(function () {
 
-        $('#Section').on("click",".thisSection",function(){
+        /*$('#Section').on("click",".thisSection",function(){
             var $this = $(this);
             var id = $this.attr("id");
-            alert(id)
-            window.location.href = "/section/sectionCategory?id="+id;
+            // alert(id)
+            // window.location.href = "/section/sectionCategory?id="+id;
             // layer.msg("id为"+$this.attr("id"));
 
-            /*$("#Section").siblings('.sectionbg').removeClass('sectionback');
+            /!*$("#Section").siblings('.sectionbg').removeClass('sectionback');
             $this.addClass('sectionback');
-*/
-            /*$.ajax({
+*!/
+            /!*$.ajax({
                 url: '/user/album/add/',
                 data: {
                     uid:uid,
@@ -192,8 +188,8 @@
                 error:function(){
                     $("#load").remove();
                 }
-            });*/
-        });
+            });*!/
+        });*/
 
     })
 </script>

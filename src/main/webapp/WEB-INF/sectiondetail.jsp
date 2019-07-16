@@ -10,7 +10,7 @@
     <link href="${ctx}/static/css/mycss.css" rel="stylesheet">
     <script src="${ctx}/static/js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${ctx}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
+
     <script src="${ctx}/static/wangEditor-3.1.1/wangEditor.min.js" type="text/javascript"></script>
     <style>
 
@@ -34,28 +34,41 @@
     <div class="layui-row layui-col-space10" id="Section" style="background-color: #ffffff; min-height: 100%;margin-top: 60px">
 
         <div class="layui-col-md3">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    ${}
-                </div>
-            </div>
+          <blockquote class="layui-elem-quote">${section.name}·板块</blockquote>
         </div>
-        <div class="layui-col-ma9"></div>
+        <div class="layui-col-ma9">
+
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-tab layui-tab-brief" lay-filter="demo">
+                <ul class="layui-tab-title">
+                    <c:forEach items="${section.sectionCategory}" var="category" varStatus="s">
+                        <li <c:if test="${s.first}">class="layui-this"</c:if>>${category.name}</li>
+
+                    </c:forEach>
+                </ul>
+                <div class="layui-tab-content"></div>
+            </div>
+
+        </div>
 
     </div>
 </div>
-
+<script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
 <script>
-    layui.use(['laypage', 'layer','util'], function () {
-        var laypage = layui.laypage
-             ,layer = layui.layer
-              ,util = layui.util;
+    layui.use(['layer','util','element'], function () {
+            var layer = layui.layer
+              ,util = layui.util
+           ,element = layui.element;
+
+
+            element.on('tab(demo)', function(data){
+           console.log(data);
+        });
 
     });
 
-    $(function () {
-        // getSection();
-    });
+
     function getSection() {
         $.get("/section/getAllSection",function (data) {
             var content="";

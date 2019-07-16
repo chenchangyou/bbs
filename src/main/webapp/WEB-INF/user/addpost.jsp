@@ -22,16 +22,19 @@
             position: absolute;
             z-index: 999999;
         }
+        body{
+            background-color: #e2f7f2;
+        }
     </style>
 </head>
 <body>
 <%@include file="../../common/head.jsp" %>
-<div class="layui-container" style="margin: 65px auto">
+<div class="layui-container" style="background-color: rgba(255,255,255,0.4); margin: 65px auto">
     <ol class="breadcrumb">
         <li><a href="home">首页</a></li>
         <li class="active">发表新帖</li>
     </ol>
-    <h2>发布帖子</h2>
+    <blockquote class="layui-elem-quote">发布帖子</blockquote>
     <form action="addpost" method="post" class="layui-form" enctype="multipart/form-data">
         <div class="layui-col-md8">
             <input type="hidden" name="act" value="add"/>
@@ -53,15 +56,24 @@
                                       </span>
                             </div>
                         </div>
-                        <div>
-                            <p>选择帖子类型</p>
-                            <select name="category" lay-verify="required" class="select_cat">
-                                <option value="">请选择类型</option>
-                                <c:forEach items="${categoryList}" var="category">
-                                    <option value="${category.id}">${category.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 110px">
+                                    <i style="color: red;font-size: 18px">* </i><B style="font-size: 15px;color:grey">投稿分类</B>
+                                </label>
+                                <div class="layui-input-inline">
+                                    <select lay-filter="test" name="" id="partition" >
+                                        <option  value="">请选择</option>
+                                        <c:forEach items="${categoryList}" var="category">
+                                        <option  value="${category.id}">${category.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline">
+                                    <select name="category" id="field" class="field">
+
+                                    </select>
+                                </div>
+                            </div>
                     </div>
                     <div style="margin-top:  26px;">
                         <h3>上传封面图（可选）</h3>
@@ -116,6 +128,21 @@
     layui.use('form', function () {
         var form = layui.form;
         form.render();
+        $(function () {
+            form.on('select(test)',function(data){
+                var id=data.value;
+                $.get("/section/user/sectionCategory?id="+id,function (date,status) {
+                    var  str="";
+                    $.each(date,function(k,v){
+                        str+="<option value="+v.id+">"+v.name+"</option>";
+                    });
+                    $("#field").html(str);
+                    form.render();
+                });
+            });
+            $('select[name="partition"]').next().find('.layui-anim-upbit').find('.layui-this').click();
+            form.render();
+        });
     });
     layui.use('upload', function () {
         var $ = layui.jquery
@@ -152,24 +179,6 @@
             }
         });
     });
-
-    $(document).ready(function () {
-        form.on('select(test)',function(data){
-            var id=data.value;
-            $.post("/post/getField?id="+id,function (date,status) {
-                var  str="";
-                $.each(date,function(k,v){
-                    str+="<option value="+v.id+">"+v.fname+"</option>";
-                });
-                $("#field").html(str);
-                form.render();
-            });
-
-        });
-
-        $('select[name="partition"]').next().find('.layui-anim-upbit').find('.layui-this').click();
-    });
-
 
 </script>
 </body>

@@ -35,6 +35,7 @@
             </div>
         </div>
     </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">年龄</label>
         <div class="layui-input-inline">
@@ -49,6 +50,9 @@
             <input type="radio" name="sex" value="保密" title="保密">
         </div>
     </div>
+
+    <button type="button" class="ui_btn ui_org_btn" id="tel_btn"
+            style="height: 43px">获取验证码</button>
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit type="submit">立即注册</button>
@@ -73,6 +77,30 @@
         //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
         form.render();
     });
+
+    $(function() {
+
+        var btn = $("#tel_btn");
+        $(function() {
+            btn.click(settime);
+        });
+        var countdown = 5;//倒计时总时间，为了演示效果，设为5秒，一般都是60s
+        function settime() {
+            if (countdown == 0) {
+                btn.attr("disabled", false);
+                btn.html("获取验证码");
+                btn.removeClass("disabled");
+                countdown = 5;
+                return;
+            } else {
+                btn.addClass("disabled");
+                btn.attr("disabled", true);
+                btn.html("重新发送(" + countdown + ")");
+                countdown--;
+            }
+            setTimeout(settime, 1000);
+        }
+    })
 </script>
 </body>
 </html>

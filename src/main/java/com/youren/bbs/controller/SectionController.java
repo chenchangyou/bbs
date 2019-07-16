@@ -30,18 +30,18 @@ public class SectionController {
     }
 
     @GetMapping("/sectionDetail")
-    public String sectionDetail(String id){
+    public String sectionDetail(String id,Model model){
 
-        return "sectiondetail";
+
+        model.addAttribute("section",sectionService.findById(id));
+
+        return "/sectiondetail";
     }
-
     @ResponseBody
     @PostMapping("/addSection")
     public Section addSection(String cname){
         return sectionService.save(cname,1L);
     }
-
-
     @ResponseBody
     @GetMapping("/getAllSection")
     public List<Section> findAll(){
@@ -53,6 +53,7 @@ public class SectionController {
     @PostMapping("/addcategory")
     public SectionCategory addcategory(String cname,String sectionId){
 
+
     return sectionCategoryService.save(cname,sectionId);
     }
     @GetMapping("/sectionCategory")
@@ -62,5 +63,15 @@ public class SectionController {
 
         model.addAttribute("section",section);
         return "/admin/adminSectionCategory";
+    }
+    @ResponseBody
+    @GetMapping("/user/sectionCategory")
+    public List<SectionCategory> userSectionCategory(String id, Model model){
+
+        Section section = sectionService.findById(id);
+
+        List<SectionCategory> sectionCategory = section.getSectionCategory();
+
+        return sectionCategory;
     }
 }
