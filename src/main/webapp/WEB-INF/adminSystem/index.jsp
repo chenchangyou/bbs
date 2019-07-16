@@ -36,21 +36,10 @@
 						</div>
 					</div>
 					<ul class="layui-nav admin-header-item">
-						<%--<li class="layui-nav-item">
-							<a href="javascript:;">清除缓存</a>
-						</li>
-                        <li class="layui-nav-item" id="pay">
-                            <a href="javascript:;">捐赠我</a>
-                        </li>
-						<li class="layui-nav-item">
-							<a href="javascript:;">浏览网站</a>
-						</li>
-						<li class="layui-nav-item" id="video1">
-							<a href="javascript:;">视频</a>
-						</li>--%>
+
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
-								<img src="${ctx}/static/admin/images/0.jpg" />
+								<img src="${ctx}${loginAdmin.headshot}" />
 								<span>站长：${loginAdmin.username}</span>
 							</a>
 							<dl class="layui-nav-child">

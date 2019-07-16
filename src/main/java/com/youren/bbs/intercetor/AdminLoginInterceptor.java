@@ -18,7 +18,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
         //指定拦截的路径，需要登录才可以进入的页面
         final String[] PRE_UNIGNORE_URI = {
-               "/admin/indexs","/admin/postlist","/admin/reply/","/admin/userlist",
+               "/admin/postlist","/admin/reply/","/admin/userlist",
                 "/admin/notice/list","/admin/carouse/list","/admin/category/list","/admin/index"
         };
 

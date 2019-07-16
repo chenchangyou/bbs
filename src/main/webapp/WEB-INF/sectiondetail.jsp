@@ -33,8 +33,14 @@
 <div class="layui-container">
     <div class="layui-row layui-col-space10" id="Section" style="background-color: #ffffff; min-height: 100%;margin-top: 60px">
 
-
-
+        <div class="layui-col-md3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    ${}
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-ma9"></div>
 
     </div>
 </div>

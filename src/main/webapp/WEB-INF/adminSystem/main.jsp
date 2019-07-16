@@ -53,12 +53,12 @@
 </div>
 
 <div class="layui-card" style="width: 480px; height: 195px;float:left;">
-	<div class="layui-card-header">热门</div>
+	<div class="layui-card-header"></div>
 	<div class="layui-card-body" id="todo1" style="width: 440px; height: 120px;">
 		<div class="layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 80px;">
 			<li class="layui-col-xs6">
 				<a class="layadmin-backlog-body">
-					<h3>热门帖子</h3>
+					<h3>今日发帖数</h3>
 					<p><cite style="line-height:45px;" id="totalOrder1"></cite></p>
 				</a>
 			</li>
@@ -109,7 +109,10 @@
 							"</li>"
 				}
 				$("#content").html(content);
-				// $("#totalOrder").text(data);
+
+			});
+			$.get("/admin/getToday",function (data) {
+				$("#totalOrder1").text(data)
 			})
 		})
 		});

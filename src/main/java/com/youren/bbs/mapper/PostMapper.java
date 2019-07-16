@@ -15,6 +15,7 @@ public interface PostMapper {
     Post findById(Long id);
     List<Post> findByUserId(Long userId);
     List<Post> findAll();
+    List<Post> findAllByToDay();
     int updatebrowse(Post post);
     int updatedifference(Post post);
     int updateawesome(Post post);

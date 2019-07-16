@@ -153,6 +153,24 @@
         });
     });
 
+    $(document).ready(function () {
+        form.on('select(test)',function(data){
+            var id=data.value;
+            $.post("/post/getField?id="+id,function (date,status) {
+                var  str="";
+                $.each(date,function(k,v){
+                    str+="<option value="+v.id+">"+v.fname+"</option>";
+                });
+                $("#field").html(str);
+                form.render();
+            });
+
+        });
+
+        $('select[name="partition"]').next().find('.layui-anim-upbit').find('.layui-this').click();
+    });
+
+
 </script>
 </body>
 </html>

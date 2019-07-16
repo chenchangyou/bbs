@@ -84,14 +84,22 @@
 <body>
 
 
-    <blockquote class="layui-elem-quote " style="background-color: #FFFFFF;margin-bottom: 5px">所有版块 (<span style="color: red" id="number"></span>)
+    <blockquote class="layui-elem-quote " style="background-color: #FFFFFF;margin-bottom: 5px">版块下的类型 (<span style="color: red" id="number"></span>)
         <button type="button" class="layui-btn layui-btn-sm" id="addcaregory" data-type="addRow">
-            <i class="layui-icon layui-icon-add-1"></i> 添加版块
+            <i class="layui-icon layui-icon-add-1"></i> 添加类型
         </button>
     </blockquote>
+    <div class="layui-col-md12">
+        <c:forEach items="${section.sectionCategory}" var="category">
+            <button id="${category.id}" type="button" class="layui-btn category">${category.name}</button>
+        </c:forEach>
+        <c:if test="${empty section.sectionCategory}">
+            <p>暂无类型</p>
+        </c:if>
+    </div>
 
     <div class="layui-row" id="Section" style="background-color: #ffffff; overflow: auto;min-height: 20%;max-height: 60%;padding: 5px">
-        <%--版块区--%>
+
     </div>
 <script>
 
@@ -132,15 +140,16 @@
     }
     $(function () {
         $("#addcaregory").click(function () {
+            var sectionId=${section.id};
             layer.prompt({
-                    title: '请输入板块名称'},
+                    title: '请输入类型名称'},
                 function(val, index){
-                    $.post("/section/addSection",{cname:val},function (date) {
+                    $.post("/section//addcategory",{cname:val,sectionId:sectionId},function (date) {
                         if(date != null ){
                             layer.msg("添加成功！",{
                                 time:800
                             },function () {
-                                getSection();
+
                             })
                         }else {
                             layer.msg('添加失败', {
@@ -155,11 +164,9 @@
     });
     $(function () {
 
-        $('#Section').on("click",".thisSection",function(){
+        $('#Section').on("click",".sectionbg",function(){
             var $this = $(this);
             var id = $this.attr("id");
-            alert(id)
-            window.location.href = "/section/sectionCategory?id="+id;
             // layer.msg("id为"+$this.attr("id"));
 
             /*$("#Section").siblings('.sectionbg').removeClass('sectionback');

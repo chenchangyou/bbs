@@ -9,7 +9,7 @@
 <div class="admin-global">
     <ol class="breadcrumb">
         <li>后台首页</li>
-        <li class="active">管理中心</li>
+        <li class="active">帖子管理</li>
             <a href="javascript:location.reload();" style="content:none; width: 150px;float: right;text-align: center">
                 刷新
                 <i style="color: #0000FF" class="layui-anim layui-anim-rotate layui-icon layui-icon-refresh">
@@ -90,10 +90,10 @@
             //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 
             tableIns.reload({
-                elem: '#test'
+                // elem: '#test'
 
-                ,url: '/admin/bypostkeyword' //设置异步接口
-                ,id: 'idTest'
+                url: '/admin/bypostkeyword' //设置异步接口
+                ,id: '#test'
                 ,where: { //设定异步数据接口的额外参数，任意设
                     field: data.field.field
                     ,keyword: data.field.keyword
@@ -107,12 +107,14 @@
                 ,{field:'title', width:150, title: '类型',templet: function(d){
                         return''+ d.category.name +''
                     }}
+                    ,{field:'user', width:150, title: '发布人',templet: function(d){
+                            return''+ d.user.username +''
+                        }}
                 ,{field:'browse',width:80, title: '访问量' }
                 ,{field:'awesome',width:80, title: '点赞量' }
                 ,{field:'collectCount',width:80, title: '收藏量' }
                 ,{field:'createTime', title: '发布时间',templet:'<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }}</div>'}
                 ,{field:'state',width:80, title: '状态' }
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]]//设置表头
             });
             return false;

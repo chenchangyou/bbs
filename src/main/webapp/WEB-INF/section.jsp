@@ -190,7 +190,7 @@
                     "            <a href=\"/section/sectionDetail?id="+data[i].id+"\">\n" +
                     "            <div class=\"panel panel-default\">\n" +
                     "                <div class=\"panel-body sectionbg\">\n" +
-                    "                   "+data[i].name+" <span class=\"layui-badge\">  "+(i+1)+"</span>\n" +
+                    "                   "+data[i].name+" <span class=\"layui-badge\">  "+data[i].sectionCategory.length+"</span>\n" +
                     "                </div>\n" +
                     "            </div>\n" +
                     "            </a>\n" +

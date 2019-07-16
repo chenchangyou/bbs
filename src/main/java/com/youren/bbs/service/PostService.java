@@ -20,4 +20,5 @@ public interface PostService {
     List<Post> findByKeyWord(String keyword);
     List<Post> findAllByPopular();
     List<Post>ByKeyword(String Field, String keyword);
+    List<Post> findAllByToDay();
 }

@@ -1,17 +1,35 @@
 package com.youren.bbs.service.impl;
 
 
+import com.youren.bbs.dao.SectionCategoryDao;
+import com.youren.bbs.entity.Section;
 import com.youren.bbs.entity.SectionCategory;
 import com.youren.bbs.service.SectionCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SectionCategoryServiceImpl implements SectionCategoryService {
+
+    @Autowired
+    private SectionCategoryDao sectionCategoryDao;
+
     @Override
-    public SectionCategory save(String sname, String cname) {
-        return null;
+    public SectionCategory save(String sname, String id) {
+        SectionCategory sectionCategory = new SectionCategory();
+        sectionCategory.setCreateTime(new Date());
+        sectionCategory.setName(sname);
+        sectionCategory.setId(UUID.randomUUID().toString());
+        sectionCategory.setState(1);
+        Section section = new Section();
+        section.setId(id);
+        sectionCategory.setSection(section);
+
+        return sectionCategoryDao.save(sectionCategory);
     }
 
     @Override
@@ -26,6 +44,7 @@ public class SectionCategoryServiceImpl implements SectionCategoryService {
 
     @Override
     public List<SectionCategory> findBySection(String sectionId) {
-        return null;
+        List<SectionCategory> bySectionId = sectionCategoryDao.findBySectionId(sectionId);
+        return bySectionId;
     }
 }

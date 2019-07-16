@@ -159,8 +159,16 @@ public class AdminController {
     @ResponseBody
     @GetMapping("/getReplyNum")
     public int findReplyNum(){
+
         List<Reply> replyList = replyService.findAll();
         return replyList.size();
+    }
+    @ResponseBody
+    @GetMapping("/getToday")
+    public int getToday(){
+        List<Post> allByToDay = postService.findAllByToDay();
+        return allByToDay.size();
+
     }
 
     @ResponseBody
@@ -211,5 +219,6 @@ public class AdminController {
         postmap.put("data",page.getList());
         return postmap;
     }
+
 
 }

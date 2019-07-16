@@ -108,4 +108,9 @@ public class PostServiceImpl implements PostService {
 
         return postMapper.ByKeyWord(Field,"%"+keyword+"%");
     }
+
+    @Override
+    public List<Post> findAllByToDay() {
+        return postMapper.findAllByToDay();
+    }
 }

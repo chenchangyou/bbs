@@ -102,7 +102,17 @@
 		from t_post p
 		left join t_user u on p.user_id=u.id
 		left join t_category ca on ca.id=p.category
+		<where>
+			<if test="today!=null">
+				and STR_TO_DATE(create_time,'%Y-%m-%d') = current_date;
+			</if>
+		</where>
 		GROUP BY p.create_time desc
+	</select>
+	<select id="findAllByToDay" resultMap="postResultMap">
+		select create_time
+		from t_post
+				where STR_TO_DATE(create_time,'%Y-%m-%d') = current_date;
 	</select>
 
     <select id="findByKeyWord" resultMap="postResultMap">

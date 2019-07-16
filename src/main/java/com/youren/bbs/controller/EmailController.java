@@ -4,7 +4,6 @@ import com.youren.bbs.util.EmailUtil;
 import com.youren.bbs.util.RandomCode;
 import freemarker.template.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
