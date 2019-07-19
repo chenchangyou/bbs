@@ -45,14 +45,26 @@
                         </div>
                     </div>
                     <span style="margin-left: 100%;color: #0000FF" id="word">100</span><span>/100</span>
-                    <div>
-                        <p>选择帖子类型</p>
-                        <select name="category" lay-verify="required" class="select_cat">
-                            <option value="">请选择类型</option>
-                            <c:forEach items="${categoryList}" var="category">
-                                <option <c:if test="${post.category.id == category.id}"> selected = "selected"</c:if> value="${category.id}">${category.name}</option>
-                            </c:forEach>
-                        </select>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 110px">
+                            <i style="color: red;font-size: 18px">* </i><B style="font-size: 15px;color:grey">投稿分类</B>
+                        </label>
+
+                        <div class="layui-input-inline">
+                            <select lay-filter="test"  name="section" id="partition" class="field">
+                                <c:forEach items="${categoryList}" var="category">
+                                    <option  value="${category.id}"<c:if test="${category.id eq post.section.id}"> selected </c:if> >${category.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="category" id="field" >
+                                <c:forEach items="${section}" var="section">
+                                    <option  value="${section.id}" <c:if test="${section.id eq post.sectionCategory.id}"> selected </c:if> >${section.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
                 <div style="margin-top:  26px;">
@@ -60,7 +72,7 @@
                     <hr>
                     <input type="file" name="file">
                     <p>请选择文件</p>
-                    <img class="layui-upload-img" id="demo1" src="${ctx}/${post.coverImage}">
+                    <img class="layui-upload-img" id="demo1" src="${post.coverImage}">
                 </div>
             </div>
             <div style="clear:both">
@@ -106,6 +118,21 @@
     //Demo
     layui.use('form', function(){
         var form = layui.form;
+        $(function () {
+            form.on('select(test)',function(data){
+                var id=data.value;
+                $.get("/section/user/sectionCategory?id="+id,function (date,status) {
+                    var  str="";
+                    $.each(date,function(k,v){
+                        str+="<option value="+v.id+">"+v.name+"</option>";
+                    });
+                    $("#field").html(str);
+                    form.render();
+                });
+            });
+            $('select[name="partition"]').next().find('.layui-anim-upbit').find('.layui-this').click();
+            form.render();
+        });
         form.render();
     });
     layui.use('upload', function() {

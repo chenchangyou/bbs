@@ -73,7 +73,13 @@
                     title: '注册时间',
                     templet: '<div>{{layui.util.toDateString(d.createTime, "yyyy-MM-dd HH:mm") }}</div>'
                 }
-                , {field: 'state', width: 80, title: '状态'}
+                , {field: 'state', width: 80, title: '状态',templet: function(d){
+                    if(d.state==1&&d.type==1){
+                        return'普通用户'
+                    }else if(d.state==1&&d.type==2){
+                        return '管理员'
+                    }
+                    }}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
         });
@@ -98,7 +104,7 @@
                  var index = layer.open({
                     title:'修改个人资料',
                     type: 2,
-                    area: ['450px', '600px'],
+                    area: ['100%', '100%'],
                     fixed: true, //不固定
                     maxmin: false,
                     content: '/user/update?uid='+data.id

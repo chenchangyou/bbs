@@ -78,10 +78,18 @@
                                     ${followed.followeId.username}
                             </span>
                             </a>
-                            <span class="layui-form">
-                                <input type="checkbox" name="switch" lay-skin="switch" lay-filter="followSwitch"
+                <span style="margin-left: 1%;color:#c2c2c2;">
+                    简介：<c:if test="${empty followed.followeId.synopsis}">
+                        这个人很懒，什么都没写
+                        </c:if>
+                    <c:if test="${not empty followed.followeId.synopsis}">
+                        ${followed.followeId.synopsis}
+                    </c:if>
+                 </span>
+                            <span class="layui-form" style="position:absolute;right: 4%">
+                                <input type="checkbox" value="${followed.followeId.id}" name="switch" lay-skin="switch" lay-filter="followSwitch" checked
                                        lay-text="关注|已取消">
-                        </span>
+                            </span>
                         </div>
                     </div>
                 </c:forEach>
@@ -101,6 +109,14 @@
                                             ${followed.followeId.username}
                                     </span>
                                 </a>
+                                <span style="margin-left: 1%;color:#c2c2c2;">
+                                    简介：<c:if test="${empty followed.followeId.synopsis}">
+                                                    这个人很懒，什么都没写
+                                                </c:if>
+                                    <c:if test="${not empty followed.followeId.synopsis}">
+                                        ${followed.followeId.synopsis}
+                                    </c:if>
+                                 </span>
                             </div>
                         </div>
                     </c:forEach>
@@ -131,6 +147,14 @@
                                             ${followed.followeId.username}
                                     </span>
                             </a>
+                            <span style="margin-left: 1%;color:#c2c2c2;">
+                                简介：<c:if test="${empty followed.followeId.synopsis}">
+                                            这个人很懒，什么都没写
+                                        </c:if>
+                                <c:if test="${not empty followed.followeId.synopsis}">
+                                    ${followed.followeId.synopsis}
+                                </c:if>
+                             </span>
                         </div>
                     </div>
                 </c:forEach>
@@ -161,25 +185,27 @@
             , layer = layui.layer;
 
         form.on('switch(followSwitch)', function (data) {
-            var status_id = data.value;
-            var csrfToken = "<?= Yii::$app->request->csrfToken ?>";
+            var id = data.value;
+            // layer.msg(status_id);
             $.ajax({
-                url: "/admin/category/ajaxstatus",
+                url: "/user/followed",
                 type: "post",
                 dataType: "JSON",
-                data: {status_id: status_id, _csrf_admin: csrfToken},
+                data: {fid:id},
                 success: function (data) {
-                    if (data.success == true) {
-                        layer.msg(data.msg);
+                    if (data === 0) {
+                      /*  layer.msg(data.msg);
                         location.reload();
-                        return false;
-                    } else {
-                        layer.msg(data.msg);
+                        return false;*/
+                    } else if(data===1){
+                        /*layer.msg(data.msg);
                         setTimeout(function () {
                             location.reload();
                         }, 1000);
-                        return false;
+                        return false;*/
                     }
+                },error:function () {
+                    layer.msg("系统出错");
                 }
             });
         });

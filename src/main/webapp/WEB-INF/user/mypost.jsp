@@ -10,7 +10,7 @@
     <link href="${ctx}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="${ctx}/static/js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${ctx}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
+
     <%--引入样式--%>
     <%@include file="userstyle.jsp" %>
 
@@ -97,7 +97,7 @@
                                <span class="post_r">
                                    <a class="btn btn-info layui-anim layui-anim-fadein"
                                       href="/user/post/edit?pid=${post.id}">编辑</a>
-                                   <a class="btn btn-danger layui-anim layui-anim-fadein" href="javascript:;">删除</a>
+                                   <a id="${post.id}" class="btn btn-danger layui-anim layui-anim-fadein deletePost" href="javascript:">删除</a>
                                </span>
                             </c:if>
                         </c:if>
@@ -115,8 +115,31 @@
 
 </div>
 
-<script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
+<script src="${ctx}/static/layui/layui.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
 
+<script>
+    $(function () {
+
+    $(".deletePost").click(function () {
+        layui.use('layer',function () {
+
+            var $this = $(this);
+            var id = $this.attr("id");
+            var $delete = $this.parent().parent().parent();
+            $.post("/user/deletePost",{postId:id},function (data) {
+                if(data == 'ok'){
+                    layer.msg("删除成功");
+                    $delete.animate({height: "0px"}, function () {
+                        $delete.remove();
+                    });
+                }else {
+                    layer.msg("删除失败")
+                }
+            })
+        })
+      })
+    })
+</script>
 </body>
 </html>

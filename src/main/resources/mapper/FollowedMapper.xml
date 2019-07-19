@@ -11,12 +11,15 @@
 			<id property="id" column="id" />
 			<result property="username" column="username"/>
 			<result property="headshot" column="headshot"/>
+			<result property="synopsis" column="usynopsis"/>
 		</association>
 
 		<association property="followeId" column="followed_user_id" javaType="User">
 			<id property="id" column="fid" />
 			<result property="username" column="fusername"/>
 			<result property="headshot" column="fheadshot"/>
+			<result property="synopsis" column="fsynopsis"/>
+
 		</association>
 	</resultMap>
 
@@ -34,7 +37,7 @@
 	</select>
 
 	<select id="findByUid"  resultMap="followedResultMap" parameterType="Followed">
-		select u.id,u.username,u.headshot,
+		select u.id,u.username,u.headshot,u.synopsis usynopsis,fu.synopsis fsynopsis,
 		fu.id fid,fu.username fusername,fu.headshot fheadshot,
 		f.create_time
 		from t_followed f
@@ -44,7 +47,7 @@
 	</select>
 
 	<select id="findByFuid"  resultMap="followedResultMap" parameterType="Followed">
-		select u.id,u.username,u.headshot,
+		select u.id,u.username,u.headshot,u.synopsis,u.synopsis usynopsis,fu.synopsis fsynopsis,
 		fu.id fid,fu.username fusername,fu.headshot fheadshot,
 		f.create_time
 		from t_followed f

@@ -68,7 +68,7 @@
                 {field:'id', width:80, title: 'ID'}
                 ,{field:'title', width:150, title: '标题'}
                 ,{field:'category', width:150, title: '类型',templet: function(d){
-                        return''+ d.category.name +''
+                        return''+ d.sectionCategory.name +''
                     }}
                 ,{field:'user', width:150, title: '发布人',templet: function(d){
                         return''+ d.user.username +''
@@ -105,7 +105,7 @@
                 {field:'id', width:80, title: 'ID'}
                 ,{field:'title', width:150, title: '标题'}
                 ,{field:'title', width:150, title: '类型',templet: function(d){
-                        return''+ d.category.name +''
+                        return''+ d.sectionCategory.name +''
                     }}
                     ,{field:'user', width:150, title: '发布人',templet: function(d){
                             return''+ d.user.username +''

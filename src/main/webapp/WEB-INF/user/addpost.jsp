@@ -23,13 +23,13 @@
             z-index: 999999;
         }
         body{
-            background-color: #e2f7f2;
+            /*background-color: #71caf7;*/
         }
     </style>
 </head>
 <body>
 <%@include file="../../common/head.jsp" %>
-<div class="layui-container" style="background-color: rgba(255,255,255,0.4); margin: 65px auto">
+<div class="layui-container" style="background-color: rgba(255,255,255,0.8); margin: 65px auto">
     <ol class="breadcrumb">
         <li><a href="home">首页</a></li>
         <li class="active">发表新帖</li>
@@ -37,16 +37,35 @@
     <blockquote class="layui-elem-quote">发布帖子</blockquote>
     <form action="addpost" method="post" class="layui-form" enctype="multipart/form-data">
         <div class="layui-col-md8">
-            <input type="hidden" name="act" value="add"/>
-            用户名：${loginUser.username} <br>
-            标题：<input style="" type="text" name="title" required lay-verify="required" placeholder="请输入标题"
-                      autocomplete="off" class="layui-input">
+            <div class="layui-form-item">
+                <input type="hidden" name="act" value="add"/>
+                <label class="layui-form-label" style="width: 110px">
+                    <i style="color: red;font-size: 18px"></i><B style="font-size: 15px;color:grey">用户名</B>
+
+                </label>
+                <div class="layui-input-inline">
+                    ${loginUser.username}
+                </div>
+            </div>
+            <div class="layui-form-item">
+
+                <label class="layui-form-label" style="width: 110px">
+                    <i style="color: red;font-size: 18px">* </i><B style="font-size: 15px;color:grey">标题</B>
+                </label>
+                <div class="layui-input-inline" style="width: 85%;margin: 0">
+                    <input style="" type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
             <div>
                 <div style="width: 100%">
                     <div style="">
                         <hr>
                         <div class="layui-form-item layui-form-text">
-                            <label class="layui-form-label">简介</label>
+                            <label class="layui-form-label" style="width: 110px">
+                                <i style="color: red;font-size: 18px">* </i><B style="font-size: 15px;color:grey">简介</B>
+                            </label>
                             <div class="layui-input-block">
                                 <textarea name="synopsis" placeholder="请输入内容" class="layui-textarea"
                                           id="accepted_answer" lay-verify="required"></textarea>
@@ -61,7 +80,7 @@
                                     <i style="color: red;font-size: 18px">* </i><B style="font-size: 15px;color:grey">投稿分类</B>
                                 </label>
                                 <div class="layui-input-inline">
-                                    <select lay-filter="test" name="" id="partition" >
+                                    <select lay-filter="test" name="section" id="partition" >
                                         <option  value="">请选择</option>
                                         <c:forEach items="${categoryList}" var="category">
                                         <option  value="${category.id}">${category.name}</option>
@@ -92,7 +111,6 @@
             <div id="editor"></div>
             <textarea id="detail" name="content" style="width:100%; height:200px;display:none;"></textarea>
         </div>
-
         <div class="layui-form-item" style="float: right">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="formDemo" style="background-color: #0cc1f7">立即发表

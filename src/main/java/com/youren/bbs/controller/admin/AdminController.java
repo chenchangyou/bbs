@@ -219,6 +219,27 @@ public class AdminController {
         postmap.put("data",page.getList());
         return postmap;
     }
+    @ResponseBody
+    @GetMapping("/ByReplykeyword")
+    public Map<String,Object> findByReplykeyword(String field,String keyword,
+                                            @RequestParam(name = "page",defaultValue = "1") int pageNum,
+                                            @RequestParam(name = "limit",defaultValue = "10") int pageSize){
 
+        Map<String,Object> replymap = new HashMap<String, Object>();
+
+        //开始分页，在执行这个方法后，下一个数据库的查询操作，将会被拦截，加上分页语句
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Reply> byReply = replyService.findByReply(field, keyword);
+
+        PageInfo<Reply> page = new PageInfo<Reply>(byReply);
+
+        replymap.put("code",0);
+        replymap.put("msg","");
+        replymap.put("count",page.getTotal());
+        replymap.put("data",page.getList());
+
+        return replymap;
+    }
 
 }

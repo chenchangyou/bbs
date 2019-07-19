@@ -4,6 +4,7 @@
 <head>
     <title>注册成功</title>
     <%@include file="../common/style.jsp"%>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 </head>
 <body>
 <div style="width: 600px;height: 400px; margin: 50px auto;">

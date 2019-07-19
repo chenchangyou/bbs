@@ -5,8 +5,8 @@
     <title>邮件模板</title>
 </head>
 <body>
-<h1 style="color:darkmagenta;">你好，${username}</h1>
-<h3 style="color: red;">你的验证码：${validCode}</h3>
+<h1 style="color:darkmagenta;">你好，</h1>
+<h3 style="color: red;">你的验证码：</h3>
 </body>
 </html>-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -34,7 +34,7 @@
     <tr>
         <td>
             <div style="margin: 20px;text-align: center;margin-top: 50px">
-                <img src="https://cxbres.oss-cn-beijing.aliyuncs.com/CTSP/mail/header/20180904115147.png" border="0" style="display:block;width: 100%;height: 100%">
+<#--                <img src="https://cxbres.oss-cn-beijing.aliyuncs.com/CTSP/mail/header/20180904115147.png" border="0" style="display:block;width: 100%;height: 100%">-->
             </div>
         </td>
     </tr>
@@ -42,11 +42,12 @@
     <tr>
         <td>
             <div style="border: #36649d 1px dashed;margin: 30px;padding: 20px">
-                <label style="font-size: 22px;color: #36649d;font-weight: bold">欢迎您注册友人论坛！</label>
+                <label style="font-size: 22px;color: #36649d;font-weight: bold">欢迎来到友人论坛！</label>
                <#-- <p style="font-size: 16px">亲爱的&nbsp;<label style="font-weight: bold"> 先生/女士</label>&nbsp; 您好！欢迎加入xxx。
                 </p>-->
               <#--  <p style="font-size: 16px">您已于2018年10月1日充值成功，希望更好的为您服务！</p>-->
-                <p>您的验证是：${validCode}</p>
+                <p>尊敬的：“<span style="color: #0cc1f7">${username}</span>” 你好</p>
+                <p>你的验证是：<span style="color: red">${validCode}</span></p>
             </div>
         </td>
     </tr>
@@ -77,8 +78,7 @@
     <tr>
         <td>
             <div align="right" style="margin: 40px;border-top: solid 1px gray" id="bottomTime">
-                <p style="margin-right: 20px">陈氏集团科技有限公司</p>
-                <label style="margin-right: 20px">${dateTime}</label>
+                <p style="margin-right: 20px">友人论坛</p>
             </div>
         </td>
     </tr>

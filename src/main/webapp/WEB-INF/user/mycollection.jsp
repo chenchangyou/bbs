@@ -100,7 +100,11 @@
                         </div>
                         <div class="panel-body layui-anim layui-anim-up layui-col-md12">
                             <span class="layui-col-md11">简介： ${collect.post.synopsis}</span>
-                            <span class="layui-col-md1"><a href="javascript:"><i class="layui-icon layui-icon-close"></i></a></span>
+                            <span class="layui-col-md1 layui-form">
+                                    <%--<a href="javascript:"><i class="layui-icon layui-icon-close"></i></a>--%>
+                              <input type="checkbox" value="${collect.post.id}" name="switch" lay-skin="switch" lay-filter="collect" checked
+                                     lay-text="收藏|已取消">
+                            </span>
                         </div>
                     </div>
 
@@ -137,7 +141,6 @@
         <c:if test="${empty loginUser}">
             <c:if test="${setting.collect}">
                 <c:forEach items="${collectList}" var="collect">
-
                     <div class="layui-row panel panel-info layui-anim layui-anim-up">
                         <div class="panel-heading layui-col-md12">
                             <h4 class="panel-title">
@@ -161,10 +164,44 @@
             </c:if>
         </c:if>
     </div>
-
 </div>
 
 <script src="${ctx}/static/layui/layui.all.js" type="text/javascript"></script>
+<script>
+    layui.use(['layer', 'form'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer;
+
+        form.on('switch(collect)', function (data) {
+            var id = data.value;
+            // layer.msg(status_id);
+            $.ajax({
+                url: "/user/collect",
+                type: "post",
+                dataType: "JSON",
+                data: {pid:id},
+                success: function (data) {
+                    if (data === 0) {
+                        /*  layer.msg(data.msg);
+                          location.reload();
+                          return false;*/
+                    } else if(data===1){
+                        /*layer.msg(data.msg);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                        return false;*/
+                    }
+                },error:function () {
+                    layer.msg("系统出错");
+                }
+            });
+        });
+    });
+</script>
+
 <script src="${ctx}/static/js/user_index.js" type="text/javascript"></script>
 
 </body>

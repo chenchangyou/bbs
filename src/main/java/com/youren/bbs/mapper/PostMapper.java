@@ -24,4 +24,6 @@ public interface PostMapper {
     List<Post> findByKeyWord(@Param("keyword") String keyword);
     List<Post> ByKeyWord(@Param("field") String Field,@Param("keyword") String keyword);
     List<Post> findAllByPopular();
+    List<Post> findBySection(@Param("section") String section);
+    List<Post> findBySectionCategory(@Param("Category") String Category);
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public interface UserService {
-    Map<String, Object> register(String username, String password, String sex, String email,int age, String tel);
+    Map<String, Object> register(String username, String password, String sex, String email,int age, String tel,String EvalidCode,String  validCode);
     Map<String, Object> login(String username, String password);
     Map<String, Object> adminlogin(String username, String password);
 

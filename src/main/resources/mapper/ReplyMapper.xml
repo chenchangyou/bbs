@@ -22,9 +22,9 @@
 			<result property="title" column="title"/>
 		</association>
 
-		<association property="replyLike" javaType="ReplyLike">
-
-		</association>
+		<!--<association property="replyLike" javaType="ReplyLike">
+			<result property="createTime" column="rlcreate_time"/>
+		</association>-->
 
 	</resultMap>
 
@@ -71,5 +71,19 @@
 		left join t_post p on p.id = r.post_id
 		left join t_user u on u.id = r.user_id
 		order by create_time desc
+	</select>
+
+	<select id="findBykeyword" resultMap="replyResultMap">
+		select r.id,r.content,r.create_time,r.likecont,u.headshot,
+			   u.id uid, u.username,p.title,p.id pid
+		from t_reply r
+		left join t_post p on p.id = r.post_id
+		left join t_user u on u.id = r.user_id
+		<where>
+			<if test="field!=null">
+				and ${field} like #{keyword}
+			</if>
+			order by create_time desc
+		</where>
 	</select>
 </mapper>

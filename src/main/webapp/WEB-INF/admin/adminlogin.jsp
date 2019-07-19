@@ -80,7 +80,7 @@
                 data: $("#loginForm").serialize(),
                 success: function (data) {
                     if (data.ok) {
-                        layer.msg("登陆成功！", {icon: 1, anim: 2, time: 2000}, function () {
+                        layer.msg("登陆成功！", {icon: 1, anim: 5, time: 2000}, function () {
                             window.location.href = "/admin/indexs";
                         });
                     } else {

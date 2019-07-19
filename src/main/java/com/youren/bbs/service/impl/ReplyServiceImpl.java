@@ -112,4 +112,10 @@ public class ReplyServiceImpl implements ReplyService {
         reply.setLikecont(likeNum);
         return replyMapper.updateLikeCont(reply);
     }
+
+    @Override
+    public List<Reply> findByReply(String Field, String keyword) {
+
+        return replyMapper.findBykeyword(Field,"%"+keyword+"%");
+    }
 }

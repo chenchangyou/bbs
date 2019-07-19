@@ -21,13 +21,8 @@
 		</property>
 	</bean>
 
-	<!-- freemarker配置 -->
 	<bean id="configuration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-		<!-- 模板文件的路径 -->
-		<property name="templateLoaderPath">
-			<value>classpath:/freemarker/</value>
-		</property>
-		<!-- 设置FreeMarker环境变量 -->
+		<property name="templateLoaderPath" value="/freemarker/" />
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="default_encoding">UTF-8</prop>

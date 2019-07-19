@@ -28,7 +28,6 @@ import java.util.Map;
  * 贴子
  */
 @Controller
-//@RequestMapping("")
 public class PostController {
 
     @Autowired
@@ -43,10 +42,13 @@ public class PostController {
     private CollectService collectService;
     @Autowired
     private FollowedService followedService;
-    @Autowired
-    private CategoryService categoryService;
+
     @Autowired
     private SectionService sectionService;
+
+    @Autowired
+    private SectionCategoryService sectionCategoryService;
+
 
     @GetMapping("addpost")
     public String addpost(Model model){
@@ -123,7 +125,7 @@ public class PostController {
      */
     @PostMapping("addpost")
     public String addpost(MultipartFile file,String title,String content, HttpSession session,
-                          Model model,String category,String synopsis) throws IOException {
+                          Model model,String category,String synopsis,String section) throws IOException {
 
         String postImg = null;
 
@@ -142,8 +144,11 @@ public class PostController {
         User user = (User)session.getAttribute("loginUser");
         Date datetime = new Date();
         SectionCategory categorys = new SectionCategory();
+        Section section1 = new Section();
+        section1.setId(section);
         categorys.setId(category);
         Post post = new Post();
+        post.setSection(section1);
         post.setTitle(title);
         post.setContent(content);
         post.setCreateTime(datetime);
@@ -172,6 +177,17 @@ public class PostController {
     @ResponseBody
     @PostMapping("/admin/deletePost")
     public String daletepost(Long postId){
+
+        int row = postService.updateState(0, postId);
+        if(row > 0){
+            return "ok";
+        }else {
+            return "删除失败！";
+        }
+    }
+    @ResponseBody
+    @PostMapping("/user/deletePost")
+    public String userdaletepost(Long postId){
 
         int row = postService.updateState(0, postId);
         if(row > 0){
@@ -212,27 +228,33 @@ public class PostController {
         Post post = postService.findById(pid);
 
         if (loginUser!=null){
-            if(loginUser.equals(post.getUser().getId())){
+            if(loginUser.getId().equals(post.getUser().getId())){
 
-                List<Category> categoryList = categoryService.findAll();
+                List<Section> sectionList = sectionService.findAll();
 
+                Section byId = sectionService.findById(post.getSection().getId());
+
+                model.addAttribute("section",byId.getSectionCategory());
                 model.addAttribute("post",post);
-                model.addAttribute("categoryList",categoryList);
+                model.addAttribute("categoryList",sectionList);
 
                 return "/user/postedit";
             }
         }
-        return "";
+        return "/user/postedit";
     }
 
     @GetMapping("/admin/post/edit")
     public String admineditpage(Long pid,Model model){
 
-        List<Category> categoryList = categoryService.findAll();
+        List<Section> sectionList = sectionService.findAll();
         Post post = postService.findById(pid);
 
+        Section byId = sectionService.findById(post.getSection().getId());
+
+        model.addAttribute("section",byId.getSectionCategory());
         model.addAttribute("post",post);
-        model.addAttribute("categoryList",categoryList);
+        model.addAttribute("categoryList",sectionList);
 
         return "/admin/postEdit";
     }
@@ -240,15 +262,18 @@ public class PostController {
 //    @ResponseBody
     @PostMapping("/post/edit")
     public String edit(MultipartFile file,Long pid,  String title,String content, HttpSession session,
-                       Model model,Long category,String synopsis) throws IOException {
+                       Model model,String category,String synopsis,String section) throws IOException {
 
         Post post = postService.findById(pid);
         Long uid = post.getUser().getId();
-        Category categorys = new Category();
+        SectionCategory categorys = new SectionCategory();
+        Section section1 = new Section();
+        section1.setId(section);
+        post.setSection(section1);
         categorys.setId(category);
         post.setTitle(title);
         post.setContent(content);
-        post.setCategory(categorys);
+        post.setSectionCategory(categorys);
         post.setSynopsis(synopsis);
 
         if (file.getSize()>0){
@@ -277,10 +302,10 @@ public class PostController {
 //    @ResponseBody
     @PostMapping("/admin/post/edit")
     public String adminedit(MultipartFile file,Long pid,  String title,String content, HttpSession session,
-                       Model model,Long category,String synopsis) throws IOException {
+                       Model model,String category,String synopsis,String section) throws IOException {
 
                edit( file,pid, title,content, session,
-                 model, category,synopsis);
+                 model, category,synopsis,section);
 
         return "/admin/adminpost";
     }
@@ -311,6 +336,40 @@ public class PostController {
         PageHelper.startPage(pageNum, pageSize);
 
         List<Post>  postList = postService.findAllByPopular();
+
+        PageInfo<Post> page = new PageInfo<Post>(postList);
+        map.put("date",page.getList());
+        map.put("pages",page.getPages());
+
+        return map;
+    }
+    @ResponseBody
+    @GetMapping("/getpostBySection")
+    public Map postBySection(@RequestParam(name = "page",defaultValue = "1") int pageNum,
+                    @RequestParam(name = "limit",defaultValue = "5") int pageSize,String id){
+
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Post>  postList = postService.findAllBySection(id);
+
+        PageInfo<Post> page = new PageInfo<Post>(postList);
+        map.put("date",page.getList());
+        map.put("pages",page.getPages());
+
+        return map;
+    }
+    @ResponseBody
+    @GetMapping("/getpostByCategory")
+    public Map postByCategory(@RequestParam(name = "page",defaultValue = "1") int pageNum,
+                             @RequestParam(name = "limit",defaultValue = "5") int pageSize,String id){
+
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Post>  postList = postService.findAllByCategory(id);
 
         PageInfo<Post> page = new PageInfo<Post>(postList);
         map.put("date",page.getList());

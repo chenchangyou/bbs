@@ -102,6 +102,7 @@ background-image: url('../static/images/bg1.png')">
                 </div>
             </form>
             <div class="modal-footer">
+                <a href="/user/Retrieve">忘记密码？</a>
                 <button type="button" class="btn btn-default" id="gb" data-dismiss="modal">关闭</button>
             </div>
         </div>

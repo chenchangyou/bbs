@@ -41,8 +41,8 @@ $(function () {
         layer.open({
             type: 1,
             skin: 'layui-layer-rim', //加上边框
-            area: ['420px', '240px'], //宽高
-            content: '<div class="layui-upload">' +
+            area: ['320px', '240px'], //宽高
+            content: '<div class="layui-upload" style="text-align: center">' +
                 '  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>' +
                 '  <button type="button" class="layui-btn" id="test9">开始上传</button>' +
                 '</div>'
@@ -85,11 +85,11 @@ layui.use('form', function(){
     form.on('submit(updatepassword)', function(data){
         $.post("/user/updatepassword",data.field,function (data) {
             if(data === 1){
-                layer.msg("修改成功",{
+                layer.msg("修改成功,请重新登录",{
                     icon:1,
-                    time:800
+                    time:1000
                 },function () {
-                    window.location.reload();
+                    window.location.href="/home";
                 })
             }else if(data === 2){
                 layer.msg("修改失败！系统出错",{

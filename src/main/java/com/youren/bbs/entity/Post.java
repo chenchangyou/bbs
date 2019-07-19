@@ -22,7 +22,7 @@ public class Post {
     private Integer difference;//差评数
     private Integer state;//帖子状态（1.正常，2.正在审核，3.提示不合规范下架，并回退到草稿区，4，属于草稿
 //    private Category category;//帖子类别
-    private SectionCategory sectionCategory;//板块及类型
+    private SectionCategory sectionCategory;//类型
     private Section section;//所属板块
     private String synopsis;//简介
     private String coverImage;//封面（可选）

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +27,14 @@ public class UserServiceImpl implements UserService {
 
     //注册
     @Override
-    public Map<String, Object> register(String username, String password, String sex, String email, int age, String tel) {
+    public Map<String, Object> register(String username, String password, String sex, String email, int age, String tel, String validCode,String EvalidCode) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("ok", false);
+
+        map.put("ok",false);
         String headshot = "/static/images/user.png";//默认头像路径
         User user = userMapper.findByUsername(username);
         if (user == null) {
+            if(validCode.equals(EvalidCode)){
             user = new User();
             user.setUsername(username);
             user.setPassword(password);
@@ -50,7 +53,9 @@ public class UserServiceImpl implements UserService {
                 userSettingService.create(user.getId());
             } else {
                 map.put("error", "注册失败！");
-
+            }
+            } else {
+                map.put("error", "你输入的验证码有误请从新输入");
             }
         } else {
             map.put("error", "用户名已被注册！");

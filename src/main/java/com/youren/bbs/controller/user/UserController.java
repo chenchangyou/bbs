@@ -3,6 +3,7 @@ package com.youren.bbs.controller.user;
 import com.youren.bbs.entity.User;
 import com.youren.bbs.entity.UserBackground;
 import com.youren.bbs.entity.UserSetting;
+import com.youren.bbs.mapper.UserMapper;
 import com.youren.bbs.mapper.UserSettingMapper;
 import com.youren.bbs.service.UserBackgroundService;
 import com.youren.bbs.service.UserService;
@@ -41,35 +42,41 @@ public class UserController {
     private JavaMailSender javaMailSender;
     @Autowired
     private Configuration configuration;
+    @Autowired
+    private UserMapper userMapper;
 
-    @GetMapping("register")
+    @GetMapping("/register")
     public String register() {
         return "register";
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
-
-
-
+    @GetMapping("/success")
+    public String success(){
+       return "/chenggong";
+    }
+    @GetMapping("/Retrieve")
+    public String Retrieve(){
+        return "Retrieve";
+    }
     //注册
-    @PostMapping("register")
-    public String register(String username, String password, String sex, String email, Integer age, String tel,
-                           Map<String, Object> map, RedirectAttributes redirectAttributes,HttpSession session) {
-        Map<String, Object> resultMap = userService.register(username, password, sex, email, age, tel);
+    @ResponseBody
+    @PostMapping("/register")
+    public  Map<String, Object> register(String username, String password, String sex, String email, Integer age, String tel,
+                            RedirectAttributes redirectAttributes,HttpSession session,String validCode) {
+
+        String validCode1 = (String)session.getAttribute("validCode");
+        Map<String, Object> resultMap = userService.register(username, password, sex, email, age, tel,validCode,validCode1);
         if ((Boolean) resultMap.get("ok")) {
 
             Map<String, Object> loginMap = userService.login(username, password);
             session.setAttribute("loginUser", loginMap.get("user"));
             redirectAttributes.addFlashAttribute("message", "注册成功！请登录！");
-
-            return "chenggong";
-        } else {
-            map.put("error", resultMap.get("error"));
-            return "register";
         }
+        return resultMap;
     }
 
     /**
@@ -198,9 +205,13 @@ public class UserController {
     //修改密码
     @ResponseBody
     @PostMapping("/updatepassword")
-    public int updatepassword(Long uid,String password,String newPassword){
+    public int updatepassword(HttpSession session, Long uid,String password,String newPassword){
 
-        return  userService.updatepassword(uid, password, newPassword);
+        int i = userService.updatepassword(uid, password, newPassword);
+        if (i>0){
+            session.invalidate();
+        }
+        return i;
     }
     //删除用户
     @ResponseBody
@@ -223,5 +234,38 @@ public class UserController {
         UserSetting setting = userSettingMapper.findByUid(uid);
 
         return setting;
+    }
+    @ResponseBody
+    @PostMapping("/reset")
+    public Map<String,Object> resetPassword(HttpSession session,String username, String newPassword,String validCode){
+
+        String validCode1 = (String) session.getAttribute("validCode");
+        User byUsername = userMapper.findByUsername(username);
+
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("ok",false);
+        if(validCode!=null&&!validCode.equals("")){
+          if(validCode1.equals(validCode)){
+            if(newPassword!=null&&!newPassword.equals("")){
+                if(!newPassword.equals(byUsername.getPassword())){
+                    int row = userService.updatepassword(byUsername.getId(), byUsername.getPassword(), newPassword);
+                    if(row > 0){
+                        map.put("ok",true);
+                    }else {
+                        map.put("error","修改失败，系统出错");
+                    }
+                }else {
+                    map.put("error","修改失败，与之前的密码一致");
+                }
+            }else {
+                map.put("error","密码不能为空");
+            }
+            }else {
+                map.put("error","验证码不正确");
+            }
+        }else {
+            map.put("error","验证码不能为空");
+        }
+        return map;
     }
 }

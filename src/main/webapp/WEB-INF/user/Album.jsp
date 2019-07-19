@@ -19,6 +19,9 @@
             float: left;
             margin: 5px 3px;
         }
+        #layui-layer2{
+            top:0px;
+        }
     </style>
 </head>
 <body>
@@ -316,8 +319,9 @@
 
                         if(data!=null){
                             layer.msg("新建相册成功",{
-                                iocn:1,
-                                time:600
+                                icon:1,
+                                time:600,
+                                top: '50px'
                             },function () {
                                 window.location.reload();
                             });

@@ -20,7 +20,7 @@ public class FollowedController {
     private FollowedService followedService;
 
     @ResponseBody
-    @PostMapping("followed")
+    @PostMapping("/followed")
     public int judgeFollowed(Long fid, HttpSession session){
 
         User user = (User)session.getAttribute("loginUser");

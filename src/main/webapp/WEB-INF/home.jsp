@@ -92,18 +92,25 @@
         <div class="box-left articlelist layui-col-md2">
             <div class="layui-row" style="padding: 5px; background-color: #FFFFFF;border-radius: 4px;">
                 <div class="layui-col-md12 layui-hide-xs">
-                    <p><img src="${loginUser.headshot}" alt="..." class="img-circle" width="70px" height="70px"
-                            style="text-align: center"></p>
-                    <p>${loginUser.username}</p>
-                    <p>个人信息</p>
+                    <c:if test="${not empty loginUser}">
+                        <p><img src="${loginUser.headshot}" alt="..." class="img-circle" width="70px" height="70px"
+                                style="text-align: center"></p>
+                        <p>${loginUser.username}</p>
+                        <p>个人信息</p>
+                    </c:if>
+                    <c:if test="${empty loginUser}">
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="width: 100%;margin-top: 2%"><span
+                                class="glyphicon" aria-hidden="true"></span>立即登录</a>
+                    </c:if>
+                    <br>
                 </div>
                 <div class="layui-col-md12">
                     <c:if test="${not empty loginUser}">
-                        <a href="addpost" class="btn btn-info" style="width: 100%;"><span class="glyphicon glyphicon-pencil"
+                        <a href="addpost" class="btn btn-info" style="width: 100%;margin-top: 2%"><span class="glyphicon glyphicon-pencil"
                                                                                           aria-hidden="true"></span> 发表新帖</a>
                     </c:if>
                     <c:if test="${empty loginUser}">
-                        <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="width: 100%;"><span
+                        <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="width: 100%;margin-top: 2%""><span
                                 class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 发表新帖</a>
                     </c:if>
 
@@ -131,9 +138,9 @@
                         <li id="clicknewpost" onclick="getNewPost()">新帖</li>
                         <li onclick="getPopularPost()"><i style="color: red;" class="layui-icon layui-icon-fire"></i>热门</li>
                     </ul>
-                    <span class="layui-col-md1" style="padding: 12px;border-bottom: 1px #e2e2e2 solid"><a href="/section/">更多>></a></span>
+                    <span class="layui-hide-xs layui-col-md1" style="background-color: #FFFFFF; padding: 12px;border-bottom: 1px #e2e2e2 solid"><a href="/section/">更多>></a></span>
                     </div>
-                    <div class="layui-tab-content" style="padding: 0; border-radius: 4px;">
+                    <div class="layui-tab-content" style="padding-top:5%; border-radius: 4px;">
 
                         <div class="layui-tab-item" id="NewPost" style="border-radius: 5px"></div>
                         <div class="layui-tab-item" id="PopularPost"></div>

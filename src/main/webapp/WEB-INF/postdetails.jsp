@@ -195,7 +195,7 @@
                 </div>
 
                 <c:forEach items="${replyList}" var="reply" varStatus="number">
-                    <div class="panel panel-default" style="padding: 2px; background-color: rgba(0,255,255,0.02);border: none">
+                    <div class="panel panel-default" style="padding: 2px; background-color: rgb(255, 255, 255);border: none">
                         <!-- 回复区 -->
                         <form method="post" class="reply1">
                             <input type="hidden" name="postId" value="${post.id}">
@@ -203,7 +203,7 @@
                                 <div style="height: 35px;width: 100%">
                                     <div style="width: 50px;float: left"><a href="/user/index?uid=${reply.user.id}"><img src="${reply.user.headshot}" alt="..."
                                                                                                                          class="img-circle" width="35px" height="35px"
-                                                                                                                         style="text-align: center"></a></div>
+                                                                                                                         style="text-align: center;border: 1px #d2d2d2 solid"></a></div>
                                     <div style="float: left;margin-left: 2px;text-align: center">
                                         <c:if test="${reply.user.id == post.user.id}"><span
                                                 style="color:#1E9FFF;font-weight: bolder">楼主 </span></c:if>
@@ -244,10 +244,10 @@
                             <%--评论回复区--%>
 
                         <c:forEach items="${reply.replyCommentList}" var="comment">
-                            <div class="panel panel-default" style="margin-right: 6px;background:none;border:none">
-                                <div class="panel-body" style="padding: 5px;margin-left: 60px">
+                            <div class="panel panel-default" style="margin-right: 6px;border:none">
+                                <div class="panel-body" style="padding: 5px;margin-left: 60px;background-color:#f2f2f2;">
                                     <sapn style="float: left"><a href="/user/index?uid=${comment.user.headshot}"><img src="${comment.user.headshot}"
-                                                                                                                      style="width: 35px;height: 35px; border-radius:50%"></a>
+                                                                                                                      style="width: 35px;height: 35px;border: 1px #d2d2d2 solid;border-radius:50%"></a>
                                     </sapn>
                                     <div style="width: 100%;">
                                         <c:if test="${reply.user.id == comment.user.id}"><span
@@ -427,7 +427,7 @@
                     if (data > 0) {
                         delDiv.animate({height: "0px"}, function () {
                             delDiv.remove();
-                        })
+                        });
                         layer.msg('删除成功', {
                             offset: '150',
                             icon: 1

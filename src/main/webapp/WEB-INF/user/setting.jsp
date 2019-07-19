@@ -72,10 +72,10 @@
                     <td>我的粉丝</td>
                     <td><input type="checkbox" name="fans"lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.fans}">checked</c:if>></td>
                 </tr>
-                <tr>
+               <%-- <tr>
                     <td>性别</td>
                     <td><input type="checkbox" name="sex" lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.sex}">checked</c:if>></td>
-                </tr>
+                </tr>--%>
                 <tr>
                     <td>个人资料</td>
                     <td><input type="checkbox" name="usetting" lay-filter="switchTest" lay-skin="switch" lay-text="公开|隐藏"<c:if test="${userSetting.usetting}">checked</c:if>></td>

@@ -21,4 +21,5 @@ public interface ReplyService {
     int update(Long rid,String content);
     List<Reply> findAll();
     int updateLikeCont(Long rid,Integer likeNum);
+    List<Reply> findByReply(String Field, String keyword);
 }

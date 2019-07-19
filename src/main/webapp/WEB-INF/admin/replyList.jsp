@@ -64,7 +64,7 @@
             ,form = layui.form;
 
 
-        table.render({
+        var tableIns=table.render({
             elem: '#test'
             ,url:'/admin/reply/list'
             ,title: '用户数据表'
@@ -78,7 +78,7 @@
                 }
                 ,cols: [[
                 {type:'numbers' ,fixed:'left'}
-                ,{field:'id', width:80, title: 'ID', hide:true}
+                ,{field:'id', width:80, title: 'ID'}
                 ,{field:'user', width:120, title: '回帖人',templet: function(d){
                         return''+ d.user.username +''
                     }}
@@ -97,8 +97,7 @@
         form.on('submit(formDemo)', function(data){
              tableIns.reload({
                 elem: '#test'
-
-                ,url: '/admin/bypostkeyword' //设置异步接口
+                ,url: '/admin/ByReplykeyword' //设置异步接口
                 ,id: 'idTest'
                 ,where: { //设定异步数据接口的额外参数，任意设
                     field: data.field.field
@@ -109,7 +108,7 @@
                     curr: 1 //重新从第 1 页开始
                 },cols: [[
                     {type:'numbers' ,fixed:'left'}
-                    ,{field:'id', width:80, title: 'ID', hide:true}
+                    ,{field:'id', width:80, title: 'ID'}
                     ,{field:'user', width:120, title: '回帖人',templet: function(d){
                             return''+ d.user.username +''
                         }}

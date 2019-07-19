@@ -81,11 +81,14 @@
                                     <span>
                                             ${followed.userId.username}
                                     </span>
+                                    <span style="margin-left: 1%;color:#c2c2c2;">简介：<c:if test="${empty followed.userId.synopsis}">
+                                        这个人很懒，什么都没写
+                                    </c:if>
+                                        <c:if test="${not empty followed.userId.synopsis}">
+                                            ${followed.userId.synopsis}
+                                        </c:if>
+                                    </span>
                                 </a>
-                              <%--  <span class="layui-form">
-                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest"
-                                   lay-text="关注|已取消">
-                    </span>--%>
                             </div>
                         </div>
                     </c:forEach>
@@ -105,6 +108,13 @@
                                             ${followed.userId.username}
                                     </span>
                                     </a>
+                                    <span style="margin-left: 1%;color:#c2c2c2;">简介：<c:if test="${empty followed.userId.synopsis}">
+                                        这个人很懒，什么都没写
+                                    </c:if>
+                                        <c:if test="${not empty followed.userId.synopsis}">
+                                            ${followed.userId.synopsis}
+                                        </c:if>
+                                    </span>
                                 </div>
                             </div>
                         </c:forEach>
@@ -134,6 +144,13 @@
                                             ${followed.userId.username}
                                     </span>
                                 </a>
+                                <span style="margin-left: 1%;color:#c2c2c2;">简介：<c:if test="${empty followed.userId.synopsis}">
+                                    这个人很懒，什么都没写
+                                </c:if>
+                                        <c:if test="${not empty followed.userId.synopsis}">
+                                            ${followed.userId.synopsis}
+                                        </c:if>
+                                    </span>
                             </div>
                         </div>
                     </c:forEach>

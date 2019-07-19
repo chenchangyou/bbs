@@ -10,10 +10,7 @@
 		<association property="user" column="uid" javaType="User">
 			<id property="id" column="uid" />
 			<result property="username" column="username" />
-			<!--<result property="password" column="password" />
-			<result property="sex" column="sex" />
-			<result property="createTime" column="uctime" />
-			<result property="balance" column="balance" />-->
+
 		</association>
 		<association property="post" column="pid" javaType="Post">
 			<id property="id" column="pid" />
@@ -28,10 +25,6 @@
 			<result property="collectCount" column="collectcount" />
 			<result property="coverImage" column="cover_image"/>
 			<result property="synopsis" column="synopsis"/>
-			<association property="category" javaType="Category">
-				<id property="id" column="category"/>
-				<result property="name" column="caname" />
-			</association>
 		</association>
 
 	</resultMap>
@@ -52,12 +45,11 @@
 	</select>
 
 	<select id="findByuid"  resultMap="collectResultMap" parameterType="Collect">
-		select p.id pid,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,ca.name caname,p.category,
+		select p.id pid,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,
 			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
 		from t_collect c
 		left join t_user u on u.id = c.uid
 		left join t_post p on p.id = c.pid
-		left join t_category ca on ca.id=p.category
 		where p.state >0 and uid=#{user.id}
 		GROUP BY c.create_time desc
 	</select>

@@ -41,6 +41,7 @@ function getNewPost() {
                                 '                        ' + item.user.username + ' ' +
                                 '                    </span>' +
                                 '                    <span>发表于：'+ util.toDateString(item.createTime,'yyyy-MM-dd HH:mm') +'</span>' +
+                                '                    <span>'+item.section.name+'</span>' +
                                 '                    <span>'+item.sectionCategory.name+'</span>' +
                                 '                    <span><i class="fa fa-eye"></i>  ' + item.browse + '</span>' +
                                 '                    <span><i class="fa fa-thumbs-o-up"></i>  ' + item.collectCount + '</span>' +

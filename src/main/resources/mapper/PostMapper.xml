@@ -28,25 +28,27 @@
 			<id property="id" column="category"/>
 			<result property="name" column="caname" />
 		</association><association property="section" javaType="Section">
-        <id property="id" column="section"/>
+        <id property="id" column="sid"/>
         <result property="name" column="sname" />
     </association>
 
 	</resultMap>
 
     <insert id="create" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
-		insert into t_post(user_id,title,content,create_time,state,category,cover_image,synopsis) values
-		(#{user.id},#{title},#{content},#{createTime},#{state},#{sectionCategory.id},#{coverImage},#{synopsis})
+		insert into t_post(user_id,title,content,create_time,state,category,cover_image,synopsis,section_id) values
+		(#{user.id},#{title},#{content},#{createTime},#{state},#{sectionCategory.id},#{coverImage},#{synopsis},#{section.id})
 	</insert>
 
 	<sql id="user_column_list">
 		p.id,p.title,p.content,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
-			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis,
+			   s.name as sname,s.id sid
 	</sql>
 
 	<sql id="user_column_list_NoContent">
 		p.id,p.title,p.create_time,p.browse,p.difference,p.awesome,p.state,p.category,ca.name caname,
-			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis
+			   u.id uid, u.username,u.headshot,p.replynumber,p.collectcount,p.cover_image,p.synopsis,
+	        s.name as sname,s.id sid
 	</sql>
 
 	<update id="updatebrowse" parameterType="Post">
@@ -72,7 +74,7 @@
 	<update id="update" parameterType="Post">
 		update t_post
 		set title=#{title},content=#{content},category=#{sectionCategory.id},
-			synopsis=#{synopsis},cover_image=#{coverImage}
+			synopsis=#{synopsis},cover_image=#{coverImage},section_id=#{section.id}
 		where id=#{id}
 	</update>
 
@@ -86,7 +88,7 @@
         <include refid="user_column_list" />
         from t_post p
 		left join t_user u on p.user_id=u.id
-		left join t_section s on s.id = p.sectiom_id
+		left join t_section s on s.id = p.section_id
 		left join t_section_category ca on ca.id=p.category
 		where p.id=#{id}
 	</select>
@@ -96,7 +98,7 @@
 		<include refid="user_column_list_NoContent" />
 		from t_post p
 		left join t_user u on p.user_id=u.id
-        left join t_section s on s.id = p.sectiom_id
+        left join t_section s on s.id = p.section_id
 		left join t_section_category ca on ca.id=p.category
 		where p.user_id=#{userId}
 		GROUP BY p.create_time desc
@@ -107,7 +109,7 @@
         <include refid="user_column_list_NoContent" />
 		from t_post p
 		left join t_user u on p.user_id=u.id
-        left join t_section s on s.id = p.sectiom_id
+        left join t_section s on s.id = p.section_id
 		left join t_section_category ca on ca.id=p.category
 		<where>
 			<if test="today!=null">
@@ -127,7 +129,7 @@
         <include refid="user_column_list_NoContent" />
         from t_post p
         left join t_user u on p.user_id=u.id
-        left join t_section s on s.id = p.sectiom_id
+        left join t_section s on s.id = p.section_id
         left join t_section_category ca on ca.id=p.category
         <where>
 
@@ -143,7 +145,7 @@
 		<include refid="user_column_list_NoContent" />
 		from t_post p
 		left join t_user u on p.user_id=u.id
-        left join t_section s on s.id = p.sectiom_id
+        left join t_section s on s.id = p.section_id
 		left join t_section_category ca on ca.id=p.category
 		<where>
 
@@ -159,8 +161,29 @@
         <include refid="user_column_list_NoContent" />
         from t_post p
         left join t_user u on p.user_id=u.id
-        left join t_section s on s.id = p.sectiom_id
+        left join t_section s on s.id = p.section_id
         left join t_section_category ca on ca.id=p.category
         GROUP BY p.browse desc
     </select>
+
+	<select id="findBySection" resultMap="postResultMap">
+		select
+		<include refid="user_column_list_NoContent" />
+		from t_post p
+		left join t_user u on p.user_id=u.id
+		left join t_section s on s.id = p.section_id
+		left join t_section_category ca on ca.id=p.category
+		where p.section_id =#{section}
+		GROUP BY p.create_time desc
+	</select>
+	<select id="findBySectionCategory" resultMap="postResultMap">
+		select
+		<include refid="user_column_list_NoContent" />
+		from t_post p
+		left join t_user u on p.user_id=u.id
+		left join t_section s on s.id = p.section_id
+		left join t_section_category ca on ca.id=p.category
+		where p.category =#{Category}
+		GROUP BY p.create_time desc
+	</select>
 </mapper>

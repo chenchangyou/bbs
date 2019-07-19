@@ -113,4 +113,16 @@ public class PostServiceImpl implements PostService {
     public List<Post> findAllByToDay() {
         return postMapper.findAllByToDay();
     }
+
+    @Override
+    public List<Post> findAllBySection(String id) {
+
+        return postMapper.findBySection(id);
+    }
+
+    @Override
+    public List<Post> findAllByCategory(String id) {
+
+        return postMapper.findBySectionCategory(id);
+    }
 }
